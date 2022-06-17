@@ -1,0 +1,1 @@
+\part{Industrial context and bibliography}

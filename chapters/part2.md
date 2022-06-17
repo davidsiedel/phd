@@ -1,0 +1,1 @@
+\part{Hybrid high order method in solid mechanics}
