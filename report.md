@@ -55,7 +55,7 @@ header-includes:
 ---
 
 <!--
-pandoc -f markdown+tex_math_single_backslash -F pandoc-crossref --citeproc --highlight-style=tango report.md chapters/notations.md chapters/introduction.md chapters/part1.md chapters/industrial-context.md chapters/volumetric-locking.md chapters/phase-field.md chapters/part2.md chapters/hho.md chapters/part3.md chapters/micromorphic-damage.md chapters/micromorphic-damage-fem.md chapters/micromorphic-damage-hho.md chapters/part4.md chapters/references.md chapters/conclusions.md chapters/references.md -o report.pdf
+pandoc -f markdown+tex_math_single_backslash -F pandoc-crossref --citeproc --highlight-style=tango report.md chapters/notations.md chapters/introduction.md chapters/part1.md chapters/industrial-context.md chapters/volumetric-locking.md chapters/phase-field.md chapters/part2.md chapters/hho.md chapters/part3.md chapters/micromorphic-damage.md chapters/micromorphic-damage-fem.md chapters/micromorphic-damage-hho.md chapters/part4.md  chapters/conclusions.md chapters/appendices.md chapters/hho-implementation.md chapters/references.md -o report.pdf
 -->
 
 \newcommand{\dtot}{\mathrm{d}}
