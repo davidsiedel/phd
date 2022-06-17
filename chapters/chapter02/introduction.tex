@@ -1,0 +1,186 @@
+\section{Introduction}
+\label{sec_introduction}
+
+\paragraph{Outline}
+
+This paper aims at highlighting the link between the Hu–Washizu
+variational principle and that of so called relaxed formulations
+% ,
+% from which are derived \textit{e.g.} Hybrid Discontinuous Galerkin
+% (HDG) methods, and, in particular, one of their latest refinement, the
+% Hybrid High Order (HHO) method.
+among which the family of Discontinuous Galerkin (DG) and Hybrid Discontinuous Galerkin
+(HDG) methods, and, in particular, one of their latest refinement, the
+Hybrid High Order (HHO) method.
+Both these approaches introduce supplementary unknowns to the problem, and many works in the literature rely on either one of these two approaches to derive numerical methods that prove to be robust to volumetric locking phenomena.
+% Both these methods are at the foundation of numerical methods
+
+The Hu-Washizu principle considers supplementary stress and strain fields to the sole displacement problem arising from the well-known principle of Virtual Work, that act as Lagrange multipliers to enforce respectively the constitutive and strain-displacement relations.
+On the other hand, relaxed formulations provide a richer kinematics by introducing a displacement jump at element boundaries, hence allowing for the definition of enhanced strain and stress fields.
+
+The present paper proposes a variational formulation for HDG methods based on a Hu-Washizu approach, where the discontinuity of the displacement field is
+retrieved by introducing a linear elastic interface between elements, hence sketching a common framework to both Hu-Washizu based approaches for continuous displacement fields, and hybrid discontinuous methods.
+An novel resolution algorithm, based on the proposed variational approach is then devised and numerically tested in Section \ref{sec_num_example_part_2}.
+Finally, an extension of the method to axi-symmetric problems is proposed.
+
+% The following introduction outlines in a first part the development and applications of The Hu–Washizu variational
+% formulation and in a second part that of discontinuous methods.
+
+% DIRE HW A ETE REGARDE POUR LINCOMPRESSIBILITE PLASTIQUE ETC, AVANTDE PARLER DES LETHDODES
+% -> INTRODUIRE LES 
+% -> NOTATIONS (voir papier micromorphe)
+% -> charges mortes pour les temres de passage en configurartion initiale, pas celles de Nanson
+% -> les brackets : dimension finie, produit scalair intégrale, nsur des vectiueyrs : produit scalair vectoriel
+% -> le potentiel élastique, non-standrad mais pour retrouver les expressions exactes des HDG, passer par vrai potentiel élastique , à tester. Passage en zone cohézive, extension intéressante pas traitée dans le document
+
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\subsection{From the Hellinger-Reissner principle to the Hu–Washizu variational formulation}
+
+Before 1950, variational principles considered only displacement
+as a single independent field.
+Generalized variational principles began in the 1950's with the
+breakthrough works of Reissner \cite{reissner_variational_1950} on two-field variational principles for elasticity problems, in
+which the displacement and stress were considered independent fields. Subsequently, de Vebeuke \cite{fraeijs_de_veubeke_diffusion_1951} constructed a
+four-field variational principle, and Hu \cite{hu_variational_1954} and Washizu \cite{washizu_variational_1955} established three-field variational
+principle independently.
+In 1983, Chien \cite{chien_method_1983} first pointed out that the three kinds of
+variables in Hu-Washizu principle are but nct independent
+of each other. Stress-strain relations are still its variational
+constraints, which could be removed only by high-order
+Lagrange multiplier method.
+
+% ---------------------------------------------------------
+% -- SUBSUBSECTION
+% ---------------------------------------------------------
+\paragraph{B-bar methods}
+
+The denomination "assumed strain methods" is intended to encompass a variety of finite element procedures, often proposed on an ad-hoc basis, which are typically characterized by an interpolation of the discrete gradient operator assumed apriori, independently of the interpolation adopted for the displacement field. The often referred to "B-bar method", proposed by Hughes \cite{belytschko_ac0_1984}, offers an example of an assumed strain method which has proven successful in a variety of situations, including widely used structural elements \cite{hughes_finite_1981}. For the finite strain incompressible problem, this method has been precisely reformulated by Simo et al. \cite{simo_variational_1985} within the context of the Hu-Washizu principle.
+% The so-called mode decomposition technique, proposed by Belytschko (e.g., [\textcolor{blue}{ref}]), furnishes another example of a B-bar type of method that leads to the formulation of successful structural elements.
+
+% In XXX, Hughes and SImon showed that that assumed strain methods can be systematically formulated within the variational framework furnished by the Hu-Washizu principle. A crucial point in this development concerns the role played by the stress field, now entering the formulation as a Lagrange multiplier, and its recovery within the proposed variational structure. It is first noted that the Lagrange multipliers drop out from the formulation leading to a generalized displacement model, provided a certain orthogonality condition on the assumed strain field is satisfied. In addition, as a result of the variational structure, the admissible stress field (Lagrange multipliers) is constrained by an orthogonality condition arising from the Hu-Washizu principle as an Euler-Lagrange equation. These orthogonality conditions result in a single.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Mixed methods}
+
+At the same time,
+studies concerning the equivalence of the modified displacement approaches and Hu-Washizu
+mixed approaches were conducted by Simo et al. \cite{simo_variational_1985} with regard to incompressibility
+problems, and by Simo and Hughes \cite{simo_variational_1985} in a more general context of the assumed strain
+(B-bar) approach. Other related works are \cite{hughes_equivalence_1977,oden_observations_1975, shimodaira_equivalence_1985}
+
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\subsection{Hybrid Discontinuous Galerkin methods}
+
+% The Hybrid High Order method (HHO) is a discontinuous discretization
+% method, that takes root in the Discontinuous Galerkin method (DG).
+From the physical standpoint, discontinuous methods ensure the continuity of the flux
+across interfaces, by seeking the solution element-wise, hence allowing
+jumps of the potential across elements. They can be seen as a
+generalization of Finite Volume methods, and are able to capture
+physically relevant discontinuities without producing spurious
+oscillations.
+
+% ---------------------------------------------------------
+% -- SUBSUBSECTION
+% ---------------------------------------------------------
+\paragraph{Discontinuous Galerkin (DG) methods}
+
+The origin of DG methods dates back to the pioneering work of
+\cite{reed_triangular_1973}, where an hyperbolic formualtion is used to
+solve the neutron transport equation. The first application of the
+method to elliptic problems originates in \cite{babuska_finite_1973}
+where Nitsche's method \cite{nitsche_uber_1970} is used to weakly impose
+continuity of the flux across interfaces.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Application in Linear Elasticity}
+
+% ---> TODO : reformulate
+In 2002, Hansbo and Larson \cite{hansbo_discontinuous_2002-1} were the first to
+consider the Nitsche's classical DG method for nearly incompressible
+elasticity. They showed, theoretically and numerically, that this
+method is free from volumetric locking.
+% --->
+%
+%
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Symmetric interior penalty}
+
+However, the bilinear form
+arising from this formulation is not symmetric. A so called interior
+penalty term has been introduced in \cite{wheeler_elliptic_1978},
+leading to the Symmetric Interior Penalty (SIP) DG method. A first study
+of the method to linear elasticity has been devised by
+\cite{riviere_optimal_2000}, where optimal error estimate has been
+proved.
+%
+%
+%
+% ---> TODO : reformulate
+\cite{lew_optimal_2004} generalized the
+Symmetric Interior Penalty method to linear elasticity.
+In about the same
+period of time, DG methods were proposed for other linear problems in
+solid mechanics, such as Timoshenko beams
+\cite{celiker_locking-free_2006}, Bernoulli-Euler beam and the
+Poisson-Kirchhoff plate \cite{brenner_balancing_1999,
+  engel_continuousdiscontinuous_2002} and Reissner-Mindlin plates
+\cite{arnold_family_2005}. In the mid 2000's, the first applications
+of DG methods to nonlinear elasticity problems was undertaken by
+\cite{ten_eyck_discontinuous_2006, noels_general_2006}, and in 2007,
+Ortner and Süli \cite{ortner_discontinuous_2007} carried out the a
+priori error analysis of DG methods for nonlinear elasticity.
+% --->
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{DG methods in solid mechanics}
+%
+%
+%
+DG methods then sollicitated a vigourus interest, mostly in fluid dynamics \cite{shahbazi_high-order_2007, persson_discontinuous_2009} due to their local conservative property and stability in convection domniated problems. However, except some applications for instance in fracture mechanics using XFEM methods \cite{gracie_blending_2008, shen_stability_2010}, or gradient plasticity \cite{djoko_discontinuous_2007,djoko_discontinuous_2007-1} DG methods did not break through in computational solid mechanics because of their numerical cost, since nodal unknowns need be duplicated to define local basis functions in each element.
+
+% ---------------------------------------------------------
+% -- SUBSUBSECTION
+% ---------------------------------------------------------
+\paragraph{Hybrid Discontinuous Galerkin (HDG) methods}
+
+To adress this problem, in the early 2010's, \cite{cockburn_unified_2009, soon_hybridizable_2009} introduced additional faces unknowns on element interfaces for linear elastic problem, hence leading to the hybridization of DG methods, or Hybridizable Discontinuous Galerkin method (HDG). By adding supplementary boundary unknowns, the authors actually allowed to eliminate original cell unknowns by a static condensation process, in order to express the global problem on faces ones only.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{HDG methods in solid mechanics}
+
+Extension of HDG methods to non-linear elasticity were first undertaken in \cite{soon_hybridizable_2008} and have then fueled intense reaserch works for various applications such as linear and non-linear convection-diffusion problems \cite{nguyen_implicit_2009,nguyen_implicit_2009-1,nguyen_hybridizable_2010}, incompressible stokes flows \cite{nguyen_hybridizable_2010, nguyen_implicit_2011} and non-linear mechanics \cite{nguyen_hybridizable_2012}.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{HHO methods}
+
+In \cite{di_pietro_hybrid_2015, di_pietro_arbitrary-order_2014}, the authors introduced a higher order potential reconstruction operator in the classical HDG formulation for elliptic problems, providing a $h^{k+1} H^1$-norm convergence rate as compared to the ususal $h^k$-rate. This higher order term coined the name for the so called HHO method.
+Recent developments of HHO methods in
+computational mechanics include the incompressible Stokes
+equations (with possibly large irrotational forces) \cite{di_pietro_discontinuous_2016}, the
+incompressible Navier–Stokes equations \cite{di_pietro_hybrid_2018}, Biot’s consolidation problem \cite{boffi_nonconforming_2016}, and nonlinear elasticity with small
+deformations \cite{botti_hybrid_2017}
+
+% \subsection{Aim of this paper}
+
+% \subsection{Outline}
+
+% In the first part of this paper, the Hu-Washizu variational principle is presented, and the Principle of Virtual Work is introduced as specification of the Hu-Washizu principle.
+% The description of an element 

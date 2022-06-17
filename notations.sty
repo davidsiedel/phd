@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{notations}[2014/08/21 custom_notations]
 
+<<<<<<< HEAD
 % ======================================================================================================================
 % IMPORTS
 % ======================================================================================================================
@@ -80,6 +81,11 @@
 % ======================================================================================================================
 % DIVERS
 % ======================================================================================================================
+=======
+\RequirePackage{bm}
+\RequirePackage{amsmath}
+\RequirePackage{stackengine}
+>>>>>>> 3db0ae34e7bf99dc53affecafed4bb2316fc6fd8
 
 \newcommand{\subscript}[1]{
     {}_{#1}
@@ -99,22 +105,51 @@
 
 \newcommand*{\captize}[2][4]{\scalebox{1.60}{$#2$}}
 
+<<<<<<< HEAD
+=======
+\DeclareMathOperator{\Det}{det}
+
+\DeclareMathOperator{\Tr}{tr}
+
+>>>>>>> 3db0ae34e7bf99dc53affecafed4bb2316fc6fd8
 % ======================================================================================================================
 % TENSORIAL NOTATIONS
 % ======================================================================================================================
 
 \newcommand{\tensoro}[1]{
+<<<<<<< HEAD
     \bm{#1}
 }
 
 \newcommand{\tensori}[1]{
     {\stackunder[-1.5pt]{${\bm{#1}}$}{$-$}}
+=======
+    % \bm{#1}
+    {#1}
+}
+
+\newcommand{\tensori}[1]{
+    % {\stackunder[-1.5pt]{${\bm{#1}}$}{$-$}}
+    \bm{#1}
+>>>>>>> 3db0ae34e7bf99dc53affecafed4bb2316fc6fd8
 }
 
 \newcommand{\tensorii}[1]{
     {\stackunder[1.2pt]{${\bm{#1}}$}{$\scriptstyle \sim$}}
 }
 
+<<<<<<< HEAD
+=======
+\newcommand{\setclosure}[1]{
+    {\stackunder[-10.0pt]{$#1$}{$\scriptstyle --$}}
+}
+
+\newcommand{\tensoriis}[1]{
+    % \smash{\underset{\sim}{\bm{#1}}}
+    \stackunder[1.2pt]{{\textit{#1}}}{$\scriptstyle \sim$}
+}
+
+>>>>>>> 3db0ae34e7bf99dc53affecafed4bb2316fc6fd8
 \newcommand{\tensoriv}[1]{
     {\stackunder[1.2pt]{${\bm{#1}}$}{$\scriptstyle \approx$}}
 }
@@ -140,6 +175,7 @@
 }
 
 % ======================================================================================================================
+<<<<<<< HEAD
 % SCALARS, VECTORS, TENSORS
 % ======================================================================================================================
 
@@ -261,3 +297,150 @@
 
 \DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
 \SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
+=======
+% PAPER NOTATIONS
+% ======================================================================================================================
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{development}[theorem]{Development}
+
+\newcommand{\iter}[2]{#2^{(#1)}}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\Frac}[2]{\displaystyle \frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\derivtot}[2]{\displaystyle \frac{\displaystyle d#1}{\displaystyle d#2}}
+\newcommand{\bts}[1]{\left.#1\right|_{t}}
+\newcommand{\deriv}[2]{\displaystyle \frac{\displaystyle \partial #1}{\displaystyle \partial #2}}
+\newcommand{\variation}[2]{\displaystyle \frac{\displaystyle \delta #1}{\displaystyle \delta #2}}
+\newcommand{\argmin}{\mathrm{argmin}}
+
+\newcommand\bodyEul{\Omega_t}
+\newcommand\bodyLag{\Omega}
+\newcommand\dBodyEul{\partial \Omega_t}
+\newcommand\dBodyLag{\partial \Omega}
+\newcommand\dirichletBoundaryEul{\partial_d \Omega_t}
+\newcommand\neumannBoundaryEul{\partial_n \Omega_t}
+\newcommand\dirichletBoundaryLag{\partial_D \Omega}
+\newcommand\neumannBoundaryLag{\partial_N \Omega}
+
+\newcommand\mecPotential{\psi}
+\newcommand\dissipationPotential{\phi}
+
+
+\newcommand\CAset{U}
+
+\newcommand\cell{T}
+\newcommand\dCell{\partial T}
+\newcommand\ClosedCell{\bar{\cell}}
+\newcommand\dirichletCell{\partial_D T}
+\newcommand\neumannCell{\partial_N T}
+\newcommand\neumannCellLoad{\tensori{t}{}_{\partial_N T}}
+\newcommand\dirichletCellLoad{\tensori{u}{}_{\partial_D T}}
+
+% \newcommand\matA{K}
+% \newcommand\dMatA{\partial K}
+% \newcommand\dirichletMatA{\partial_D K}
+% \newcommand\neumannMatA{\partial_N K}
+% \newcommand\neumannMatALoad{\tensori{t}{}_{\partial_N K}}
+
+\newcommand\matI{T_i}
+\newcommand\dMatI{\partial T_i}
+\newcommand\dirichletMatI{\partial_D T_i}
+\newcommand\neumannMatI{\partial_N T_i}
+\newcommand\neumannMatILoad{\tensori{t}{}_{\partial_N T_i}}
+
+% \newcommand\matB{H}
+% \newcommand\dMatB{\partial H}
+% \newcommand\dirichletMatB{\partial_D H}
+% \newcommand\neumannMatB{\partial_N H}
+% \newcommand\neumannMatBLoad{\tensori{t}{}_{\partial_N H}}
+
+\newcommand\Bulk{K}
+\newcommand\dBulk{\partial K}
+\newcommand\Crown{I}
+\newcommand\dCrown{\partial I}
+
+\newcommand\HybridMesh{\mathcal{T}}
+\newcommand\dHybridMesh{\mathcal{F}}
+\newcommand\HybridMeshWhole{\bar{\mathcal{T}}}
+
+\newcommand\displacementSpaceHybridMesh{U(\mathcal{T})}
+\newcommand\displacementSpaceDHybridMesh{V(\mathcal{F})}
+\newcommand\hybridDisplacementSpaceHybridMesh{U(\bar{\mathcal{T}})}
+
+\newcommand\virtualDisplacementSpaceHybridMesh{U_0(\mathcal{T})}
+\newcommand\virtualDisplacementSpaceDHybridMesh{V_0(\mathcal{F})}
+\newcommand\virtualHybridDisplacementSpaceHybridMesh{U_0(\bar{\mathcal{T}})}
+
+\newcommand\discreteDisplacementSpaceHybridMesh{U^h(\mathcal{T})}
+\newcommand\discreteDisplacementSpaceDHybridMesh{V^h(\mathcal{F})}
+\newcommand\discreteHybridDisplacementSpaceHybridMesh{U^h(\bar{\mathcal{T}})}
+\newcommand\discreteVirtualDisplacementSpaceHybridMesh{U_0^h(\mathcal{T})}
+\newcommand\discreteVirtualDisplacementSpaceDHybridMesh{V_0^h(\mathcal{F})}
+\newcommand\discreteVirtualHybridDisplacementSpaceHybridMesh{U_0^h(\bar{\mathcal{T}})}
+
+% \newcommand\bound{\partial{}^{\text{e}} T}
+% \newcommand\neumannBound{\partial{}^{\text{e}}{}_N T}
+% \newcommand\dirichletBound{\partial{}^{\text{e}}{}_D T}
+% \newcommand\neumannBoundLoad{\tensori{t}{}_{\partial{}^{\text{e}}{}_N T}}
+
+% \newcommand\bound{\partial T}
+% \newcommand\neumannBound{\partial_N T}
+% \newcommand\dirichletBound{\partial_D T}
+% \newcommand\neumannBoundLoad{\tensori{t}{}_{\partial_N T}}
+
+\newcommand\loadLag{\tensori{f}{}_V}
+\newcommand\loadEul{\tensori{f}{}_v}
+\newcommand\neumannLag{\tensori{t}{}_N}
+\newcommand\neumannEul{\tensori{t}{}_n}
+\newcommand\dirichletLag{\tensori{u}{}_D}
+\newcommand\dirichletEul{\tensori{u}{}_d}
+
+\newcommand\internaleStateVariables{v_{int}}
+
+\newcommand\PK{\tensorii{P}}
+\newcommand\G{\tensorii{G}}
+\newcommand\F{\tensorii{F}}
+
+\newcommand\gradSpaceMatI{G(\matI)}
+\newcommand\stressSpaceMatI{S(\matI)}
+\newcommand\displacementSpaceMatI{U(\matI)}
+\newcommand\displacementSpaceDMatI{V(\dMatI)}
+
+\newcommand\potentialSpaceCell{D(\cell)}
+\newcommand\gradSpaceCell{G(\cell)}
+\newcommand\stressSpaceCell{S(\cell)}
+\newcommand\displacementSpaceCell{U(\cell)}
+\newcommand\displacementSpaceDCell{V(\dCell)}
+\newcommand\virtualDisplacementSpaceCell{U_0(\cell)}
+\newcommand\virtualDisplacementSpaceDCell{V_0(\dCell)}
+\newcommand\hybridDisplacementSpaceCell{U(\bar{\cell})}
+\newcommand\virtualHybridDisplacementSpaceCell{U_0(\bar{\cell})}
+
+\newcommand\discretePotentialSpaceCell{D^h(\cell)}
+\newcommand\discreteGradSpaceCell{G^h(\cell)}
+\newcommand\discreteStressSpaceCell{S^h(\cell)}
+\newcommand\discreteDisplacementSpaceCell{U^h(\cell)}
+\newcommand\discreteDisplacementSpaceDCell{V^h(\dCell)}
+\newcommand\discreteVirtualDisplacementSpaceCell{U_0^h(\cell)}
+\newcommand\discreteVirtualDisplacementSpaceDCell{V_0^h(\dCell)}
+\newcommand\discreteHybridDisplacementSpaceCell{U^h(\bar{\cell})}
+\newcommand\discreteVirtualHybridDisplacementSpaceCell{U_0^h(\bar{\cell})}
+
+\newcommand\gradSpaceBulk{G(\Bulk)}
+\newcommand\stressSpaceBulk{S(\Bulk)}
+\newcommand\displacementSpaceBulk{U(\Bulk)}
+\newcommand\displacementSpaceDBulk{V(\dBulk)}
+
+\newcommand\gradSpaceCrown{G(\Crown)}
+\newcommand\stressSpaceCrown{S(\Crown)}
+\newcommand\displacementSpaceCrown{U(\Crown)}
+\newcommand\displacementSpaceDCrown{V(\dCrown)}
+
+\newcommand\cellQuadrature{Q_T}
+\newcommand{\commentTH}[1]{
+  \textcolor{blue}{\textbf{Commentaire T.H.}~: #1}
+}
+>>>>>>> 3db0ae34e7bf99dc53affecafed4bb2316fc6fd8
