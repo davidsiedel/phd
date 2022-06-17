@@ -1,0 +1,77 @@
+\documentclass[a4paper, 11pt]{book}
+
+%\usepackage{fontspec}
+\usepackage{lmodern}
+\usepackage{lipsum}
+\usepackage{psl-cover}
+
+% my packages:
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\sisetup{math-micro=\text{µ},text-micro=µ}
+\usepackage[euler]{textgreek}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{soul}
+\usepackage{enumitem}
+\usepackage{bm}
+
+\title{Insérer ici l'intitulé du sujet de thèse}
+
+\author{Martinus Putra Widjaja}
+
+\institute{MINES ParisTech}
+\doctoralschool{Ingénierie des Systèmes, Matériaux, Mécanique, Energétique}{621}
+\specialty{Voir spécialités ED}
+\date{jj mois aaaa}
+
+%% cotutelle
+% \entitle{Thesis Subject in English}
+% \otherinstitute{CEA Saclay}
+% \logootherinstitute{logo-institute}
+
+\jurymember{1}{Prénom NOM}{Titre, établissement}{Président}
+\jurymember{2}{Prénom NOM}{Titre, établissement}{Rapporteur}
+\jurymember{3}{Prénom NOM}{Titre, établissement}{Rapporteur}
+\jurymember{4}{Prénom NOM}{Titre, établissement}{Examinateur}
+\jurymember{5}{Prénom NOM}{Titre, établissement}{Examinateur}
+\jurymember{6}{Prénom NOM}{Titre, établissement}{Examinateur}
+\jurymember{7}{Prénom NOM}{Titre, établissement}{Examinateur}
+\jurymember{8}{Alain THIONNET}{Titre, établissement}{Directeur de thèse}
+% \jurymember{9}{Prénom NOM}{Titre, établissement}{Invité}
+% \jurymember{10}{Prénom NOM}{Titre, établissement}{Invité}
+
+\input{abstract}
+
+\begin{document}
+
+\maketitle{}
+
+\tableofcontents
+\listoffigures
+
+
+\include{chapters/chapter01/chapter_introduction}
+
+
+\include{chapters/chapter_model_mise_en_page/chapter_xxx}
+
+%\input{introduction}
+%\input{pressure_vessel}
+%\input{gscs}
+%\input{porous_laminate}
+%\input{biaxial}
+%\input{epoxy}
+%\input{microstructure}
+%\input{baxevanakis}
+
+\bibliography{bibliography}
+\bibliographystyle{apalike}
+
+
+\end{document}
