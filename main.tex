@@ -1,5 +1,5 @@
 \documentclass[a4paper, 10pt]{book}
-% \usepackage[a4paper, total={6in, 6in}]{geometry}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \usepackage{amssymb}
 \usepackage[figuresright]{rotating}
@@ -78,21 +78,24 @@
 \tableofcontents
 \listoffigures
 
+% CHAPTER 2
+\chapter{Chapter 01}
+\label{section_chapter_xxx}
 
-\include{chapters/chapter01/chapter_introduction}
+\include{chapters/chapter02/notations}
+\include{chapters/chapter02/introduction}
+\include{chapters/chapter02/model_problem}
+\include{chapters/chapter02/composite_demo}
+\include{chapters/chapter02/discretization}
+\include{chapters/chapter02/numerical_exemples}
+\include{chapters/chapter02/conclusion}
 
+\appendix
+\label{sec_appendix}
 
-% \include{chapters/chapter_model_mise_en_page/chapter_xxx}
-\include{chapters/chapter02/chapter_02.tex}
-
-%\input{introduction}
-%\input{pressure_vessel}
-%\input{gscs}
-%\input{porous_laminate}
-%\input{biaxial}
-%\input{epoxy}
-%\input{microstructure}
-%\input{baxevanakis}
+\input{chapters/chapter02/appendix_hu_washizu}
+\input{chapters/chapter02/appendix_rec_grad}
+\input{chapters/chapter02/appendix_implementation}
 
 \bibliography{bib}
 \bibliographystyle{apalike}
