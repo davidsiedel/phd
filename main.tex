@@ -1,4 +1,8 @@
-\documentclass[a4paper, 11pt]{book}
+\documentclass[a4paper, 10pt]{book}
+% \usepackage[a4paper, total={6in, 6in}]{geometry}
+
+\usepackage{amssymb}
+\usepackage[figuresright]{rotating}
 
 %\usepackage{fontspec}
 \usepackage{lmodern}
@@ -20,6 +24,25 @@
 \usepackage{soul}
 \usepackage{enumitem}
 \usepackage{bm}
+
+\usepackage{notations}
+
+\usepackage{import}
+\usepackage{example}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{import}
+\usepackage{comment}
+\usepackage{ulem}
+\usepackage{booktabs,xltabular}
+\usepackage{longtable} 
 
 \title{Insérer ici l'intitulé du sujet de thèse}
 
@@ -59,7 +82,8 @@
 \include{chapters/chapter01/chapter_introduction}
 
 
-\include{chapters/chapter_model_mise_en_page/chapter_xxx}
+% \include{chapters/chapter_model_mise_en_page/chapter_xxx}
+\include{chapters/chapter02/chapter_02.tex}
 
 %\input{introduction}
 %\input{pressure_vessel}
@@ -70,7 +94,7 @@
 %\input{microstructure}
 %\input{baxevanakis}
 
-\bibliography{bibliography}
+\bibliography{bib}
 \bibliographystyle{apalike}
 
 
