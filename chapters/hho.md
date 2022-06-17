@@ -6,11 +6,11 @@
 Before 1950, variational principles considered only displacement
 as a single independent field.
 Generalized variational principles began in the 1950's with the
-breakthrough works of Reissner \cite{reissner_variational_1950} on two-field variational principles for elasticity problems, in
-which the displacement and stress were considered independent fields. Subsequently, de Vebeuke \cite{fraeijs_de_veubeke_diffusion_1951} constructed a
-four-field variational principle, and Hu \cite{hu_variational_1954} and Washizu \cite{washizu_variational_1955} established three-field variational
+breakthrough works of Reissner @reissner_variational_1950 on two-field variational principles for elasticity problems, in
+which the displacement and stress were considered independent fields. Subsequently, de Vebeuke @fraeijs_de_veubeke_diffusion_1951 constructed a
+four-field variational principle, and Hu @hu_variational_1954} and Washizu \cite{washizu_variational_1955 established three-field variational
 principle independently.
-In 1983, Chien \cite{chien_method_1983} first pointed out that the three kinds of
+In 1983, Chien @chien_method_1983 first pointed out that the three kinds of
 variables in Hu-Washizu principle are but nct independent
 of each other. Stress-strain relations are still its variational
 constraints, which could be removed only by high-order
@@ -18,18 +18,20 @@ Lagrange multiplier method.
 
 ### B-bar methods
 
-The denomination "assumed strain methods" is intended to encompass a variety of finite element procedures, often proposed on an ad-hoc basis, which are typically characterized by an interpolation of the discrete gradient operator assumed apriori, independently of the interpolation adopted for the displacement field. The often referred to "B-bar method", proposed by Hughes \cite{belytschko_ac0_1984}, offers an example of an assumed strain method which has proven successful in a variety of situations, including widely used structural elements \cite{hughes_finite_1981}. For the finite strain incompressible problem, this method has been precisely reformulated by Simo et al. \cite{simo_variational_1985} within the context of the Hu-Washizu principle.
+The denomination "assumed strain methods" is intended to encompass a variety of finite element procedures, often proposed on an ad-hoc basis, which are typically characterized by an interpolation of the discrete gradient operator assumed apriori, independently of the interpolation adopted for the displacement field. The often referred to "B-bar method", proposed by Hughes @belytschko_ac0_1984, offers an example of an assumed strain method which has proven successful in a variety of situations, including widely used structural elements @hughes_finite_1981. For the finite strain incompressible problem, this method has been precisely reformulated by Simo et al. @simo_variational_1985 within the context of the Hu-Washizu principle.
  The so-called mode decomposition technique, proposed by Belytschko (e.g., [\textcolor{blue}{ref}]), furnishes another example of a B-bar type of method that leads to the formulation of successful structural elements.
 
  In XXX, Hughes and SImon showed that that assumed strain methods can be systematically formulated within the variational framework furnished by the Hu-Washizu principle. A crucial point in this development concerns the role played by the stress field, now entering the formulation as a Lagrange multiplier, and its recovery within the proposed variational structure. It is first noted that the Lagrange multipliers drop out from the formulation leading to a generalized displacement model, provided a certain orthogonality condition on the assumed strain field is satisfied. In addition, as a result of the variational structure, the admissible stress field (Lagrange multipliers) is constrained by an orthogonality condition arising from the Hu-Washizu principle as an Euler-Lagrange equation. These orthogonality conditions result in a single.
 
 ### Mixed methods
 
-At the same time,
-studies concerning the equivalence of the modified displacement approaches and Hu-Washizu
-mixed approaches were conducted by Simo et al. \cite{simo_variational_1985} with regard to incompressibility
-problems, and by Simo and Hughes \cite{simo_variational_1985} in a more general context of the assumed strain
-(B-bar) approach. Other related works are \cite{hughes_equivalence_1977,oden_observations_1975, shimodaira_equivalence_1985}
+At the same time, studies concerning the equivalence of the modified
+displacement approaches and Hu-Washizu mixed approaches were conducted
+by Simo et al. @simo_variational_1985 with regard to incompressibility
+problems, and by Simo and Hughes @simo_variational_1985 in a more
+general context of the assumed strain (B-bar) approach. Other related
+works are [@hughes_equivalence_1977;oden_observations_1975;
+shimodaira_equivalence_1985@]
 
 ## Hybrid Discontinuous Galerkin methods
 
@@ -45,16 +47,16 @@ oscillations.
 ### Discontinuous Galerkin (DG) methods
 
 The origin of DG methods dates back to the pioneering work of
-\cite{reed_triangular_1973}, where an hyperbolic formualtion is used to
+@reed_triangular_1973, where an hyperbolic formualtion is used to
 solve the neutron transport equation. The first application of the
-method to elliptic problems originates in \cite{babuska_finite_1973}
-where Nitsche's method \cite{nitsche_uber_1970} is used to weakly impose
+method to elliptic problems originates in @babuska_finite_1973
+where Nitsche's method @nitsche_uber_1970 is used to weakly impose
 continuity of the flux across interfaces.
 
 ### Application in Linear Elasticity
 
  ---> TODO : reformulate
-In 2002, Hansbo and Larson \cite{hansbo_discontinuous_2002-1} were the first to
+In 2002, Hansbo and Larson @hansbo_discontinuous_2002-1 were the first to
 consider the Nitsche's classical DG method for nearly incompressible
 elasticity. They showed, theoretically and numerically, that this
 method is free from volumetric locking.
@@ -63,47 +65,68 @@ method is free from volumetric locking.
 
 However, the bilinear form
 arising from this formulation is not symmetric. A so called interior
-penalty term has been introduced in \cite{wheeler_elliptic_1978},
+penalty term has been introduced in @wheeler_elliptic_1978,
 leading to the Symmetric Interior Penalty (SIP) DG method. A first study
 of the method to linear elasticity has been devised by
-\cite{riviere_optimal_2000}, where optimal error estimate has been
+@riviere_optimal_2000, where optimal error estimate has been
 proved.
 !!! ---> TODO : reformulate
-\cite{lew_optimal_2004} generalized the
+@lew_optimal_2004 generalized the
 Symmetric Interior Penalty method to linear elasticity.
 In about the same
 period of time, DG methods were proposed for other linear problems in
 solid mechanics, such as Timoshenko beams
-\cite{celiker_locking-free_2006}, Bernoulli-Euler beam and the
+@celiker_locking-free_2006, Bernoulli-Euler beam and the
 Poisson-Kirchhoff plate \cite{brenner_balancing_1999,
   engel_continuousdiscontinuous_2002} and Reissner-Mindlin plates
-\cite{arnold_family_2005}. In the mid 2000's, the first applications
+@arnold_family_2005. In the mid 2000's, the first applications
 of DG methods to nonlinear elasticity problems was undertaken by
-\cite{ten_eyck_discontinuous_2006, noels_general_2006}, and in 2007,
-Ortner and Süli \cite{ortner_discontinuous_2007} carried out the a
+@ten_eyck_discontinuous_2006, noels_general_2006, and in 2007,
+Ortner and Süli @ortner_discontinuous_2007 carried out the a
 priori error analysis of DG methods for nonlinear elasticity.
  --->
 
 ### DG methods in solid mechanics
 
-!!!DG methods then sollicitated a vigourus interest, mostly in fluid dynamics \cite{shahbazi_high-order_2007, persson_discontinuous_2009} due to their local conservative property and stability in convection domniated problems. However, except some applications for instance in fracture mechanics using XFEM methods \cite{gracie_blending_2008, shen_stability_2010}, or gradient plasticity \cite{djoko_discontinuous_2007,djoko_discontinuous_2007-1} DG methods did not break through in computational solid mechanics because of their numerical cost, since nodal unknowns need be duplicated to define local basis functions in each element.
+!!!DG methods then sollicitated a vigourus interest, mostly in fluid
+dynamics [@shahbazi_high-order_2007;@persson_discontinuous_2009] due
+to their local conservative property and stability in convection
+domniated problems. However, except some applications for instance in
+fracture mechanics using XFEM methods
+[@gracie_blending_2008;@shen_stability_2010], or gradient plasticity
+[@djoko_discontinuous_2007;@djoko_discontinuous_2007-1] DG methods
+did not break through in computational solid mechanics because of
+their numerical cost, since nodal unknowns need be duplicated to
+define local basis functions in each element.
 
 ### Hybrid Discontinuous Galerkin (HDG) methods
 
-To adress this problem, in the early 2010's, \cite{cockburn_unified_2009, soon_hybridizable_2009} introduced additional faces unknowns on element interfaces for linear elastic problem, hence leading to the hybridization of DG methods, or Hybridizable Discontinuous Galerkin method (HDG). By adding supplementary boundary unknowns, the authors actually allowed to eliminate original cell unknowns by a static condensation process, in order to express the global problem on faces ones only.
+To adress this problem, in the early 2010's,
+[@cockburn_unified_2009;@soon_hybridizable_2009] introduced additional
+faces unknowns on element interfaces for linear elastic problem, hence
+leading to the hybridization of DG methods, or Hybridizable
+Discontinuous Galerkin method (HDG). By adding supplementary boundary
+unknowns, the authors actually allowed to eliminate original cell
+unknowns by a static condensation process, in order to express the
+global problem on faces ones only.
 
 ### HDG methods in solid mechanics
 
-Extension of HDG methods to non-linear elasticity were first undertaken in \cite{soon_hybridizable_2008} and have then fueled intense reaserch works for various applications such as linear and non-linear convection-diffusion problems \cite{nguyen_implicit_2009,nguyen_implicit_2009-1,nguyen_hybridizable_2010}, incompressible stokes flows \cite{nguyen_hybridizable_2010, nguyen_implicit_2011} and non-linear mechanics \cite{nguyen_hybridizable_2012}.
+Extension of HDG methods to non-linear elasticity were first undertaken in [@soon_hybridizable_2008] and have then fueled intense reaserch works for various applications such as linear and non-linear convection-diffusion problems [@nguyen_implicit_2009;@nguyen_implicit_2009-1;@nguyen_hybridizable_2010], incompressible stokes flows [@nguyen_hybridizable_2010;nguyen_implicit_2011@ and non-linear mechanics @nguyen_hybridizable_2012.
 
 ### HHO methods
 
-In \cite{di_pietro_hybrid_2015, di_pietro_arbitrary-order_2014}, the authors introduced a higher order potential reconstruction operator in the classical HDG formulation for elliptic problems, providing a $h^{k+1} H^1$-norm convergence rate as compared to the ususal $h^k$-rate. This higher order term coined the name for the so called HHO method.
-Recent developments of HHO methods in
-computational mechanics include the incompressible Stokes
-equations (with possibly large irrotational forces) \cite{di_pietro_discontinuous_2016}, the
-incompressible Navier–Stokes equations \cite{di_pietro_hybrid_2018}, Biot’s consolidation problem \cite{boffi_nonconforming_2016}, and nonlinear elasticity with small
-deformations \cite{botti_hybrid_2017}
+In [@di_pietro_hybrid_2015;di_pietro_arbitrary-order_2014], the
+authors introduced a higher order potential reconstruction operator in
+the classical HDG formulation for elliptic problems, providing a
+$h^{k+1} H^1$-norm convergence rate as compared to the ususal
+$h^k$-rate. This higher order term coined the name for the so called
+HHO method.  Recent developments of HHO methods in computational
+mechanics include the incompressible Stokes equations (with possibly
+large irrotational forces) @di_pietro_discontinuous_2016, the
+incompressible Navier–Stokes equations @di_pietro_hybrid_2018,
+Biot’s consolidation problem @boffi_nonconforming_2016, and
+nonlinear elasticity with small deformations @botti_hybrid_2017
 
 # The standard Hu–Washizu variational approach
 \label{sec_model_problem}
@@ -113,12 +136,12 @@ principle. For the sake of simplicity, and without loss of generality,
 let consider the case of an hyperelastic material. Extensions to
 mechanical behaviours with internal state variables are treated in
 classical textbooks of computational mechanics
-\cite{belytschko_nonlinear_nodate,besson_non-linear_2010}. This
+[@belytschko_nonlinear_nodate;@besson_non-linear_2010]. This
 extension in
-Section~\ref{sec:discretization:extension_to_non_linear_materials} for
-theorical aspects and in Section~\ref{sec_implementation} which
+Section \ref{sec:discretization:extension_to_non_linear_materials} for
+theorical aspects and in Section \ref{sec_implementation} which
 discusses our numerical implementation of the Hybrid High Order method.
-This implementation is used in Section~\ref{sec_numerical_examples}
+This implementation is used in Section \ref{sec_numerical_examples}
 which provides several examples in finite strain plasticity.
 
 ## Description of the mechanical problem and notations
@@ -228,7 +251,7 @@ displacement thus satisfies the principle of virtual work
 \label{sec_HW_lagrangian}
 
 The Hu-Washizu Lagrangian $L^{HW}_{\bodyLag{}}$
-\cite{belytschko_nonlinear_nodate,washizu_variational_1974} generalizes
+[@belytschko_nonlinear_nodate;@washizu_variational_1974] generalizes
 the previous variational principle by considering that the gradient of
 the displacement $\tensorii{G}$ and the first Piola-Kirchoff
 $\tensorii{P}$ stress are independent unknowns of the problem, such
@@ -269,16 +292,16 @@ $\tensorii{P}$ yields   !\begin{subequations}
     \label{eq_hu_washizu_derivative_0:eq3}
   \end{alignat}
 \end{subequations}
-where Equations~\eqref{eq_hu_washizu_derivative_0:eq2}
-and~\eqref{eq_hu_washizu_derivative_0:eq3} account
-for~\eqref{eq_grad_def} and~\eqref{eq_stress_def} respectively in a weak
+where Equations \eqref{eq_hu_washizu_derivative_0:eq2}
+and \eqref{eq_hu_washizu_derivative_0:eq3} account
+for \eqref{eq_grad_def} and \eqref{eq_stress_def} respectively in a weak
 sense.
 
 ## Classical applications of the Hu-Washizu variational approach in computational mechanics to circumvent volumetric locking
 
 In the continuous framework, the Hu-Washizu functional is not
-relevant, since Equations~\eqref{eq_hu_washizu_derivative_0:eq2}
-and~\eqref{eq_hu_washizu_derivative_0:eq3} would lead to the following
+relevant, since Equations \eqref{eq_hu_washizu_derivative_0:eq2}
+and \eqref{eq_hu_washizu_derivative_0:eq3} would lead to the following
 egualities:
 \begin{equation}
   \begin{aligned}
@@ -297,21 +320,21 @@ for the specification of the Lagrangian \eqref{eq_HW_0}.
 ### Pressure swelling formulations
 
 Since volumetric locking is a pressure dependent phenomenon,
-considering for instance a decomposition of the stress and strain fields
-into \textit{e.g.} devatoric and spherical components, one can express a
-mixed problem in terms of pressure and swelling, which is at the origin
-of so-called UPG methods \cite{al_akhrass_integrating_2014,
-  simo_quasi-incompressible_1991,simo_variational_1985}. The scalar
-pressure and swelling unknowns replace respectively the stress and
-strain tensorial unknowns in \eqref{eq_HW_0} and a modified deformation
-gradient is introduced in the constitutive equation.
+considering for instance a decomposition of the stress and strain
+fields into \textit{e.g.} devatoric and spherical components, one can
+express a mixed problem in terms of pressure and swelling, which is at
+the origin of so-called UPG methods
+[@al_akhrass_integrating_2014;@simo_quasi-incompressible_1991;@simo_variational_1985]. The
+scalar pressure and swelling unknowns replace respectively the stress
+and strain tensorial unknowns in \eqref{eq_HW_0} and a modified
+deformation gradient is introduced in the constitutive equation.
 
 ### Enhanced assumed strains formulations
 
 Another approach of the use of the Hu-Washizu consists in
 studying the equilibrium of a single element. Such a framework falls
 into the scope of so-called Enhanced Assumed Strains methods
-\cite{simo_variational_1986,simo_class_1990}, which results for instance
+[@simo_variational_1986;@simo_class_1990], which results for instance
 in the B-bar method, that consists in defining a modified derivation
 operator, such that one gets rid of the three-field formulation, to
 express the problem in terms of primal unknowns only.
@@ -330,22 +353,24 @@ next section aims at introducing the whole framework of non-conformal
 methods, including the displacement discontinuity, through the
 Hu–Washizu Lagragian.
 
- In \cite{noels_general_2006,neunteufel_three-field_2021}, a
- Hu-Washizu Lagrangian is used in the context of discontinuous methods
- (namely the DG and the TDNNS methods), but it does not account for
- the global framework defining these methods, as in the present
- document.
+In [@noels_general_2006;@neunteufel_three-field_2021], a Hu-Washizu
+Lagrangian is used in the context of discontinuous methods (namely
+the DG and the TDNNS methods), but it does not account for the global
+framework defining these methods, as in the present document.
 
- Though one counts a few occurances of the use of the Hu–Washizu
- Lagragian in the context of discontinuous methods
- \cite{noels_general_2006,neunteufel_three-field_2021}, none, to our
- knowledge, introduce all the ingredients of the method through the
- sole Hu–Washizu Lagragian.
+Though one counts a few occurances of the use of the Hu–Washizu
+Lagragian in the context of discontinuous methods
+[@noels_general_2006;@neunteufel_three-field_2021], none, to our
+knowledge, introduce all the ingredients of the method through the
+sole Hu–Washizu Lagragian.
 
- and though one counts a few applications of the Hu–Washizu Lagrangian for Discontinuous Galerkin methods \cite{}, none of them exploit the 
+ and though one counts a few applications of the Hu–Washizu Lagrangian
+ for Discontinuous Galerkin methods, none of them exploit the
  Its application in mechanics had not resulted in a break through, and
- so did not its variants, among which the Hybird Discontinuous Galerkin method and the Hybird High Order method.
- Though one counts a few applications of the Hu–Washizu Lagrangian for Discontinuous Galerkin methods 
+ so did not its variants, among which the Hybird Discontinuous
+ Galerkin method and the Hybird High Order method.  Though one counts
+ a few applications of the Hu–Washizu Lagrangian for Discontinuous
+ Galerkin methods
 
  En continue, aucun intérêt. Par contre, très puissant une fois les
  bases d'approximations choisies.
@@ -388,23 +413,27 @@ This representation is at the basis of Discontinuous Galerkin methods
 ### Hybird Discontinuous Galerkin methods
 
 
-In
-this paper, we consider hybrid discontinuous Galerkin (HDG) methods,
-where two elastic interfaces are introducted: one between \(T\) and its
-boundary \(\partial T\) and a second one between \(\Omega\backslash T\)
-and \(\partial T\) (see Figure \ref{fig_02}(c)). Following this idea, we
-show in this section how the use of the Hu-Hashizu Lagrangian allows to
-recover the main ingredients of the HDG/HHO methods, namely the
-\textit{reconstructed gradient} and the \textit{stabilisation operator}.
+In this paper, we consider hybrid discontinuous Galerkin (HDG)
+methods, where two elastic interfaces are introducted: one between
+\(T\) and its boundary \(\partial T\) and a second one between
+\(\Omega\backslash T\) and \(\partial T\) (see Figure
+\ref{fig_02}(c)). Following this idea, we show in this section how the
+use of the Hu-Hashizu Lagrangian allows to recover the main
+ingredients of the HDG/HHO methods, namely the \textit{reconstructed
+gradient} and the \textit{stabilisation operator}.
 
 ## Element description
 
 ### Element geometry
 
-
-In the following, the cell $\cell$ is assumed to be convex.
-It is split into a core part $\Bulk \subset \cell$ with boundary $\dBulk$, and into an interface part $\Crown{} \subset \cell$ with boundary $\dCrown = \dBulk \cup \dCell$, as shown in Figure \ref{fig_02}. The interface $\Crown{}$ has some thickness $\ell > 0$ that is supposed to be small compared to $h_{\cell}$ the diameter of $\cell$.
-From a geometrical standpoint, the core par of the element $\Bulk{}$ is an homotethy of $\cell$ by some ratio inferior to $1$.
+In the following, the cell $\cell$ is assumed to be convex.  It is
+split into a core part $\Bulk \subset \cell$ with boundary $\dBulk$,
+and into an interface part $\Crown{} \subset \cell$ with boundary
+$\dCrown = \dBulk \cup \dCell$, as shown in Figure \ref{fig_02}. The
+interface $\Crown{}$ has some thickness $\ell > 0$ that is supposed to
+be small compared to $h_{\cell}$ the diameter of $\cell$.  From a
+geometrical standpoint, the core par of the element $\Bulk{}$ is an
+homotethy of $\cell$ by some ratio inferior to $1$.
 
 ### Element boundary description}
 
@@ -817,13 +846,13 @@ that to $\tensori{u}{}^h_{\dCell}$.
 
 ## Local and global discrete problems
 
-\subsubsection{Local residual}
+### Local residual
 
 In a functional space of finite dimension, the restriction of a linear
 form can be represented a vector in the dual space. Hence, let
 $\mathfrak{R}_{\cell}$ and $\mathfrak{R}_{\dCell}$ the residual vectors
 associated with the the variations of the total
-Lagrangian~\eqref{eq_0015}:
+Lagrangian \eqref{eq_0015}:
 \begin{subequations}
   \label{eq_final_problem_00}
   \begin{alignat}{3}
@@ -907,7 +936,7 @@ discrete problem satisfies:
 \end{equation}
 where the vector
 $\mathfrak{R}_{\mathcal{F}}(\mathfrak{U}_{\mathcal{T}},
-\mathfrak{U}_{\mathcal{F}})$ is the skeleton residual such that~:
+\mathfrak{U}_{\mathcal{F}})$ is the skeleton residual such that :
 \begin{equation}
   \label{eq_final_problem_0}
   \begin{aligned}
@@ -950,7 +979,7 @@ one, presented as the \textit{Cell equilibrium} strategy, has, to our
 knowledge, never been introduced in the literature, and arises from the
 previous total Lagrangian formulation of HDG methods. The second one
 consists in performing a static condensation operation
-\cite{abbas_hybrid_2018, abbas_hybrid_2019,di_pietro_hybrid_2015}
+[@abbas_hybrid_2018;@abbas_hybrid_2019;@di_pietro_hybrid_2015]
 following linearization of the problem.
 
 \subsubsection{Cell equilibrium}
@@ -965,7 +994,7 @@ displacement unknown $\mathfrak{U}_{\dCell}$ as follows:
     \mathfrak{U}_{\dCell}) = 0
   \end{aligned}
 \end{equation}
-In practice, Nonlinear Equation~\eqref{eq_cell_equilibrium_1} can be
+In practice, Nonlinear Equation \eqref{eq_cell_equilibrium_1} can be
 solved by an iterative method. At the global scale, the face residual
 can thus be expressed as function of the face displacement, and
 satisfies:
@@ -975,7 +1004,7 @@ satisfies:
  \mathfrak{U}_{\mathcal{F}})=0
 \end{equation}
 
-Nonlinear Equation~\eqref{eq_cell_equilibrium_face_residual} is
+Nonlinear Equation \eqref{eq_cell_equilibrium_face_residual} is
 generally solved using an iterative method. For the sake of simplicity,
 the Newton method is considered here. Let
 \(\iter{n}{\mathfrak{U}_{\mathcal{F}}}\) be the current estimate of the
@@ -1114,7 +1143,7 @@ The element contributions
 system giving \(\iter{n}{\delta}\mathfrak{U}_{\mathcal{F}}\). Once,
 \(\iter{n}{\delta}\mathfrak{U}_{\dCell}\) is known, a decondensation
 step is performed to computed \(\iter{n}{\delta}\mathfrak{U}_{\cell}\)
-using Equation~\ref{eq:cell_unknown_correction}.
+using Equation \ref{eq:cell_unknown_correction}.
 
 
 ## Extension to non linear materials with internal state variables
@@ -1127,10 +1156,10 @@ assumed to describe a unique material.
 
 To simplify the presentation and preseve a variational framework, the
 behaviour of the material is assumed to be standard
-generalized~\cite{moreau_sur_1970,halphen_sur_1975}. The evolution of
+generalized [@moreau_sur_1970;@halphen_sur_1975]. The evolution of
 the material can thus be described by an incremental lagrangian
 \(L_{\cell}^{HDG}\) defined as
-follows~\cite{lorentz_variational_1999,forest_localization_2004}:
+follows [@lorentz_variational_1999;@forest_localization_2004]:
 \begin{equation}
   L_{\cell}^{HDG} = \displaystyle \int_{\cell} \left[
   \mecPotential{}_{\bodyLag{}}+\Delta\,t\,\dissipationPotential\paren{\Frac{\vec{Y}^{\star}-\bts{\vec{Y}}}{\Delta\,t}}
@@ -1151,8 +1180,8 @@ where:
 
 At this stage, two strategies can be set-up to eliminate the internal
 state variables:
-\begin{enumerate}
-  \item Classically, state variables are assumed to be defined at
+
+- Classically, state variables are assumed to be defined at
   the integration points (or, expressed differently, to be approximated
   in \(L^{2}\)). This strategy is the one used by most finite element
   solvers. In pratice, given the increment of the reconstructed
@@ -1160,43 +1189,38 @@ state variables:
   ordinary differential equations, are integrated to compute the new
   value of the stress and the consistent tangent operator. This
   strategy, already used by Abbas et
-  al.~\cite{abbas_hybrid_2018,abbas_hybrid_2019}, is used in the
+  al. [@abbas_hybrid_2018;@abbas_hybrid_2019], is used in the
   numerical examples of this paper.
-  \item The state variables can also be approximated in some
+- The state variables can also be approximated in some
   discrete space on the cell. In this case, the cell resolution
   algorithm could be extended to define the cell displacements and the
   state variables as implicit functions of the face displacements. This
   approach seems \emph{a priori} interesting in at least two cases:
-  \begin{itemize}
-    \item Applied to plasticity, this approach lead to a en
+  - Applied to plasticity, this approach lead to a en
     potentially efficient multi-field
-    plasticity~\cite{simo_computational_1998} method with a low
+    plasticity [@simo_computational_1998] method with a low
     computational cost as the extra degrees of freedoms (associated with
     the plastic strains) can be eliminated at the cell level.
-    <> Static condensation in the context of multi-field plasticty \cite{schroder_static_2015}.
-    \item Applied to phase-field damage problems, the
+  - Applied to phase-field damage problems, the
     irreversibility constraint could be treated at the element level by
     defining appropriate Lagrange multiplier that can be eliminated. A
     similar idea was developped by Cicuttin et al. for the elliptic
-    obstacle problem~\cite{cicuttin_hybrid_2020}.
-  \end{itemize}
-  Exploring those two lines of research is left for future
-  works.
-\end{enumerate}
+    obstacle problem [@cicuttin_hybrid_2020].
+
+Exploring those two lines of research is left for future works.
 
 <>Moreover, it allows to consider extending the present cell correction
 <>iterative resolution to \textit{e.g.} constrained resolution algorithm,
 <>in order to solve inequality constrained problems, as encountered in
-<>multi-field plasticity~\cite{schroder_small_2015} for instance.
+<>multi-field plasticity @schroder_small_2015 for instance.
 
-\subsubsection{Comparison between both schemes}
+### Comparison between both schemes
 \label{par_cell_eq}
 
 ### Static condensation
 
-
 The static condensation algorithm is the one used in the literature
-\cite{di_pietro_discontinuous-skeletal_2015,cockburn_algorithm_2019,abbas_hybrid_2019-1,abbas_hybrid_2018}
+[@di_pietro_discontinuous-skeletal_2015;@cockburn_algorithm_2019;@abbas_hybrid_2019-1;@abbas_hybrid_2018]
 to eliminate cell unknowns. Contrary to the introduced cell resolution
 algorithm, this scheme needs not iterate at the cell level to accomodate
 the cell correction. The actualization of the cell unknown displacement
@@ -1205,7 +1229,7 @@ by its correction requires that the quantities $\partial
 R_{\cell}^{\cell} / \partial \tensori{u}{}_{\dCell}^k$ computed at the
 previous iteration are known. From a numerical standpoint, this results
 in keeping stiffness matrices blocks (see
-Section~\ref{sec_implementation2}) in memory from an iteration to the
+Section \ref{sec_implementation2}) in memory from an iteration to the
 other.
 
 ### Cell equilibrium
@@ -1214,7 +1238,7 @@ other.
 The novel cell resolution scheme needs iterate at the cell level. It
 may require to integrate the constitutive equation more times than the
 static condensation algorithm does (See
-paragraph~\ref{sec:discretization:extension_to_non_linear_materials}).
+paragraph \ref{sec:discretization:extension_to_non_linear_materials}).
 However, it allows to exactly evaluate the equilibrium of the cell with
 its boundary, what does not the former.
 
@@ -1248,7 +1272,7 @@ results obtained with the reference implementation provided the
 
 To ensure coercivity of the HHO method, the stabilization parameter
 $\beta$ needs be chosen according to the material under study. In the
-literature~\cite{di_pietro_discontinuous-skeletal_2015}, a value of
+literature @di_pietro_discontinuous-skeletal_2015, a value of
 order $2 \mu$ is advocated, where $\mu$ denotes the shear modulus of the
 material. We use this values for all test cases in the present section.
 
@@ -1366,7 +1390,7 @@ Figure \ref{fig_sphereall} mentions the label HHO without specifying approximati
 As for the displacement, the analytical solution for the trace of the Cauchy stress tensor is compared to the one computed using the proposed HHO method for three approximation orders.
 A sign of volumetric locking is the presence of strong oscillations in the trace of the Cauchy stress (or, equivalently, the hydrostatic pressure) within elements.
 We observe that numerical results at quadrature points fit the analytical curve, and display no sign of volumetric locking. The computed solution is however less smooth
-at the borders of the specimen for higher orders, a phenomenon that was pointed out in \cite{abbas_hybrid_2019-1} for the three dimensional case, and attributed to the fact that planar faces are considered.
+at the borders of the specimen for higher orders, a phenomenon that was pointed out in @abbas_hybrid_2019-1 for the three dimensional case, and attributed to the fact that planar faces are considered.
 
 \begin{figure}[H]
     \centering
@@ -1392,7 +1416,7 @@ bar is discretized, and the mesh is composed of XXX quadrangles.
 
 
 The same behavior law as that in \ref{sec_swelling_sphere} is considered for the present test case. 
-However, the finite strain hypothesis is chosen, based on a logarithmic decomposition of the stress \cite{miehe_anisotropic_2002}.
+However, the finite strain hypothesis is chosen, based on a logarithmic decomposition of the stress @miehe_anisotropic_2002.
 
 ### Material parameters
 
@@ -1465,7 +1489,7 @@ and quadratic approximations)
 The same behavior law as that in \ref{sec_swelling_sphere} is
 considered for the present test case. However, the finite strain
 hypothesis is chosen, based on a logarithmic decomposition of the stress
-\cite{miehe_anisotropic_2002}.
+@miehe_anisotropic_2002.
 
 ### Material parameters
 
@@ -1522,4 +1546,4 @@ Finally, we have devised and evaluated numerically an HHO method to account for 
 The HHO method exhibits a robust behavior for strain-hardening plasticity as well as for perfect plasticity and produces accurate solutions with a moderate number of degrees of freedom for various benchmarks from the literature.
 
 This work can be pursued in several directions. One could use the cell resolution algorithm to address local resolution problems, such as those encountered with \textit{e.g.} damage irreversibility in phase field fracture mechanics, or multi field plasticity. Moreover, an adaptation of the HHO method to
-reconstruct pressure-driven gradient terms only could lead to a simpler formulation, closer to that of mixed methods \cite{simo_quasi-incompressible_1991}.
+reconstruct pressure-driven gradient terms only could lead to a simpler formulation, closer to that of mixed methods @simo_quasi-incompressible_1991.
