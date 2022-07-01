@@ -1578,15 +1578,9 @@ Considering \textit{e.g.} a linear hardening behaviour law leads to a stabilized
 \end{figure}
 
 ##### Local system
+
+The local system to solve with each cell scales with the size of a single cell unknown. An overview of the values taken using a monomial shape function can be found in \ref{sec_appendix_implementation}. These local resolution procedures consist in solving dense systems and are completely
 parallelizable.
-
-####  \subsubsection
-
-
-
-
-
-
 
 
 ## Conclusion
