@@ -27,35 +27,37 @@
 
 \DeclareMathOperator{\Tr}{tr}
 
+\DeclareMathOperator{\Dev}{dev}
+
 % ======================================================================================================================
 % TENSORIAL NOTATIONS
 % ======================================================================================================================
 
 \newcommand{\tensoro}[1]{
     % \bm{#1}
-    {#1}
+    {#1}{}
 }
 
 \newcommand{\tensori}[1]{
     % {\stackunder[-1.5pt]{${\bm{#1}}$}{$-$}}
-    \bm{#1}
+    \bm{#1}{}
 }
 
 \newcommand{\tensorii}[1]{
-    {\stackunder[1.2pt]{${\bm{#1}}$}{$\scriptstyle \sim$}}
+    {\stackunder[1.2pt]{${\bm{#1}}$}{$\scriptstyle \sim$}}{}
 }
 
 \newcommand{\setclosure}[1]{
-    {\stackunder[-10.0pt]{$#1$}{$\scriptstyle --$}}
+    {\stackunder[-10.0pt]{$#1$}{$\scriptstyle --$}}{}
 }
 
 \newcommand{\tensoriis}[1]{
     % \smash{\underset{\sim}{\bm{#1}}}
-    \stackunder[1.2pt]{{\textit{#1}}}{$\scriptstyle \sim$}
+    \stackunder[1.1pt]{{$\scriptstyle \bm{#1}$}}{$\scriptscriptstyle \sim$}{}
 }
 
 \newcommand{\tensoriv}[1]{
-    {\stackunder[1.2pt]{${\bm{#1}}$}{$\scriptstyle \approx$}}
+    {\stackunder[1.2pt]{${\bm{#1}}$}{$\scriptstyle \approx$}}{}
 }
 
 % ======================================================================================================================
@@ -79,6 +81,103 @@
 }
 
 % ======================================================================================================================
+% MISCS NOTATIONS
+% ======================================================================================================================
+
+\newcommand{\IdentityTensorO}{\tensoro{I}{}_d}
+\newcommand{\IdentityTensorI}{\tensori{I}{}_d}
+\newcommand{\IdentityTensorII}{\tensorii{I}{}_d}
+\newcommand{\IdentityTensorIV}{\tensorii{I}{}_d}
+
+\newcommand{\TraceOperator}[1]{\vert_{#1}}
+\newcommand{\LagrangianOperator}[2]{L_{#1}^{#2}}
+
+
+\newcommand{\StabilizationFactor}{\beta}
+
+\newcommand{\VirtualField}[1]{\hat{#1}}
+\newcommand{\Field}[3]{{#1}{}_{#2}^{#3}}
+
+\newcommand{\Vector}[1]{\mathfrak{#1}}
+\newcommand{\Matrix}[1]{\mathbb{#1}}
+
+
+% ======================================================================================================================
+% FIELD NOTATIONS
+% ======================================================================================================================
+
+\newcommand{\DisplacementField}{\tensori{u}}
+\newcommand{\DisplacementGradientField}{\tensorii{G}}
+\newcommand{\TransformationGradientField}{\tensorii{F}}
+\newcommand{\PKIStressField}{\tensorii{P}}
+\newcommand{\DisplacementTractionField}{\tensori{\theta}{}_{u}}
+\newcommand{\DisplacementJumpField}{\tensori{J}{}_{u}}
+\newcommand{\DisplacementStabilizationFactor}{\beta_{u}}
+
+\newcommand{\MicromorphicDamageField}{\tensoro{d}{}_{\chi}}
+\newcommand{\MicromorphicDamageGradientField}{\tensori{g}{}_{\chi}}
+\newcommand{\MicromorphicDamageStressField}{\tensori{b}{}_{\chi}}
+\newcommand{\MicromorphicDamageForceField}{\tensoro{a}{}_{\chi}}
+\newcommand{\MicromorphicDamageTractionField}{\tensoro{\theta}{}_{d}}
+\newcommand{\MicromorphicDamageJumpField}{\tensoro{J}{}_{d}}
+\newcommand{\MicromorphicDamageStabilizationFactor}{\beta_{d}}
+
+\newcommand{\DamageField}{\tensoro{d}}
+\newcommand{\DamageForceField}{\tensoro{Y}}
+
+
+
+\newcommand{\NormalVector}{\tensori{n}}
+
+% ======================================================================================================================
+% ELEMENT NOTATIONS
+% ======================================================================================================================
+
+\newcommand{\BodyLagrange}{{\Omega}}
+\newcommand{\BodyLagrangeBoundary}{{\partial \Omega}}
+\newcommand{\BodyLagrangeDirichletBoundary}{{\partial_D \Omega}}
+\newcommand{\BodyLagrangeNeumannBoundary}{{\partial_N \Omega}}
+
+\newcommand{\BodyEuler}{{\Omega_t}}
+\newcommand{\BodyEulerBoundary}{{\partial \Omega_t}}
+\newcommand{\BodyEulerDirichletBoundary}{{\partial_t \Omega_t}}
+\newcommand{\BodyEulerNeumannBoundary}{{\partial_n \Omega_t}}
+
+\newcommand{\ElementCell}{{T}}
+\newcommand{\ElementSkeleton}{\mathcal{F}(T)}
+\newcommand{\ElementBoundary}{{\partial T}}
+\newcommand{\ElementFace}{{F}}
+\newcommand{\ElementInterface}{{I}}
+\newcommand{\ElementInterfaceBoundary}{{\partial I}}
+\newcommand{\ElementBulk}{{K}}
+\newcommand{\ElementBulkBoundary}{{\partial K}}
+
+\newcommand{\Mesh}{\mathcal{T}}
+\newcommand{\Skeleton}{\mathcal{F}}
+\newcommand{\SkeletonInterior}{\mathcal{F}{}_{}^{i}}
+\newcommand{\SkeletonBoundary}{\mathcal{F}{}_{}^{e}}
+\newcommand{\SkeletonBoundaryDirichlet}{\mathcal{F}{}_{D}^{e}}
+\newcommand{\SkeletonBoundaryNeumann}{\mathcal{F}{}_{N}^{e}}
+
+
+% \newcommand{\ElementCellField}[1]{{#1}{}_{T}}
+% \newcommand{\ElementBoundaryField}[1]{{#1}{}_{\partial T}}
+% \newcommand{\ElementInterfaceField}[1]{{#1}{}_{I}}
+% \newcommand{\ElementBulkField}[1]{{#1}{}_{K}}
+% \newcommand{\ElementBulkBoundaryField}[1]{{#1}{}_{\partial K}}
+
+% \newcommand{\ElementDiscreteCellField}[1]{{#1}{}_{T}^h}
+% \newcommand{\ElementDiscreteBoundaryField}[1]{{#1}{}_{\partial T}^h}
+% \newcommand{\ElementDiscreteInterfaceField}[1]{{#1}{}_{I}^h}
+% \newcommand{\ElementDiscreteBulkField}[1]{{#1}{}_{K}^h}
+% \newcommand{\ElementDiscreteBulkBoundaryField}[1]{{#1}{}_{\partial K}^h}
+
+% \newcommand{\MeshField}[1]{{#1}{}_{\mathcal{T}}}
+% \newcommand{\SkeletonField}[1]{{#1}{}_{\mathcal{F}}}
+% \newcommand{\MeshDiscreteField}[1]{{#1}{}_{\mathcal{T}}^h}
+% \newcommand{\SkeletonDiscreteField}[1]{{#1}{}_{\mathcal{F}}^h}
+
+% ======================================================================================================================
 % PAPER NOTATIONS
 % ======================================================================================================================
 
@@ -87,6 +186,15 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{property}[theorem]{Property}
 \newtheorem{development}[theorem]{Development}
+
+\newcommand{\iter}[2]{#2^{(#1)}}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\Frac}[2]{\displaystyle \frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\derivtot}[2]{\displaystyle \frac{\displaystyle d#1}{\displaystyle d#2}}
+\newcommand{\bts}[1]{\left.#1\right|_{t}}
+\newcommand{\deriv}[2]{\displaystyle \frac{\displaystyle \partial #1}{\displaystyle \partial #2}}
+\newcommand{\variation}[2]{\displaystyle \frac{\displaystyle \delta #1}{\displaystyle \delta #2}}
+\newcommand{\argmin}{\mathrm{argmin}}
 
 \newcommand\bodyEul{\Omega_t}
 \newcommand\bodyLag{\Omega}
@@ -146,8 +254,8 @@
 \newcommand\virtualDisplacementSpaceDHybridMesh{V_0(\mathcal{F})}
 \newcommand\virtualHybridDisplacementSpaceHybridMesh{U_0(\bar{\mathcal{T}})}
 
-\newcommand\discreteDisplacementSpaceHybridMesh{U^h(\mathcal{T})}
-\newcommand\discreteDisplacementSpaceDHybridMesh{V^h(\mathcal{F})}
+\newcommand\discreteDisplacementSpaceHybridMesh{U^h_T}
+\newcommand\discreteDisplacementSpaceDHybridMesh{U^h_F}
 \newcommand\discreteHybridDisplacementSpaceHybridMesh{U^h(\bar{\mathcal{T}})}
 \newcommand\discreteVirtualDisplacementSpaceHybridMesh{U_0^h(\mathcal{T})}
 \newcommand\discreteVirtualDisplacementSpaceDHybridMesh{V_0^h(\mathcal{F})}
@@ -173,7 +281,7 @@
 \newcommand\internaleStateVariables{v_{int}}
 
 \newcommand\PK{\tensorii{P}}
-\renewcommand\G{\tensorii{G}}
+\newcommand\G{\tensorii{G}}
 \newcommand\F{\tensorii{F}}
 
 \newcommand\gradSpaceMatI{G(\matI)}
@@ -191,11 +299,11 @@
 \newcommand\hybridDisplacementSpaceCell{U(\bar{\cell})}
 \newcommand\virtualHybridDisplacementSpaceCell{U_0(\bar{\cell})}
 
-\newcommand\discretePotentialSpaceCell{D^h(\cell)}
-\newcommand\discreteGradSpaceCell{G^h(\cell)}
-\newcommand\discreteStressSpaceCell{S^h(\cell)}
-\newcommand\discreteDisplacementSpaceCell{U^h(\cell)}
-\newcommand\discreteDisplacementSpaceDCell{V^h(\dCell)}
+\newcommand\discretePotentialSpaceCell{W^h_{\cell}}
+\newcommand\discreteGradSpaceCell{G^h_{\cell}}
+\newcommand\discreteStressSpaceCell{S^h_{\cell}}
+\newcommand\discreteDisplacementSpaceCell{U^h_{\cell}}
+\newcommand\discreteDisplacementSpaceDCell{U^h_{\dCell}}
 \newcommand\discreteVirtualDisplacementSpaceCell{U_0^h(\cell)}
 \newcommand\discreteVirtualDisplacementSpaceDCell{V_0^h(\dCell)}
 \newcommand\discreteHybridDisplacementSpaceCell{U^h(\bar{\cell})}
