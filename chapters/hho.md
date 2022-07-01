@@ -411,7 +411,7 @@ From a geometrical standpoint, the core part of the element $\Bulk{}$ is an homo
 ##### Element boundary description
 \begin{figure}[H]
     \centering
-    \includegraphics[width=14.cm]{image_calcs/ef_dg_hdg.png}
+    \includegraphics[width=14.cm]{img_calcs/ef_dg_hdg.png}
     \caption{schematic representation of a cell and its surrounding depending on the continuity requirement of the displacement field}
     \label{fig_02}
 \end{figure}
@@ -1334,7 +1334,7 @@ with temperature values $T_{max} = 2000$ K and $T_{min} = 293.15$ K.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=10.cm]{image_calcs/satoh_setting.png}
+    \includegraphics[width=10.cm]{img_calcs/satoh_setting.png}
     \caption{Geometry, displacement boundary conditions and temperature loading for the free dilatation test case}
     \label{fig_satoh_setting}
 \end{figure}
@@ -1358,7 +1358,7 @@ elements, where quadratic displacement elements needs be employed together with 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=10.cm]{image_calcs/satoh_calc.png}
+    \includegraphics[width=10.cm]{img_calcs/satoh_calc.png}
     \caption{Map fo the Trace of the Cauchy stress at quadrature points for the Free dilatation test case at the last time step}
     \label{fig_satoh_calc}
 \end{figure}
@@ -1397,7 +1397,7 @@ perfect plasticity is considered for this test case. The saturation parameter $\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{image_calcs/sphere_mesh.png}
+    \includegraphics[width=12.cm]{img_calcs/sphere_mesh.png}
     \caption{the swelling sphere test case. Geometry, loadings, final displacement along the radius of the sphere, and final equivalent plastic strain map at quadrature points}
     \label{fig_sphereall}
 \end{figure}
@@ -1416,7 +1416,7 @@ at the borders of the specimen for higher orders, a phenomenon that was pointed 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15.cm]{image_calcs/sphere_pressures.png}
+    \includegraphics[width=15.cm]{img_calcs/sphere_pressures.png}
     \caption{trace of the Cauchy stress tensor along the radius of the sphere at quadrature points}
     \label{fig_sphere_pressure}
 \end{figure}
@@ -1457,7 +1457,7 @@ One notices through the present example, that the proposed HHO method displays n
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{image_calcs/ssna_plastic.png}
+    \includegraphics[width=12.cm]{img_calcs/ssna_plastic.png}
     \caption{
         final equivalent plastic strain map at quadrature points in the notch region
     }
@@ -1472,7 +1472,7 @@ fairly smooth over the whole structure at all approximation orders, even at the 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{image_calcs/ssna_mesh.png}
+    \includegraphics[width=12.cm]{img_calcs/ssna_mesh.png}
     \caption{
         the notched specimen test case. Geometry, loadings, load deflection curve, and final hydrostatic pressure map at quadrature points in the notch region
     }
@@ -1508,7 +1508,7 @@ As expected, the number of iteration per time step is similar for Cell resolutio
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{image_calcs/plot_global_iterations__4_ordn.png}
+    \includegraphics[width=12.cm]{img_calcs/plot_global_iterations__4_ordn.png}
     \caption{Normalized number of iterations per time step for non-linear test cases and all resolution schemes variants}
     \label{fig_acceleration_res_0}
 \end{figure}
@@ -1556,7 +1556,7 @@ is given in Figure \ref{fig_acceleration_res_memory} for different acceleration 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=8.cm]{image_calcs/plot_memory.png}
+    \includegraphics[width=8.cm]{img_calcs/plot_memory.png}
     \caption{Number of scalar entries to store from one iteration to another for different polynomial orders and resolution schemes variants}
     \label{fig_acceleration_res_memory}
 \end{figure}
@@ -1572,7 +1572,7 @@ Considering \textit{e.g.} a linear hardening behaviour law leads to a stabilized
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{image_calcs/plot_cell_iterations__4_cell_iters.png}
+    \includegraphics[width=12.cm]{img_calcs/plot_cell_iterations__4_cell_iters.png}
     \caption{Normalized number of cell iterations per time step for non-linear test cases and Cell equilibrium based resolution schemes variants}
     \label{fig_acceleration_res_1}
 \end{figure}
@@ -1866,7 +1866,7 @@ where $M_0$ is the first coordinate of a point $\tensori{M}$ in the local frame 
 The vector $\tensori{M}{}_{o}$ denotes a point located in the plane $M_0 = 0$, and $\tensori{M}{}_{\ell}$ a point on the plane $M_0 = \ell$, such that they share the same coordinates on their respective planes.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7.cm]{image_calcs/yo.png}
+    \includegraphics[width=7.cm]{img_calcs/yo.png}
     \caption{schematic representation of the cell, interface and boundary displacement fields close to a corner region}
     \label{fig_appendix_interface_displacement}
 \end{figure}
@@ -2487,7 +2487,7 @@ $\sigma_0 = 450$ MPa, $\sigma_{\infty} = 715$ MPa with a saturation parameter $\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{image_calcs/cook_comp.png}
+    \includegraphics[width=12.cm]{img_calcs/cook_comp.png}
     \caption{Hydrostatic pressure map one the reference configuration at the limit load}
     \label{fig_cook}
 \end{figure}
@@ -2508,7 +2508,7 @@ The same perfect plastic material as that in \ref{sec_swelling_sphere} is consid
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{image_calcs/cube.png}
+    \includegraphics[width=12.cm]{img_calcs/cube.png}
     \caption{Hydrostatic pressure map one the reference configuration at the limit load}
     \label{fig_cube}
 \end{figure}
