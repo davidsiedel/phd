@@ -143,10 +143,6 @@ equations (with possibly large irrotational forces) \cite{di_pietro_discontinuou
 incompressible Navier–Stokes equations \cite{di_pietro_hybrid_2018}, Biot’s consolidation problem \cite{boffi_nonconforming_2016}, and nonlinear elasticity with small
 deformations \cite{botti_hybrid_2017}
 
-###  \subsection
-
-###  \subsection
-
 ## The standard Hu–Washizu variational approach
 \label{sec_model_problem}
 
@@ -708,15 +704,6 @@ and the Cauchy stress is the derivative of the potential $\mecPotential_{\bodyLa
         \tensorii{\sigma}{}_{\cell} = \frac{\partial \mecPotential_{\bodyLag}}{\partial \tensorii{\varepsilon}{}_{\cell}}
     \end{aligned}
 \end{equation}
-
-###  \subsection
-
-
-
-
-
-
-
 
 ## Discretization
 \label{sec-discretization}
