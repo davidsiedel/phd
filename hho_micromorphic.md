@@ -39,9 +39,9 @@ In the following, let $\tensori{g}{}_{\chi} = \nabla \MicromorphicDamageField$ t
 ##### Free energy potential
 
 The free energy potential $\psi_{\BodyLagrange}$ of the body $\BodyLagrange$ reads as a function of the displacement $\DisplacementField$, the (local) damage $d$ and the micromorphic damage $\MicromorphicDamageField$, in the form
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \psi_{\BodyLagrange}
     (\TransformationGradientField, \DamageField, \MicromorphicDamageField, \MicromorphicDamageGradientField)
@@ -58,9 +58,9 @@ The free energy potential $\psi_{\BodyLagrange}$ of the body $\BodyLagrange$ rea
     \psi_{\MicromorphicDamageGradientField}
     (\MicromorphicDamageGradientField)
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where $\psi_{\tensoriis{F}, \DamageField}$ denotes the mechanical contribution that takes into account the damage in the medium,
 $\psi_{\DamageField}$ is the energy stored during the fracture process,
 $\psi_{\DamageField, \MicromorphicDamageField}$ is a coupling term between the damage and micromorphic damage variables, and
@@ -69,9 +69,9 @@ $\psi_{\MicromorphicDamageGradientField}$ defines the micromorphic force.
 ##### Stresses
 
 The following stresses are introduced
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \begin{aligned}
         \PKIStressField = \deriv{\psi_{\BodyLagrange}}{\TransformationGradientField}
@@ -83,9 +83,9 @@ The following stresses are introduced
         \DamageForceField = \deriv{\psi_{\BodyLagrange}}{\DamageField}
     \end{aligned}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where $\PKIStressField$ is the first Piola-Kirchoff stress tensor, and $\MicromorphicDamageStressField, \MicromorphicDamageForceField$ and $\DamageForceField$ are the thermodynamic
 forces associated to $\tensori{g}{}_{\chi}, d_{\chi}$ and $d$ respectively.
 
@@ -93,9 +93,9 @@ forces associated to $\tensori{g}{}_{\chi}, d_{\chi}$ and $d$ respectively.
 
 A dissipation potential $\phi_{\bodyLag}(d)$ accounts for the energy dissipated by the fracture process in the medium, and is assumed to be
 an homogeneous function of degree one such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \begin{aligned}
         \Delta \, t \, \phi_{\BodyLagrange}(\frac{\DamageField - \DamageField \TraceOperator{t}} {\Delta \, t}) = \phi_{\BodyLagrange}(\DamageField - \DamageField \TraceOperator{t})
@@ -103,18 +103,18 @@ an homogeneous function of degree one such that
         \forall \Delta \, t > 0
     \end{aligned}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 In particular, the dissipation potential generally contains an indicator function imposing the irreversibility of the
 damage evolution.
 
 ##### Total Lagrangian
 
 The total Hu-Washizu Lagrangian of the body $\BodyLagrange$ is defined
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \LagrangianOperator{\BodyLagrange}{tot}
     =
@@ -122,13 +122,13 @@ The total Hu-Washizu Lagrangian of the body $\BodyLagrange$ is defined
     +
     \int_{\BodyLagrange} \phi_{\BodyLagrange}(\DamageField - \DamageField \TraceOperator{t})
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \LagrangianOperator{\BodyLagrange}{HW}
     =
@@ -142,14 +142,14 @@ where
     -
     \int_{\BodyLagrangeNeumannBoundary} \tensori{t}{}_{N} \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 The solution $(\DisplacementField, \DisplacementGradientField, \PKIStressField, \DamageField, \MicromorphicDamageField, \MicromorphicDamageGradientField, \MicromorphicDamageStressField)$
 satisfying the mechanical equilibrium minimizes the Lagragian $\LagrangianOperator{\BodyLagrange}{HW}$. The first order variation with respect to each variables yields the weak equations
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{subequations}
     \label{eq_micromorphic_hu_washizu_derivative_0}
     \begin{alignat}{3}
@@ -217,9 +217,9 @@ The following strong equations for the sole displacement problem are deduced fro
 and
 \eqref{eq_micromorphic_hu_washizu_derivative_0:eq0}
 respectively
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{subequations}
     \label{eq_micromorphic_strong_equations_meca}
     \begin{alignat}{3}
@@ -252,18 +252,18 @@ respectively
     \label{eq_micromorphic_strong_equations_meca:eq3}
     \end{alignat}
 \end{subequations}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 Similarly, the strong equations governing the sole micromorphic damage problem are deduced from
 \eqref{eq_micromorphic_hu_washizu_derivative_0:eq4} ,
 \eqref{eq_micromorphic_hu_washizu_derivative_0:eq5}
 and
 \eqref{eq_micromorphic_hu_washizu_derivative_0:eq3}
 respectively
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{subequations}
     \label{eq_micromorphic_strong_equations_damage}
     \begin{alignat}{3}
@@ -297,9 +297,9 @@ respectively
         \\
     \end{alignat}
 \end{subequations}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where the governing laws of the micromorphic damage variable define a generalized continuum medium as introduced in \cite{forest_micromorphic_2009}.## HHO
 \label{sec_micromorphic_hho}
 
@@ -308,9 +308,9 @@ where the governing laws of the micromorphic damage variable define a generalize
 The core of the element $\ElementBulk$ is made out of the same material that composes $\BodyLagrange$ and
 behaves according to the free energy potential $\psi_{\BodyLagrange}$. The behaviour of the interface $\ElementInterface$
 is defined by the free energy potential $\psi_{\ElementInterface}$ such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \label{eq_0009}
         \psi_{\ElementInterface}
@@ -320,9 +320,9 @@ is defined by the free energy potential $\psi_{\ElementInterface}$ such that
         \frac{1}{2} \MicromorphicDamageStabilizationFactor \frac{\ell}{h_{\ElementCell}} \nabla \Field{\MicromorphicDamageField}{\ElementInterface}{} \cdot \nabla \Field{\MicromorphicDamageField}{\ElementInterface}{}
 \end{equation}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Element loading
 
 The core $\ElementBulk$ is subjected to the volumetric loading $\loadLag{}$,
@@ -331,9 +331,9 @@ By continuity, $\ElementBulk$ applies the opposite traction force on $\ElementIn
 The interface $\ElementInterface$ is also subjected to the exterior traction force $\neumannCellLoad{}$ acting on $\BodyLagrangeNeumannBoundary$,
 that accounts for the action of the rest of the solid $\BodyLagrange$ onto the boundary $\ElementBoundary$.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Discplacement, displacement gradient, stress and micromorphic fields
 
 Let
@@ -355,9 +355,9 @@ those in the interface.
 The displacement and micromorphic damage of the boundary $\ElementBoundary$ are denoted $\Field{\DisplacementField}{\ElementBoundary}{}$ and $\Field{\MicromorphicDamageField}{\ElementBoundary}{}$ respectively.
 By continuity of the displacement and micromorphic damage fields between $\ElementBulk$ and $\ElementBoundary$,
 the following relations hold true
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{equation}
     \label{eq_ud_conformity}
         \begin{aligned}
@@ -371,26 +371,26 @@ the following relations hold true
     \end{aligned}
 \end{equation}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Hu-Washizu Lagrangian of the element
 
 By combining both the Lagragian of the core $\ElementBulk$ and that of the interface $\ElementInterface$, one obtains the total Lagragian $\LagrangianOperator{\ElementCell}{HW}$ over the element such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \label{eq_hu_washizu_split}
     \LagrangianOperator{\ElementCell}{HW} = \LagrangianOperator{\ElementBulk}{HW} + \LagrangianOperator{\ElementInterface}{HW}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \label{eq_hu_washizu_split2}
     \LagrangianOperator{\ElementBulk}{HW}
@@ -403,13 +403,13 @@ where
     -
     \int_{\ElementBulk} \loadLag \cdot \Field{\DisplacementField}{\ElementBulk}{}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 and
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \label{eq_hu_washizu_split23}
     \LagrangianOperator{\ElementInterface}{HW}
@@ -423,22 +423,22 @@ and
     \int_{\neumannCell} \neumannCellLoad \cdot \Field{\DisplacementField}{\ElementBoundary}{}
 \end{equation}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( -- SUBSECTION)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  -- SUBSECTION -->
+<!---  --------------------------------------------------------- -->
 ### Hypotheses
 \label{sec_assumtions}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Displacement in the interface
 
 Since the interface is of negligible volume compared to that of the core, the displacement and micromorphic damage fields in the interface $\ElementInterface$ are assumed to be linear with respect to $\NormalVector$, such that
 the gradients are homogeneous in $\ElementInterface$ along $\NormalVector$
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{equation}
     \label{eq_crown_displacement}
     \begin{aligned}
@@ -460,21 +460,21 @@ the gradients are homogeneous in $\ElementInterface$ along $\NormalVector$
         \NormalVector
     \end{aligned}
 \end{equation}
-[//]: # ( )
-[//]: # ( )
-[//]: # ()
+<!---   -->
+<!---   -->
+<!---  -->
 That is, the displacement and micromorphic damage fields in the interface $\ElementInterface$ linearly bridge those of the boundary $\ElementBoundary$ to those of the bulk $\ElementBulk$.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Stress in the interface
 
 Likewise, let assume that $\Field{\PKIStressField}{\ElementInterface}{}$ and $\Field{\MicromorphicDamageStressField}{\ElementInterface}{}$ are constant along the direction $\NormalVector$ in $\ElementInterface$.
 By continuity of the traction force across $\ElementBulkBoundary$, the following equalities hold true
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{equation}
     \label{eq_continuity_traction_force}
     \begin{aligned}
@@ -490,17 +490,17 @@ By continuity of the traction force across $\ElementBulkBoundary$, the following
     \end{aligned}
 \end{equation}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( -- SUBSECTION)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  -- SUBSECTION -->
+<!---  --------------------------------------------------------- -->
 ### Towards Hybrid discontinuous methods from the Hu-Washizu Lagrangian
 
 ##### Lagrangian
 
 The total Lagragian is
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \label{eq_0015}
     \begin{aligned}
@@ -531,15 +531,15 @@ The total Lagragian is
     \end{aligned}
 \end{equation}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Lagrangian variations
 
 By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each variable of the problem, the following weak equations arise
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{subequations}
     \label{eq_0017}
         \begin{alignat}{2}
@@ -609,9 +609,9 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             \label{eq_0017:eq22}
     \end{alignat}
 \end{subequations}
-[//]: # ( )
-[//]: # ( )
-[//]: # ()
+<!---   -->
+<!---   -->
+<!---  -->
 where the \textit{reconstructed tractions} $\Field{\DisplacementTractionField}{\ElementCell}{} = \Field{\PKIStressField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector + (\DisplacementStabilizationFactor / h_{\ElementCell}) \DisplacementJumpField(\Field{\DisplacementField}{\ElementCell}{}, \Field{\DisplacementField}{\ElementBoundary}{})$
 and
 $\Field{\MicromorphicDamageTractionField}{\ElementCell}{} = \Field{\MicromorphicDamageStressField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector + (\MicromorphicDamageStabilizationFactor / h_{\ElementCell}) \MicromorphicDamageJumpField(\Field{\MicromorphicDamageField}{\ElementCell}{}, \Field{\MicromorphicDamageField}{\ElementBoundary}{})$
@@ -621,15 +621,15 @@ and
 $\MicromorphicDamageJumpField(\Field{\MicromorphicDamageField}{\ElementCell}{}, \Field{\MicromorphicDamageField}{\ElementBoundary}{}) = \Field{\MicromorphicDamageField}{\ElementBoundary}{} - \Field{\MicromorphicDamageField}{\ElementCell}{} \TraceOperator{\ElementBoundary}$
 the jump functions on the boundary $\ElementBoundary$.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( -- SUBSECTION)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  -- SUBSECTION -->
+<!---  --------------------------------------------------------- -->
 ### Problem in primal form
 \label{sec_hdg_element_equilibrium}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Reconstructed gradient
 
 Since minimization of \eqref{eq_0017:eq3} and \eqref{eq_0017:eq31} define linear problems with any displacement and micromorphic damage pairs respectively, they can be eliminated
@@ -641,9 +641,9 @@ associated with any respective displacement and micromorphic damage pairs
 $(\Field{\VirtualField{\DisplacementField}}{\ElementCell}{}, \Field{\VirtualField{\DisplacementField}}{\ElementBoundary}{})$
 and
 $(\Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{}, \Field{\VirtualField{\MicromorphicDamageField}}{\ElementBoundary}{})$, that satisfy
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{subequations}
     \label{eq_00172}
         \begin{alignat}{2}
@@ -668,21 +668,21 @@ $(\Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{}, \Field{\Virtu
             \label{eq_00172:eq1}
     \end{alignat}
 \end{subequations}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where $\Field{\tensorii{\tau}}{\ElementCell}{}$ denotes an arbitrary kinematically admissible stress field, and $\Field{\tensori{\zeta}}{\ElementCell}{}$ is an arbitrary kinematically admissible micromorphic stress field.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Stress tensor
 
 Likewise, \eqref{eq_0017:eq2} and \eqref{eq_0017:eq22} are eliminated from \eqref{eq_0017} since they are linear with $\Field{\DisplacementGradientField}{\ElementCell}{}$ and  $\Field{\MicromorphicDamageGradientField}{\ElementCell}{}$ respectively.
 Assuming in addition that the space of kinematically admissible stress fields is included in that of kinematically admissible gradient fields, \eqref{eq_0017:eq2} and \eqref{eq_0017:eq22} hold in a strong sense such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{subequations}
     \label{eq_stress}
         \begin{alignat}{3}
@@ -694,17 +694,17 @@ Assuming in addition that the space of kinematically admissible stress fields is
     \end{alignat}
 \end{subequations}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Lagrangian variations in primal form
 
 Using \eqref{eq_stress} and \eqref{eq_00172}, problem \eqref{eq_0017} depends on the displacement unknowns only.
-[//]: # ( and the only remaining variations of the total Lagrangian \eqref{eq_0015} are those with respect to both displacement variables.)
+<!---  and the only remaining variations of the total Lagrangian \eqref{eq_0015} are those with respect to both displacement variables. -->
 A new total Lagrangian $\LagrangianOperator{\ElementCell}{HDG}$ arises from the simplified problem such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \label{eq_total_lagragian_bis}
     \begin{aligned}
@@ -722,9 +722,9 @@ A new total Lagrangian $\LagrangianOperator{\ElementCell}{HDG}$ arises from the 
         \int_{\BodyLagrangeNeumannBoundary} \neumannCellLoad{} \cdot \Field{\DisplacementField}{\ElementBoundary}{}
     \end{aligned}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 with respective cell and boundary displacement variations:
 \begin{subequations}
     \label{eq_final_problem}
@@ -768,13 +768,13 @@ with respective cell and boundary displacement variations:
             \label{eq_final_problem:eq12}
     \end{alignat}
 \end{subequations}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where $\Field{\PKIStressField}{\ElementCell}{}$ and $\Field{\MicromorphicDamageStressField}{\ElementCell}{}$ are defined by \eqref{eq_stress} and
-depend on $\Field{\DisplacementGradientField}{\ElementCell}{}$ and $\Field{\MicromorphicDamageGradientField}{\ElementCell}{}$ which solve \eqref{eq_00172}.[//]: # ( ---------------------------------------------------------)
-[//]: # ( ---- SECTION)
-[//]: # ( ---------------------------------------------------------)
+depend on $\Field{\DisplacementGradientField}{\ElementCell}{}$ and $\Field{\MicromorphicDamageGradientField}{\ElementCell}{}$ which solve \eqref{eq_00172}.<!---  --------------------------------------------------------- -->
+<!---  ---- SECTION -->
+<!---  --------------------------------------------------------- -->
 ## Discretization
 \label{sec_discretization}
 
@@ -783,14 +783,14 @@ and introduces the discretization for both cell and faces displacement fields.
 The classical \textit{static condensation} cell unknowns elimination strategy is presented, and a novel elimination scheme
 based on the previous Lagrangian formulation of hybrid discontinuous methods is then devised.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( -- SUBSECTION)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  -- SUBSECTION -->
+<!---  --------------------------------------------------------- -->
 ### Mesh and skeleton
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Faces and skeleton of the mesh
 
 The boundary $\ElementBoundary$ of each element is decomposed in faces, such
@@ -812,23 +812,23 @@ $\ElementCell$, let $\Skeleton(\ElementCell) = \{ \ElementFace \in \Skeleton(\Bo
 \subset \ElementBoundary \}$ the set of faces composing the boundary of $\ElementCell$,
 and let $\Field{N}{\ElementBoundary}{}$ the number of faces in $\ElementBoundary$.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Mesh description
 
 Likewise, one defines the collection of all cells in the mesh
 as $\Mesh(\BodyLagrange) = \{ \Field{\ElementCell}{i}{} \subset \BodyLagrange \ \vert \ 1 \leq i
 \leq \Field{N}{\Mesh}{} \}$, where $\Field{N}{\Mesh}{}$ denotes the total number of cells.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( -- SUBSECTION)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  -- SUBSECTION -->
+<!---  --------------------------------------------------------- -->
 ### Discretization
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Discrete functional space
 
 Let $\Field{U}{\ElementCell}{\; h}$ and $\Field{D}{\ElementCell}{\; h}$ denote
@@ -847,9 +847,9 @@ denote polynomial bases of $\Field{U}{\ElementCell}{\; h}, \Field{U}{\ElementFac
 Using vector notations, the fields $\Field{\DisplacementField}{\ElementCell}{\; h}, \Field{\DisplacementField}{\ElementFace}{\; h}, \Field{\MicromorphicDamageField}{\ElementCell}{\; h}, \Field{\MicromorphicDamageField}{\ElementFace}{\; h}$
 can be represented by vectors of coefficients $\Field{\Vector{U}}{\ElementCell}{}, \Field{\Vector{U}}{\ElementFace}{}, \Field{\Vector{D}}{\ElementCell}{}, \Field{\Vector{D}}{\ElementFace}{}$
 in their respective bases such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
   \label{eq_bases}
   \begin{aligned}
@@ -874,9 +874,9 @@ the global
 unknowns of problem \eqref{eq_final_problem} in discrete form, where
 $\Field{\DisplacementField}{\Mesh}{\; h}, \Field{\DisplacementField}{\Skeleton}{\; h}, \Field{\MicromorphicDamageField}{\Mesh}{\; h}, \Field{\MicromorphicDamageField}{\Skeleton}{\; h}$
 are the piece-wise continuous fields such that $\forall \ElementCell \in \Mesh, \forall \ElementFace \in \Skeleton$
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
   \begin{aligned}
     \Field{\DisplacementField}{\Mesh}{\; h} \TraceOperator{\ElementCell} = \Field{\DisplacementField}{\ElementCell}{\; h}
@@ -891,9 +891,9 @@ are the piece-wise continuous fields such that $\forall \ElementCell \in \Mesh, 
     \Field{\MicromorphicDamageField}{\Skeleton}{\; h} \TraceOperator{\ElementFace} = \Field{\MicromorphicDamageField}{\ElementFace}{\; h}
   \end{aligned}
 \end{equation}
-[//]: # ( )
-[//]: # ( )
-[//]: # ( )
+<!---   -->
+<!---   -->
+<!---   -->
 with $
 \Field{U}{\Mesh}{\; h} = \prod_{\ElementCell \in \Mesh} \Field{U}{\ElementCell}{\; h}, \;
 \Field{U}{\Skeleton}{\; h} = \prod_{\ElementFace \in \Skeleton} \Field{U}{\ElementFace}{\; h}, \;
@@ -907,9 +907,9 @@ to $\Field{\DisplacementField}{\Mesh}{\; h}, \Field{\DisplacementField}{\Skeleto
 ##### Elementary boundary unknown
 
 Likewise, let $\Field{\DisplacementField}{\ElementBoundary}{\; h} \in \Field{U}{\ElementBoundary}{\; h}$ and $\Field{\MicromorphicDamageField}{\ElementBoundary}{\; h} \in \Field{D}{\ElementBoundary}{\; h}$ such that $\forall \ElementFace \in \Skeleton(\ElementCell)$
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
   \begin{aligned}
     \Field{\DisplacementField}{\ElementBoundary}{\; h} \TraceOperator{\ElementFace} = \Field{\DisplacementField}{\ElementFace}{\; h}
@@ -918,20 +918,20 @@ Likewise, let $\Field{\DisplacementField}{\ElementBoundary}{\; h} \in \Field{U}{
     \Field{\MicromorphicDamageField}{\ElementBoundary}{\; h} \TraceOperator{\ElementFace} = \Field{\MicromorphicDamageField}{\ElementFace}{\; h}
   \end{aligned}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 and let $\Field{\Vector{U}}{\ElementBoundary}{}$ and $\Field{\Vector{D}}{\ElementBoundary}{}$
 the unknown coefficient vectors associated to $\Field{\DisplacementField}{\ElementBoundary}{\; h}$ and $\Field{\MicromorphicDamageField}{\ElementBoundary}{\; h}$.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( -- SUBSECTION)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  -- SUBSECTION -->
+<!---  --------------------------------------------------------- -->
 ### Local and global discrete problems
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 #### Local residual
 
 As in a functional space of finite dimension, the restriction of a linear
@@ -939,9 +939,9 @@ form can be represented by a vector in the dual space, let
 $\Field{\Vector{R}}{u, \ElementCell}{}, \Field{\Vector{R}}{u, \ElementBoundary}{}, \Field{\Vector{R}}{d, \ElementCell}{}, \Field{\Vector{R}}{d, \ElementBoundary}{}$ the residual vectors
 associated with the the variations of the total
 Lagrangian~\eqref{eq_total_lagragian_bis}
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{subequations}
   \label{eq_final_problem_00}
   \begin{alignat}{3}
@@ -988,9 +988,9 @@ where the discrete stress tensor $\Field{\PKIStressField}{\ElementCell}{\; h}$ a
 discrete reconstructed gradient
 $\Field{\DisplacementGradientField}{\ElementCell}{\; h}(\Field{\DisplacementField}{\ElementCell}{\; h}, \Field{\DisplacementField}{\ElementBoundary}{\; h})$ are defined by the discrete forms of
 equations \eqref{eq_stress} and \eqref{eq_00172} respectively such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
   \label{eq_stress_discrete}
   \begin{aligned}
@@ -1021,9 +1021,9 @@ equations \eqref{eq_stress} and \eqref{eq_00172} respectively such that
     \qquad \forall \Field{\tensori{\zeta}}{\ElementCell}{\; h}
   \end{aligned}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 and the discrete reconstructed tractions write
 $\Field{\DisplacementTractionField}{\ElementCell}{\; h} = \Field{\PKIStressField}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary} \cdot \NormalVector + (\DisplacementStabilizationFactor / h_{\ElementCell}) \Field{\DisplacementJumpField}{}{\; h}(\Field{\DisplacementField}{\ElementCell}{\; h}, \Field{\DisplacementField}{\ElementBoundary}{\; h})$
 and
@@ -1031,14 +1031,14 @@ $\Field{\MicromorphicDamageTractionField}{\ElementCell}{\; h} = \Field{\Micromor
 In particular, the expression of the discrete jump function $\Field{\DisplacementJumpField}{}{\; h}$
 is the key ingredient that defines the HHO method (see Section \ref{sec_appendix_implementation} for more details on this note).
 The solution of the discrete problem $(\Field{\DisplacementField}{\ElementCell}{\; h}, \Field{\DisplacementField}{\ElementBoundary}{\; h}, \Field{\MicromorphicDamageField}{\ElementCell}{\; h}, \Field{\MicromorphicDamageField}{\ElementBoundary}{\; h})$
-[//]: # ( $(\mathfrak{U}_{\ElementCell}, \mathfrak{U}_{\ElementBoundary})$)
+<!---  $(\mathfrak{U}_{\ElementCell}, \mathfrak{U}_{\ElementBoundary})$ -->
 is defined by the fact that the
 residuals $\Field{\Vector{R}}{u, \ElementCell}{}, \Field{\Vector{R}}{u, \ElementBoundary}{}, \Field{\Vector{R}}{d, \ElementCell}{}, \Field{\Vector{R}}{d, \ElementBoundary}{}$ must be
 zero.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 #### Global residuals and face assembly
 
 ##### Global problem
@@ -1046,9 +1046,9 @@ zero.
 At the global scale, the solution
 $(\Field{\Vector{U}}{\Mesh}{}, \Field{\Vector{U}}{\Skeleton}{}, \Field{\Vector{D}}{\Mesh}{}, \Field{\Vector{D}}{\Skeleton}{})$ of the
 discrete problem satisfies
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{subequations}
   \label{eq_final_problem_003}
   \begin{alignat}{3}
@@ -1081,14 +1081,14 @@ discrete problem satisfies
     \label{eq_final_problem_003:eq3}
   \end{alignat}
 \end{subequations}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where the vectors
 $\Field{\Vector{R}}{u, \Skeleton}{}(\Field{\Vector{U}}{\Mesh}{}, \Field{\Vector{U}}{\Skeleton}{})$ and $\Field{\Vector{R}}{d, \Skeleton}{}(\Field{\Vector{D}}{\Mesh}{}, \Field{\Vector{D}}{\Skeleton}{})$ are the skeleton residuals such that
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{subequations}
   \label{eq_final_problem_00333}
   \begin{alignat}{3}
@@ -1140,9 +1140,9 @@ $\Field{\Vector{R}}{u, \Skeleton}{}(\Field{\Vector{U}}{\Mesh}{}, \Field{\Vector{
     \label{eq_final_problem_00333:eq1}
   \end{alignat}
 \end{subequations}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 and which result in the assembly of faces unknowns only.
 
 ##### Assembly over the skeleton
@@ -1155,9 +1155,9 @@ for the micromorphic damage field.
 By summation over each face of the structure, these equal contributions
 cancel out, which yields the expression of the first argument in the
 right-hand side of \eqref{eq_final_problem_00333:eq0} and \eqref{eq_final_problem_00333:eq1}.
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 Since exterior faces subjected to Neumann boundary conditions are
 linked to a single cell only, the local surface forces $\tensori{t}{}_{\neumannCell}$ are equal to $\neumannLag$ on $\neumannBoundaryLag{}$,
 which yields the expression of
@@ -1170,26 +1170,26 @@ the second argument in the right-hand side of
 
 The mechanical energy is the product of the pure mechanical contribution to which is added
 an adimensional \textit{degradation function} $g(d)$ such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \begin{aligned}
         \psi_{\tensoriis{F}, d} = g(d) \, \psi_{mec}(\tensorii{F}{})
     \end{aligned}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where different choices arise in terms of the definition of the degradation function.
 
 ##### Dissipation potential
 
 A dissipation potential $\phi_{\bodyLag}(d)$ accounts for the energy dissipated by the fracture process of the medium, and is assumed to be
 an homogeneous function of degree one such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \begin{aligned}
         \Delta \, t \, \phi_{\bodyLag}(\frac{\hat{d} - d} {\Delta \, t}) = \phi_{\bodyLag}(\hat{d} - d)
@@ -1197,9 +1197,9 @@ an homogeneous function of degree one such that
         \forall (\hat{d}, \Delta \, t > 0)
     \end{aligned}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 In particular, the dissipation potential generally contains an indicator function imposing the irreversibility of the
 damage evolution.
 
@@ -1207,9 +1207,10 @@ damage evolution.
     \begin{aligned}
         \psi_{\bodyLag} = 
     \end{aligned}
-\end{equation}[//]: # ( ---------------------------------------------------------)
-[//]: # ( -- SUBSECTION)
-[//]: # ( ---------------------------------------------------------)
+\end{equation}
+<!---  --------------------------------------------------------- -->
+<!---  -- SUBSECTION -->
+<!---  --------------------------------------------------------- -->
 ## Resolution scheme
 \label{sec_cell_unknowns_elimination}
 
@@ -1220,9 +1221,9 @@ This section is devoted to the extending the proposed formulation to the non-lin
 
 ##### Total Lagrangian for the proposed HDG formulation
 The proposed elementary Lagragian \eqref{eq_total_lagragian_bis} depends now on a dissipative term, such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \begin{aligned}
         L_{\ElementCell}^{HDG}
@@ -1243,9 +1244,9 @@ The proposed elementary Lagragian \eqref{eq_total_lagragian_bis} depends now on 
         \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\ElementBoundary}
     \end{aligned}
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 
 ##### Standard Generalized dissipation of the damage
 
@@ -1273,9 +1274,9 @@ cell.
 The tests presented in this section have been performed using an
 \texttt{python} implementation freely available on github: \url{https://github.com/davidsiedel/h2o_paper}.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Stabilization parameter
 
 To ensure coercivity of the HHO method, the so-called \textit{stabilization} parameters
@@ -1294,31 +1295,31 @@ The rod has an length $L = 1$ mm and a width $l = 0.1$ mm.
 A vertical displacement $u$ is imposed at the top of the rod.
 The simulation is performed until the limit load corresponding to an internal displacement of $0.2$ mm is reached.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Material behaviour
 
 The mechanical potential involves a degradation function $g(d)$ acting on the spherical part of the elastic energy of the material such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{equation}
     \psi_{\tensoriis{F}, \DamageField} (\TransformationGradientField, \DamageField) = g(\DamageField) \, \psi_{sph}(\TransformationGradientField) + \psi_{dev}(\TransformationGradientField)
 \end{equation}
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 where $g(d) = (1 - d)^2$ in order to recover the AT2 model \cite{bourdin_numerical_2000}.
 The potentials $\psi_{sph}$ and $\psi_{sph}$ are based on a devatoric-spherical split of the
 Hooke tensor for a linear elastic material.
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 The micromorphic damage and damage potentials are chosen such that
-[//]: # ()
-[//]: # ()
-[//]: # ()
+<!---  -->
+<!---  -->
+<!---  -->
 \begin{subequations}
     \label{eq_micromorphic_rod_damage_potentials}
     \begin{alignat}{1}
@@ -1342,9 +1343,9 @@ The micromorphic damage and damage potentials are chosen such that
     \end{alignat}
 \end{subequations}
 Moreover, the small strain hypothesis is assumed for this test case.
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{figure}[H]
     \centering
     \includegraphics[width=5.cm]{../article_02/figures/rod.png}
@@ -1352,16 +1353,16 @@ Moreover, the small strain hypothesis is assumed for this test case.
     \label{fig_rod_micromirphic}
 \end{figure}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Displacement along the radius
 
 The force deflection curve of the experiment is given in Figure \ref{fig_rod_micromirphic_cruve}. The results obtained with the HHO formulation are compared to those provided by
 the \texttt{MFEM} library, and are in agreement with those provided by a standard Lagrange discretization.
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{figure}[H]
     \centering
     \includegraphics[width=7.cm]{../article_02/figures/rod_curve.png}
@@ -1371,9 +1372,9 @@ the \texttt{MFEM} library, and are in agreement with those provided by a standar
 
 ### Matrix fiber specimen
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Specimen and loading
 
 The last application consists of a two dimensional plate that is subjected to uniaxial
@@ -1381,15 +1382,15 @@ extension. The plate (or matrix) is clamped around a fiber of radius $0.2$ mm (r
 The matrix is a square of length of $1$ mm. A vertical
 displacement $u_y = 0.2$ mm is imposed at the top, as shown in Figure \ref{fig_matrix}.
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Behaviour law
 
 The same behavior law as that in \ref{sec_uniaxial_rod} is considered for the present test case.
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{figure}[H]
     \centering
     \includegraphics[width=7.cm]{../article_02/figures/plate.png}
@@ -1397,16 +1398,16 @@ The same behavior law as that in \ref{sec_uniaxial_rod} is considered for the pr
     \label{fig_matrix}
 \end{figure}
 
-[//]: # ( ---------------------------------------------------------)
-[//]: # ( PARAGRAPH)
-[//]: # ( ---------------------------------------------------------)
+<!---  --------------------------------------------------------- -->
+<!---  PARAGRAPH -->
+<!---  --------------------------------------------------------- -->
 ##### Load deflection curve
 
 The load-displacement curve is plotted
 in Figure \ref{fig_matrix_curve}, and gives similar results to that obtained with a standard Lagrange discretization.
-[//]: # ()
-[//]: # ( )
-[//]: # ( )
+<!---  -->
+<!---   -->
+<!---   -->
 \begin{figure}[H]
     \centering
     \includegraphics[width=7.cm]{../article_02/figures/plate_curve.png}
