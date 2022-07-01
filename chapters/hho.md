@@ -1063,10 +1063,8 @@ the face resiudal with respect to the face displacement
   \end{aligned}
 \end{equation}
 
-##### Resolution of Nonlinear
+##### Resolution of Nonlinear Equation~\eqref{eq_cell_equilibrium_face_residual} using a accelerated fixed point algorithm} Nonlinear
 
-  Equation~\eqref{eq_cell_equilibrium_face_residual} using a accelerated
-  fixed point algorithm} Nonlinear
 Equation~\eqref{eq_cell_equilibrium_face_residual} can be rewritten as
 follows:
 \[
