@@ -1003,7 +1003,7 @@ the only unknown. Two algorithm are now presented:
   \item A fixed point algorithm combined with an acceleration scheme.
 \end{itemize}
 
-##### Resolution of Nonlinear Equation~\eqref
+##### Resolution of Nonlinear Equation~\eqref{eq_cell_equilibrium_face_residual} using the Newton algorithm
 
 Let \(\iter{n}{\mathfrak{U}_{\mathcal{F}}}\) be the current estimate
 of the solution. The correction
