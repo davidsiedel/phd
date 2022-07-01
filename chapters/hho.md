@@ -2233,9 +2233,7 @@ Integrals are evaluated numerically by means of a quadrature rule on an element 
 
 From an algebraic standpoint, \eqref{eq_grad} defines a linear problem
 consisting in inverting a mass matrix in $\discreteGradSpaceCell{}$. One can thus define 
-$
-{\mathbb{B}}{}_{\cell}
-$
+${\mathbb{B}}{}_{\cell}$
 the discrete gradient operator acting on the displacement unknowns vector $\mathfrak{U}{}_{\ClosedCell}$ at a quadrature point $\tensori{X}{}_q \in \cellQuadrature$, and ${\mathfrak{G}}{}_{\cell}^k$ the vector representation of the reconstructed gradient $\tensorii{G}{}_{\cell}^k(\tensori{v}{}_{\cell}^l, \tensori{v}{}_{\dCell}^k)$ such that
 \begin{equation}
     \label{eq_discrete_gradient_vector}
