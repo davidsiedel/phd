@@ -1,3 +1,0 @@
-# Numerical implementations using HHO
-
-
