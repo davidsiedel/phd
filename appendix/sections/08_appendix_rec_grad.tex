@@ -1,0 +1,114 @@
+% ---------------------------------------------------------
+% ---- SECTION
+% ---------------------------------------------------------
+\section{Reconstructed gradient and Elliptic projection}
+\label{sec_appendix_gradient}
+
+This section aims at generalizing the elliptic projection property of the reconstructed gradient, as introduced in \cite{di_pietro_hybrid_2015}. In the following, subspaces for the cell and faces approximations are not assumed to be polynomial necessarily.
+
+Let $\displacementSpaceCell$ the space of cell kinematically admissible displacements, and $\displacementSpaceDCell$ that of face kinematically admissible displacements. The space for statically admissible stress and strain is denoted $\stressSpaceCell$.
+%
+%
+%
+Let $\discreteDisplacementSpaceCell \subset \displacementSpaceCell$ and $U^\perp(\cell) \subset \displacementSpaceCell$ such that $\displacementSpaceCell = \discreteDisplacementSpaceCell \oplus U^\perp(\cell)$, and set $\tensori{u}{}_{\cell} = \tensori{u}{}_{\cell}^h + \tensori{u}{}_{\cell}^\perp$ with
+$\tensori{u}{}_{\cell}^h \in U^h(\cell)$ and $\tensori{u}{}_{\cell}^\perp \in U^\perp(\cell)$ the orthogonal projections of $\tensori{u}{}_{\cell}$ onto $U^h(\cell)$ and $U^\perp(\cell)$ respectively.
+Let $V^h(\dCell) \subset \displacementSpaceDCell$ and $\tensori{u}{}_{\dCell}^h \in V^h(\dCell)$ the orthogonal projection of $\tensori{u}{}_{\cell}$ onto $V^h(\dCell)$.
+The orthogonal projection of $\tensori{u}{}_{\cell}$ onto $U^h(\cell) \times V^h(\dCell)$ is then the displacement pair $(\tensori{u}{}_{\cell}^h, \tensori{u}{}_{\dCell}^h)$.
+Let $S^h(\cell) = \{ \tensorii{\tau}{}_{\cell}^h \in \stressSpaceCell \ \ \vert \ \ \nabla \cdot  \tensorii{\tau}{}_{\cell}^h \in U^h(\cell) \ \ \vert \ \  \tensorii{\tau}{}_{\cell}^h \vert_{\dCell} \cdot \tensori{n}{} \in V^h(\dCell) \}$,
+and $\tensorii{G}{}_{\cell}^h \in S^h(\cell)$ the solution of \eqref{eq_grad} for $(\tensori{u}{}_{\cell}^h, \tensori{u}{}_{\dCell}^h)$ such that
+%
+%
+%
+\begin{equation}
+    \begin{aligned}
+        \int_{\cell} \tensorii{G}{}_{\cell}^h(\tensori{u}{}_{\cell}^h, \tensori{u}{}_{\dCell}^h) : \tensorii{\tau}{}_{\cell}^h
+        =
+        \int_{\cell} \nabla \tensori{u}{}_{\cell}^h : \tensorii{\tau}{}_{\cell}^h
+        +
+        \int_{\dCell} (\tensori{u}{}_{\dCell}^h - \tensori{u}{}_{\cell}^h \vert_{\dCell}) \cdot \tensorii{\tau}{}_{\cell}^h \vert_{\dCell} \cdot \tensori{n}{}
+        &&
+        \ \ \ \ \ \ \ \ 
+        &&
+        \forall \tensorii{\tau}{}_{\cell}^h \in S^h(\cell)
+    \end{aligned}
+\end{equation}
+%
+%
+%
+using the fact that $\tensori{u}{}_{\dCell}^h$ is the projection of $\tensori{u}{}_{\cell}$ onto $V^h(\dCell)$ and that $\tensorii{\tau}{} \vert_{\dCell} \cdot \tensori{n}{} \in V^h(\dCell)$:
+%
+%
+%
+\begin{equation}
+    \begin{aligned}
+        \int_{\cell} \tensorii{G}{}_{\cell}^h(\tensori{u}{}_{\cell}^h, \tensori{u}{}_{\dCell}^h) : \tensorii{\tau}{}_{\cell}^h
+        = &
+        \int_{\cell} \nabla \tensori{u}{}_{\cell}^h : \tensorii{\tau}{}_{\cell}^h
+        +
+        \int_{\dCell} (\tensori{u}{}_{\cell} \vert_{\dCell} - \tensori{u}{}_{\cell}^h \vert_{\dCell}) \cdot \tensorii{\tau}{}_{\cell}^h \vert_{\dCell} \cdot \tensori{n}{}
+        &&
+        \ \ \ \ \ \ \ \ 
+        &&
+        \forall \tensorii{\tau}{}_{\cell}^h \in S^h(\cell)
+        \\
+        = &
+        \int_{\cell} \nabla \tensori{u}{}_{\cell}^h : \tensorii{\tau}{}_{\cell}^h
+        +
+        \int_{\dCell} \tensori{u}{}_{\cell}^\perp \vert_{\dCell} \cdot \tensorii{\tau}{}_{\cell}^h \vert_{\dCell} \cdot \tensori{n}{}
+        &&
+        \ \ \ \ \ \ \ \ 
+        &&
+        \forall \tensorii{\tau}{}_{\cell}^h \in S^h(\cell)
+    \end{aligned}
+\end{equation}
+%
+%
+%
+using the divergence theorem and the fact that $\nabla \cdot  \tensorii{\tau}{}_{\cell}^h \in U^h(\cell)$, one has :
+%
+%
+%
+\begin{equation}
+    \begin{aligned}
+        \int_{\cell} \nabla \tensori{u}{}_{\cell}^\perp : \tensorii{\tau}{}_{\cell}^h
+        =
+        \int_{\dCell} \tensori{u}{}_{\cell}^\perp \vert_{\dCell} \cdot  \tensorii{\tau}{}_{\cell}^h \vert_{\dCell} \cdot \tensori{n}{}
+        % &&
+        % \ \ \ \ \ \ \ \ 
+        % &&
+        % \forall \tensorii{\tau}{}_{\cell}^h \in S^h(\cell)
+    \end{aligned}
+\end{equation}
+%
+%
+%
+such that :
+%
+%
+%
+\begin{equation}
+    \begin{aligned}
+        \int_{\cell} \tensorii{G}{}_{\cell}^h(\tensori{u}{}_{\cell}^h, \tensori{u}{}_{\dCell}^h) : \tensorii{\tau}{}_{\cell}^h
+        = &
+        \int_{\cell} \nabla \tensori{u}{}_{\cell}^h : \tensorii{\tau}{}_{\cell}^h
+        +
+        \int_{\cell} \nabla \tensori{u}{}_{\cell}^\perp : \tensorii{\tau}{}_{\cell}^h
+        &&
+        \ \ \ \ \ \ \ \ 
+        &&
+        \forall \tensorii{\tau}{}_{\cell}^h \in S^h(\cell)
+        \\
+        = &
+        \int_{\cell} \nabla \tensori{u}{}_{\cell} : \tensorii{\tau}{}_{\cell}^h
+        &&
+        \ \ \ \ \ \ \ \ 
+        &&
+        \forall \tensorii{\tau}{}_{\cell}^h \in S^h(\cell)
+    \end{aligned}
+\end{equation}
+%
+%
+%
+which states that $\tensorii{G}{}_{\cell}^h(\tensori{u}{}_{\cell}^h, \tensori{u}{}_{\dCell}^h)$ is the orthogonal projection of $\nabla \tensori{u}{}_{\cell}$ onto $S^h(\cell)$.
+By linearity of the algebraic trace operator, one has that $\text{Tr}(\tensorii{G}{}_{\cell}^h(\tensori{u}{}_{\cell}^h, \tensori{u}{}_{\dCell}^h))$ is the orthogonal projection of $\nabla \cdot \tensori{u}$, which proves robustness of the method
+for linear elastic materials, since the Lamé coefficient $\lambda$ acts on $\nabla \cdot \tensori{u}$.

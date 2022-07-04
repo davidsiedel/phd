@@ -1,0 +1,138 @@
+\documentclass[a4paper, 11pt]{book}
+\usepackage[margin=1in]{geometry}
+% \usepackage[a4paper, total={6.7in, 8in}]{geometry}
+% \usepackage[margin=0.5in]{geometry}
+
+%\usepackage{fontspec}
+\usepackage{lmodern}
+\usepackage{lipsum}
+\usepackage{psl-cover}
+
+% my packages:
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\sisetup{math-micro=\text{µ},text-micro=µ}
+\usepackage[euler]{textgreek}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{soul}
+\usepackage{enumitem}
+\usepackage{bm}
+
+\usepackage{import}
+\usepackage{example}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{../notations}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{import}
+\usepackage{comment}
+% \usepackage{cancel}
+\usepackage{ulem}
+\usepackage{booktabs,xltabular}
+\usepackage{longtable}
+
+\title{Insérer ici l'intitulé du sujet de thèse}
+
+\author{Martinus Putra Widjaja}
+
+\institute{MINES ParisTech}
+\doctoralschool{Ingénierie des Systèmes, Matériaux, Mécanique, Energétique}{621}
+\specialty{Voir spécialités ED}
+\date{jj mois aaaa}
+
+% cotutelle
+% \entitle{Thesis Sub lay}
+% \logootherinstitute{logo-institute}
+
+\jurymember{1}{Prénom NOM}{Titre, établissement}{Président}
+\jurymember{2}{Prénom NOM}{Titre, établissement}{Rapporteur}
+\jurymember{3}{Prénom NOM}{Titre, établissement}{Rapporteur}
+\jurymember{4}{Prénom NOM}{Titre, établissement}{Examinateur}
+\jurymember{5}{Prénom NOM}{Titre, établissement}{Examinateur}
+\jurymember{6}{Prénom NOM}{Titre, établissement}{Examinateur}
+\jurymember{7}{Prénom NOM}{Titre, établissement}{Examinateur}
+\jurymember{8}{Alain THIONNET}{Titre, établissement}{Directeur de thèse}
+% \jurymember{9}{Prénom NOM}{Titre, établissement}{Invité}
+% \jurymember{10}{Prénom NOM}{Titre, établissement}{Invité}
+
+\input{abstract}
+
+\begin{document}
+
+\maketitle{}
+
+\tableofcontents
+\listoffigures
+
+\chapter{Introduction}
+
+\input{../chapter_00_introduction/sections/00_industrial_context.tex}
+\input{../chapter_00_introduction/sections/01_phase_field_damage.tex}
+\input{../chapter_00_introduction/sections/02_volumetric_locking.tex}
+
+\chapter{Hybrid High Order methods for non-linear solid mechanics}
+
+\input{../chapter_01_hho_mechanics/sections/00_introduction.tex}
+\input{../chapter_01_hho_mechanics/sections/01_model_problem.tex}
+\input{../chapter_01_hho_mechanics/sections/02_composite_demo.tex}
+\input{../chapter_01_hho_mechanics/sections/03_discretization.tex}
+\input{../chapter_01_hho_mechanics/sections/04_numerical_exemples.tex}
+\input{../chapter_01_hho_mechanics/sections/05_conclusion.tex}
+% \input{../chapter_01_hho_mechanics/sections/06_notations.tex}
+% \input{../chapter_01_hho_mechanics/sections/07_appendix_hu_washizu.tex}
+% \input{../chapter_01_hho_mechanics/sections/08_appendix_rec_grad.tex}
+% \input{../chapter_01_hho_mechanics/sections/09_appendix_implementation.tex}
+
+\chapter{Micromorphic damage behaviours for quasi-brittle materials}
+
+\input{../chapter_02_ef_micromorphic/sections/00_formulation.tex}
+\input{../chapter_02_ef_micromorphic/sections/01_numerical_exemples.tex}
+\input{../chapter_02_ef_micromorphic/sections/02_conclusion.tex}
+
+\chapter{A Hybrid High Order method for Micromorphic damage behaviours}
+
+\input{../chapter_03_hho_micromorphic/sections/00_introduction.tex}
+\input{../chapter_03_hho_micromorphic/sections/01_hho_formulation.tex}
+\input{../chapter_03_hho_micromorphic/sections/02_discretization.tex}
+\input{../chapter_03_hho_micromorphic/sections/04_resolution.tex}
+\input{../chapter_03_hho_micromorphic/sections/05_numerical_exemples.tex}
+
+\appendix
+
+\chapter{Notations}
+\input{../appendix/sections/06_notations.tex}
+
+\chapter{A Hu-Washizu Formulation for HDG methods}
+\input{../appendix/sections/07_appendix_hu_washizu.tex}
+
+\chapter{Implementation}
+\input{../appendix/sections/09_appendix_implementation.tex}
+\input{../appendix/sections/08_appendix_rec_grad.tex}
+
+%\input{introduction}
+%\input{pressure_vessel}
+%\input{gscs}
+%\input{porous_laminate}
+%\input{biaxial}
+%\input{epoxy}
+%\input{microstructure}
+%\input{baxevanakis}
+
+% \bibliography{bibliography}
+\bibliography{../bib_all}
+\bibliographystyle{apalike}
+
+
+\end{document}

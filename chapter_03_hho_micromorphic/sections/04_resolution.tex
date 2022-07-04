@@ -1,0 +1,55 @@
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\section{Resolution scheme}
+\label{sec_cell_unknowns_elimination}
+
+\subsection{Irreversibility condition}
+\label{sec:discretization:extension_to_non_linear_materials}
+
+This section is devoted to the extending the proposed formulation to the non-linear case that takes into account the dissipation potential $\psi_{\BodyLagrange}$ and the damage variable.
+
+\paragraph{Total Lagrangian for the proposed HDG formulation}
+The proposed elementary Lagragian \eqref{eq_total_lagragian_bis} depends now on a dissipative term, such that
+%
+%
+%
+\begin{equation}
+    \begin{aligned}
+        L_{\ElementCell}^{HDG}
+        =
+        &
+        \int_{\ElementCell} \psi_{\BodyLagrange}
+        +
+        \int_{\ElementCell} \phi_{\BodyLagrange} \paren{\DamageField - \DamageField \TraceOperator{t}}
+        +
+        \int_{\ElementBoundary} \frac{\DisplacementStabilizationFactor}{2 h_{\ElementCell}} \lVert \DisplacementJumpField(\Field{\DisplacementField}{\ElementCell}{}, \Field{\DisplacementField}{\ElementBoundary}{}) \rVert^2
+        +
+        \int_{\ElementBoundary} \frac{\MicromorphicDamageStabilizationFactor}{2 h_{\ElementCell}} \Field{\MicromorphicDamageJumpField}{}{2}(\Field{\MicromorphicDamageField}{\ElementCell}{}, \Field{\MicromorphicDamageField}{\ElementBoundary}{})
+        \\
+        &
+        -
+        \int_{\ElementCell} \loadLag{} \cdot \tensori{u}{}_{\ElementCell}
+        -
+        \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\ElementBoundary}
+    \end{aligned}
+\end{equation}
+%
+%
+%
+
+\paragraph{Standard Generalized dissipation of the damage}
+
+At each point, the thermodynamic force $\DamageForceField$ associated with the damage is in the subgradient of the
+dissipation potential $\phi_{\BodyLagrange}$.
+
+\paragraph{Damage unknown elminiation}
+
+\begin{equation}
+    \derivtot{\MicromorphicDamageForceField}{\MicromorphicDamageField}
+    =
+    \deriv{\MicromorphicDamageForceField}{\MicromorphicDamageField}
+    +
+    \deriv{\MicromorphicDamageForceField}{\DamageField}
+    \deriv{\DamageField}{\MicromorphicDamageField}
+\end{equation}

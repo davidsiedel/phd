@@ -1,0 +1,473 @@
+\section{HHO}
+\label{sec_micromorphic_hho}
+
+\paragraph{Element behaviour}
+
+The core of the element $\ElementBulk$ is made out of the same material that composes $\BodyLagrange$ and
+behaves according to the free energy potential $\psi_{\BodyLagrange}$. The behaviour of the interface $\ElementInterface$
+is defined by the free energy potential $\psi_{\ElementInterface}$ such that
+%
+%
+%
+\begin{equation}
+    \label{eq_0009}
+        \psi_{\ElementInterface}
+        =
+        \frac{1}{2} \DisplacementStabilizationFactor \frac{\ell}{h_{\ElementCell}} \nabla \Field{\DisplacementField}{\ElementInterface}{} : \nabla \Field{\DisplacementField}{\ElementInterface}{}
+        +
+        \frac{1}{2} \MicromorphicDamageStabilizationFactor \frac{\ell}{h_{\ElementCell}} \nabla \Field{\MicromorphicDamageField}{\ElementInterface}{} \cdot \nabla \Field{\MicromorphicDamageField}{\ElementInterface}{}
+\end{equation}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Element loading}
+
+The core $\ElementBulk$ is subjected to the volumetric loading $\loadLag{}$,
+and to the traction force applied by the interface $\ElementInterface$ onto $\ElementBulkBoundary$.
+By continuity, $\ElementBulk$ applies the opposite traction force on $\ElementInterface$ through $\ElementBulkBoundary$.
+The interface $\ElementInterface$ is also subjected to the exterior traction force $\neumannCellLoad{}$ acting on $\BodyLagrangeNeumannBoundary$,
+that accounts for the action of the rest of the solid $\BodyLagrange$ onto the boundary $\ElementBoundary$.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Discplacement, displacement gradient, stress and micromorphic fields}
+
+Let
+$\Field{\DisplacementField}{\ElementBulk}{}$,
+$\Field{\DisplacementGradientField}{\ElementBulk}{}$,
+$\Field{\PKIStressField}{\ElementBulk}{}$,
+$\Field{\MicromorphicDamageField}{\ElementBulk}{}$,
+$\Field{\MicromorphicDamageGradientField}{\ElementBulk}{}$,
+$\Field{\MicromorphicDamageStressField}{\ElementBulk}{}$
+the displacement and micromorphic damage fields, gradients and stresses in the bulk of the element,
+and 
+$\Field{\DisplacementField}{\ElementInterface}{}$,
+$\Field{\DisplacementGradientField}{\ElementInterface}{}$,
+$\Field{\PKIStressField}{\ElementInterface}{}$,
+$\Field{\MicromorphicDamageField}{\ElementInterface}{}$,
+$\Field{\MicromorphicDamageGradientField}{\ElementInterface}{}$,
+$\Field{\MicromorphicDamageStressField}{\ElementInterface}{}$
+those in the interface.
+The displacement and micromorphic damage of the boundary $\ElementBoundary$ are denoted $\Field{\DisplacementField}{\ElementBoundary}{}$ and $\Field{\MicromorphicDamageField}{\ElementBoundary}{}$ respectively.
+By continuity of the displacement and micromorphic damage fields between $\ElementBulk$ and $\ElementBoundary$,
+the following relations hold true
+%
+% 
+% 
+\begin{equation}
+    \label{eq_ud_conformity}
+        \begin{aligned}
+        \Field{\DisplacementField}{\ElementInterface}{} \TraceOperator{\ElementBulkBoundary} = \Field{\DisplacementField}{\ElementBulk}{} \TraceOperator{\ElementBulkBoundary}
+        && &&
+        \Field{\DisplacementField}{\ElementInterface}{} \TraceOperator{\ElementBoundary} = \Field{\DisplacementField}{\ElementBoundary}{}
+        && &&
+        \Field{\MicromorphicDamageField}{\ElementInterface}{} \TraceOperator{\ElementBulkBoundary} = \Field{\MicromorphicDamageField}{\ElementBulk}{} \TraceOperator{\ElementBulkBoundary}
+        && &&
+        \Field{\MicromorphicDamageField}{\ElementInterface}{} \TraceOperator{\ElementBoundary} = \Field{\MicromorphicDamageField}{\ElementBoundary}{}
+    \end{aligned}
+\end{equation}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Hu-Washizu Lagrangian of the element}
+
+By combining both the Lagragian of the core $\ElementBulk$ and that of the interface $\ElementInterface$, one obtains the total Lagragian $\LagrangianOperator{\ElementCell}{HW}$ over the element such that
+%
+%
+%
+\begin{equation}
+    \label{eq_hu_washizu_split}
+    \LagrangianOperator{\ElementCell}{HW} = \LagrangianOperator{\ElementBulk}{HW} + \LagrangianOperator{\ElementInterface}{HW}
+\end{equation}
+%
+%
+%
+where
+%
+%
+%
+\begin{equation}
+    \label{eq_hu_washizu_split2}
+    \LagrangianOperator{\ElementBulk}{HW}
+    =
+    \int_{\ElementBulk} \psi_{\BodyLagrange}
+    +
+    \int_{\ElementBulk} (\nabla \Field{\DisplacementField}{\ElementBulk}{} - \Field{\DisplacementGradientField}{\ElementBulk}{}) : \Field{\PKIStressField}{\ElementBulk}{}
+    +
+    \int_{\ElementBulk} (\nabla \Field{\MicromorphicDamageField}{\ElementBulk}{} - \Field{\MicromorphicDamageGradientField}{\ElementBulk}{}) \cdot \Field{\MicromorphicDamageStressField}{\ElementBulk}{}
+    -
+    \int_{\ElementBulk} \loadLag \cdot \Field{\DisplacementField}{\ElementBulk}{}
+\end{equation}
+%
+%
+%
+and
+%
+%
+%
+\begin{equation}
+    \label{eq_hu_washizu_split23}
+    \LagrangianOperator{\ElementInterface}{HW}
+    =
+    \int_{\ElementInterface} \psi_{\ElementInterface}
+    +
+    \int_{\ElementInterface} (\nabla \Field{\DisplacementField}{\ElementInterface}{} - \Field{\DisplacementGradientField}{\ElementInterface}{}) : \Field{\PKIStressField}{\ElementInterface}{}
+    +
+    \int_{\ElementInterface} (\nabla \Field{\MicromorphicDamageField}{\ElementInterface}{} - \Field{\MicromorphicDamageGradientField}{\ElementInterface}{}) \cdot \Field{\MicromorphicDamageStressField}{\ElementInterface}{}
+    -
+    \int_{\neumannCell} \neumannCellLoad \cdot \Field{\DisplacementField}{\ElementBoundary}{}
+\end{equation}
+
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\subsection{Hypotheses}
+\label{sec_assumtions}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Displacement in the interface}
+
+Since the interface is of negligible volume compared to that of the core, the displacement and micromorphic damage fields in the interface $\ElementInterface$ are assumed to be linear with respect to $\NormalVector$, such that
+the gradients are homogeneous in $\ElementInterface$ along $\NormalVector$
+%
+% 
+% 
+\begin{equation}
+    \label{eq_crown_displacement}
+    \begin{aligned}
+        \nabla \Field{\DisplacementField}{\ElementInterface}{}
+        =
+        \frac{
+            \Field{\DisplacementField}{\ElementBoundary}{} - \Field{\DisplacementField}{\ElementBulk}{} \TraceOperator{\ElementBulkBoundary}
+        }{\ell}
+        \otimes
+        \NormalVector
+        &&
+        &&
+        \nabla \Field{\MicromorphicDamageField}{\ElementInterface}{}
+        =
+        \frac{
+            \Field{\MicromorphicDamageField}{\ElementBoundary}{} - \Field{\MicromorphicDamageField}{\ElementBulk}{} \TraceOperator{\ElementBulkBoundary}
+        }{\ell}
+        \otimes
+        \NormalVector
+    \end{aligned}
+\end{equation}
+% 
+% 
+%
+That is, the displacement and micromorphic damage fields in the interface $\ElementInterface$ linearly bridge those of the boundary $\ElementBoundary$ to those of the bulk $\ElementBulk$.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Stress in the interface}
+
+Likewise, let assume that $\Field{\PKIStressField}{\ElementInterface}{}$ and $\Field{\MicromorphicDamageStressField}{\ElementInterface}{}$ are constant along the direction $\NormalVector$ in $\ElementInterface$.
+By continuity of the traction force across $\ElementBulkBoundary$, the following equalities hold true
+%
+% 
+% 
+\begin{equation}
+    \label{eq_continuity_traction_force}
+    \begin{aligned}
+        (\Field{\PKIStressField}{\ElementInterface}{} - \Field{\PKIStressField}{\ElementBulk}{} \TraceOperator{\ElementBulkBoundary}) \cdot \NormalVector = 0
+        &&
+        \text{and}
+        &&
+        (\Field{\MicromorphicDamageStressField}{\ElementInterface}{} - \Field{\MicromorphicDamageStressField}{\ElementBulk}{} \TraceOperator{\ElementBulkBoundary}) \cdot \NormalVector = 0
+        &&
+        \text{on}
+        &&
+        \ElementBulkBoundary
+    \end{aligned}
+\end{equation}
+
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\subsection{Towards Hybrid discontinuous methods from the Hu-Washizu Lagrangian}
+
+\paragraph{Lagrangian}
+
+The total Lagragian is
+%
+%
+%
+\begin{equation}
+    \label{eq_0015}
+    \begin{aligned}
+        \LagrangianOperator{\ElementCell}{HW}
+        =
+        &
+        \int_{\ElementCell} \psi_{\BodyLagrange}
+        +
+        \int_{\ElementCell} (\nabla \Field{\DisplacementField}{\ElementCell}{} - \Field{\DisplacementGradientField}{\ElementCell}{}) : \Field{\PKIStressField}{\ElementCell}{}
+        +
+        \int_{\ElementCell} (\nabla \Field{\MicromorphicDamageField}{\ElementCell}{} - \Field{\MicromorphicDamageGradientField}{\ElementCell}{}) \cdot \Field{\MicromorphicDamageStressField}{\ElementCell}{}
+        \\
+        &
+        +
+        \int_{\ElementBoundary} (\Field{\DisplacementField}{\ElementBoundary}{} - \Field{\DisplacementField}{\ElementCell}{} \TraceOperator{\ElementBoundary}) \cdot \Field{\PKIStressField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector
+        +
+        \int_{\ElementBoundary} (\Field{\MicromorphicDamageField}{\ElementBoundary}{} - \Field{\MicromorphicDamageField}{\ElementCell}{} \TraceOperator{\ElementBoundary}) \, \Field{\MicromorphicDamageStressField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector
+        \\
+        &
+        +
+        \int_{\ElementBoundary} \frac{\DisplacementStabilizationFactor}{2 h_{\ElementCell}} \lVert \Field{\DisplacementField}{\ElementBoundary}{} - \Field{\DisplacementField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \rVert^2
+        +
+        \int_{\ElementBoundary} \frac{\MicromorphicDamageStabilizationFactor}{2 h_{\ElementCell}} (\Field{\MicromorphicDamageField}{\ElementBoundary}{} - \Field{\MicromorphicDamageField}{\ElementCell}{} \TraceOperator{\ElementBoundary})^2
+        -
+        \int_{\ElementCell} \loadLag{} \cdot \Field{\DisplacementField}{\ElementCell}{}
+        -
+        \int_{\BodyLagrangeNeumannBoundary} \neumannCellLoad{} \cdot \Field{\DisplacementField}{\ElementBoundary}{}
+    \end{aligned}
+\end{equation}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Lagrangian variations}
+
+By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each variable of the problem, the following weak equations arise
+%
+%
+%
+\begin{subequations}
+    \label{eq_0017}
+        \begin{alignat}{2}
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\DisplacementField}{\ElementCell}{}} , \delta \Field{\DisplacementField}{\ElementCell}{} \rangle
+            = & \int_{\ElementCell} \Field{\PKIStressField}{\ElementCell}{} : \nabla \delta \Field{\DisplacementField}{\ElementCell}{}
+            -
+            \int_{\ElementCell} \tensori{f}{}_V \cdot \delta \Field{\DisplacementField}{\ElementCell}{}
+            -
+            \int_{\ElementBoundary} \Field{\DisplacementTractionField}{\ElementCell}{} \cdot \delta \Field{\DisplacementField}{\ElementCell}{} \TraceOperator{\ElementBoundary}
+            &&
+            \qquad \forall \delta \Field{\DisplacementField}{\ElementCell}{}
+            \label{eq_0017:eq0}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\DisplacementField}{\ElementBoundary}{}} , \delta \Field{\DisplacementField}{\ElementBoundary}{} \rangle
+            = &
+            \int_{\neumannCell} (\Field{\DisplacementTractionField}{\ElementCell}{} - \tensori{t}{}_{\neumannCell}) \cdot \delta \Field{\DisplacementField}{\ElementBoundary}{}
+            &&
+            \qquad \forall \delta \Field{\DisplacementField}{\ElementBoundary}{}
+            \label{eq_0017:eq1}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\PKIStressField}{\ElementCell}{}} , \delta \Field{\PKIStressField}{\ElementCell}{} \rangle
+            = & \int_{\ElementCell} (\nabla \Field{\DisplacementField}{\ElementCell}{} - \Field{\DisplacementGradientField}{\ElementCell}{} ) : \delta \Field{\PKIStressField}{\ElementCell}{}
+            +
+            \int_{\ElementBoundary} (\Field{\DisplacementField}{\ElementBoundary}{} - \Field{\DisplacementField}{\ElementCell}{} \TraceOperator{\ElementBoundary}) \cdot \delta \Field{\PKIStressField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector
+            &&
+            \qquad \forall \delta \Field{\PKIStressField}{\ElementCell}{}
+            \label{eq_0017:eq3}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\DisplacementGradientField}{\ElementCell}{}} , \delta \Field{\DisplacementGradientField}{\ElementCell}{} \rangle
+            = &
+            \int_{\ElementCell} (\deriv{\mecPotential_{\BodyLagrange}}{\Field{\DisplacementGradientField}{\ElementCell}{}} - \Field{\PKIStressField}{\ElementCell}{}) : \delta \Field{\DisplacementGradientField}{\ElementCell}{}
+            &&
+            \qquad \forall \delta \Field{\DisplacementGradientField}{\ElementCell}{}
+            \label{eq_0017:eq2}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\MicromorphicDamageField}{\ElementCell}{}} , \delta \Field{\MicromorphicDamageField}{\ElementCell}{} \rangle
+            =
+            & \int_{\ElementCell} \Field{\MicromorphicDamageStressField}{\ElementCell}{} \cdot \nabla \delta \Field{\MicromorphicDamageField}{\ElementCell}{}
+            +
+            \int_{\ElementCell} \Field{\MicromorphicDamageForceField}{\ElementCell}{} \cdot \delta \Field{\MicromorphicDamageField}{\ElementCell}{}
+            -
+            \int_{\ElementBoundary} \Field{\MicromorphicDamageTractionField}{\ElementCell}{} \, \delta \Field{\MicromorphicDamageField}{\ElementCell}{} \TraceOperator{\ElementBoundary}
+            &&
+            \qquad \forall \delta \Field{\MicromorphicDamageField}{\ElementCell}{}
+            \label{eq_0017:eq04}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\MicromorphicDamageField}{\ElementBoundary}{}} , \delta \Field{\MicromorphicDamageField}{\ElementBoundary}{} \rangle
+            = &
+            \int_{\neumannCell} \Field{\MicromorphicDamageTractionField}{\ElementCell}{} \, \delta \Field{\MicromorphicDamageField}{\ElementBoundary}{}
+            &&
+            \qquad \forall \delta \Field{\MicromorphicDamageField}{\ElementBoundary}{}
+            \label{eq_0017:eq12}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\MicromorphicDamageStressField}{\ElementCell}{}} , \delta \Field{\MicromorphicDamageStressField}{\ElementCell}{} \rangle
+            = & \int_{\ElementCell} (\nabla \Field{\MicromorphicDamageField}{\ElementCell}{} - \Field{\MicromorphicDamageGradientField}{\ElementCell}{} ) \cdot \delta \Field{\MicromorphicDamageStressField}{\ElementCell}{}
+            +
+            \int_{\ElementBoundary} (\Field{\MicromorphicDamageField}{\ElementBoundary}{} - \Field{\MicromorphicDamageField}{\ElementCell}{} \TraceOperator{\ElementBoundary}) \, \delta \Field{\MicromorphicDamageStressField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector
+            &&
+            \qquad \forall \delta \Field{\MicromorphicDamageStressField}{\ElementCell}{}
+            \label{eq_0017:eq31}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\MicromorphicDamageGradientField}{\ElementCell}{}} , \delta \Field{\MicromorphicDamageGradientField}{\ElementCell}{} \rangle
+            = &
+            \int_{\ElementCell} (\deriv{\mecPotential_{\BodyLagrange}}{\Field{\MicromorphicDamageGradientField}{\ElementCell}{}} - \Field{\MicromorphicDamageStressField}{\ElementCell}{}) \cdot \delta \Field{\MicromorphicDamageGradientField}{\ElementCell}{}
+            &&
+            \qquad \forall \delta  \Field{\MicromorphicDamageGradientField}{\ElementCell}{}
+            \label{eq_0017:eq22}
+    \end{alignat}
+\end{subequations}
+% 
+% 
+%
+where the \textit{reconstructed tractions} $\Field{\DisplacementTractionField}{\ElementCell}{} = \Field{\PKIStressField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector + (\DisplacementStabilizationFactor / h_{\ElementCell}) \DisplacementJumpField(\Field{\DisplacementField}{\ElementCell}{}, \Field{\DisplacementField}{\ElementBoundary}{})$
+and
+$\Field{\MicromorphicDamageTractionField}{\ElementCell}{} = \Field{\MicromorphicDamageStressField}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector + (\MicromorphicDamageStabilizationFactor / h_{\ElementCell}) \MicromorphicDamageJumpField(\Field{\MicromorphicDamageField}{\ElementCell}{}, \Field{\MicromorphicDamageField}{\ElementBoundary}{})$
+are introduced, with
+$\DisplacementJumpField(\Field{\DisplacementField}{\ElementCell}{}, \Field{\DisplacementField}{\ElementBoundary}{}) = \Field{\DisplacementField}{\ElementBoundary}{} - \Field{\DisplacementField}{\ElementCell}{} \TraceOperator{\ElementBoundary}$
+and
+$\MicromorphicDamageJumpField(\Field{\MicromorphicDamageField}{\ElementCell}{}, \Field{\MicromorphicDamageField}{\ElementBoundary}{}) = \Field{\MicromorphicDamageField}{\ElementBoundary}{} - \Field{\MicromorphicDamageField}{\ElementCell}{} \TraceOperator{\ElementBoundary}$
+the jump functions on the boundary $\ElementBoundary$.
+
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\subsection{Problem in primal form}
+\label{sec_hdg_element_equilibrium}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Reconstructed gradient}
+
+Since minimization of \eqref{eq_0017:eq3} and \eqref{eq_0017:eq31} define linear problems with any displacement and micromorphic damage pairs respectively, they can be eliminated
+from the system \eqref{eq_0017}. The resulting equations define the so-called \textit{reconstructed gradients}
+$\Field{\DisplacementGradientField}{\ElementCell}{}(\Field{\VirtualField{\DisplacementField}}{\ElementCell}{}, \Field{\VirtualField{\DisplacementField}}{\ElementBoundary}{})$
+and
+$\Field{\MicromorphicDamageGradientField}{\ElementCell}{}(\Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{}, \Field{\VirtualField{\MicromorphicDamageField}}{\ElementBoundary}{})$
+associated with any respective displacement and micromorphic damage pairs
+$(\Field{\VirtualField{\DisplacementField}}{\ElementCell}{}, \Field{\VirtualField{\DisplacementField}}{\ElementBoundary}{})$
+and
+$(\Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{}, \Field{\VirtualField{\MicromorphicDamageField}}{\ElementBoundary}{})$, that satisfy
+%
+%
+%
+\begin{subequations}
+    \label{eq_00172}
+        \begin{alignat}{2}
+            \int_{\ElementCell} \Field{\DisplacementGradientField}{\ElementCell}{} : \Field{\tensorii{\tau}}{\ElementCell}{}
+            &
+            =
+            \int_{\ElementCell}  \nabla \Field{\VirtualField{\DisplacementField}}{\ElementCell}{} : \Field{\tensorii{\tau}}{\ElementCell}{}
+            +
+            \int_{\ElementBoundary} (\Field{\VirtualField{\DisplacementField}}{\ElementBoundary}{} - \Field{\VirtualField{\DisplacementField}}{\ElementCell}{} \TraceOperator{\ElementBoundary}) \cdot \Field{\tensorii{\tau}}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector
+            &&
+            \qquad \forall \Field{\tensorii{\tau}}{\ElementCell}{}
+            \label{eq_00172:eq0}
+            \\
+            \int_{\ElementCell} \Field{\MicromorphicDamageGradientField}{\ElementCell}{} \cdot \Field{\tensori{\zeta}}{\ElementCell}{} 
+            &
+            =
+            \int_{\ElementCell}  \nabla \Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{} \cdot \Field{\tensori{\zeta}}{\ElementCell}{} 
+            +
+            \int_{\ElementBoundary} (\Field{\VirtualField{\MicromorphicDamageField}}{\ElementBoundary}{} - \Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{} \TraceOperator{\ElementBoundary}) \, \Field{\tensori{\zeta}}{\ElementCell}{} \TraceOperator{\ElementBoundary} \cdot \NormalVector
+            &&
+            \qquad \forall \tensori{\zeta}{}_{\ElementCell}
+            \label{eq_00172:eq1}
+    \end{alignat}
+\end{subequations}
+%
+%
+%
+where $\Field{\tensorii{\tau}}{\ElementCell}{}$ denotes an arbitrary kinematically admissible stress field, and $\Field{\tensori{\zeta}}{\ElementCell}{}$ is an arbitrary kinematically admissible micromorphic stress field.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Stress tensor}
+
+Likewise, \eqref{eq_0017:eq2} and \eqref{eq_0017:eq22} are eliminated from \eqref{eq_0017} since they are linear with $\Field{\DisplacementGradientField}{\ElementCell}{}$ and  $\Field{\MicromorphicDamageGradientField}{\ElementCell}{}$ respectively.
+Assuming in addition that the space of kinematically admissible stress fields is included in that of kinematically admissible gradient fields, \eqref{eq_0017:eq2} and \eqref{eq_0017:eq22} hold in a strong sense such that
+%
+%
+%
+\begin{subequations}
+    \label{eq_stress}
+        \begin{alignat}{3}
+            \Field{\PKIStressField}{\ElementCell}{} & = \deriv{\mecPotential_{\BodyLagrange}}{\Field{\DisplacementGradientField}{\ElementCell}{}}
+            \label{eq_stress:eq0}
+            \\
+            \Field{\MicromorphicDamageStressField}{\ElementCell}{} & = \deriv{\mecPotential_{\BodyLagrange}}{\Field{\MicromorphicDamageGradientField}{\ElementCell}{}}
+            \label{eq_stress:eq1}
+    \end{alignat}
+\end{subequations}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Lagrangian variations in primal form}
+
+Using \eqref{eq_stress} and \eqref{eq_00172}, problem \eqref{eq_0017} depends on the displacement unknowns only.
+% and the only remaining variations of the total Lagrangian \eqref{eq_0015} are those with respect to both displacement variables.
+A new total Lagrangian $\LagrangianOperator{\ElementCell}{HDG}$ arises from the simplified problem such that
+%
+%
+%
+\begin{equation}
+    \label{eq_total_lagragian_bis}
+    \begin{aligned}
+        \LagrangianOperator{\ElementCell}{HDG}
+        =
+        &
+        \int_{\ElementCell} \mecPotential_{\BodyLagrange}
+        +
+        \int_{\ElementBoundary} \frac{\DisplacementStabilizationFactor}{2 h_{\ElementCell}} \lVert \DisplacementJumpField(\Field{\DisplacementField}{\ElementCell}{}, \Field{\DisplacementField}{\ElementBoundary}{}) \rVert^2
+        +
+        \int_{\ElementBoundary} \frac{\MicromorphicDamageStabilizationFactor}{2 h_{\ElementCell}} \MicromorphicDamageJumpField^{2}(\Field{\MicromorphicDamageField}{\ElementCell}{}, \Field{\MicromorphicDamageField}{\ElementBoundary}{})
+        -
+        \int_{\ElementCell} \loadLag{} \cdot \Field{\DisplacementField}{\ElementCell}{}
+        -
+        \int_{\BodyLagrangeNeumannBoundary} \neumannCellLoad{} \cdot \Field{\DisplacementField}{\ElementBoundary}{}
+    \end{aligned}
+\end{equation}
+%
+%
+%
+with respective cell and boundary displacement variations:
+\begin{subequations}
+    \label{eq_final_problem}
+        \begin{alignat}{3}
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HDG}}{\Field{\DisplacementField}{\ElementCell}{}} , \delta \Field{\DisplacementField}{\ElementCell}{} \rangle
+            =
+            &
+            \int_{\ElementCell} \Field{\PKIStressField}{\ElementCell}{} : \nabla \delta \Field{\DisplacementField}{\ElementCell}{}
+            -
+            \int_{\ElementCell} \tensori{f}{}_V \cdot \delta \Field{\DisplacementField}{\ElementCell}{}
+            -
+            \int_{\ElementBoundary} \Field{\DisplacementTractionField}{\ElementCell}{} \cdot \delta \Field{\DisplacementField}{\ElementCell}{} \TraceOperator{\ElementBoundary}
+            &&
+            \qquad \forall \delta \Field{\DisplacementField}{\ElementCell}{}
+            \label{eq_final_problem:eq0}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HDG}}{\Field{\DisplacementField}{\ElementBoundary}{}} , \delta \Field{\DisplacementField}{\ElementBoundary}{} \rangle
+            =
+            &
+            \int_{\neumannCell} (\Field{\DisplacementTractionField}{\ElementCell}{} - \tensori{t}{}_{\neumannCell}) \cdot \delta \Field{\DisplacementField}{\ElementBoundary}{}
+            &&
+            \qquad \forall \delta \Field{\DisplacementField}{\ElementBoundary}{}
+            \label{eq_final_problem:eq1}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\MicromorphicDamageField}{\ElementCell}{}} , \delta \Field{\MicromorphicDamageField}{\ElementCell}{} \rangle
+            =
+            & \int_{\ElementCell} \Field{\MicromorphicDamageStressField}{\ElementCell}{} \cdot \nabla \delta \Field{\MicromorphicDamageField}{\ElementCell}{}
+            +
+            \int_{\ElementCell} \Field{\MicromorphicDamageForceField}{\ElementCell}{} \cdot \delta \Field{\MicromorphicDamageField}{\ElementCell}{}
+            -
+            \int_{\ElementBoundary} \Field{\MicromorphicDamageTractionField}{\ElementCell}{} \, \delta \Field{\MicromorphicDamageField}{\ElementCell}{} \TraceOperator{\ElementBoundary}
+            &&
+            \qquad \forall \delta \Field{\MicromorphicDamageField}{\ElementCell}{}
+            \label{eq_final_problem:eq04}
+            \\
+            \langle \deriv{\LagrangianOperator{\ElementCell}{HW}}{\Field{\MicromorphicDamageField}{\ElementBoundary}{}} , \delta \Field{\MicromorphicDamageField}{\ElementBoundary}{} \rangle
+            = &
+            \int_{\neumannCell} \Field{\MicromorphicDamageTractionField}{\ElementCell}{} \, \delta \Field{\MicromorphicDamageField}{\ElementBoundary}{}
+            &&
+            \qquad \forall \delta \Field{\MicromorphicDamageField}{\ElementBoundary}{}
+            \label{eq_final_problem:eq12}
+    \end{alignat}
+\end{subequations}
+%
+%
+%
+where $\Field{\PKIStressField}{\ElementCell}{}$ and $\Field{\MicromorphicDamageStressField}{\ElementCell}{}$ are defined by \eqref{eq_stress} and
+depend on $\Field{\DisplacementGradientField}{\ElementCell}{}$ and $\Field{\MicromorphicDamageGradientField}{\ElementCell}{}$ which solve \eqref{eq_00172}.
