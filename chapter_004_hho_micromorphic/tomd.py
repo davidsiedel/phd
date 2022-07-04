@@ -28,7 +28,7 @@ def convert(file_path: str, new_lines: List[str]):
                 new_line = line
             new_lines.append(new_line)
 
-dir_path = "/home/dsiedel/Documents/2022_01_06_PAPER_01/paper_n/chapter_01_hho_mechanics/sections"
+dir_path = "/home/dsiedel/Documents/2022_01_06_PAPER_01/paper_n/chapter_002_hho_mechanics/sections"
 new_lines = []
 files = [f for f in listdir(dir_path) if (isfile(join(dir_path, f)) and ".tex" in join(dir_path, f))]
 files.sort()
