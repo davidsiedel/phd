@@ -532,7 +532,7 @@ ensuring the convergence of the scheme.
 
 Minimisation with respect to \(\vec{u}\) and \(d_{\chi}\) leads to a
 solve two standard Partial Differential Equations (PDE), see Equation
-\eqref{eq:micromorphicdamage:mechanical_equilibrium}and
+\eqref{eq:micromorphicdamage:mechanical_equilibrium} and
 \eqref{eq:micromorphicdamage:d_chi}. Note that:
 
 - The PDE associated with \(\vec{u}\) is a linear elastic problem with
@@ -551,8 +551,58 @@ solve two standard Partial Differential Equations (PDE), see Equation
 
 Minimisation with respect to \(d\) is local and depends on the model
 considered.
-% Appendix \ref{sec:micromorphicdamage:damage_evolution} describes
-% the local equations that must be solved in each case.
+
+\paragraph{Evolution of damage in the AT2 model}
+
+The evolution of damage is given by Equation
+\eqref{eq:micromorphicdamage:KTT}. In the case of damage increase, we
+directly impose that the new damage estimate \(\iter{n+1}{d}\) is such
+that Equation \eqref{eq:micromorphicdamage:yield} is satisfied. In the
+case of the AT2 model, Equation \eqref{eq:micromorphicdamage:Y} can be
+rewritten as follows:
+\[
+2\,\paren{1-\iter{n+1}{d}}\,\freeenergyel_{0}\paren{\iter{n+1}{\tepsilon}}-\Frac{G_{c}}{l_{0}}\,\iter{n+1}{d}-H_{\chi}\,\paren{\iter{n+1}{d}-\iter{n+1}{d_{\chi}}}=0
+\]
+
+The new damage \(\iter{n+1}{d}\) is thus given:
+
+\begin{equation}
+\label{eq:micromorphicdamage:damage_estimate0}
+\iter{n+1}{d}=
+\Frac{2\,\freeenergyel_{0}\paren{\iter{n+1}{\tepsilon}}+H_{\chi}\,\iter{n+1}{d_{\chi}}}{2\,\freeenergyel_{0}\paren{\iter{n+1}{\tepsilon}}+\Frac{G_{c}}{l_{0}}+H_{\chi}}
+\end{equation}
+
+Since the damage can only increase, a closed-form expression of
+\(\iter{n+1}{d}\) is finally given by:
+
+\begin{equation}
+\label{eq:micromorphicdamage:damage_estimate}
+\iter{n+1}{d}=
+\min\paren{\max\paren{
+\Frac{2\,\freeenergyel_{0}\paren{\iter{n+1}{\tepsilon}}+H_{\chi}\,\iter{n+1}{d_{\chi}}}{2\,\freeenergyel_{0}\paren{\iter{n+1}{\tepsilon}}+\Frac{G_{c}}{l_{0}}+H_{\chi}},\bts{d}},1}
+\end{equation}
+
+\paragraph{Evolution of damage in the Lorentz model}
+
+The Lorentz damage model is defined by a Lagrangian \(\mathcal{L}\)
+which is similar to the Lagrangian of the AT1 model by with the
+following degradation function:
+\[
+g\paren{d}=\paren{\Frac{1-d}{1+\gamma\,d}}^{2}
+\]
+
+whose derivative is:
+\[
+\derivtot{g}{d}=-2\,\Frac{\paren{1-d}\,\paren{1+\gamma}}{\paren{1+\gamma\,d}^{3}}
+\]
+
+The damage thus satisfies the following consistency equation:
+\[
+2\,\Frac{\paren{1-\ets{d}}\,\paren{1+\gamma}}{\paren{1+\gamma\,\ets{d}}^{3}}\,\freeenergyel_{0}\paren{\tepsilon}
+-\derivtot{\freeenergyd}{d}-H_{\chi}\,\paren{d-d_{\chi}}=0
+\]
+
+This equation can be solved by an Newton method, for example.
 
 \subsubsection{A second alternate minimization scheme}
 
