@@ -1,1 +1,0 @@
-\part{Treatment of irreversibility using the cell equilibrium approach}

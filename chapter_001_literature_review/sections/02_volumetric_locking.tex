@@ -1,0 +1,98 @@
+\section{Volumetric locking}
+\label{sec:hho:volumetric_locking}
+
+Comme évoqué précédemment, un problème de verrouillage numérique peut apparaitre avec
+les éléments finis H 1 -conformes (d’ordre bas) quand les déformations élastiques sont quasi-
+incompressibles et/ou les déformations plastiques sont incompressibles. Une raison pour
+l’apparition de ce verrouillage est que les éléments H 1 -conformes (d’ordre bas) ne sont pas
+assez riches pour approcher correctement une telle solution. Pour résoudre cette difficulté
+numérique, de nombreuses méthodes ont été développées. Nous présentons ci-dessous les
+principales méthodes ainsi que leurs avantages et inconvénients. Nous commençons par les
+méthodes les plus anciennes.
+• Méthodes mixtes : L’idée est d’introduire un ou plusieurs multiplicateurs de Lagrange
+pour imposer la condition d’incompressibilité. L’ajout de ces multiplicateurs augmente
+le coût de la construction et de la résolution du problème global. En outre, celui-ci est
+de type point-selle, ce qui peut compliquer la résolution avec une méthode itérative.
+De plus, la formulation des méthodes mixtes est dépendante de la loi de comportement
+utilisée et ces méthodes sont difficilement extensibles aux maillages polyédriques. Pour
+les grandes déformations hyperélastiques, nous mentionnons les travaux de Al Akhrass
+and al. [9], Brink and Stein [44], Dobrowolski [99], et Klass, Maniatty and Shephar [150]
+et en ce qui concerne la plasticité, nous avons en petites déformations les travaux de
+Cervera and al. [53, 52, 51] et Chimumenti and al. [60, 59] et en grandes déformations les
+travaux de Al Akhrass and al. [9], Agelet de Saracibar and al. [6], Bargellini and al. [24],
+Le Tallec, Rahier and Kaiss [157], de Souza Neto and al. [82], et Simo, Taylor and Pister
+[196]. Plus récemment, une analyse de stabilité menée par Aurichhio and al. [16, 17,
+15] a montré certaines limitations des méthodes mixtes pour les grandes déformations
+hyperélastiques.
+• Méthodes de Galerkin discontinu (dG) : Les méthodes dG (Arnold and al. [12],
+Cockburn [73]) reposent sur une formulation primale comme les méthodes éléments
+finis H 1 -conformes. En revanche, l’espace d’approximation n’est plus continu mais
+typiquement polynomial par morceaux. Un inconvénient de ses méthodes dG est qu’elles
+sont coûteuses car il y a beaucoup d’inconnues. En outre, dans le cas de la plasticité, le
+comportement doit être calculé sur les faces en plus des cellules et la matrice tangente
+de Newton n’est pas symétrique. Nous mentionnons pour les grandes déformations
+hyperélastique, les travaux de Eyck and Lew [117], Eyck, Celiker and Lew [116, 115], et
+Noels and Radovitzsky [174]. Les méthodes Interior penalty dG ont été développées pour
+la plasticité classique en petites déformations par Hansbo [131] et Liu and al. [162],
+et en grandes déformations par Liu, Wheeler and Yotov [163]; et en ce qui concerne la
+plasticité à gradient en petites déformations, nous mentionnons les travaux de Djoko and
+al. [98, 97] et en grandes déformations, ceux de McBride and Djoko [166].
+• Méthodes d’intégration réduite ou sélective : La technique d’intégration réduite
+(Zienkiewicz, Taylor and Too, [217]) consiste à intégrer la matrice de rigidité associée
+aux éléments finis H 1 -conformes en utilisant une règle d’intégration d’ordre plus faible
+que celui nécessaire pour une intégration exacte, alors que la méthode d’intégration
+sélective (Doherty, Wilson and Taylor, [100]) consiste à ne sous-intégrer que les termes
+de la matrice de rigidité liés à la contrainte d’incompressibilité. Ces deux méthodes
+permettent de réduire en partie les problèmes de verrouillage (cf. Ponthot [179]) mais
+présentent des difficultés pour les stabiliser (présence de modes à énergie nulle) et les
+étendre à des matériaux anisotropes (cf. les travaux de Hughes [145]). Un lien a pu
+être établi sous conditions avec certaines méthodes mixtes par Malkus and Hughes [165]
+et l’opérateur de stabilisation des méthodes dG par Reese and al. [27, 182]. En ce qui
+concerne les grandes déformations, nous mentionnons pour l’hyperélasticité, les travaux
+de Adam and al. [5] et Reese, Küssner and Reddy [5, 183], et pour la plasticité, les travaux
+de Reese [181].
+• Méthodes Enhanced Assumed Strain (EAS) : Les méthodes EAS ont été intro-
+duites par Simo and Rifai [194] où l’idée est de venir enrichir le tenseur des déformations
+par l’ajout de variables additionnelles dont certaines peuvent être éliminées par con-
+densation statique. Cependant, il est en général nécessaire de stabiliser ces méthodes.
+Pour les grandes déformations, ces méthodes ont été utilisées dans les travaux de Eyck
+and Lew [118] et Reese and Wriggers [184] en hyperélasticité et dans les travaux de Krysl
+[152, 153] et Simo and al. [191, 192] en plasticité.
+Depuis quelques années, d’autres méthodes que celles présentées ci-dessus ont été développées
+pour résoudre entre autres le problème du verrouillage numérique.
+• Méthodes isogéométriques (IGA) : L’idée des méthodes IGA est d’utiliser pour
+la discrétisation des fonctions de base qui sont plus régulières que les polynômes de
+Lagrange comme les NURBS. Un avantage sur les domaines à frontière courbe, la1.4. Grandes déformations et plasticité
+représentation de la géométrie réelle est plus fine, ce qui permet de réduire l’erreur de
+discrétisation géométrique. De manière générale, le prix à payer est un stencil plus
+étendu et une forte dépendance entre le module géométrique et le solveur éléments
+finis. Ces méthodes ont été développées pour la plasticité en petites déformations par
+Elguedj and al. [112] et en grandes déformations par Elguedj and Hughes [113]. De plus,
+une adaptation de l’intégration sélective aux méthodes IGA a été proposée par Adam
+and al. [5].
+• Méthodes de type Virtual Element Method (VEM) : Assez récemment, les
+méthodes VEM (Beirão da Veiga, Brezzi, Marini and Russo, [28, 29]) ont été développées
+afin d’étendre les éléments finis aux maillages polyédriques. Ces méthodes reposent
+sur une formulation primale et elles sont robustes dans la limite incompressible. Nous
+mentionnons en particulier la méthode VEM d’ordre bas pour les petites déformations
+plastiques par Beirão da Veiga, Lovadina and Mora [30] (et son extension bidimensionnelle
+d’ordre élevé par Artioli and al. [13]), alors que le cas des grandes déformations plastiques
+est traité par Wriggers and Hudobivnik [209] en 2D et Hudobivnik, Aldakheel and Wriggers
+[143] en 3D, toujours pour de l’ordre bas. Le cas hyperélastique est étudié par Chi,
+Beirão da Veiga and Paulino [58] et Wriggers and al. [210].
+• Méthodes hybrides : Ces dernières années, de nombreuse méthodes hybrides ont
+été développées en plus de HHO. L’idée est de rajouter des variables globales pour
+rendre les autres locales et donc éliminables par condensation statique. Ces méthodes
+se différencient par le choix des variables globales et par le lien entre variables globales et
+locales. Les méthodes Hybridizable Discontinuous Galerkin (HDG) [76] ont été utilisées
+pour l’hyperélasticité par Kabaria, Lew and Cockburn [147] et Nguyen et Peraire [171],
+alors que les méthodes hybrid dG (d’ordre bas) avec traces conformes et hybridizable
+weakly conforming Galerkin avec traces non-conformes ont été étudiées dans le cadre
+de la mécanique des solides linéaire par Krämer and al. [151] et dans le cas non-linéaire
+par Bayat and al. [26] et Wulfinghoff and al. [212].
+Nous terminons cette brève revue bibliographique en illustrant le phénomène de verrouillage
+numérique sur la simulation d’un essai de traction en grandes déformations plastiques, voir
+la Fig 1.11. Nous remarquons que la trace du tenseur des contraintes de Cauchy oscille pour
+les éléments finis H 1 -conformes linéaires (a) et quadratiques (b) avec intégration complète,
+alors que pour les éléments finis quadratiques sous-intégrés (c) et mixtes à trois champs (d),
+le verrouillage est éliminé.

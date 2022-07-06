@@ -1,0 +1,391 @@
+% ---------------------------------------------------------
+% ---- SECTION
+% ---------------------------------------------------------
+\section{Discretization}
+\label{sec_discretization}
+
+This section specifies the nature of the so-called hybrid mesh,
+and introduces the discretization for both cell and faces displacement fields.
+The classical \textit{static condensation} cell unknowns elimination strategy is presented, and a novel elimination scheme
+based on the previous Lagrangian formulation of hybrid discontinuous methods is then devised.
+
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\subsection{Mesh and skeleton}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Faces and skeleton of the mesh}
+
+The boundary $\ElementBoundary$ of each element is decomposed in faces, such
+that a face $\ElementFace$ is a subset of $\BodyLagrange$, and either there are two
+cells $\Field{\ElementCell}{F}{1}$ and $\Field{\ElementCell}{F}{2}$ such that $F = \Field{\ElementBoundary}{F}{1} \cap \Field{\ElementBoundary}{F}{2}$
+($\ElementFace$ is then an interior face), or there is a single cell $\Field{\ElementCell}{F}{}$ such
+that $\ElementFace = \Field{\ElementBoundary}{F}{} \cap \BodyLagrangeBoundary$ ($\ElementFace$ is then an exterior face).
+Let $\Skeleton(\BodyLagrange) = \{ \Field{\ElementFace}{i}{} \subset \BodyLagrange \ \vert \ 1 \leq i
+\leq \Field{N}{\Skeleton}{} \}$ the skeleton of the mesh, collecting all element faces
+$\Field{\ElementFace}{i}{}$ in the mesh, where $\Field{N}{\Skeleton}{}$ denotes the number of faces. The set of
+faces subjected to Neumann boundary conditions is denoted
+$\SkeletonBoundaryNeumann(\BodyLagrange)$, and $\SkeletonBoundaryDirichlet(\BodyLagrange)$
+denotes that subjected to Dirichlet boundary conditions.
+Moreover, let
+$\SkeletonInterior(\BodyLagrange)$ the set of interior faces
+and
+$\SkeletonBoundary(\BodyLagrange)$ the set of exterior faces. For any cell
+$\ElementCell$, let $\Skeleton(\ElementCell) = \{ \ElementFace \in \Skeleton(\BodyLagrange) \ \vert \ \ElementFace
+\subset \ElementBoundary \}$ the set of faces composing the boundary of $\ElementCell$,
+and let $\Field{N}{\ElementBoundary}{}$ the number of faces in $\ElementBoundary$.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Mesh description}
+
+Likewise, one defines the collection of all cells in the mesh
+as $\Mesh(\BodyLagrange) = \{ \Field{\ElementCell}{i}{} \subset \BodyLagrange \ \vert \ 1 \leq i
+\leq \Field{N}{\Mesh}{} \}$, where $\Field{N}{\Mesh}{}$ denotes the total number of cells.
+
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\subsection{Discretization}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Discrete functional space}
+
+Let $\Field{U}{\ElementCell}{\; h}$ and $\Field{D}{\ElementCell}{\; h}$ denote
+approximation spaces of finite dimension for the cell displacement and the micromorphic damage respectively,
+and $\Field{U}{\ElementFace}{\; h}$ and $\Field{D}{\ElementFace}{\; h}$ those
+on a face $\ElementFace \in \Skeleton(\ElementCell)$.
+The displacement and micromorphic damage approximation spaces on $\ElementBoundary$ are
+$\Field{U}{\ElementBoundary}{\; h} = \prod_{\ElementFace \in \Skeleton(\ElementCell)} \Field{U}{\ElementFace}{\; h}$
+and $\Field{D}{\ElementBoundary}{\; h} = \prod_{\ElementFace \in \Skeleton(\ElementCell)} \Field{D}{\ElementFace}{\; h}$
+respectively.
+
+\paragraph{Approximation bases and elementary unknowns}
+
+Let $\Field{\Vector{B}}{u, \ElementCell}{\; h}, \Field{\Vector{B}}{u, \ElementFace}{\; h}, \Field{\Vector{B}}{d, \ElementCell}{\; h}, \Field{\Vector{B}}{d, \ElementFace}{\; h}$
+denote polynomial bases of $\Field{U}{\ElementCell}{\; h}, \Field{U}{\ElementFace}{\; h}, \Field{D}{\ElementCell}{\; h}, \Field{D}{\ElementFace}{\; h}$ respectively.
+Using vector notations, the fields $\Field{\DisplacementField}{\ElementCell}{\; h}, \Field{\DisplacementField}{\ElementFace}{\; h}, \Field{\MicromorphicDamageField}{\ElementCell}{\; h}, \Field{\MicromorphicDamageField}{\ElementFace}{\; h}$
+can be represented by vectors of coefficients $\Field{\Vector{U}}{\ElementCell}{}, \Field{\Vector{U}}{\ElementFace}{}, \Field{\Vector{D}}{\ElementCell}{}, \Field{\Vector{D}}{\ElementFace}{}$
+in their respective bases such that
+%
+%
+%
+\begin{equation}
+  \label{eq_bases}
+  \begin{aligned}
+      \Field{\DisplacementField}{\ElementCell}{\; h} = \Field{\Vector{U}}{\ElementCell}{} \cdot \Field{\Vector{B}}{u, \ElementCell}{\; h}
+      &&
+      &&
+      \Field{\DisplacementField}{\ElementFace}{\; h} = \Field{\Vector{U}}{\ElementFace}{} \cdot \Field{\Vector{B}}{u, \ElementFace}{\; h}
+      &&
+      &&
+      \Field{\MicromorphicDamageField}{\ElementCell}{\; h} = \Field{\Vector{D}}{\ElementCell}{} \cdot \Field{\Vector{B}}{d, \ElementCell}{\; h}
+      &&
+      &&
+      \Field{\MicromorphicDamageField}{\ElementFace}{\; h} = \Field{\Vector{D}}{\ElementFace}{} \cdot \Field{\Vector{B}}{d, \ElementFace}{\; h}
+  \end{aligned}
+\end{equation}
+
+\paragraph{Global Unknowns}
+
+Let $(\Field{\DisplacementField}{\Mesh}{\; h}, \Field{\DisplacementField}{\Skeleton}{\; h}) \in \Field{U}{\Mesh}{\; h} \times \Field{U}{\Skeleton}{\; h}$
+and $(\Field{\MicromorphicDamageField}{\Mesh}{\; h}, \Field{\MicromorphicDamageField}{\Skeleton}{\; h}) \in \Field{D}{\Mesh}{\; h} \times \Field{D}{\Skeleton}{\; h}$
+the global
+unknowns of problem \eqref{eq_final_problem} in discrete form, where
+$\Field{\DisplacementField}{\Mesh}{\; h}, \Field{\DisplacementField}{\Skeleton}{\; h}, \Field{\MicromorphicDamageField}{\Mesh}{\; h}, \Field{\MicromorphicDamageField}{\Skeleton}{\; h}$
+are the piece-wise continuous fields such that $\forall \ElementCell \in \Mesh, \forall \ElementFace \in \Skeleton$
+%
+%
+%
+\begin{equation}
+  \begin{aligned}
+    \Field{\DisplacementField}{\Mesh}{\; h} \TraceOperator{\ElementCell} = \Field{\DisplacementField}{\ElementCell}{\; h}
+    &&
+    &&
+    \Field{\DisplacementField}{\Skeleton}{\; h} \TraceOperator{\ElementFace} = \Field{\DisplacementField}{\ElementFace}{\; h}
+    &&
+    &&
+    \Field{\MicromorphicDamageField}{\Mesh}{\; h} \TraceOperator{\ElementCell} = \Field{\MicromorphicDamageField}{\ElementCell}{\; h}
+    &&
+    &&
+    \Field{\MicromorphicDamageField}{\Skeleton}{\; h} \TraceOperator{\ElementFace} = \Field{\MicromorphicDamageField}{\ElementFace}{\; h}
+  \end{aligned}
+\end{equation}
+% 
+% 
+% 
+with $
+\Field{U}{\Mesh}{\; h} = \prod_{\ElementCell \in \Mesh} \Field{U}{\ElementCell}{\; h}, \;
+\Field{U}{\Skeleton}{\; h} = \prod_{\ElementFace \in \Skeleton} \Field{U}{\ElementFace}{\; h}, \;
+\Field{D}{\Mesh}{\; h} = \prod_{\ElementCell \in \Mesh} \Field{D}{\ElementCell}{\; h}, \;
+\Field{D}{\Skeleton}{\; h} = \prod_{\ElementFace \in \Skeleton} \Field{D}{\ElementFace}{\; h}
+$.
+In the following, let
+$\Field{\Vector{U}}{\Mesh}{}, \Field{\Vector{U}}{\Skeleton}{}, \Field{\Vector{D}}{\Mesh}{}, \Field{\Vector{D}}{\Skeleton}{}$ the unknown coefficient vectors associated
+to $\Field{\DisplacementField}{\Mesh}{\; h}, \Field{\DisplacementField}{\Skeleton}{\; h}, \Field{\MicromorphicDamageField}{\Mesh}{\; h}, \Field{\MicromorphicDamageField}{\Skeleton}{\; h}$ respectively.
+
+\paragraph{Elementary boundary unknown}
+
+Likewise, let $\Field{\DisplacementField}{\ElementBoundary}{\; h} \in \Field{U}{\ElementBoundary}{\; h}$ and $\Field{\MicromorphicDamageField}{\ElementBoundary}{\; h} \in \Field{D}{\ElementBoundary}{\; h}$ such that $\forall \ElementFace \in \Skeleton(\ElementCell)$
+%
+%
+%
+\begin{equation}
+  \begin{aligned}
+    \Field{\DisplacementField}{\ElementBoundary}{\; h} \TraceOperator{\ElementFace} = \Field{\DisplacementField}{\ElementFace}{\; h}
+    &&
+    &&
+    \Field{\MicromorphicDamageField}{\ElementBoundary}{\; h} \TraceOperator{\ElementFace} = \Field{\MicromorphicDamageField}{\ElementFace}{\; h}
+  \end{aligned}
+\end{equation}
+%
+%
+%
+and let $\Field{\Vector{U}}{\ElementBoundary}{}$ and $\Field{\Vector{D}}{\ElementBoundary}{}$
+the unknown coefficient vectors associated to $\Field{\DisplacementField}{\ElementBoundary}{\; h}$ and $\Field{\MicromorphicDamageField}{\ElementBoundary}{\; h}$.
+
+% ---------------------------------------------------------
+% -- SUBSECTION
+% ---------------------------------------------------------
+\subsection{Local and global discrete problems}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\subsubsection{Local residual}
+
+As in a functional space of finite dimension, the restriction of a linear
+form can be represented by a vector in the dual space, let
+$\Field{\Vector{R}}{u, \ElementCell}{}, \Field{\Vector{R}}{u, \ElementBoundary}{}, \Field{\Vector{R}}{d, \ElementCell}{}, \Field{\Vector{R}}{d, \ElementBoundary}{}$ the residual vectors
+associated with the the variations of the total
+Lagrangian~\eqref{eq_total_lagragian_bis}
+%
+% 
+% 
+\begin{subequations}
+  \label{eq_final_problem_00}
+  \begin{alignat}{3}
+    \Field{\Vector{R}}{u, \ElementCell}{}(\Field{\Vector{U}}{\ElementCell}{}, \Field{\Vector{U}}{\ElementBoundary}{}) \cdot \Field{\VirtualField{\Vector{U}}}{\ElementCell}{}
+    =
+    &
+    \int_{\ElementCell} \Field{\PKIStressField}{\ElementCell}{\; h} : \nabla \Field{\VirtualField{\DisplacementField}}{\ElementCell}{\; h}
+    -
+    \int_{\ElementCell} \tensori{f}{}_V \cdot \Field{\VirtualField{\DisplacementField}}{\ElementCell}{\; h}
+    -
+    \int_{\ElementBoundary} \Field{\DisplacementTractionField}{\ElementCell}{\; h} \cdot \Field{\VirtualField{\DisplacementField}}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary}
+    &&
+    \qquad \forall \Field{\VirtualField{\DisplacementField}}{\ElementCell}{\; h}
+    \label{eq_final_problem_00:eq0}
+    \\
+    \Field{\Vector{R}}{u, \ElementBoundary}{}(\Field{\Vector{U}}{\ElementCell}{}, \Field{\Vector{U}}{\ElementBoundary}{}) \cdot \Field{\VirtualField{\Vector{U}}}{\ElementBoundary}{}
+    =
+    &
+    \int_{\neumannCell} (\Field{\DisplacementTractionField}{\ElementCell}{\; h} - \tensori{t}{}_{\neumannCell}) \cdot \delta \Field{\DisplacementField}{\ElementBoundary}{\; h}
+    &&
+    \qquad \forall \Field{\VirtualField{\DisplacementField}}{\ElementBoundary}{\; h}
+    \label{eq_final_problem_00:eq1}
+    \\
+    \Field{\Vector{R}}{d, \ElementCell}{}(\Field{\Vector{D}}{\ElementCell}{}, \Field{\Vector{D}}{\ElementBoundary}{}) \cdot \Field{\VirtualField{\Vector{D}}}{\ElementCell}{}
+    =
+    & \int_{\ElementCell} \Field{\MicromorphicDamageStressField}{\ElementCell}{\; h} : \nabla \Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{\; h}
+    +
+    \int_{\ElementCell} \Field{\MicromorphicDamageForceField}{\ElementCell}{\; h} \cdot \Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{\; h}
+    -
+    \int_{\ElementBoundary} \Field{\MicromorphicDamageTractionField}{\ElementCell}{\; h} \, \Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary}
+    &&
+    \qquad \forall \delta \Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{\; h}
+    \label{eq_final_problem_00:eq04}
+    \\
+    \Field{\Vector{R}}{d, \ElementBoundary}{}(\Field{\Vector{D}}{\ElementCell}{}, \Field{\Vector{D}}{\ElementBoundary}{}) \cdot \Field{\VirtualField{\Vector{D}}}{\ElementBoundary}{}
+    = &
+    \int_{\neumannCell} \Field{\MicromorphicDamageTractionField}{\ElementCell}{\; h} \, \Field{\VirtualField{\MicromorphicDamageField}}{\ElementBoundary}{\; h}
+    &&
+    \qquad \forall \delta \Field{\VirtualField{\MicromorphicDamageField}}{\ElementBoundary}{\; h}
+    \label{eq_final_problem_00:eq12}
+  \end{alignat}
+\end{subequations}
+where the discrete stress tensor $\Field{\PKIStressField}{\ElementCell}{\; h}$ and the
+discrete reconstructed gradient
+$\Field{\DisplacementGradientField}{\ElementCell}{\; h}(\Field{\DisplacementField}{\ElementCell}{\; h}, \Field{\DisplacementField}{\ElementBoundary}{\; h})$ are defined by the discrete forms of
+equations \eqref{eq_stress} and \eqref{eq_00172} respectively such that
+%
+%
+%
+\begin{equation}
+  \label{eq_stress_discrete}
+  \begin{aligned}
+    \Field{\PKIStressField}{\ElementCell}{\; h}
+    =
+    \deriv{\psi_{\BodyLagrange}}{\Field{\DisplacementGradientField}{\ElementCell}{\; h}}
+    &&
+    \text{with}
+    &&
+    \int_{\ElementCell} \Field{\DisplacementGradientField}{\ElementCell}{\; h} : \Field{\tensorii{\tau}}{\ElementCell}{\; h}
+    =
+    \int_{\ElementCell}  \nabla \Field{\VirtualField{\DisplacementField}}{\ElementCell}{\; h} : \Field{\tensorii{\tau}}{\ElementCell}{\; h}
+    +
+    \int_{\ElementBoundary} (\Field{\VirtualField{\DisplacementField}}{\ElementBoundary}{\; h} - \Field{\VirtualField{\DisplacementField}}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary}) \cdot \Field{\tensorii{\tau}}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary} \cdot \NormalVector
+    &&
+    \qquad \forall \Field{\tensorii{\tau}}{\ElementCell}{\; h}
+    \\
+    \Field{\MicromorphicDamageStressField}{\ElementCell}{\; h} = \deriv{\mecPotential_{\BodyLagrange}}{\Field{\MicromorphicDamageGradientField}{\ElementCell}{\; h}}
+    &&
+    \text{with}
+    &&
+    \int_{\ElementCell} \Field{\MicromorphicDamageGradientField}{\ElementCell}{\; h} \cdot \Field{\tensori{\zeta}}{\ElementCell}{\; h}
+    =
+    \int_{\ElementCell}  \nabla \Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{\; h} \cdot \Field{\tensori{\zeta}}{\ElementCell}{\; h}
+    +
+    \int_{\ElementBoundary} (\Field{\VirtualField{\MicromorphicDamageField}}{\ElementBoundary}{\; h} - \Field{\VirtualField{\MicromorphicDamageField}}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary}) \, \Field{\tensori{\zeta}}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary} \cdot \NormalVector
+    &&
+    \qquad \forall \Field{\tensori{\zeta}}{\ElementCell}{\; h}
+  \end{aligned}
+\end{equation}
+%
+%
+%
+and the discrete reconstructed tractions write
+$\Field{\DisplacementTractionField}{\ElementCell}{\; h} = \Field{\PKIStressField}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary} \cdot \NormalVector + (\DisplacementStabilizationFactor / h_{\ElementCell}) \Field{\DisplacementJumpField}{}{\; h}(\Field{\DisplacementField}{\ElementCell}{\; h}, \Field{\DisplacementField}{\ElementBoundary}{\; h})$
+and
+$\Field{\MicromorphicDamageTractionField}{\ElementCell}{\; h} = \Field{\MicromorphicDamageStressField}{\ElementCell}{\; h} \TraceOperator{\ElementBoundary} \cdot \NormalVector + (\MicromorphicDamageStabilizationFactor / h_{\ElementCell}) \Field{\MicromorphicDamageJumpField}{}{\; h}(\Field{\MicromorphicDamageField}{\ElementCell}{\; h}, \Field{\MicromorphicDamageField}{\ElementBoundary}{\; h})$ respectively.
+In particular, the expression of the discrete jump function $\Field{\DisplacementJumpField}{}{\; h}$
+is the key ingredient that defines the HHO method (see Section \ref{sec_appendix_implementation} for more details on this note).
+The solution of the discrete problem $(\Field{\DisplacementField}{\ElementCell}{\; h}, \Field{\DisplacementField}{\ElementBoundary}{\; h}, \Field{\MicromorphicDamageField}{\ElementCell}{\; h}, \Field{\MicromorphicDamageField}{\ElementBoundary}{\; h})$
+% $(\mathfrak{U}_{\ElementCell}, \mathfrak{U}_{\ElementBoundary})$
+is defined by the fact that the
+residuals $\Field{\Vector{R}}{u, \ElementCell}{}, \Field{\Vector{R}}{u, \ElementBoundary}{}, \Field{\Vector{R}}{d, \ElementCell}{}, \Field{\Vector{R}}{d, \ElementBoundary}{}$ must be
+zero.
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\subsubsection{Global residuals and face assembly}
+
+\paragraph{Global problem}
+
+At the global scale, the solution
+$(\Field{\Vector{U}}{\Mesh}{}, \Field{\Vector{U}}{\Skeleton}{}, \Field{\Vector{D}}{\Mesh}{}, \Field{\Vector{D}}{\Skeleton}{})$ of the
+discrete problem satisfies
+%
+% 
+% 
+\begin{subequations}
+  \label{eq_final_problem_003}
+  \begin{alignat}{3}
+    \Field{\Vector{R}}{u, \ElementCell}{}(\Field{\Vector{U}}{\ElementCell}{}, \Field{\Vector{U}}{\ElementBoundary}{})
+    \cdot
+    \Field{\VirtualField{\Vector{U}}}{\ElementCell}{} & = 0
+    &&
+    \qquad \forall \ElementCell \in \Mesh(\BodyLagrange), \; \forall \Field{\VirtualField{\Vector{U}}}{\ElementCell}{} \;
+    \label{eq_final_problem_003:eq0}
+    \\
+    \Field{\Vector{R}}{d, \ElementCell}{}(\Field{\Vector{D}}{\ElementCell}{}, \Field{\Vector{D}}{\ElementBoundary}{})
+    \cdot
+    \Field{\VirtualField{\Vector{D}}}{\ElementCell}{} & = 0
+    &&
+    \qquad \forall \ElementCell \in \Mesh(\BodyLagrange), \; \forall \Field{\VirtualField{\Vector{U}}}{\ElementCell}{} \;
+    \label{eq_final_problem_003:eq1}
+    \\
+    \Field{\Vector{R}}{u, \Skeleton}{}(\Field{\Vector{U}}{\Mesh}{}, \Field{\Vector{U}}{\Skeleton}{})
+    \cdot
+    \Field{\VirtualField{\Vector{U}}}{\Skeleton}{} & = 0
+    &&
+    \qquad \forall \Field{\VirtualField{\Vector{U}}}{\Skeleton}{} \;
+    \label{eq_final_problem_003:eq2}
+    \\
+    \Field{\Vector{R}}{u, \Skeleton}{}(\Field{\Vector{D}}{\Mesh}{}, \Field{\Vector{D}}{\Skeleton}{})
+    \cdot
+    \Field{\VirtualField{\Vector{D}}}{\Skeleton}{} & = 0
+    &&
+    \qquad \forall \Field{\VirtualField{\Vector{D}}}{\Skeleton}{} \;
+    \label{eq_final_problem_003:eq3}
+  \end{alignat}
+\end{subequations}
+%
+%
+%
+where the vectors
+$\Field{\Vector{R}}{u, \Skeleton}{}(\Field{\Vector{U}}{\Mesh}{}, \Field{\Vector{U}}{\Skeleton}{})$ and $\Field{\Vector{R}}{d, \Skeleton}{}(\Field{\Vector{D}}{\Mesh}{}, \Field{\Vector{D}}{\Skeleton}{})$ are the skeleton residuals such that
+%
+% 
+% 
+\begin{subequations}
+  \label{eq_final_problem_00333}
+  \begin{alignat}{3}
+    \Field{\Vector{R}}{u, \Skeleton}{}(\Field{\Vector{U}}{\Mesh}{}, \Field{\Vector{U}}{\Skeleton}{})
+    \cdot
+    \Field{\VirtualField{\Vector{U}}}{\Skeleton}{}
+    &
+    =
+    \sum_{\ElementFace \in \SkeletonInterior(\BodyLagrange)} \int_{\ElementFace}
+    (
+      \Field{\DisplacementTractionField}{\Field{\ElementCell}{\ElementFace}{1}}{\; h}
+      +
+      \Field{\DisplacementTractionField}{\Field{\ElementCell}{\ElementFace}{2}}{\; h}
+    )
+    \cdot \Field{\VirtualField{\DisplacementField}}{\ElementFace}{\; h}
+    +
+    \sum_{\ElementFace \in \SkeletonBoundaryNeumann(\BodyLagrange)}
+    \int_{\ElementFace}
+    (
+      \Field{\DisplacementTractionField}{\Field{\ElementCell}{\ElementFace}{}}{\; h}
+      - \neumannLag
+    )
+    \cdot \Field{\VirtualField{\DisplacementField}}{\ElementFace}{\; h}
+    &&
+    \qquad \forall \Field{\VirtualField{\Vector{U}}}{\ElementFace}{}
+    \label{eq_final_problem_00333:eq0}
+    \\
+    \Field{\Vector{R}}{d, \Skeleton}{}(\Field{\Vector{D}}{\Mesh}{}, \Field{\Vector{D}}{\Skeleton}{})
+    \cdot
+    \Field{\VirtualField{\Vector{U}}}{\Skeleton}{}
+    &
+    =
+    \sum_{\ElementFace \in \SkeletonInterior(\BodyLagrange)} \int_{\ElementFace}
+    (
+      \Field{\MicromorphicDamageTractionField}{\Field{\ElementCell}{\ElementFace}{1}}{\; h}
+      +
+      \Field{\MicromorphicDamageTractionField}{\Field{\ElementCell}{\ElementFace}{2}}{\; h}
+    )
+    \,
+    \Field{\VirtualField{\MicromorphicDamageField}}{\ElementFace}{\; h}
+    +
+    \sum_{\ElementFace \in \SkeletonBoundary(\BodyLagrange)}
+    \int_{\ElementFace}
+    \Field{\MicromorphicDamageTractionField}{\Field{\ElementCell}{\ElementFace}{}}{\; h}
+    \,
+    \Field{\VirtualField{\MicromorphicDamageField}}{\ElementFace}{\; h}
+    &&
+    \qquad \forall \Field{\VirtualField{\Vector{D}}}{\ElementFace}{}
+    \label{eq_final_problem_00333:eq1}
+  \end{alignat}
+\end{subequations}
+%
+%
+%
+and which result in the assembly of faces unknowns only.
+
+\paragraph{Assembly over the skeleton}
+
+An interior face $\ElementFace$ is linked to two adjacent cells $\Field{\ElementCell}{}{1}$ and $\Field{\ElementCell}{}{2}$, and
+each of these cells applies to the other a surface load $\pm
+\tensori{t}{}_{\Field{\ElementCell}{}{1} \cap \Field{\ElementCell}{}{2}}$ through $\ElementFace$, which is identified with
+$\tensori{t}{}_{\neumannCell}$ on $\ElementFace$ in \eqref{eq_final_problem_00:eq1} for the displacement field, and which is zero
+for the micromorphic damage field.
+By summation over each face of the structure, these equal contributions
+cancel out, which yields the expression of the first argument in the
+right-hand side of \eqref{eq_final_problem_00333:eq0} and \eqref{eq_final_problem_00333:eq1}.
+%
+%
+%
+Since exterior faces subjected to Neumann boundary conditions are
+linked to a single cell only, the local surface forces $\tensori{t}{}_{\neumannCell}$ are equal to $\neumannLag$ on $\neumannBoundaryLag{}$,
+which yields the expression of
+the second argument in the right-hand side of
+\eqref{eq_final_problem_00333:eq0}.

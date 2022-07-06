@@ -1,3 +1,0 @@
-\part{Conclusions}
-
-# Conclusions {.unnumbered}

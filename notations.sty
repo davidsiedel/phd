@@ -29,6 +29,10 @@
 
 \DeclareMathOperator{\Dev}{dev}
 
+\newcommand{\GradientOperator}{\nabla}
+\newcommand{\DivergenceOperator}{\nabla \cdot}
+\newcommand{\LaplacianOperator}{\nabla{}^2}
+
 % ======================================================================================================================
 % TENSORIAL NOTATIONS
 % ======================================================================================================================
@@ -109,6 +113,7 @@
 \newcommand{\DisplacementField}{\tensori{u}}
 \newcommand{\DisplacementGradientField}{\tensorii{G}}
 \newcommand{\TransformationGradientField}{\tensorii{F}}
+\newcommand{\SmallStrainField}{\tensorii{\varepsilon}}
 \newcommand{\PKIStressField}{\tensorii{P}}
 \newcommand{\DisplacementTractionField}{\tensori{\theta}{}_{u}}
 \newcommand{\DisplacementJumpField}{\tensori{J}{}_{u}}
@@ -128,6 +133,9 @@
 
 
 \newcommand{\NormalVector}{\tensori{n}}
+
+\newcommand{\FreeEnergy}{\psi}
+\newcommand{\Dissipation}{\phi}
 
 % ======================================================================================================================
 % ELEMENT NOTATIONS
@@ -195,6 +203,7 @@
 \newcommand{\deriv}[2]{\displaystyle \frac{\displaystyle \partial #1}{\displaystyle \partial #2}}
 \newcommand{\variation}[2]{\displaystyle \frac{\displaystyle \delta #1}{\displaystyle \delta #2}}
 \newcommand{\argmin}{\mathrm{argmin}}
+\newcommand{\var}[1]{\delta #1}
 
 \newcommand\bodyEul{\Omega_t}
 \newcommand\bodyLag{\Omega}
@@ -323,3 +332,34 @@
 \newcommand{\commentTH}[1]{
   \textcolor{blue}{\textbf{Commentaire T.H.}~: #1}
 }
+
+\newcommand{\dtot}{\mathrm{d}}
+\newcommand{\absvalue}[1]{{\left|#1\right|}}
+\newcommand{\tensor}[1]{{\underset{\tilde{}}{\mathbf{#1}}}}
+\newcommand{\stensor}[1]{\underline{#1}}
+\newcommand{\fotensor}[1]{\underline{\underline{\mathbf{#1}}}}
+\newcommand{\tenseurq}[1]{\underline{\underline{\mathbf{#1}}}}
+\newcommand{\tenseur}[1]{\underline{#1}}
+\newcommand{\tepsilon}{\underline{\epsilon}}
+\newcommand{\tepsilonto}{\stensor{\varepsilon}^{\mathrm{to}}}
+\newcommand{\tepsilonel}{\stensor{\varepsilon}^{\mathrm{el}}}
+\newcommand{\tepsilonvis}{\stensor{\varepsilon}^{\mathrm{vis}}}
+\newcommand{\tdepsilonvis}{\stensor{\dot{\varepsilon}}^{\mathrm{vis}}}
+\newcommand{\tepsilonp}{\stensor{\varepsilon}^{\mathrm{p}}}
+\newcommand{\tdepsilonp}{\stensor{\dot{\varepsilon}}^{\mathrm{p}}}
+\newcommand{\tsigma}{\underline{\sigma}}
+\newcommand{\tepsilonth}{\underline{\epsilon}^{\mathrm{th}}}
+\newcommand{\sigmaH}{\sigma_{H}}
+\newcommand{\mts}[1]{\left.#1\right|_{t+\theta\,\Delta\,t}}
+\newcommand{\ets}[1]{\left.#1\right|_{t+\Delta\,t}}
+\newcommand{\sigmaeq}{\sigma_{\mathrm{eq}}}
+\newcommand{\dev}{\operatorname{dev}}
+\newcommand{\ppart}[1]{\langle #1 \rangle_{+}}
+\newcommand{\npart}[1]{\langle #1 \rangle_{-}}
+\newcommand{\freeenergy}{\psi}
+\newcommand{\freeenergyel}{{\psi}^{el}}
+\newcommand{\freeenergyd}{{\psi}^{d}}
+\newcommand{\freeenergyddchi}{{\psi}^{d, d_{\chi}}}
+\newcommand{\freeenergygdchi}{{\psi}^{\nabla\,d_{\chi}}}
+\newcommand{\dissipationpotential}{\phi}
+\newcommand{\dissipationpotentialdual}{\phi^{\star}}
