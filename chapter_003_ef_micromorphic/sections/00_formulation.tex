@@ -7,7 +7,7 @@ This revisted approach of the Griffith theory is however not tractable
 with standard numerical methods
 \cite{bourdin_numerical_2000,chambolle_approximation_2018}, in particular
 the commonly used finite element method. For this reason, Bourdin *et
-al.* developped regularised versions \cite{bourdin_numerical_2000} following
+al.* developed regularised versions \cite{bourdin_numerical_2000} following
 the works of Ambrosio and Tortorelli \cite{ambrosio_approximation_1990}.
 
 The so-called phase-field approaches to fracture have since become
@@ -19,19 +19,20 @@ question on which a considerable amount of works has been published.
 Most of the proposed solutions are not directly implemented in standard
 FEM or FFT solvers. An noticeable exception to this statement is the
 Miehe' alternative based an the so-called history variable
-\cite{miehe_phase_2010}. However, Miehe' alternative is not variationaly
+\cite{miehe_phase_2010}. However, Miehe' alternative is not variationally
 consistent.
 
 Following Forest' micromorphic framework
 \cite{forest_micromorphic_2009,forest_nonlinear_2016}, we propose in
 Section \ref{sec:micromorphicdamage:description}a class of micromorphic
 brittle behaviours which can approximate classical models of britle
-fracture in a variationnaly consistent way. Those behaviours treat the
-irreversibility constraint locally, at the integration points. Similar
-advantages have been highlighted by by Rezaee-Hajidehi et al. in the
+fracture in a variationnally consistent way. These behaviours allow to
+deal with the irreversibility constraint at integration points,
+instead of having to deal with it in the solution of balance equation. Such
+advantages have been highlighted by Rezaee-Hajidehi et al. in the
 context of phase-field approaches to phase transformation
 \cite{rezaee-hajidehi_micromorphic_2021}. The balance equations are
-standard partial derivative equations which can readily be solved by
+standard partial differential equations which can readily be solved by
 most FEM or FFT solvers.
 
 Such micromorphic models were recently investigated by Bharali \textit{et al.}
@@ -39,16 +40,16 @@ Such micromorphic models were recently investigated by Bharali \textit{et al.}
 using a monolithic resolution strategy. In this paper, we exploit the
 variational basis of the behaviour to derive in Section
 \ref{sec:micromorphicdamage:alternate_minimisation}three alternate
-minimisation schemes whose convergence is garanteed.
+minimization schemes whose convergence is guaranteed.
 
 Several test cases comparing the prediction of the classical AT2 model
 and its micromorphic counterpart are presented in Section
 \ref{sec:micromorphicdamage:test_cases}.
 The choice of the penalisation
-parameter is discussed in depths.
+parameter is discussed in-depth.
 
 Two numerical experiments are presented in Section
-\ref{sec:micromorphicdamage:numerical_experiments}which assess:
+\ref{sec:micromorphicdamage:numerical_experiments}, which assess:
 
 \begin{itemize}
     \item The performance of the micromorphic approach with high order finite
@@ -78,6 +79,7 @@ Lagrangian \cite{lorentz_variational_1999,forest_localization_2004}:
 %
 %
 \begin{equation}
+  \label{eq:ef_micromorphic:formulation:total_lagrangian}
   \LagrangianOperator{\BodyLagrange}{}(\DisplacementField, \DamageField, \MicromorphicDamageField)
   =
   \int_{\BodyLagrange} \FreeEnergy_{\BodyLagrange}(\SmallStrainField, \DamageField, \MicromorphicDamageField, \nabla \MicromorphicDamageField)
@@ -100,7 +102,7 @@ where:
     \item \(\bts{\DamageField}\) is damage at the beginning of the time step.
     \item \(\neumannLag\) is the imposed traction on the boundary \(\partial\,\Omega_{T}\).
     \item \(\DisplacementField, \DamageField, \MicromorphicDamageField\) denotes any admissible displacement, damage and micromorphic damage field.
-    \item \(\BodyLagrangeNeumannBoundary\) is the part on the boundary on which external raction forces are imposed
+    \item \(\BodyLagrangeNeumannBoundary\) is the part on the boundary where external reaction forces are imposed
 \end{itemize}
 %
 %
@@ -114,24 +116,32 @@ respect to their respective arguments.
 
 \paragraph{Body forces and prescribed micromorphic tractions}
 
-The definition of the Lagragian \(\mathcal{L}\) can be enriched by adding
+The definition of the Lagrangian \(\mathcal{L}\) can be enriched by adding
 body forces (such as gravity) and prescribed micromorphic tractions.
 
-The state of the material minimises the incremental Lagragian:
-\[
-\paren{\ets{\vec{u}}, \ets{d_{\chi}}, \ets{d}} = \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
-\]
+The state of the material minimizes the incremental Lagrangian:
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:total_lagrangian_min}
+  \paren{\ets{\vec{u}}, \ets{d_{\chi}}, \ets{d}} = \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+\end{equation}
+% \[
+% \paren{\ets{\vec{u}}, \ets{d_{\chi}}, \ets{d}} = \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+% \]
 
-In pratice, this free energy is a differentiable function.
+In practice, the free energy is a differentiable function.
 
-This is not the case of the dissipation potential
+This is not the case for the dissipation potential
 \(\dissipationpotential\) for time independent mechanisms for which
 \(\dissipationpotential\) is assumed to be an homogeneous function of
-degree \(1\) which allows us to eliminate the time increment
-\(\Delta\,t\) from the definition of the Lagrangian as:
-\[
-\Delta\,t\,\dissipationpotential\paren{\Frac{d^{\star}-\bts{d}}{\Delta\,t}} = \dissipationpotential\paren{d^{\star}-\bts{d}}
-\]
+degree \(1\). Consequently, this which allows to eliminate the time increment
+\(\Delta\,t\) from the definition of the Lagrangian such that :
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:dissipation}
+  \Delta\,t\,\dissipationpotential\paren{\Frac{d^{\star}-\bts{d}}{\Delta\,t}} = \dissipationpotential\paren{d^{\star}-\bts{d}}
+\end{equation}
+% \[
+% \Delta\,t\,\dissipationpotential\paren{\Frac{d^{\star}-\bts{d}}{\Delta\,t}} = \dissipationpotential\paren{d^{\star}-\bts{d}}
+% \]
 
 In particular, the dissipation potential generally contains an indicator
 function imposing the \textit{irreversibility of the damage evolution}.
@@ -141,147 +151,261 @@ function imposing the \textit{irreversibility of the damage evolution}.
 Deriving equilibrium equations from the principle of the minimum of the
 Lagrangian is non trivial due to the fact that the dissipation potentiel
 is not differentiable.
-
+%
+%
+%
 It is then convenient to separate the Lagrangian into two parts
 \(\mathcal{L}_{1}\) and \(\mathcal{L}_{2}\) as follows:
-\[
-\begin{aligned}
-\mathcal{L}_{1}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}} &= 
-\int_{\Omega}
-\freeenergy\paren{\tepsilon^{\star}, d^{\star}, d_{\chi}^{\star},\nabla\,d_{\chi}^{\star}}
-\,\dtot\,V -
-\int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S \\
-\mathcal{L}_{2}\paren{d^{\star}} &= 
-\int_{\Omega}
-\dissipationpotential\paren{d^{\star}-\bts{d}}
-\,\dtot\,V
-\end{aligned}
-\]
+%
+%
+%
+\begin{subequations}
+  \label{eq:ef_micromorphic:formulation:total_lagrangian_split}
+      \begin{alignat}{3}
+        \mathcal{L}_{1}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+        &
+        = 
+        \int_{\Omega} \freeenergy\paren{\tepsilon^{\star}, d^{\star}, d_{\chi}^{\star},\nabla\,d_{\chi}^{\star}} \,\dtot\,V
+        -
+        \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
+        \label{eq:ef_micromorphic:formulation:total_lagrangian_split:eq0}
+        \\
+        \mathcal{L}_{2}\paren{d^{\star}}
+        &
+        = 
+        \int_{\Omega}
+        \dissipationpotential\paren{d^{\star}-\bts{d}}
+        \,\dtot\,V
+        \label{eq:ef_micromorphic:formulation:total_lagrangian_split:eq1}
+  \end{alignat}
+\end{subequations}
 
-In this report, we will admit the following mathematical result which
-characterize the minima of Lagrangian \cite{son_standard_2021}:
+In this report, the following mathematical result characterizing
+the minima of Lagrangian \cite{son_standard_2021} are assumed :
 
 \begin{itemize}
-    \item The regular part of Lagrangian \(\mathcal{L}_{1}\) is minimal with
+    \item The regular part of the Lagrangian \(\mathcal{L}_{1}\) is minimal with
     respect to the displacement field \(\vec{u}\) and the micromorphic
     damage field \(d_{\chi}\).
     \item At each point, the thermodynamic force \(Y\) associated with the
     damage, is in the subgradient of the dissipation potential:
-    \[
-    Y \in \partial \dissipationpotential
-    \]
+    \begin{equation}
+      \label{eq:ef_micromorphic:formulation:generalized_standard_0}
+      Y \in \partial \dissipationpotential
+    \end{equation}
+    % \[
+    % Y \in \partial \dissipationpotential
+    % \]
     where \(Y\) is defined by:
-    \[
-    Y = -\deriv{\freeenergy}{d}
-    \]
+    \begin{equation}
+      \label{eq:ef_micromorphic:formulation:generalized_standard_1}
+      Y = -\deriv{\freeenergy}{d}
+    \end{equation}
+    % \[
+    % Y = -\deriv{\freeenergy}{d}
+    % \]
 \end{itemize}
 
-In this section, we only consider the condition on the regular part of
-the Lagrangian. The evolution of the damage is discussed in Section
+In this section, the condition on the regular part of
+the Lagrangian is considered only.
+The evolution of the damage is discussed in Section
 \ref{sec:micromorphicdamage:constitutive_equations}.
 
-The variation of \(\mathcal{L}_{1}\) with respect to the
+The variation \(\var{\mathcal{L}_{1}}\) of $\mathcal{L}_{1}$ with respect to the
 displacement and micromorphic damage field is defined by:
-\[
-\var{\mathcal{L}_{1}}=
-\mathcal{L}_{1}\paren{\ets{\vec{u}}+\var{\vec{u}},\ets{d}, \ets{d_{\chi}} + \var{d_{\chi}}} - 
-\mathcal{L}_{1}\paren{\ets{\vec{u}},\ets{d}, \ets{d_{\chi}}}
-\]
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:lagrangian_variation_0}
+  \begin{aligned}
+    \var{\mathcal{L}_{1}}
+    =
+    \mathcal{L}_{1}\paren{\ets{\vec{u}}+\var{\vec{u}},\ets{d}, \ets{d_{\chi}} + \var{d_{\chi}}} - 
+    \mathcal{L}_{1}\paren{\ets{\vec{u}},\ets{d}, \ets{d_{\chi}}}
+  \end{aligned}
+\end{equation}
+% \[
+% \var{\mathcal{L}_{1}}
+% =
+% \mathcal{L}_{1}\paren{\ets{\vec{u}}+\var{\vec{u}},\ets{d}, \ets{d_{\chi}} + \var{d_{\chi}}} - 
+% \mathcal{L}_{1}\paren{\ets{\vec{u}},\ets{d}, \ets{d_{\chi}}}
+% \]
 
 where the variation \(\var{\vec{u}}\) is null on the part of the
 boundary where imposed displacements are prescribed, i.e. on
 \(\partial\Omega\setminus\partial\Omega_{T}\).
 
 By retaining only first order terms, this variation can be computed as follows:
-\[
-\begin{aligned}
-\var{\mathcal{L}_{1}}&=
-\int_{\Omega}
-\left[
-\deriv{\freeenergy}{\tepsilon}\,\colon\,\var{\tepsilon}+
-\deriv{\freeenergy}{d_{\chi}}\,\var{d_{\chi}}+
-\deriv{\freeenergy}{\nabla\,d_{\chi}}\,\cdot\,\nabla\,\var{d_{\chi}}
-\right]
-\,\dtot\,V -
-\int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\var{\vec{u}} \,\dtot\,S \\
-&=
-\int_{\Omega}
-\left[
-\tsigma\,\colon\,\var{\tepsilon}+
-a_{\chi}\,\var{d_{\chi}}+
-\vec{b}_{\chi}\,\cdot\,\nabla\,\var{d_{\chi}}
-\right]
-\,\dtot\,V -
-\int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\var{\vec{u}} \,\dtot\,S \\
-\end{aligned}
-\]
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:lagrangian_variation_1}
+  \begin{aligned}
+    \var{\mathcal{L}_{1}}&=
+    \int_{\Omega}
+    \left[
+    \deriv{\freeenergy}{\tepsilon}\,\colon\,\var{\tepsilon}+
+    \deriv{\freeenergy}{d_{\chi}}\,\var{d_{\chi}}+
+    \deriv{\freeenergy}{\nabla\,d_{\chi}}\,\cdot\,\nabla\,\var{d_{\chi}}
+    \right]
+    \,\dtot\,V -
+    \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\var{\vec{u}} \,\dtot\,S \\
+    &=
+    \int_{\Omega}
+    \left[
+    \tsigma\,\colon\,\var{\tepsilon}+
+    a_{\chi}\,\var{d_{\chi}}+
+    \vec{b}_{\chi}\,\cdot\,\nabla\,\var{d_{\chi}}
+    \right]
+    \,\dtot\,V -
+    \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\var{\vec{u}} \,\dtot\,S \\
+  \end{aligned}
+\end{equation}
+% \[
+% \begin{aligned}
+% \var{\mathcal{L}_{1}}&=
+% \int_{\Omega}
+% \left[
+% \deriv{\freeenergy}{\tepsilon}\,\colon\,\var{\tepsilon}+
+% \deriv{\freeenergy}{d_{\chi}}\,\var{d_{\chi}}+
+% \deriv{\freeenergy}{\nabla\,d_{\chi}}\,\cdot\,\nabla\,\var{d_{\chi}}
+% \right]
+% \,\dtot\,V -
+% \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\var{\vec{u}} \,\dtot\,S \\
+% &=
+% \int_{\Omega}
+% \left[
+% \tsigma\,\colon\,\var{\tepsilon}+
+% a_{\chi}\,\var{d_{\chi}}+
+% \vec{b}_{\chi}\,\cdot\,\nabla\,\var{d_{\chi}}
+% \right]
+% \,\dtot\,V -
+% \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\var{\vec{u}} \,\dtot\,S \\
+% \end{aligned}
+% \]
 
 where the following thermodynamic forces were introduced:
-\[
-\tsigma  = \deriv{\freeenergy}{\tepsilon} \quad\quad
-a_{\chi} = \deriv{\freeenergy}{d_{\chi}} \quad\quad
-\vec{b}_{\chi} = \deriv{\freeenergy}{\nabla d_{\chi}}
-\]
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:thermodynamic_forces}
+  \begin{aligned}
+    \tsigma  = \deriv{\freeenergy}{\tepsilon} \quad\quad
+    a_{\chi} = \deriv{\freeenergy}{d_{\chi}} \quad\quad
+    \vec{b}_{\chi} = \deriv{\freeenergy}{\nabla d_{\chi}}
+  \end{aligned}
+\end{equation}
+% \[
+% \tsigma  = \deriv{\freeenergy}{\tepsilon} \quad\quad
+% a_{\chi} = \deriv{\freeenergy}{d_{\chi}} \quad\quad
+% \vec{b}_{\chi} = \deriv{\freeenergy}{\nabla d_{\chi}}
+% \]
 
 Applying the divergence theorem leads to:
-\[
-\var{\mathcal{L}_{1}}=
-\int_{\Omega}
-\left[
--\nabla \cdot\,\tsigma\,\cdot\,\var{\vec{u}}+
-  \paren{a_{\chi}-\nabla \cdot\,\vec{b}_{\chi}}\,\var{d_{\chi}} \right]
-  \,\dtot\,V + \int_{\partial\,\Omega_{T}}
-  \paren{\tsigma\,\cdot\,\vec{n}-\vec{T}}\,\cdot\,\var{\vec{u}}
-  \,\dtot\,S + \int_{\partial\,\Omega}
-  \paren{\vec{b}_{\chi}\,\cdot\,\vec{n}}\,\var{\vec{d}_{\chi}}
-  \,\dtot\,S
-\]
-where we took into account the fact that the variation of the
-displacement is null on \(\partial\Omega\setminus\partial\Omega_{T}\).
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:lagrangian_variation_2}
+  \begin{aligned}
+    \var{\mathcal{L}_{1}}
+    =
+    &
+    \int_{\Omega}
+    \left[
+      -\nabla \cdot\,\tsigma\,\cdot\,\var{\vec{u}}+
+      \paren{a_{\chi}-\nabla \cdot\,\vec{b}_{\chi}}\,\var{d_{\chi}}
+    \right]
+    \,\dtot\,V
+    \\
+    & +
+    \int_{\partial\,\Omega_{T}} \paren{\tsigma\,\cdot\,\vec{n}
+    -
+    \vec{T}}\,\cdot\,\var{\vec{u}} \,\dtot\,S
+    +
+    \int_{\partial\,\Omega} \paren{\vec{b}_{\chi}\,\cdot\,\vec{n}}\,\var{\vec{d}_{\chi}} \,\dtot\,S
+  \end{aligned}
+\end{equation}
+% \[
+% \var{\mathcal{L}_{1}}=
+% \int_{\Omega}
+% \left[
+% -\nabla \cdot\,\tsigma\,\cdot\,\var{\vec{u}}+
+%   \paren{a_{\chi}-\nabla \cdot\,\vec{b}_{\chi}}\,\var{d_{\chi}} \right]
+%   \,\dtot\,V + \int_{\partial\,\Omega_{T}}
+%   \paren{\tsigma\,\cdot\,\vec{n}-\vec{T}}\,\cdot\,\var{\vec{u}}
+%   \,\dtot\,S + \int_{\partial\,\Omega}
+%   \paren{\vec{b}_{\chi}\,\cdot\,\vec{n}}\,\var{\vec{d}_{\chi}}
+%   \,\dtot\,S
+% \]
+where the fact that the variation of the
+displacement is null on \(\partial\Omega\setminus\partial\Omega_{T}\)
+has been used.
 
 Classical arguments shows that this variation can characterize a
 minimum only if all the integrands are zero.
 
-The integrands associated with variation of the displacement field gives
+The integrands associated with the variation of the displacement field gives
 the classical mechanical equilibrium equation in \(\Omega\) and boundary
 conditions on \(\partial\,\Omega_{T}\):
-\[
-\left\{
-\begin{aligned}
-\nabla \cdot\,\tsigma &= 0       & \text{ in } & \Omega \\
-\tsigma\,\cdot\,\vec{n}&=\vec{T} & \text{ on } & \partial\,\Omega_{T}
-\end{aligned}
-\right.
-\]\label{eq:micromorphicdamage:mechanical_equilibrium}
+\begin{equation}
+  \label{eq:micromorphicdamage:mechanical_equilibrium}
+  \begin{aligned}
+    \left\{
+    \begin{aligned}
+    \nabla \cdot\,\tsigma &= 0       & \text{ in } & \Omega \\
+    \tsigma\,\cdot\,\vec{n}&=\vec{T} & \text{ on } & \partial\,\Omega_{T}
+    \end{aligned}
+    \right.
+  \end{aligned}
+\end{equation}
+% \[
+% \left\{
+% \begin{aligned}
+% \nabla \cdot\,\tsigma &= 0       & \text{ in } & \Omega \\
+% \tsigma\,\cdot\,\vec{n}&=\vec{T} & \text{ on } & \partial\,\Omega_{T}
+% \end{aligned}
+% \right.
+% \]\label{eq:micromorphicdamage:mechanical_equilibrium}
 
-The integrands associated with variation of the micromorphic damage field
+The integrands associated with the variation of the micromorphic damage field
 leads to the following balance equation and boundary conditions:
-\[
-\left\{
-\begin{aligned}
-\nabla \cdot\,\vec{b}_{\chi} &= a_{\chi} &\text{ in }& \Omega \\
-\vec{b}_{\chi}\,\cdot\,\vec{n}&=\vec{0} &\text{ on }& \partial\,\Omega
-\end{aligned}
-\right.
-\]\label{eq:micromorphicdamage:d_chi}
+\begin{equation}
+  \label{eq:micromorphicdamage:d_chi}
+  \begin{aligned}
+    \left\{
+    \begin{aligned}
+    \nabla \cdot\,\vec{b}_{\chi} &= a_{\chi} &\text{ in }& \Omega \\
+    \vec{b}_{\chi}\,\cdot\,\vec{n}&=\vec{0} &\text{ on }& \partial\,\Omega
+    \end{aligned}
+    \right.
+  \end{aligned}
+\end{equation}
+% \[
+% \left\{
+% \begin{aligned}
+% \nabla \cdot\,\vec{b}_{\chi} &= a_{\chi} &\text{ in }& \Omega \\
+% \vec{b}_{\chi}\,\cdot\,\vec{n}&=\vec{0} &\text{ on }& \partial\,\Omega
+% \end{aligned}
+% \right.
+% \]\label{eq:micromorphicdamage:d_chi}
 
 \subsection{Constitutive equations}
 \label{sec:micromorphicdamage:constitutive_equations}
 
 The free energy \(\freeenergy\) is additively decomposed as follows:
-\[
-\freeenergy\paren{\tepsilon, d, d_{\chi}, \nabla\,d_{\chi}}=
-\freeenergyel\paren{\tepsilon, d}+
-\freeenergyd\paren{d}+
-\freeenergyddchi\paren{d, d_{\chi}}+
-\freeenergygdchi\paren{\nabla\,d_{\chi}}
-\]
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:freeenergy_split}
+  \freeenergy\paren{\tepsilon, d, d_{\chi}, \nabla\,d_{\chi}}=
+  \freeenergyel\paren{\tepsilon, d}+
+  \freeenergyd\paren{d}+
+  \freeenergyddchi\paren{d, d_{\chi}}+
+  \freeenergygdchi\paren{\nabla\,d_{\chi}}
+\end{equation}
+% \[
+% \freeenergy\paren{\tepsilon, d, d_{\chi}, \nabla\,d_{\chi}}=
+% \freeenergyel\paren{\tepsilon, d}+
+% \freeenergyd\paren{d}+
+% \freeenergyddchi\paren{d, d_{\chi}}+
+% \freeenergygdchi\paren{\nabla\,d_{\chi}}
+% \]
 where:
 
 \begin{itemize}
     \item \(\freeenergyel\paren{\tepsilon, d}\) describes the mechanical part of
     the free energy.
-    \item \(\freeenergyd\paren{d}\) defines an stored energy du to damage.
+    \item \(\freeenergyd\paren{d}\) defines an stored energy due to damage.
     \item \(\freeenergyddchi\paren{d, d_{\chi}}\) defines the coupling between
     the damage \(d\) and the micromorphic damage \(d_{\chi}\)
     \item \(\freeenergygdchi\paren{\nabla\, d_{\chi}}\) defines the a
@@ -296,102 +420,218 @@ to the thermodynamic force driving the damage evolution.
 A classical choice is to multiply the free energy of an undamaged
 elastic material \(\freeenergyel_{0}\paren{\tepsilon}\) by a degradation
 function \(g\paren{d}\) as follows:
-\[
-\freeenergyel\paren{\tepsilon, d} = 
-g\paren{d}\,\freeenergyel_{0}\paren{\tepsilon} = \Frac{g\paren{d}}{2}\,\tepsilon\,\colon\,\tenseurq{D}\,\colon\,\tepsilon
-\]\label{eq:micromorphicdamage:freeenergygel}
+\begin{equation}
+  \label{eq:micromorphicdamage:freeenergygel}
+  \freeenergyel\paren{\tepsilon, d} = 
+  g\paren{d}\,\freeenergyel_{0}\paren{\tepsilon} = \Frac{g\paren{d}}{2}\,\tepsilon\,\colon\,\tenseurq{D}\,\colon\,\tepsilon
+\end{equation}
+% \[
+% \freeenergyel\paren{\tepsilon, d} = 
+% g\paren{d}\,\freeenergyel_{0}\paren{\tepsilon} = \Frac{g\paren{d}}{2}\,\tepsilon\,\colon\,\tenseurq{D}\,\colon\,\tepsilon
+% \]\label{eq:micromorphicdamage:freeenergygel}
 where \(\tenseurq{D}\) is the stiffness matrix of the sound material.
 
 The stresss \(\tsigma\) is thus given by:
-\[
-\tsigma = g\paren{d}\,\tenseurq{D}\,\colon\,\tepsilon
-\]
+\begin{equation}
+  \tsigma = g\paren{d}\,\tenseurq{D}\,\colon\,\tepsilon
+\end{equation}
+% \[
+% \tsigma = g\paren{d}\,\tenseurq{D}\,\colon\,\tepsilon
+% \]
 
-Another classical choice popularised by Miehe \cite{miehe_phase_2010} is to
+Another classical choice proposed by Miehe \cite{miehe_phase_2010} is to
 use a spectral decomposition of the strain to split the free energy into
-a positive and negative part. The degradation function is only applied
+a positive and negative part. In this case, the degradation function is only applied
 to the positive part of the free energy.
 
 \subsubsection{Evolution of the micromorphic damage}
 
 \paragraph{Choice of \(\freeenergyddchi\)}
 
-\[
-\freeenergyddchi\paren{d, d_{\chi}}=\Frac{H_{\chi}}{2}\,\paren{d-d_{\chi}}^{2}
-\]
-
+The free energy density $freeenergyddchi$ is chosen such that
+%
+%
+%
+\begin{equation}
+  \freeenergyddchi\paren{d, d_{\chi}}=\Frac{H_{\chi}}{2}\,\paren{d-d_{\chi}}^{2}
+\end{equation}
+% \[
+% \freeenergyddchi\paren{d, d_{\chi}}=\Frac{H_{\chi}}{2}\,\paren{d-d_{\chi}}^{2}
+% \]
+%
+%
+%
 which leads to the following expression of \(a_{\chi}\):
-\[
-a_{\chi} = - H_{\chi}\,\paren{d-d_{\chi}}
-\]\label{eq:micromorphicdamage:achi}
+\begin{equation}
+  \label{eq:micromorphicdamage:achi}
+  a_{\chi} = - H_{\chi}\,\paren{d-d_{\chi}}
+\end{equation}
+% \[
+% a_{\chi} = - H_{\chi}\,\paren{d-d_{\chi}}
+% \]\label{eq:micromorphicdamage:achi}
 
 \paragraph{Choice of \(\freeenergygdchi\)}
 
-\[
-\freeenergygdchi\paren{\nabla\, d_{\chi}} = \Frac{A_{\chi}}{2}\,\nabla\, d_{\chi}\,\cdot\,\nabla\, d_{\chi}
-\]\label{eq:micromorphicdamage:freeenergygdchi}
+The free energy density $freeenergyddchi$ is chosen such that
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:freeenergygdchi}
+  \freeenergygdchi\paren{\nabla\, d_{\chi}} = \Frac{A_{\chi}}{2}\,\nabla\, d_{\chi}\,\cdot\,\nabla\, d_{\chi}
+\end{equation}
+% \[
+% \freeenergygdchi\paren{\nabla\, d_{\chi}} = \Frac{A_{\chi}}{2}\,\nabla\, d_{\chi}\,\cdot\,\nabla\, d_{\chi}
+% \]\label{eq:micromorphicdamage:freeenergygdchi}
+%
+%
+%
 which leads to the following expression of \(\vec{b}_{\chi}\):
-\[
-\vec{b}_{\chi} = A_{\chi}\,\nabla\, d_{\chi}
-\]\label{eq:micromorphicdamage:bchi}
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:bchi}
+  \vec{b}_{\chi} = A_{\chi}\,\nabla\, d_{\chi}
+\end{equation}
+% \[
+% \vec{b}_{\chi} = A_{\chi}\,\nabla\, d_{\chi}
+% \]\label{eq:micromorphicdamage:bchi}
 
-Combining Equations \eqref{eq:micromorphicdamage:achi}and
-\eqref{eq:micromorphicdamage:bchi}shows that the micromorphic damage follows
-the equation:
-\[
-A_{\chi}\,\LaplacianOperator\,d_{\chi}+ H_{\chi}\,\paren{d-d_{\chi}}= 0
-\]\label{eq:micromorphicdamage:d_chi2}
+Substituting \eqref{eq:micromorphicdamage:achi} and \eqref{eq:micromorphicdamage:bchi} in the expression of the variation of Lagrangian \eqref{eq:micromorphicdamage:d_chi} shows that the micromorphic damage satisfies the equation
+%
+%
+%
+% Combining Equations \eqref{eq:micromorphicdamage:achi}and
+% \eqref{eq:micromorphicdamage:bchi}shows that the micromorphic damage follows
+% the equation:
+\begin{equation}
+  \label{eq:micromorphicdamage:d_chi2}
+  A_{\chi}\,\LaplacianOperator\,d_{\chi}+ H_{\chi}\,\paren{d-d_{\chi}}= 0
+\end{equation}
+% \[
+% A_{\chi}\,\LaplacianOperator\,d_{\chi}+ H_{\chi}\,\paren{d-d_{\chi}}= 0
+% \]\label{eq:micromorphicdamage:d_chi2}
+%
+%
+%
 where \(\LaplacianOperator\) denotes the Laplacian operator.
 
 \subsubsection{Evolution of the damage}
 
 The thermodynamic forces \(Y\) associated with the damage is given by:
-\[
-\begin{aligned}
-Y &= -\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}-\deriv{\freeenergyddchi}{d}
-&=-\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}-H_{\chi}\,\paren{d-d_{\chi}}\\
-&=-\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}+a_{\chi}\\
-\end{aligned}
-\]\label{eq:micromorphicdamage:Y}
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:Y}
+  \begin{aligned}
+    Y &= -\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}-\deriv{\freeenergyddchi}{d}
+    &=-\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}-H_{\chi}\,\paren{d-d_{\chi}}
+    \\
+    &=-\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}+a_{\chi}
+    \\
+  \end{aligned}
+\end{equation}
+% \[
+% \begin{aligned}
+% Y &= -\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}-\deriv{\freeenergyddchi}{d}
+% &=-\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}-H_{\chi}\,\paren{d-d_{\chi}}\\
+% &=-\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}-\derivtot{\freeenergyd}{d}+a_{\chi}\\
+% \end{aligned}
+% \]\label{eq:micromorphicdamage:Y}
 
 A simple choice of the dissipation potential is:
-\[
-\dissipationpotential\paren{\dot{d}} = Y_{0}\,\dot{d}+ \mathrm{I}_{\mathbb{R}_{+}}\paren{\dot{d}} 
-\]\label{eq:micromorphicdamage:dissipationpotential}
-where \(\mathrm{I}_{\mathbb{R}_{+}}\) is the characteristic associated with positive real number, i.e.:
-\[
-\mathrm{I}_{\mathbb{R}_{+}}=
-\left\{
-\begin{aligned}
-0 &\quad\text{if}\quad x\geq 0 \\
-+\infty &\quad\text{if}\quad x< 0 \\
-\end{aligned}
-\right.
-\]
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:dissipationpotential}
+  \begin{aligned}
+    \dissipationpotential\paren{\dot{d}} = Y_{0}\,\dot{d}+ \mathrm{I}_{\mathbb{R}_{+}}\paren{\dot{d}} 
+  \end{aligned}
+\end{equation}
+% \[
+% \dissipationpotential\paren{\dot{d}} = Y_{0}\,\dot{d}+ \mathrm{I}_{\mathbb{R}_{+}}\paren{\dot{d}} 
+% \]\label{eq:micromorphicdamage:dissipationpotential}
+%
+%
+%
+where $Y_0$ is a scalar threshold value, and \(\mathrm{I}_{\mathbb{R}_{+}}\) is the characteristic function associated with positive real number, i.e.:
+%
+%
+%
+\begin{equation}
+  % \label{eq:micromorphicdamage:dissipationpotential}
+  \mathrm{I}_{\mathbb{R}_{+}}=
+  \left\{
+  \begin{aligned}
+  0 &\quad\text{if}\quad x\geq 0 \\
+  +\infty &\quad\text{if}\quad x< 0 \\
+  \end{aligned}
+  \right.
+\end{equation}
+% \[
+% \mathrm{I}_{\mathbb{R}_{+}}=
+% \left\{
+% \begin{aligned}
+% 0 &\quad\text{if}\quad x\geq 0 \\
+% +\infty &\quad\text{if}\quad x< 0 \\
+% \end{aligned}
+% \right.
+% \]
 
 This dissipation potential is equivalent to define the following damage surface:
-\[
-Y = Y_{0}
-\]\label{eq:micromorphicdamage:yield}
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:yield}
+  Y = Y_{0}
+\end{equation}
+% \[
+% Y = Y_{0}
+% \]\label{eq:micromorphicdamage:yield}
 
 The evolution of damage is thus driven by the following equations:
-\[
-\left\{
-\begin{aligned}
-\Delta\,d\,\paren{Y - Y_{0}}&=0\\
-\Delta\,d&\geq 0\\
-Y - Y_{0}&\leq 0
-\end{aligned}
-\right.
-\]\label{eq:micromorphicdamage:KTT}
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:KTT}
+  \left\{
+  \begin{aligned}
+  \Delta\,d\,\paren{Y - Y_{0}}&=0\\
+  \Delta\,d&\geq 0\\
+  Y - Y_{0}&\leq 0
+  \end{aligned}
+  \right.
+\end{equation}
+% \[
+% \left\{
+% \begin{aligned}
+% \Delta\,d\,\paren{Y - Y_{0}}&=0\\
+% \Delta\,d&\geq 0\\
+% Y - Y_{0}&\leq 0
+% \end{aligned}
+% \right.
+% \]\label{eq:micromorphicdamage:KTT}
 
 Combining Equations \eqref{eq:micromorphicdamage:d_chi2},
 \eqref{eq:micromorphicdamage:Y} and \eqref{eq:micromorphicdamage:yield}, the yield
 surface may also be written:
-\[
--\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}=
-Y_{0}+\derivtot{\freeenergyd}{d}+A_{\chi}\,\LaplacianOperator\,d_{\chi}
-\]
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:damage_estimate}
+  -\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}=
+  Y_{0}+\derivtot{\freeenergyd}{d}+A_{\chi}\,\LaplacianOperator\,d_{\chi}
+\end{equation}
+% \[
+% -\derivtot{g}{d}\,\freeenergyel_{0}\paren{\tepsilon}=
+% Y_{0}+\derivtot{\freeenergyd}{d}+A_{\chi}\,\LaplacianOperator\,d_{\chi}
+% \]
 
 \subsubsection{Link with classical models of brittle fracture}
 
@@ -399,26 +639,50 @@ Choices described by Equations \eqref{eq:micromorphicdamage:freeenergygel},
 \eqref{eq:micromorphicdamage:dissipationpotential}and
 \eqref{eq:micromorphicdamage:freeenergygdchi}lead to the following expression
 of the Lagrangian:
-\[
-\begin{aligned}
-\mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
-&=\int_{\Omega}
-\left[
-g\paren{d^{\star}}\,\freeenergyel_{0}\paren{\tepsilon^{\star}}+
-\freeenergyd\paren{d^{\star}}+
-Y_{0}\,d^{\star}
-+\Frac{A_{\chi}}{2}\,\nabla\, d_{\chi}^{\star}\,\cdot\,\nabla\, d_{\chi}^{\star}
-\right]
-\,\dtot\,V\\
-&+\int_{\Omega}
-\left[
-\Frac{H_{\chi}}{2}\,\paren{d^{\star}-d_{\chi}^{\star}}^{2}+
-\mathrm{I}_{\mathbb{R}_{+}}\paren{d^{\star}-\ets{d}} 
-\right]
-\,\dtot\,V
-- \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
-\end{aligned}
-\]\label{eq:micromorphicdamage:Lagrangian}
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:Lagrangian}
+  \begin{aligned}
+  \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+  &=\int_{\Omega}
+  \left[
+  g\paren{d^{\star}}\,\freeenergyel_{0}\paren{\tepsilon^{\star}}+
+  \freeenergyd\paren{d^{\star}}+
+  Y_{0}\,d^{\star}
+  +\Frac{A_{\chi}}{2}\,\nabla\, d_{\chi}^{\star}\,\cdot\,\nabla\, d_{\chi}^{\star}
+  \right]
+  \,\dtot\,V\\
+  &+\int_{\Omega}
+  \left[
+  \Frac{H_{\chi}}{2}\,\paren{d^{\star}-d_{\chi}^{\star}}^{2}+
+  \mathrm{I}_{\mathbb{R}_{+}}\paren{d^{\star}-\ets{d}} 
+  \right]
+  \,\dtot\,V
+  - \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
+  \end{aligned}
+\end{equation}
+% \[
+% \begin{aligned}
+% \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+% &=\int_{\Omega}
+% \left[
+% g\paren{d^{\star}}\,\freeenergyel_{0}\paren{\tepsilon^{\star}}+
+% \freeenergyd\paren{d^{\star}}+
+% Y_{0}\,d^{\star}
+% +\Frac{A_{\chi}}{2}\,\nabla\, d_{\chi}^{\star}\,\cdot\,\nabla\, d_{\chi}^{\star}
+% \right]
+% \,\dtot\,V\\
+% &+\int_{\Omega}
+% \left[
+% \Frac{H_{\chi}}{2}\,\paren{d^{\star}-d_{\chi}^{\star}}^{2}+
+% \mathrm{I}_{\mathbb{R}_{+}}\paren{d^{\star}-\ets{d}} 
+% \right]
+% \,\dtot\,V
+% - \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
+% \end{aligned}
+% \]\label{eq:micromorphicdamage:Lagrangian}
 Note that the constant term \(Y_{0}\,\ets{d}\), which thus does not have
 any influence of the solution, has been removed from the expression of
 the Lagrangian.
@@ -428,29 +692,52 @@ For high values of the \(H_{\chi}\) coefficient, the contribution to the
 d_{\chi}}=\Frac{H_{\chi}}{2}\,\paren{d-d_{\chi}}^{2}\) may be seen as a
 penalisation term which ensures that the damage \(d\) and the
 micromorphic damage \(d_{\chi}\) are close. Intuitively, if the
-coefficient \(H_{\chi}\) tends to infinity, those variables must become
+coefficient \(H_{\chi}\) tends to infinity, these two must become
 equal to ensure a finite energy.
 
 Hence, we expect the Lagrangian to have the following limit:
-\[
-\begin{aligned}
-\mathcal{L}\paren{\vec{u}^{\star},d^{\star}}
-&=\int_{\Omega}
-\left[
-g\paren{d^{\star}}\,\freeenergyel_{0}\paren{\tepsilon^{\star}}+
-\freeenergyd\paren{d^{\star}}+
-Y_{0}\,d^{\star}
-+\Frac{A_{\chi}}{2}\,\nabla\, d^{\star}\,\cdot\,\nabla\, d^{\star}
-\right]
-\,\dtot\,V\\
-&+\int_{\Omega}
-\left[
-\mathrm{I}_{\mathbb{R}_{+}}\paren{d^{\star}-\ets{d}} 
-\right]
-\,\dtot\,V
-- \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
-\end{aligned}
-\]\label{eq:micromorphicdamage:LagrangianLimit}
+%
+%
+%
+\begin{equation}
+  \label{eq:micromorphicdamage:LagrangianLimit}
+  \begin{aligned}
+  \mathcal{L}\paren{\vec{u}^{\star},d^{\star}}
+  &=\int_{\Omega}
+  \left[
+  g\paren{d^{\star}}\,\freeenergyel_{0}\paren{\tepsilon^{\star}}+
+  \freeenergyd\paren{d^{\star}}+
+  Y_{0}\,d^{\star}
+  +\Frac{A_{\chi}}{2}\,\nabla\, d^{\star}\,\cdot\,\nabla\, d^{\star}
+  \right]
+  \,\dtot\,V\\
+  &+\int_{\Omega}
+  \left[
+  \mathrm{I}_{\mathbb{R}_{+}}\paren{d^{\star}-\ets{d}} 
+  \right]
+  \,\dtot\,V
+  - \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
+  \end{aligned}
+\end{equation}
+% \[
+% \begin{aligned}
+% \mathcal{L}\paren{\vec{u}^{\star},d^{\star}}
+% &=\int_{\Omega}
+% \left[
+% g\paren{d^{\star}}\,\freeenergyel_{0}\paren{\tepsilon^{\star}}+
+% \freeenergyd\paren{d^{\star}}+
+% Y_{0}\,d^{\star}
+% +\Frac{A_{\chi}}{2}\,\nabla\, d^{\star}\,\cdot\,\nabla\, d^{\star}
+% \right]
+% \,\dtot\,V\\
+% &+\int_{\Omega}
+% \left[
+% \mathrm{I}_{\mathbb{R}_{+}}\paren{d^{\star}-\ets{d}} 
+% \right]
+% \,\dtot\,V
+% - \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
+% \end{aligned}
+% \]\label{eq:micromorphicdamage:LagrangianLimit}
 
 \begin{table}[H]
     \centering
@@ -485,14 +772,22 @@ appropriate choices of \(g\paren{d}\), \(\freeenergyd\paren{d}\),
 The cases of AT1 and AT2 models, originating from the work of Ambrosio
 and Tortorelli (AT) \cite{ambrosio_approximation_1990} and the case of
 Lorentz's model \cite{lorentz_gradient_2011,lorentz_convergence_2011}, are
-treated in Table \ref{tbl:micromorphicdamage:ATparameters}where the
+provided in Table \ref{tbl:micromorphicdamage:ATparameters}where the
 following quantities were introduced:
+%
+%
+%
+\begin{itemize}
+  \item \(G_{c}\) is the fracture energy.
+  \item \(l_{0}\) is a characteristic length.
+  \item \(\gamma\) is a parameter of the Lorentz' model.
+\end{itemize}
 
-- \(G_{c}\) is the fracture energy.
-- \(l_{0}\) is a characteristic length.
-- \(\gamma\) is a parameter of the Lorentz' model.
+% - \(G_{c}\) is the fracture energy.
+% - \(l_{0}\) is a characteristic length.
+% - \(\gamma\) is a parameter of the Lorentz' model.
 
-Note that we made that for the AT1 and Lorentz' models, an alternative choice, can be made:
+Note that an alternative choice can be made for both AT1 and Lorentz' models such that:
 \[
 \freeenergyd\paren{d}= 0  \quad\text{and}\quad Y_{0}=\Frac{3}{8}\,G_{c}\,l_{0}
 \]
@@ -508,37 +803,52 @@ equivalent in the context of this paper.
 \subsubsection{A first alternate minimization scheme}
 
 The Lagrangian \(\mathcal{L}\) is not convex, but convex with respect to
-each variables taken independantly.
+each variable taken independently.
 
 Thus, in the spirit of the alternate minimization scheme proposed by
 Bourdin et al. \cite{bourdin_numerical_2000}, the following iterative scheme
 can be proposed:
-\[
-\left\{
-\begin{aligned}
-\iter{n+1}{\vec{u}} &= \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},\iter{n}{d},\iter{n}{d_{\chi}}}\\
-\iter{n+1}{d_{\chi}} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},\iter{n}{d},d_{\chi}^{\star}} \\
-\iter{n+1}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n+1}{d_{\chi}}} \\
-\end{aligned}
-\right.
-\]
+%
+%
+%
+\begin{equation}
+  \left\{
+  \begin{aligned}
+  \iter{n+1}{\vec{u}} &= \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},\iter{n}{d},\iter{n}{d_{\chi}}}\\
+  \iter{n+1}{d_{\chi}} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},\iter{n}{d},d_{\chi}^{\star}} \\
+  \iter{n+1}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n+1}{d_{\chi}}} \\
+  \end{aligned}
+  \right.
+\end{equation}
+% \[
+% \left\{
+% \begin{aligned}
+% \iter{n+1}{\vec{u}} &= \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},\iter{n}{d},\iter{n}{d_{\chi}}}\\
+% \iter{n+1}{d_{\chi}} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},\iter{n}{d},d_{\chi}^{\star}} \\
+% \iter{n+1}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n+1}{d_{\chi}}} \\
+% \end{aligned}
+% \right.
+% \]
 where \(\iter{n}{\vec{u}}\), \(\iter{n}{d_{\chi}}\) and
 \(\iter{n}{d_{\chi}}\) denote respectively the estimates of the
 displacement field, micromorphic damage field and damage field at the
 n\textsuperscript{th} iteration of the algorithm.
 
-Each steps of the algorithm diminishes the value of the Lagrangian,
+Each step of the algorithm diminishes the value of the Lagrangian,
 ensuring the convergence of the scheme.
 
-Minimisation with respect to \(\vec{u}\) and \(d_{\chi}\) leads to a
-solve two standard Partial Differential Equations (PDE), see Equation
+Minimization with respect to \(\vec{u}\) and \(d_{\chi}\) leads to
+solving two standard Partial Differential Equations (PDE), see Equation
 \eqref{eq:micromorphicdamage:mechanical_equilibrium}and
 \eqref{eq:micromorphicdamage:d_chi}. Note that:
-
-- The PDE associated with \(\vec{u}\) is a linear elastic problem with
+%
+%
+%
+\begin{itemize}
+  \item The PDE associated with \(\vec{u}\) is a linear elastic problem with
   spatially variable mechanical coefficients. This problem becomes non
-  linear if unilateral effects are taking into account.
-- The PDE associated with \(d_{\chi}\) is always linear and
+  linear if unilateral effects are taken into account.
+  \item The PDE associated with \(d_{\chi}\) is always linear and
   \(\iter{n+1}{d_{\chi}}\) is the solution of (see Equation
   \eqref{eq:micromorphicdamage:d_chi2}):
   \[
@@ -548,27 +858,54 @@ solve two standard Partial Differential Equations (PDE), see Equation
   Note that this PDE is close to the PDE describing heat transfer and can
   thus be solved in most finite element solvers. See \cite{azinpour_simple_2018}
   for an alternative implementation of the phase-field model based on this analogy.
+\end{itemize}
 
-Minimisation with respect to \(d\) is local and depends on the model
-considered.
+% - The PDE associated with \(\vec{u}\) is a linear elastic problem with
+%   spatially variable mechanical coefficients. This problem becomes non
+%   linear if unilateral effects are taking into account.
+% - The PDE associated with \(d_{\chi}\) is always linear and
+%   \(\iter{n+1}{d_{\chi}}\) is the solution of (see Equation
+%   \eqref{eq:micromorphicdamage:d_chi2}):
+%   \[
+%   -A_{\chi}\,\LaplacianOperator\,\iter{n+1}{d_{\chi}}+H_{\chi}\,\iter{n+1}{d_{\chi}}=
+%   H_{\chi}\,\iter{n}{d}
+%   \]
+%   Note that this PDE is close to the PDE describing heat transfer and can
+%   thus be solved in most finite element solvers. See \cite{azinpour_simple_2018}
+%   for an alternative implementation of the phase-field model based on this analogy.
+
+Minimization with respect to \(d\) is local and depends on the considered model.
 % Appendix \ref{sec:micromorphicdamage:damage_evolution} describes
 % the local equations that must be solved in each case.
 
 \subsubsection{A second alternate minimization scheme}
 
-Since an update of the damage variable is computationaly inexpensive,
+Since an update of the damage variable is computationally inexpensive,
 compared to the computation of the displacement and micromorphic damage,
-one may consider evalutating its value twice, as follows:
-\[
-\left\{
-\begin{aligned}
-\iter{n+1}{\vec{u}} &= \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},\iter{n}{d},\iter{n}{d_{\chi}}}\\
-\iter{n+1/2}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n}{d_{\chi}}} \\
-\iter{n+1}{d_{\chi}} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},\iter{n+1/2}{d},d_{\chi}^{\star}} \\
-\iter{n+1}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n+1}{d_{\chi}}} \\
-\end{aligned}
-\right.
-\]
+one may consider evaluating its value twice, as follows:
+%
+%
+%
+\begin{equation}
+  \left\{
+  \begin{aligned}
+  \iter{n+1}{\vec{u}} &= \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},\iter{n}{d},\iter{n}{d_{\chi}}}\\
+  \iter{n+1/2}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n}{d_{\chi}}} \\
+  \iter{n+1}{d_{\chi}} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},\iter{n+1/2}{d},d_{\chi}^{\star}} \\
+  \iter{n+1}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n+1}{d_{\chi}}} \\
+  \end{aligned}
+  \right.
+\end{equation}
+% \[
+% \left\{
+% \begin{aligned}
+% \iter{n+1}{\vec{u}} &= \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},\iter{n}{d},\iter{n}{d_{\chi}}}\\
+% \iter{n+1/2}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n}{d_{\chi}}} \\
+% \iter{n+1}{d_{\chi}} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},\iter{n+1/2}{d},d_{\chi}^{\star}} \\
+% \iter{n+1}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n+1}{d_{\chi}}} \\
+% \end{aligned}
+% \right.
+% \]
 
 The damage estimates \(\iter{n+1/2}{d}\) is given by an appropriate
 modification of Equation \eqref{eq:micromorphicdamage:damage_estimate}.
@@ -576,7 +913,7 @@ modification of Equation \eqref{eq:micromorphicdamage:damage_estimate}.
 \subsubsection{A third alternate minimization scheme}
 
 The third alternate minimization scheme is based on the fact that the
-minimisation with respect to \(d\) and \(d_{\chi}\) is convex:
+minimization with respect to \(d\) and \(d_{\chi}\) is convex:
 \[
 \left\{
 \begin{aligned}
@@ -587,9 +924,10 @@ minimisation with respect to \(d\) and \(d_{\chi}\) is convex:
 \]
 
 The evolution of \(d_{\chi}\) is still given by Equation
-\eqref{eq:micromorphicdamage:d_chi}but the determination of the conjugated
+\eqref{eq:micromorphicdamage:d_chi} but the determination of the conjugated
 force \(a_{\chi}\) relies locally on the resolution of Equation
-\eqref{eq:micromorphicdamage:damage_estimate}As this equation is only linear
+\eqref{eq:micromorphicdamage:damage_estimate}.
+As this equation is only linear
 by part, Equation \eqref{eq:micromorphicdamage:d_chi}is indeed non linear and
 its resolution is performed in this work using a Newton algorithm.
 

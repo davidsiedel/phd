@@ -37,11 +37,10 @@ The damage patterns at the end of those tests are reported on Figure
 The \texttt{python} scripts are available in this repository:
 https://github.com/thelfer/micromorphic-damage-giens-2022.
 
-Those scripts contains the geometry, material properties and loadings
+Those scripts contain the geometry, material properties and loadings
 required to reproduce those tests.
 
-For those tests, the penalisation parameter \(H_{\chi}\) is chosen of
-the form:
+For those tests, the penalisation parameter \(H_{\chi}\) is chosen as:
 \[
 H_{\chi}= \beta\,\Frac{G_{c}}{l_{0}}
 \]
@@ -56,7 +55,7 @@ the damge is below a given threshold \(\varepsilon_{d}\) at each
 integration point.
 
 This criterion is not totally satisfying as it does not ensure that a
-true minimun of the Lagrangian is found. We carefully checked that this
+true minimum of the Lagrangian is found. We carefully checked that this
 is the case for each steps of the numerical experiments described in
 this section.
 
@@ -119,7 +118,7 @@ Those three tests lead to similar conclusions:
 % #fig:micromorphic_damage:shear:iterations}
 
 \begin{itemize}
-  \item The two first schemes converges very slowly (several thousand of fixed
+  \item The two first schemes converge very slowly (several thousands of fixed
   point iterations) even in the quasi-elastic range. A threshold as
   small as \(10^{-5}\) is required to ensure converged results. Those
   schemes are considered unsuable in pratice.
@@ -133,7 +132,7 @@ Those three tests lead to similar conclusions:
   penalisation factor plays a major role on the overall
   force-displacement curve. Our experiments shows that a value of
   \(150\) leads to results undistinguishable with the one of the AT2
-  model for every tests. However, an higher value of \(300\) is
+  model for all the tests. However, an higher value of \(300\) is
   required to reproduce closely the evolution of the fracture energy.
   \item The number of iteration of the fixed point algorithm is roughly
   similar between the standard AT2 model and the third scheme, altough a
@@ -331,7 +330,7 @@ alleviate issues related to volumetric locking.
 Figure \ref{fig:micromorphicdamage:traction_curve} presents the
 force/displacement curves as a function of the finite element order.
 Quadratic results, which are intermediate between linear and quadratic
-results are not reproduced for the sake of clarity. The following
+results, are not reproduced for the sake of clarity. The following
 observations can be made:
 
 \begin{itemize}
@@ -435,11 +434,11 @@ where:
 
 \subsection{Modification of the free energy}
 
-To take thermal expansion into account, the free energy
+To take the thermal expansion into account, the free energy
 \(\freeenergyel\paren{\tepsilon, d}\) is modified as follows:
 
 \begin{equation}
-  \label{eq:micromorphicdamage:freeenergygel}
+  \label{eq:micromorphicdamage:freeenergygel_2}
   \freeenergyel\paren{\tepsilon, T, d} = 
   g\paren{d}\,\freeenergyel_{0}\paren{\tepsilon-\tepsilonth} =
   \Frac{g\paren{d}}{2}\,\paren{\tepsilon-\tepsilonth}\,\colon\,\tenseurq{D}\,\colon\,\paren{\tepsilon-\tepsilonth}
