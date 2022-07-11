@@ -1,0 +1,158 @@
+\documentclass[anti,rapport,anglais]{note_technique_2018}
+
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+
+\titre{Hybrid High Order methods applied to incompressible
+(visco-)plastic flows and phase field approaches of fracture.
+Application de la méthode Hybrid High Order aux écoulements
+(visco-)plastiques incompressibles et aux approches variationnelles de
+la rupture.}
+
+\titrecourt{Second year report of D. Siedel' PhD. Rapport de seconde
+année de la thèse de D. Siedel.}
+
+\input{LSC}
+
+\auteurs{David Siedel, Thomas Helfer, Olivier Fandeur (*)}
+
+\affiliation{(*) DES/ISAS/DM2S/SEMT/LM2S}
+
+% \codebarre{img/barcode.jpg}
+
+\redacteur{\mbox{D. Siedel}}
+
+\fredacteur{\mbox{Doctorant}}
+
+\verificateur{M. Josien (DEC/SESC/LM2C)}
+
+% \dateversion{05/2021}
+
+%\numero{21-005}
+
+%\chrono{CEA/DES/IRESNE/DEC/SESC DO 54}
+
+\indice{A}
+
+
+\numeroaffaire{A-SICOM-02-01-01}
+
+\clients{EDF-Framatome}
+
+\domaine{SIMU}
+
+\programmerecherche{SICOM}
+
+\accords{CEA-EDF-FRAMATOME F35158}
+
+\typeaction{80\% CEA -- 20\% EDF}
+
+\usepackage{tcolorbox}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage[eulergreek]{sansmath}
+\usepackage{stmaryrd}
+
+\newtcolorbox{myquote}{colback=blue!5!white, colframe=blue!75!black}
+\renewenvironment{quote}{\begin{myquote}}{\end{myquote}}
+\NoLogoAFAQ
+\CoupeListeDiffusion
+\include{diffusion}
+
+% Fix footnotes in tables (requires footnote package)
+
+\usepackage{graphicx}
+
+\resumeDO{
+
+  This document describes two papers written during the second
+  year of the PhD thesis of David Siedel:
+  \begin{itemize}
+    \item One deriving the Hybrid Discontinuous Galerkin (HDG)
+    and Hybrid High Order (HHO) methods from the Hu-Washizu principle.
+    \item One exploring a class of micromophorphic damage
+    behaviours and their link with phase field approaches to fracture.
+  \end{itemize}
+
+  \textbf{Résumé français}
+
+  Ce rapport décrit le travail réalisé au cours et autour de la
+  seconde année du doctorat de D. Siedel. Ce travail s'est focalisé sur
+  la rédaction de deux papier:
+
+  \begin{itemize}
+    \item L'un montrant comment les méthodes Hybrid
+    Discontinuous Galerkin (HDG) et Hybrid High Order (HHO) peuvent être
+    déduites du principe de Hu-Washizu.
+    \item L'autre étudiant une classe de modèles micromorphes
+    de l'endommagement et leurs liens avec les approaches par champs de
+    phase.
+  \end{itemize}
+}
+
+\resumeDR{
+Sans objet.
+}
+
+\motsclefs{Méthode Hybrid High Order method. Approches variationnelles de
+la rupture.}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[euler]{textgreek}
+\usepackage{soul}
+
+\usepackage{graphicx}
+\usepackage{../notations}
+
+\newcommand*{\refname}{Bibliography}
+
+\begin{document}
+
+\chapter{Introduction}
+
+This document describes two papers written during the second year of
+the PhD thesis of David Siedel:
+\begin{itemize}
+  \item One deriving the Hybrid Discontinuous Galerkin (HDG) and
+  Hybrid High Order (HHO) methods from the Hu-Washizu principle. This
+  paper is reported in Chapter \ref{chapter:hho} of this report.
+  \item One exploring a class of micromophorphic damage
+  behaviours and their link with phase field approaches to fracture.
+  This paper is reported in Chapter \ref{chapter:micromorphic_damage} of
+  this report.
+\end{itemize}
+
+\chapter{Hybrid High Order methods for non-linear solid mechanics}
+\label{chapter:hho}
+
+\input{../chapter_002_hho_mechanics/sections/00_introduction.tex}
+\input{../chapter_002_hho_mechanics/sections/01_model_problem.tex}
+\input{../chapter_002_hho_mechanics/sections/02_composite_demo.tex}
+\input{../chapter_002_hho_mechanics/sections/03_discretization.tex}
+\input{../chapter_002_hho_mechanics/sections/04_numerical_exemples.tex}
+\input{../chapter_002_hho_mechanics/sections/05_conclusion.tex}
+
+\chapter{Micromorphic damage behaviours for quasi-brittle materials}
+\label{chapter:micromorphic_damage}
+
+\input{../chapter_003_ef_micromorphic/sections/00_formulation.tex}
+\input{../chapter_003_ef_micromorphic/sections/01_numerical_exemples.tex}
+\input{../chapter_003_ef_micromorphic/sections/02_conclusion.tex}
+
+\appendix
+
+\chapter{Notations}
+\input{../appendix/sections/06_notations.tex}
+
+\chapter{A Hu-Washizu Formulation for HDG methods}
+\input{../appendix/sections/07_appendix_hu_washizu.tex}
+
+\chapter{Implementation}
+\input{../appendix/sections/09_appendix_implementation.tex}
+\input{../appendix/sections/08_appendix_rec_grad.tex}
+
+\bibliography{../bib_all}
+\bibliographystyle{fr-insa}
+
+
+\end{document}
