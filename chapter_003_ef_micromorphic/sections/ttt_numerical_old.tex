@@ -1,7 +1,177 @@
 \section{Numerical implementations using standard finite elements}
-
-\subsection{Comparison of the micromorphic solutions to the phase-field solutions on selected test cases  using \texttt{mgis.fenics}}
 \label{sec:micromorphicdamage:test_cases}
+
+In this section, the proposed micromorphic apporoach to brittle fracture
+is evaluated on numerical applications.
+classical test cases taken from the literature.
+The first three are classical test cases taken from the literature and have been performed using the
+\texttt{mgis.fenics} implementation. Implementations are freely available on the following repository: \url{https://github.com/davidsiedel/h2o_paper}.
+They aim at comparing both the classical phase field approach to the proposed micromorphic one.
+The last two test cases are performed using the \texttt{mfem.fenics} implementation, and showcase respectively
+the performance of the micromorphic approach with high order finite
+elements in the case of shear driven fracture, and the scalability of the approach.
+
+\paragraph{Hypotheses}
+
+For all the applications in this section, a spectral decomposition of the elastic
+free energy thermo-elastic energy potential $\psi_{\tensoriis{F}}$ is considered.
+
+% The results of this implementations were thoroughly compared to the
+% results obtained with the reference implementation provided by the
+% \texttt{Disk++} solver \cite{cicuttin_implementation_2018} in the cartesian framework.
+
+% \subsection{Comparison of the micromorphic solutions to the phase-field solutions on selected test cases  using \texttt{mgis.fenics}}
+
+\subsection{Tensile test on a fiber reinforced matrix}
+
+% The first test case of the following benchmark is taken from 
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Specimen and loading}
+
+The considered test case taken from \cite{bourdin_numerical_2000} describes a matrix represented by a square of length 1mm,
+that is attached to a fiber in the middle (see Figure \ref{fig:micromorphic_formulation:matrix_fiber}).
+The fiber is depicted by a hole
+of radius 0.2mm located at the center of the specimen, and is considered to be infinitely stiff with
+respect to the matrix.
+A vertical displacement of amplitude 0.125mm is applied at the top of the specimen, and the
+matrix is clamped around the fiber in both directions.
+Damage is enforced to be null at the intersection between the matrix and the fiber, and natural
+boundary conditions are considered elsewhere.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=14.cm]{../chapter_003_ef_micromorphic/drawings/matrix_mesh.png}
+    \caption{Geometry, displacement and micromorphic damage boundary conditions}
+    \label{fig:micromorphic_formulation:matrix_fiber}
+\end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=10.cm]{../chapter_003_ef_micromorphic/drawings/matrix_pattern.png}
+%     \caption{Geometry, displacement and micromorphic damage boundary conditions}
+%     \label{fig:micromorphic_formulation:matrix_fiber}
+% \end{figure}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Material behaviour}
+
+A linear thermo-elastic energy potential $\psi_{\tensoriis{F}}$ is considered,
+with a Young's modulus $E$ equal to $200$ MPa. The material displays a compressible
+behaviour with a Poisson's ratio $\nu$ equal to $0.2$.
+The chosen micromorphic damage is described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
+where the fracture energy release rate $G_c$ is equal to $1$ J/mm${}^2$, and the characteristic length is $\ell_c = 0.02$ mm.
+The penalization factor $\beta$ has been tests with several values.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10.cm]{../chapter_003_ef_micromorphic/figures/FiberReinforcedMatrix-force.pdf}
+  \caption{Evolution of the force as a function of the imposed displacement for
+  the fiber reinforced matrix test for the third scheme with \(\beta=150\)
+  and the standard phase-field schemes based on the resolution of the
+  variational inegality or based on Miehe' history
+  function}
+  \label{fig:micromorphic_damage:force}
+\end{figure}
+
+% \subsubsection{Tensile test on a notched plate}
+
+% \paragraph{Specimen and loading}
+
+% The considered test case describes a matrix represented by a square of length 1mm,
+% that is attached to a fiber in the middle (see Figure \ref{fig:micromorphic_formulation:matrix_fiber}).
+% The fiber is depicted by a hole
+% of radius 0.2mm at the center of the specimen, and is considered to be infinitely stiff with
+% respect to the matrix.
+% A vertical displacement of amplitude 0.125mm is applied at the top of the specimen, and the
+% matrix is clamped around the fiber in both directions.
+% Damage is enforced to be null at the intersection between the matrix and the fiber, and natural
+% boundary conditions are considered elsewhere.
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=12.cm]{../chapter_003_ef_micromorphic/drawings/tensile_plate.png}
+%     \caption{Geometry, displacement and micromorphic damage boundary conditions}
+%     \label{fig:micromorphic_formulation:tensile_plate}
+% \end{figure}
+
+% \paragraph{Material behaviour}
+
+% A linear thermo-elastic energy potential $\psi_{\tensoriis{F}}$ is considered,
+% with a Young's modulus $E$ equal to $200$ MPa. The material displays a compressible
+% behaviour with a Poisson's ratio $\nu$ equal to $0.2$.
+% The chosen micromorphic damage is described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
+% where the fracture energy release rate $G_c$ is equal to $1$ J/mm${}^2$, and the characteristic length is $\ell_c = 0.02$ mm.
+% The penalization factor $\beta$ has been tests with several values.
+
+\subsubsection{Shear test on a notched plate}
+
+\paragraph{Specimen and loading}
+
+The second test case describes a square plate length 1mm,
+that is clamped at the bottom in the vertical direction (see Figure \ref{fig:micromorphic_formulation:shear_plate}).
+A tangential displacement of amplitude 0.125mm is applied at the top of the specimen, and one of the vertex
+of the plate is fixed to prevent rigid body motions.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=14.cm]{../chapter_003_ef_micromorphic/drawings/shear_plate.png}
+    \caption{Geometry, displacement and micromorphic damage boundary conditions}
+    \label{fig:micromorphic_formulation:shear_plate}
+\end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=10.cm]{../chapter_003_ef_micromorphic/drawings/shear_plate_pattern.png}
+%     \caption{Geometry, displacement and micromorphic damage boundary conditions}
+%     \label{fig:micromorphic_formulation:shear_plate}
+% \end{figure}
+
+\paragraph{Material behaviour}
+
+As for the precedent test case, a linear elastic energy potential $\psi_{\tensoriis{F}}$ is considered,
+with a Young's modulus $E=200$ MPa and a Poisson's ratio $\nu=0.2$.
+The chosen micromorphic damage is also described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
+with a fracture energy release rate $G_c=1$ J/mm${}^2$, and a characteristic length $\ell_c = 0.02$ mm.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10.cm]{../chapter_003_ef_micromorphic/figures/shear-force.pdf}
+  \caption{Evolution of the force as a function of the imposed displacement for
+  \(\beta=50\), \(\beta=100\), \(\beta=150\) for the shear test using the
+  third staggered scheme}
+  \label{fig:micromorphic_damage:beta}
+\end{figure}
+
+% ![Evolution of the fracture energy as a function of the imposed
+% displacement for \(\beta=50\), \(\beta=100\), \(\beta=150\) for the
+% shear test using the third staggered
+% scheme.](img/DissipatedEnergies.pdf){width=75%
+% #fig:micromorphic_damage:beta2}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10.cm]{../chapter_003_ef_micromorphic/figures/shear-iterations.pdf}
+  \caption{Number of iterations of the fixed point algorithm for the shear test
+  as a function of the step number for the standard AT2 model and the
+  third scheme for \(\beta=150\) and
+  \(\beta=300\)}
+  \label{fig:micromorphic_damage:shear:iterations}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10.cm]{../chapter_003_ef_micromorphic/figures/DissipatedEnergies.pdf}
+  \caption{Evolution of the fracture energy as a function of the imposed
+  displacement for \(\beta=50\), \(\beta=100\), \(\beta=150\) for the
+  shear test using the third staggered
+  scheme}
+  \label{fig:micromorphic_damage:beta2}
+\end{figure}
 
 In this section, the
 \texttt{mgis.fenics}
@@ -22,7 +192,7 @@ We consider in this section three classical test cases:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10.cm]{../chapter_003_ef_micromorphic/figures/DamagePattern.pdf}
+  \includegraphics[width=16.cm]{../chapter_003_ef_micromorphic/figures/DamagePattern.pdf}
   \caption{Damage patterns at the end of the unit tests}
   \label{fig:micromorphicdamage:damage_patterns}
 \end{figure}
@@ -93,6 +263,16 @@ Those three tests lead to similar conclusions:
   \(\beta=50\), \(\beta=100\), \(\beta=150\) for the shear test using the
   third staggered scheme}
   \label{fig:micromorphic_damage:beta}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10.cm]{../chapter_003_ef_micromorphic/figures/DissipatedEnergies.pdf}
+  \caption{Evolution of the fracture energy as a function of the imposed
+  displacement for \(\beta=50\), \(\beta=100\), \(\beta=150\) for the
+  shear test using the third staggered
+  scheme}
+  \label{fig:micromorphic_damage:beta2}
 \end{figure}
 
 % ![Evolution of the fracture energy as a function of the imposed

@@ -1,14 +1,17 @@
 \section{Introduction}
 
-The variational approach to fracture takes its grounds in the work of
-Francfort and Marigo which recasted the Griffith theory into an enery
-minimization problem \cite{francfort_revisiting_1998,francfort_vers_2002}.
+The variational approach to brittle fracture takes its roots in the work of
+Francfort and Marigo \cite{francfort_revisiting_1998,francfort_vers_2002},
+which recasted the Griffith theory into an energy
+minimization problem.
 This revisted approach of the Griffith theory is however not tractable
 with standard numerical methods
-\cite{bourdin_numerical_2000,chambolle_approximation_2018}, in particular
-the commonly used finite element method. For this reason, Bourdin *et
-al.* developed regularised versions \cite{bourdin_numerical_2000} following
+\cite{bourdin_numerical_2000, chambolle_approximation_2018}, in particular
+the commonly used finite element method. For this reason, Bourdin \textit{et
+al.} developed regularized versions \cite{bourdin_numerical_2000} following
 the works of Ambrosio and Tortorelli \cite{ambrosio_approximation_1990}.
+
+\paragraph{Phase field approach to brittle fracture and damage irreversibility consition}
 
 The so-called phase-field approaches to fracture have since become
 widely popular. As pointed by Gerasimov and De Lorenzis in their
@@ -22,196 +25,308 @@ Miehe' alternative based an the so-called history variable
 \cite{miehe_phase_2010}. However, Miehe' alternative is not variationally
 consistent.
 
-Following Forest' micromorphic framework
-\cite{forest_micromorphic_2009,forest_nonlinear_2016}, we propose in
-Section \ref{sec:micromorphicdamage:description}a class of micromorphic
-brittle behaviours which can approximate classical models of britle
-fracture in a variationnally consistent way. These behaviours allow to
-deal with the irreversibility constraint at integration points,
-instead of having to deal with it in the solution of balance equation. Such
-advantages have been highlighted by Rezaee-Hajidehi et al. in the
-context of phase-field approaches to phase transformation
-\cite{rezaee-hajidehi_micromorphic_2021}. The balance equations are
-standard partial differential equations which can readily be solved by
-most FEM or FFT solvers.
+\paragraph{Micromorphic approach to brittle fracture}
 
+A comprehensive framework for 
+micromorphic approaches to various physical problems,
+including brittle fracture, has been developed by Forest in
+\cite{forest_micromorphic_2009, forest_nonlinear_2016}.
+Balance equations arising from
+such micromorphic approaches are
+standard partial differential equations, that can readily be solved by
+most FEM or FFT solvers.
+In particular, these micromorphic behaviours allow to
+deal with the damage irreversibility constraint at integration points,
+instead of having to deal with it in the resolution of balance equations,
+as is the case for the classical Phase field approach \cite{gerasimov_numerical_2020}. These
+advantages have been highlighted by Rezaee-Hajidehi \textit{et al.} in the
+context of phase-field approaches to phase transformation
+\cite{rezaee-hajidehi_micromorphic_2021}.
+%
+%
+%
 Such micromorphic models were recently investigated by Bharali \textit{et al.}
 \cite{bharali_computational_2021} to approximate the AT1 and AT2 models
-using a monolithic resolution strategy. In this paper, we exploit the
-variational basis of the behaviour to derive in Section
-\ref{sec:micromorphicdamage:alternate_minimisation}three alternate
-minimization schemes whose convergence is guaranteed.
+using a monolithic resolution strategy.
 
+\paragraph{Outline}
+
+Following Forest' micromorphic framework
+\cite{forest_micromorphic_2009, forest_nonlinear_2016}, a class of micromorphic
+brittle behaviours that can approximate classical models of brittle
+fracture in a variationally consistent way is proposed in
+Section \ref{sec:micromorphicdamage:description}.
+The variational basis of the behaviour is exploited to derive three alternate
+minimization schemes in Section
+\ref{sec:micromorphicdamage:alternate_minimisation}, whose convergence is guaranteed.
+%
+%
+%
 Several test cases comparing the prediction of the classical AT2 model
 and its micromorphic counterpart are presented in Section
-\ref{sec:micromorphicdamage:test_cases}.
-The choice of the penalisation
-parameter is discussed in-depth.
-
+\ref{sec:micromorphicdamage:test_cases}, where
+the choice of the penalization
+parameter which at the foundation of the link between the Phase Field approach and the 
+micromorphic one is discussed in-depth.
+%
+%
+%
 Two numerical experiments are presented in Section
 \ref{sec:micromorphicdamage:numerical_experiments}, which assess:
-
+%
+%
+%
 \begin{itemize}
     \item The performance of the micromorphic approach with high order finite
     elements in the case of shear driven fracture.
-    The scalability of the micromorphic approach.
+    \item The scalability of the micromorphic approach.
 \end{itemize}
 
-\subsection{Description of the micromorphic behaviours}
-\label{sec:micromorphicdamage:description}
+\section{Model problem}
 
-In this paper, we consider the quasi-static evolution of a body
-\(\Omega\) made of a brittle material.
+\paragraph{Solid body in the current configuration}
 
-The state of this material is characterized, at each time step, by:
+Let $\BodyEuler$ a solid body that is subjected to a volumetric load $\tensori{f}{}_v$ in the current configuration at some time $t > 0$.
+A displacement $\tensori{u}{}_{d}$ is prescribed
+on the Dirichlet boundary $\BodyEulerDirichletBoundary$ and a surface load $\tensori{t}{}_{n}$ is imposed
+on the Neumann boundary $\BodyEulerNeumannBoundary$.
 
-\begin{itemize}
-    \item A displacement field $\DisplacementField$.
-    \item A micromorphic damage field $\MicromorphicDamageField$.
-    \item A local damage field $\DamageField$.
-\end{itemize}
+\paragraph{Transformation mapping}
 
-In the view of simple generalized standard materials
-\cite{moreau_sur_1970,halphen_sur_1975,ehrlacher_principe_1985,nguyen_standard_2002},
-the micromorphic model is defined by the following incremental
-Lagrangian \cite{lorentz_variational_1999,forest_localization_2004}:
+Let $\tensori{\Phi}{}$ the transformation mapping of the solid body from the initial configuration $\BodyLagrange$ to the current configuration $\BodyEuler$.
+The displacement field $\DisplacementField$ is such that $\DisplacementField = \tensori{\Phi}{} - \IdentityTensorI$ where $\IdentityTensorI$
+is the identity application on $\BodyLagrange$.
+The gradient of the transformation is denoted $\TransformationGradientField = \nabla \tensori{\Phi}{} = \IdentityTensorII + \nabla \DisplacementField$.
+Let $\BodyLagrangeDirichletBoundary$ and $\BodyLagrangeNeumannBoundary$ the images of $\BodyEulerDirichletBoundary$ and $\BodyEulerNeumannBoundary$ respectively by $\tensori{\Phi}{}^{-1}$.
+
+\paragraph{External loads in the reference configuration} 
+
+In the reference configuration, the solid is subjected to a volumetric load
+$\tensori{f}{}_V$, a prescribed displacement $\tensori{u}{}_D$ on $\BodyLagrangeDirichletBoundary$, and a surface load $\tensori{t}{}_N$ on $\BodyLagrangeNeumannBoundary$, where the volumetric and surface loads $\tensori{f}{}_V$ and $\tensori{t}{}_N$ have been obtained from their counterparts
+$\tensori{f}{}_v$ and $\tensori{t}{}_n$ respectively, using Nanson formulaes. For the sake of simplicty, they are supposed to be independent
+on $\tensorii{F}{}$.
+
+\paragraph{State of the solid} The mechanical state of the solid body $\BodyLagrange$ is characterized by the displacement field $\DisplacementField$,
+the damage field $\DamageField$ and a micromorphic damage field $\MicromorphicDamageField$.
+
+\paragraph{Free energy potential}
+
+The free energy potential $\psi_{\BodyLagrange}$ of the body $\BodyLagrange$ reads as a function of the displacement $\DisplacementField$, the (local) damage $d$ and the micromorphic damage $\MicromorphicDamageField$, in the form
 %
 %
 %
 \begin{equation}
-  \label{eq:ef_micromorphic:formulation:total_lagrangian}
-  \LagrangianOperator{\BodyLagrange}{}(\DisplacementField, \DamageField, \MicromorphicDamageField)
-  =
-  \int_{\BodyLagrange} \FreeEnergy_{\BodyLagrange}(\SmallStrainField, \DamageField, \MicromorphicDamageField, \nabla \MicromorphicDamageField)
-  +
-  \int_{\BodyLagrange} \Delta t \, \Dissipation_{\BodyLagrange} \paren{\frac{\DamageField - \bts{\DamageField}}{\Delta t}}
-  -
-  \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField
+    \psi_{\BodyLagrange}
+    (\TransformationGradientField, \DamageField, \MicromorphicDamageField, \nabla \MicromorphicDamageField)
+    =
+    \psi_{\tensoriis{F}, \DamageField}
+    (\TransformationGradientField, \DamageField)
+    +
+    \psi_{\DamageField}
+    (\DamageField)
+    +
+    \psi_{\MicromorphicDamageField, \DamageField}
+    (\MicromorphicDamageField, \DamageField)
+    +
+    \psi_{\nabla \MicromorphicDamageField}
+    (\nabla \MicromorphicDamageField)
 \end{equation}
 %
 %
 %
-where:
+where $\psi_{\tensoriis{F}, \DamageField}$ denotes the mechanical contribution that takes into account the damage in the medium,
+$\psi_{\DamageField}$ is the energy stored during the fracture process,
+$\psi_{\DamageField, \MicromorphicDamageField}$ is a coupling term between the damage and micromorphic damage variables, and
+$\psi_{\nabla \MicromorphicDamageField}$ defines the micromorphic force.
+In practice, $\psi_{\BodyLagrange}$ is a differentiable function.
+
+\paragraph{Stresses}
+
+In the spirit of \cite{forest_mecanique_2009}, the following stresses are introduced
 %
 %
 %
-\begin{itemize}
-    \item \(\FreeEnergy_{\BodyLagrange}\) is the free energy.
-    \item \(\Dissipation_{\BodyLagrange}\) is the dissipation potential.
-    \item \(\Delta\,t\) is the time increment.
-    \item \(\bts{\DamageField}\) is damage at the beginning of the time step.
-    \item \(\neumannLag\) is the imposed traction on the boundary \(\partial\,\Omega_{T}\).
-    \item \(\DisplacementField, \DamageField, \MicromorphicDamageField\) denotes any admissible displacement, damage and micromorphic damage field.
-    \item \(\BodyLagrangeNeumannBoundary\) is the part on the boundary where external reaction forces are imposed
-\end{itemize}
+\begin{equation}
+    \begin{aligned}
+        \PKIStressField = \deriv{\psi_{\BodyLagrange}}{\TransformationGradientField}
+        && &&
+        \MicromorphicDamageStressField = \deriv{\psi_{\BodyLagrange}}{\nabla \MicromorphicDamageField}
+        && &&
+        \MicromorphicDamageForceField = \deriv{\psi_{\BodyLagrange}}{\MicromorphicDamageField}
+        && &&
+        \DamageForceField = \deriv{\psi_{\BodyLagrange}}{\DamageField}
+    \end{aligned}
+\end{equation}
 %
 %
 %
-To satisfy the Ilyushin-Drucker postulate, the incremental Lagragian
-\(\mathcal{L}\) must be convex with respect to each variables
-\(\vec{u}^{\star},d^{\star},d_{\chi}^{\star}\) taken independently. It
-can be shown that this condition is ensured if the \(\freeenergy\) and
-the dissipation potential \(\dissipationpotential\) are convex with
+where $\PKIStressField$ is the first Piola-Kirchoff stress tensor, and $\MicromorphicDamageStressField, \MicromorphicDamageForceField$ and $\DamageForceField$ are the thermodynamic
+forces associated to $\nabla \MicromorphicDamageField, \MicromorphicDamageField$ and $\DamageField$ respectively.
+
+\paragraph{Dissipation potential}
+
+A dissipation potential $\phi_{\BodyLagrange}(\DamageField)$ accounts for the irreversibility of the fracture process in the medium.
+For time independent mechanisms, $\phi_{\BodyLagrange}$ is usually not differentiable. However, it is is assumed to be
+an homogeneous function of degree one
+such that for any time increment $\Delta \, t > 0$, and any admissible damage field $\DamageField$ at the time $t + \Delta \, t$
+%
+%
+%
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:dissipation_potential}
+  \begin{aligned}
+      \Delta \, t \, \phi_{\BodyLagrange}(\frac{\DamageField - \DamageField \TraceOperator{t}} {\Delta \, t})
+      =
+      \phi_{\BodyLagrange}(\DamageField - \DamageField \TraceOperator{t})
+  \end{aligned}
+\end{equation}
+%
+%
+%
+% where $\Delta \, t$ is a time increment.
+In particular, $\phi_{\bodyLag}(d)$ generally contains an indicator function to enforce the irreversibility of the
+damage evolution.
+
+\paragraph{Total Lagrangian}
+
+% The equilibrium of the solid $\BodyLagrange$ is characterized by the stationarity of the total incremental Lagragian
+% $\LagrangianOperator{\BodyLagrange}{\text{tot}}$
+% such that for any time increment $\Delta \, t > 0$, and any admissible displacement, damage and micromorphic damage fields $\DisplacementField, \DamageField$
+% and $\MicromorphicDamageField$ at the time $t + \Delta \, t$
+% In the view of simple generalized standard materials
+% \cite{moreau_sur_1970, halphen_sur_1975, ehrlacher_principe_1985, nguyen_standard_2002},
+% the micromorphic model is defined by the following incremental
+% Lagrangian \cite{lorentz_variational_1999,forest_localization_2004}:
+In the view of generalized standard materials
+\cite{moreau_sur_1970, halphen_sur_1975, ehrlacher_principe_1985, nguyen_standard_2002},
+and for any time increment $\Delta \, t > 0$,
+the equilibrium of the solid $\BodyLagrange$ at the time $t + \Delta \, t$ is characterized by the stationarity of the total incremental Lagrangian
+$\LagrangianOperator{\BodyLagrange}{\text{tot}}$ \cite{lorentz_variational_1999,forest_localization_2004}
+such that
+%
+%
+%
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:total_lagrangian_1}
+  \begin{aligned}
+    \LagrangianOperator{\BodyLagrange}{\text{tot}}
+    =
+    &
+    \int_{\BodyLagrange}
+    \psi_{\BodyLagrange}
+    (\TransformationGradientField, \DamageField, \MicromorphicDamageField, \nabla \MicromorphicDamageField)
+    +
+    \int_{\BodyLagrange} \Delta \, t \, \phi_{\BodyLagrange}(\frac{\DamageField - \DamageField \TraceOperator{t}} {\Delta \, t})
+    -
+    \int_{\BodyLagrange} \loadLag{} \cdot \DisplacementField
+    -
+    \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary}
+  \end{aligned}
+\end{equation}
+%
+%
+%
+for any admissible displacement, damage and micromorphic damage fields $\DisplacementField, \DamageField$
+and $\MicromorphicDamageField$ at the time $t + \Delta \, t$.
+%
+%
+%
+To satisfy the Ilyushin-Drucker postulate, the total incremental Lagrangian
+$\LagrangianOperator{\BodyLagrange}{\text{tot}}$ must be convex with respect to each variables
+$\DisplacementField, \DamageField$
+and $\MicromorphicDamageField$ taken independently. It
+can be shown that this condition is ensured if the free energy potential $\psi_{\BodyLagrange}$ and
+the dissipation potential $\phi_{\BodyLagrange}$ are convex with
 respect to their respective arguments.
 
-\paragraph{Body forces and prescribed micromorphic tractions}
-
-The definition of the Lagrangian \(\mathcal{L}\) can be enriched by adding
-body forces (such as gravity) and prescribed micromorphic tractions.
-
-The state of the material minimizes the incremental Lagrangian:
-\begin{equation}
-  \label{eq:ef_micromorphic:formulation:total_lagrangian_min}
-  \paren{\ets{\vec{u}}, \ets{d_{\chi}}, \ets{d}} = \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
-\end{equation}
-% \[
-% \paren{\ets{\vec{u}}, \ets{d_{\chi}}, \ets{d}} = \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
-% \]
-
-In practice, the free energy is a differentiable function.
-
-This is not the case for the dissipation potential
-\(\dissipationpotential\) for time independent mechanisms for which
-\(\dissipationpotential\) is assumed to be an homogeneous function of
-degree \(1\). Consequently, this which allows to eliminate the time increment
-\(\Delta\,t\) from the definition of the Lagrangian such that :
-\begin{equation}
-  \label{eq:ef_micromorphic:formulation:dissipation}
-  \Delta\,t\,\dissipationpotential\paren{\Frac{d^{\star}-\bts{d}}{\Delta\,t}} = \dissipationpotential\paren{d^{\star}-\bts{d}}
-\end{equation}
-% \[
-% \Delta\,t\,\dissipationpotential\paren{\Frac{d^{\star}-\bts{d}}{\Delta\,t}} = \dissipationpotential\paren{d^{\star}-\bts{d}}
-% \]
-
-In particular, the dissipation potential generally contains an indicator
-function imposing the \textit{irreversibility of the damage evolution}.
-
-\subsubsection{Equilibrium}
+\paragraph{Total Lagrangian split}
 
 Deriving equilibrium equations from the principle of the minimum of the
-Lagrangian is non trivial due to the fact that the dissipation potentiel
+Lagrangian is non trivial due to the fact that the dissipation potential
 is not differentiable.
 %
 %
 %
-It is then convenient to separate the Lagrangian into two parts
-\(\mathcal{L}_{1}\) and \(\mathcal{L}_{2}\) as follows:
+It is then convenient to separate the total Lagrangian $\LagrangianOperator{\BodyLagrange}{\text{tot}}$ into two parts
+$\LagrangianOperator{\BodyLagrange}{\text{hel}}$ and $\LagrangianOperator{\BodyLagrange}{\text{dis}}$ as follows:
 %
 %
 %
 \begin{subequations}
   \label{eq:ef_micromorphic:formulation:total_lagrangian_split}
       \begin{alignat}{3}
-        \mathcal{L}_{1}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+        \LagrangianOperator{\BodyLagrange}{\text{hel}}
         &
-        = 
-        \int_{\Omega} \freeenergy\paren{\tepsilon^{\star}, d^{\star}, d_{\chi}^{\star},\nabla\,d_{\chi}^{\star}} \,\dtot\,V
+        =
+        \int_{\BodyLagrange} \FreeEnergy_{\BodyLagrange}(\TransformationGradientField, \DamageField, \MicromorphicDamageField, \nabla \MicromorphicDamageField)
         -
-        \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
+        \int_{\BodyLagrange} \loadLag{} \cdot \DisplacementField
+        -
+        \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary}
         \label{eq:ef_micromorphic:formulation:total_lagrangian_split:eq0}
         \\
-        \mathcal{L}_{2}\paren{d^{\star}}
+        \LagrangianOperator{\BodyLagrange}{\text{dis}}
         &
         = 
-        \int_{\Omega}
-        \dissipationpotential\paren{d^{\star}-\bts{d}}
-        \,\dtot\,V
+        \int_{\BodyLagrange} \phi_{\BodyLagrange}(\DamageField - \DamageField \TraceOperator{t})
         \label{eq:ef_micromorphic:formulation:total_lagrangian_split:eq1}
   \end{alignat}
 \end{subequations}
+%
+%
+%
+where \eqref{eq:ef_micromorphic:formulation:dissipation_potential} has been used in \eqref{eq:ef_micromorphic:formulation:total_lagrangian_split:eq1}.
 
-In this report, the following mathematical result characterizing
+In this work, the following mathematical result characterizing
 the minima of Lagrangian \cite{son_standard_2021} are assumed :
 
-\begin{itemize}
-    \item The regular part of the Lagrangian \(\mathcal{L}_{1}\) is minimal with
-    respect to the displacement field \(\vec{u}\) and the micromorphic
-    damage field \(d_{\chi}\).
-    \item At each point, the thermodynamic force \(Y\) associated with the
-    damage, is in the subgradient of the dissipation potential:
-    \begin{equation}
-      \label{eq:ef_micromorphic:formulation:generalized_standard_0}
-      Y \in \partial \dissipationpotential
-    \end{equation}
-    % \[
-    % Y \in \partial \dissipationpotential
-    % \]
-    where \(Y\) is defined by:
-    \begin{equation}
-      \label{eq:ef_micromorphic:formulation:generalized_standard_1}
-      Y = -\deriv{\freeenergy}{d}
-    \end{equation}
-    % \[
-    % Y = -\deriv{\freeenergy}{d}
-    % \]
-\end{itemize}
+\paragraph{H1}
+
+The regular part of the Lagrangian $\LagrangianOperator{\BodyLagrange}{\text{hel}}$ is minimal with
+respect to the displacement field $\DisplacementField$ and the micromorphic
+damage field $\MicromorphicDamageField$.
+
+\paragraph{H2}
+
+At each point, the thermodynamic force $\DamageForceField$ associated with the
+damage is in the subgradient of the dissipation potential:
+%
+%
+%
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:generalized_standard_0}
+  \DamageForceField \in \partial \phi_{\BodyLagrange}
+\end{equation}
+
+% \begin{itemize}
+%     \item The regular part of the Lagrangian $\mathcal{L}_{1}$ is minimal with
+%     respect to the displacement field $\vec{u}$ and the micromorphic
+%     damage field $d_{\chi}$.
+%     \item At each point, the thermodynamic force $Y$ associated with the
+%     damage, is in the subgradient of the dissipation potential:
+%     \begin{equation}
+%       \label{eq:ef_micromorphic:formulation:generalized_standard_0}
+%       Y \in \partial \dissipationpotential
+%     \end{equation}
+%     % \[
+%     % Y \in \partial \dissipationpotential
+%     % \]
+%     where $Y$ is defined by:
+%     \begin{equation}
+%       \label{eq:ef_micromorphic:formulation:generalized_standard_1}
+%       Y = -\deriv{\freeenergy}{d}
+%     \end{equation}
+%     % \[
+%     % Y = -\deriv{\freeenergy}{d}
+%     % \]
+% \end{itemize}
 
 In this section, the condition on the regular part of
 the Lagrangian is considered only.
 The evolution of the damage is discussed in Section
 \ref{sec:micromorphicdamage:constitutive_equations}.
 
-The variation \(\var{\mathcal{L}_{1}}\) of $\mathcal{L}_{1}$ with respect to the
+The variation $\var{\mathcal{L}_{1}}$ of $\mathcal{L}_{1}$ with respect to the
 displacement and micromorphic damage field is defined by:
 \begin{equation}
   \label{eq:ef_micromorphic:formulation:lagrangian_variation_0}
@@ -222,6 +337,172 @@ displacement and micromorphic damage field is defined by:
     \mathcal{L}_{1}\paren{\ets{\vec{u}},\ets{d}, \ets{d_{\chi}}}
   \end{aligned}
 \end{equation}
+
+% \subsection{Description of the micromorphic behaviours}
+% \label{sec:micromorphicdamage:description}
+
+% In this paper, we consider the quasi-static evolution of a body
+% $\Omega$ made of a brittle material.
+
+% The state of this material is characterized, at each time step, by:
+
+% \begin{itemize}
+%     \item A displacement field $\DisplacementField$.
+%     \item A micromorphic damage field $\MicromorphicDamageField$.
+%     \item A local damage field $\DamageField$.
+% \end{itemize}
+
+% In the view of simple generalized standard materials
+% \cite{moreau_sur_1970,halphen_sur_1975,ehrlacher_principe_1985,nguyen_standard_2002},
+% the micromorphic model is defined by the following incremental
+% Lagrangian \cite{lorentz_variational_1999,forest_localization_2004}:
+% %
+% %
+% %
+% \begin{equation}
+%   \label{eq:ef_micromorphic:formulation:total_lagrangian}
+%   \LagrangianOperator{\BodyLagrange}{}(\DisplacementField, \DamageField, \MicromorphicDamageField)
+%   =
+%   \int_{\BodyLagrange} \FreeEnergy_{\BodyLagrange}(\SmallStrainField, \DamageField, \MicromorphicDamageField, \nabla \MicromorphicDamageField)
+%   +
+%   \int_{\BodyLagrange} \Delta t \, \Dissipation_{\BodyLagrange} \paren{\frac{\DamageField - \bts{\DamageField}}{\Delta t}}
+%   -
+%   \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField
+% \end{equation}
+% %
+% %
+% %
+% where:
+% %
+% %
+% %
+% \begin{itemize}
+%     \item $\FreeEnergy_{\BodyLagrange}$ is the free energy.
+%     \item $\Dissipation_{\BodyLagrange}$ is the dissipation potential.
+%     \item $\Delta\,t$ is the time increment.
+%     \item $\bts{\DamageField}$ is damage at the beginning of the time step.
+%     \item $\neumannLag$ is the imposed traction on the boundary $\partial\,\Omega_{T}$.
+%     \item $\DisplacementField, \DamageField, \MicromorphicDamageField$ denotes any admissible displacement, damage and micromorphic damage field.
+%     \item $\BodyLagrangeNeumannBoundary$ is the part on the boundary where external reaction forces are imposed
+% \end{itemize}
+% %
+% %
+% %
+% To satisfy the Ilyushin-Drucker postulate, the incremental Lagragian
+% $\mathcal{L}$ must be convex with respect to each variables
+% $\vec{u}^{\star},d^{\star},d_{\chi}^{\star}$ taken independently. It
+% can be shown that this condition is ensured if the $\freeenergy$ and
+% the dissipation potential $\dissipationpotential$ are convex with
+% respect to their respective arguments.
+
+% \paragraph{Body forces and prescribed micromorphic tractions}
+
+% The definition of the Lagrangian $\mathcal{L}$ can be enriched by adding
+% body forces (such as gravity) and prescribed micromorphic tractions.
+
+% The state of the material minimizes the incremental Lagrangian:
+% \begin{equation}
+%   \label{eq:ef_micromorphic:formulation:total_lagrangian_min}
+%   \paren{\ets{\vec{u}}, \ets{d_{\chi}}, \ets{d}} = \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+% \end{equation}
+% % \[
+% % \paren{\ets{\vec{u}}, \ets{d_{\chi}}, \ets{d}} = \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+% % \]
+
+% In practice, the free energy is a differentiable function.
+
+% This is not the case for the dissipation potential
+% $\dissipationpotential$ for time independent mechanisms for which
+% $\dissipationpotential$ is assumed to be an homogeneous function of
+% degree $1$. Consequently, this which allows to eliminate the time increment
+% $\Delta\,t$ from the definition of the Lagrangian such that :
+% \begin{equation}
+%   \label{eq:ef_micromorphic:formulation:dissipation}
+%   \Delta\,t\,\dissipationpotential\paren{\Frac{d^{\star}-\bts{d}}{\Delta\,t}} = \dissipationpotential\paren{d^{\star}-\bts{d}}
+% \end{equation}
+% % \[
+% % \Delta\,t\,\dissipationpotential\paren{\Frac{d^{\star}-\bts{d}}{\Delta\,t}} = \dissipationpotential\paren{d^{\star}-\bts{d}}
+% % \]
+
+% In particular, the dissipation potential generally contains an indicator
+% function imposing the \textit{irreversibility of the damage evolution}.
+
+% \subsubsection{Equilibrium}
+
+% Deriving equilibrium equations from the principle of the minimum of the
+% Lagrangian is non trivial due to the fact that the dissipation potentiel
+% is not differentiable.
+% %
+% %
+% %
+% It is then convenient to separate the Lagrangian into two parts
+% $\mathcal{L}_{1}$ and $\mathcal{L}_{2}$ as follows:
+% %
+% %
+% %
+% \begin{subequations}
+%   \label{eq:ef_micromorphic:formulation:total_lagrangian_split}
+%       \begin{alignat}{3}
+%         \mathcal{L}_{1}\paren{\vec{u}^{\star},d^{\star},d_{\chi}^{\star}}
+%         &
+%         = 
+%         \int_{\Omega} \freeenergy\paren{\tepsilon^{\star}, d^{\star}, d_{\chi}^{\star},\nabla\,d_{\chi}^{\star}} \,\dtot\,V
+%         -
+%         \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
+%         \label{eq:ef_micromorphic:formulation:total_lagrangian_split:eq0}
+%         \\
+%         \mathcal{L}_{2}\paren{d^{\star}}
+%         &
+%         = 
+%         \int_{\Omega}
+%         \dissipationpotential\paren{d^{\star}-\bts{d}}
+%         \,\dtot\,V
+%         \label{eq:ef_micromorphic:formulation:total_lagrangian_split:eq1}
+%   \end{alignat}
+% \end{subequations}
+
+% In this report, the following mathematical result characterizing
+% the minima of Lagrangian \cite{son_standard_2021} are assumed :
+
+% \begin{itemize}
+%     \item The regular part of the Lagrangian $\mathcal{L}_{1}$ is minimal with
+%     respect to the displacement field $\vec{u}$ and the micromorphic
+%     damage field $d_{\chi}$.
+%     \item At each point, the thermodynamic force $Y$ associated with the
+%     damage, is in the subgradient of the dissipation potential:
+%     \begin{equation}
+%       \label{eq:ef_micromorphic:formulation:generalized_standard_0}
+%       Y \in \partial \dissipationpotential
+%     \end{equation}
+%     % \[
+%     % Y \in \partial \dissipationpotential
+%     % \]
+%     where $Y$ is defined by:
+%     \begin{equation}
+%       \label{eq:ef_micromorphic:formulation:generalized_standard_1}
+%       Y = -\deriv{\freeenergy}{d}
+%     \end{equation}
+%     % \[
+%     % Y = -\deriv{\freeenergy}{d}
+%     % \]
+% \end{itemize}
+
+% In this section, the condition on the regular part of
+% the Lagrangian is considered only.
+% The evolution of the damage is discussed in Section
+% \ref{sec:micromorphicdamage:constitutive_equations}.
+
+% The variation $\var{\mathcal{L}_{1}}$ of $\mathcal{L}_{1}$ with respect to the
+% displacement and micromorphic damage field is defined by:
+% \begin{equation}
+%   \label{eq:ef_micromorphic:formulation:lagrangian_variation_0}
+%   \begin{aligned}
+%     \var{\mathcal{L}_{1}}
+%     =
+%     \mathcal{L}_{1}\paren{\ets{\vec{u}}+\var{\vec{u}},\ets{d}, \ets{d_{\chi}} + \var{d_{\chi}}} - 
+%     \mathcal{L}_{1}\paren{\ets{\vec{u}},\ets{d}, \ets{d_{\chi}}}
+%   \end{aligned}
+% \end{equation}
 % \[
 % \var{\mathcal{L}_{1}}
 % =
@@ -229,9 +510,9 @@ displacement and micromorphic damage field is defined by:
 % \mathcal{L}_{1}\paren{\ets{\vec{u}},\ets{d}, \ets{d_{\chi}}}
 % \]
 
-where the variation \(\var{\vec{u}}\) is null on the part of the
+where the variation $\var{\vec{u}}$ is null on the part of the
 boundary where imposed displacements are prescribed, i.e. on
-\(\partial\Omega\setminus\partial\Omega_{T}\).
+$\partial\Omega\setminus\partial\Omega_{T}$.
 
 By retaining only first order terms, this variation can be computed as follows:
 \begin{equation}
@@ -330,15 +611,15 @@ Applying the divergence theorem leads to:
 %   \,\dtot\,S
 % \]
 where the fact that the variation of the
-displacement is null on \(\partial\Omega\setminus\partial\Omega_{T}\)
+displacement is null on $\partial\Omega\setminus\partial\Omega_{T}$
 has been used.
 
 Classical arguments shows that this variation can characterize a
 minimum only if all the integrands are zero.
 
 The integrands associated with the variation of the displacement field gives
-the classical mechanical equilibrium equation in \(\Omega\) and boundary
-conditions on \(\partial\,\Omega_{T}\):
+the classical mechanical equilibrium equation in $\Omega$ and boundary
+conditions on $\partial\,\Omega_{T}$:
 \begin{equation}
   \label{eq:micromorphicdamage:mechanical_equilibrium}
   \begin{aligned}
@@ -384,7 +665,7 @@ leads to the following balance equation and boundary conditions:
 \subsection{Constitutive equations}
 \label{sec:micromorphicdamage:constitutive_equations}
 
-The free energy \(\freeenergy\) is additively decomposed as follows:
+The free energy $\freeenergy$ is additively decomposed as follows:
 \begin{equation}
   \label{eq:ef_micromorphic:formulation:freeenergy_split}
   \freeenergy\paren{\tepsilon, d, d_{\chi}, \nabla\,d_{\chi}}=
@@ -403,12 +684,12 @@ The free energy \(\freeenergy\) is additively decomposed as follows:
 where:
 
 \begin{itemize}
-    \item \(\freeenergyel\paren{\tepsilon, d}\) describes the mechanical part of
+    \item $\freeenergyel\paren{\tepsilon, d}$ describes the mechanical part of
     the free energy.
-    \item \(\freeenergyd\paren{d}\) defines an stored energy due to damage.
-    \item \(\freeenergyddchi\paren{d, d_{\chi}}\) defines the coupling between
-    the damage \(d\) and the micromorphic damage \(d_{\chi}\)
-    \item \(\freeenergygdchi\paren{\nabla\, d_{\chi}}\) defines the a
+    \item $\freeenergyd\paren{d}$ defines an stored energy due to damage.
+    \item $\freeenergyddchi\paren{d, d_{\chi}}$ defines the coupling between
+    the damage $d$ and the micromorphic damage $d_{\chi}$
+    \item $\freeenergygdchi\paren{\nabla\, d_{\chi}}$ defines the a
     micromorphic force.
 \end{itemize}
 
@@ -418,8 +699,8 @@ $\freeenergyel$ determines the expression of the stress and contributes
 to the thermodynamic force driving the damage evolution.
 
 A classical choice is to multiply the free energy of an undamaged
-elastic material \(\freeenergyel_{0}\paren{\tepsilon}\) by a degradation
-function \(g\paren{d}\) as follows:
+elastic material $\freeenergyel_{0}\paren{\tepsilon}$ by a degradation
+function $g\paren{d}$ as follows:
 \begin{equation}
   \label{eq:micromorphicdamage:freeenergygel}
   \freeenergyel\paren{\tepsilon, d} = 
@@ -429,9 +710,9 @@ function \(g\paren{d}\) as follows:
 % \freeenergyel\paren{\tepsilon, d} = 
 % g\paren{d}\,\freeenergyel_{0}\paren{\tepsilon} = \Frac{g\paren{d}}{2}\,\tepsilon\,\colon\,\tenseurq{D}\,\colon\,\tepsilon
 % \]\label{eq:micromorphicdamage:freeenergygel}
-where \(\tenseurq{D}\) is the stiffness matrix of the sound material.
+where $\tenseurq{D}$ is the stiffness matrix of the sound material.
 
-The stresss \(\tsigma\) is thus given by:
+The stresss $\tsigma$ is thus given by:
 \begin{equation}
   \tsigma = g\paren{d}\,\tenseurq{D}\,\colon\,\tepsilon
 \end{equation}
@@ -446,7 +727,7 @@ to the positive part of the free energy.
 
 \subsubsection{Evolution of the micromorphic damage}
 
-\paragraph{Choice of \(\freeenergyddchi\)}
+\paragraph{Choice of $\freeenergyddchi$}
 
 The free energy density $\freeenergyddchi$ is chosen such that
 %
@@ -461,7 +742,7 @@ The free energy density $\freeenergyddchi$ is chosen such that
 %
 %
 %
-which leads to the following expression of \(a_{\chi}\):
+which leads to the following expression of $a_{\chi}$:
 \begin{equation}
   \label{eq:micromorphicdamage:achi}
   a_{\chi} = - H_{\chi}\,\paren{d-d_{\chi}}
@@ -470,7 +751,7 @@ which leads to the following expression of \(a_{\chi}\):
 % a_{\chi} = - H_{\chi}\,\paren{d-d_{\chi}}
 % \]\label{eq:micromorphicdamage:achi}
 
-\paragraph{Choice of \(\freeenergygdchi\)}
+\paragraph{Choice of $\freeenergygdchi$}
 
 The free energy density $\freeenergyddchi$ is chosen such that
 %
@@ -486,7 +767,7 @@ The free energy density $\freeenergyddchi$ is chosen such that
 %
 %
 %
-which leads to the following expression of \(\vec{b}_{\chi}\):
+which leads to the following expression of $\vec{b}_{\chi}$:
 %
 %
 %
@@ -515,11 +796,11 @@ Substituting \eqref{eq:micromorphicdamage:achi} and \eqref{eq:micromorphicdamage
 %
 %
 %
-where \(\LaplacianOperator\) denotes the Laplacian operator.
+where $\LaplacianOperator$ denotes the Laplacian operator.
 
 \subsubsection{Evolution of the damage}
 
-The thermodynamic forces \(Y\) associated with the damage is given by:
+The thermodynamic forces $Y$ associated with the damage is given by:
 %
 %
 %
@@ -557,7 +838,7 @@ A simple choice of the dissipation potential is:
 %
 %
 %
-where $Y_0$ is a scalar threshold value, and \(\mathrm{I}_{\mathbb{R}_{+}}\) is the characteristic function associated with positive real number, i.e.:
+where $Y_0$ is a scalar threshold value, and $\mathrm{I}_{\mathbb{R}_{+}}$ is the characteristic function associated with positive real number, i.e.:
 %
 %
 %
@@ -683,16 +964,16 @@ of the Lagrangian:
 % - \int_{\partial\,\Omega_{T}} \vec{T}\,\cdot\,\vec{u}^{\star} \,\dtot\,S
 % \end{aligned}
 % \]\label{eq:micromorphicdamage:Lagrangian}
-Note that the constant term \(Y_{0}\,\ets{d}\), which thus does not have
+Note that the constant term $Y_{0}\,\ets{d}$, which thus does not have
 any influence of the solution, has been removed from the expression of
 the Lagrangian.
 
-For high values of the \(H_{\chi}\) coefficient, the contribution to the
+For high values of the $H_{\chi}$ coefficient, the contribution to the
 \(\freeenergyddchi\paren{d,
 d_{\chi}}=\Frac{H_{\chi}}{2}\,\paren{d-d_{\chi}}^{2}\) may be seen as a
-penalisation term which ensures that the damage \(d\) and the
-micromorphic damage \(d_{\chi}\) are close. Intuitively, if the
-coefficient \(H_{\chi}\) tends to infinity, these two must become
+penalisation term which ensures that the damage $d$ and the
+micromorphic damage $d_{\chi}$ are close. Intuitively, if the
+coefficient $H_{\chi}$ tends to infinity, these two must become
 equal to ensure a finite energy.
 
 Hence, we expect the Lagrangian to have the following limit:
@@ -747,16 +1028,16 @@ Hence, we expect the Lagrangian to have the following limit:
         \\
         [0.5ex] 
         \hline\hline
-        \(g\paren{d}\)            & \(\paren{1-d}^{2}\)              & \(\paren{1-d}^{2}\)               & \(\paren{\Frac{1-d}{1+\gamma\,d}}^{2}\)  
+        $g\paren{d}$            & $\paren{1-d}^{2}$              & $\paren{1-d}^{2}$               & $\paren{\Frac{1-d}{1+\gamma\,d}}^{2}$  
         \\
         % \hline      
-        \(\freeenergyd\paren{d}\) & \(\Frac{3\,G_{c}}{8\,l_{0}}\,d\) & \(\Frac{G_{c}}{2\,l_{0}}\,d^{2}\) & \(\Frac{3\,G_{c}}{8\,l_{0}}\,d\)         
+        $\freeenergyd\paren{d}$ & $\Frac{3\,G_{c}}{8\,l_{0}}\,d$ & $\Frac{G_{c}}{2\,l_{0}}\,d^{2}$ & $\Frac{3\,G_{c}}{8\,l_{0}}\,d$         
         \\
         % \hline      
-        \(A_{\chi}\)              & \(\Frac{3}{4}\,G_{c}\,l_{0}\)    & \(G_{c}\,l_{0}\)                  & \(\Frac{3}{4}\,G_{c}\,l_{0}\)    
+        $A_{\chi}$              & $\Frac{3}{4}\,G_{c}\,l_{0}$    & $G_{c}\,l_{0}$                  & $\Frac{3}{4}\,G_{c}\,l_{0}$    
         \\
         % \hline              
-        \(Y_{0}\)                 & \(0\)                            & \(0\)                             &  \(0\)   
+        $Y_{0}$                 & $0$                            & $0$                             &  $0$   
         \\
         \hline
     \end{tabular}
@@ -766,8 +1047,8 @@ Hence, we expect the Lagrangian to have the following limit:
 
 Lagrangian \eqref{eq:micromorphicdamage:Lagrangian}can be identified with
 Lagrangians of many classical models of brittle fracture with
-appropriate choices of \(g\paren{d}\), \(\freeenergyd\paren{d}\),
-\(A_{\chi}\) and \(Y_{0}\).
+appropriate choices of $g\paren{d}$, $\freeenergyd\paren{d}$,
+$A_{\chi}$ and $Y_{0}$.
 
 The cases of AT1 and AT2 models, originating from the work of Ambrosio
 and Tortorelli (AT) \cite{ambrosio_approximation_1990} and the case of
@@ -778,14 +1059,14 @@ following quantities were introduced:
 %
 %
 \begin{itemize}
-  \item \(G_{c}\) is the fracture energy.
-  \item \(l_{0}\) is a characteristic length.
-  \item \(\gamma\) is a parameter of the Lorentz' model.
+  \item $G_{c}$ is the fracture energy.
+  \item $l_{0}$ is a characteristic length.
+  \item $\gamma$ is a parameter of the Lorentz' model.
 \end{itemize}
 
-% - \(G_{c}\) is the fracture energy.
-% - \(l_{0}\) is a characteristic length.
-% - \(\gamma\) is a parameter of the Lorentz' model.
+% - $G_{c}$ is the fracture energy.
+% - $l_{0}$ is a characteristic length.
+% - $\gamma$ is a parameter of the Lorentz' model.
 
 Note that an alternative choice can be made for both AT1 and Lorentz' models such that:
 \[
@@ -802,7 +1083,7 @@ equivalent in the context of this paper.
 
 \subsubsection{A first alternate minimization scheme}
 
-The Lagrangian \(\mathcal{L}\) is not convex, but convex with respect to
+The Lagrangian $\mathcal{L}$ is not convex, but convex with respect to
 each variable taken independently.
 
 Thus, in the spirit of the alternate minimization scheme proposed by
@@ -829,15 +1110,15 @@ can be proposed:
 % \end{aligned}
 % \right.
 % \]
-where \(\iter{n}{\vec{u}}\), \(\iter{n}{d_{\chi}}\) and
-\(\iter{n}{d_{\chi}}\) denote respectively the estimates of the
+where $\iter{n}{\vec{u}}$, $\iter{n}{d_{\chi}}$ and
+$\iter{n}{d_{\chi}}$ denote respectively the estimates of the
 displacement field, micromorphic damage field and damage field at the
 n\textsuperscript{th} iteration of the algorithm.
 
 Each step of the algorithm diminishes the value of the Lagrangian,
 ensuring the convergence of the scheme.
 
-Minimization with respect to \(\vec{u}\) and \(d_{\chi}\) leads to
+Minimization with respect to $\vec{u}$ and $d_{\chi}$ leads to
 solving two standard Partial Differential Equations (PDE), see Equation
 \eqref{eq:micromorphicdamage:mechanical_equilibrium}and
 \eqref{eq:micromorphicdamage:d_chi}. Note that:
@@ -845,11 +1126,11 @@ solving two standard Partial Differential Equations (PDE), see Equation
 %
 %
 \begin{itemize}
-  \item The PDE associated with \(\vec{u}\) is a linear elastic problem with
+  \item The PDE associated with $\vec{u}$ is a linear elastic problem with
   spatially variable mechanical coefficients. This problem becomes non
   linear if unilateral effects are taken into account.
-  \item The PDE associated with \(d_{\chi}\) is always linear and
-  \(\iter{n+1}{d_{\chi}}\) is the solution of (see Equation
+  \item The PDE associated with $d_{\chi}$ is always linear and
+  $\iter{n+1}{d_{\chi}}$ is the solution of (see Equation
   \eqref{eq:micromorphicdamage:d_chi2}):
   \[
   -A_{\chi}\,\LaplacianOperator\,\iter{n+1}{d_{\chi}}+H_{\chi}\,\iter{n+1}{d_{\chi}}=
@@ -860,11 +1141,11 @@ solving two standard Partial Differential Equations (PDE), see Equation
   for an alternative implementation of the phase-field model based on this analogy.
 \end{itemize}
 
-% - The PDE associated with \(\vec{u}\) is a linear elastic problem with
+% - The PDE associated with $\vec{u}$ is a linear elastic problem with
 %   spatially variable mechanical coefficients. This problem becomes non
 %   linear if unilateral effects are taking into account.
-% - The PDE associated with \(d_{\chi}\) is always linear and
-%   \(\iter{n+1}{d_{\chi}}\) is the solution of (see Equation
+% - The PDE associated with $d_{\chi}$ is always linear and
+%   $\iter{n+1}{d_{\chi}}$ is the solution of (see Equation
 %   \eqref{eq:micromorphicdamage:d_chi2}):
 %   \[
 %   -A_{\chi}\,\LaplacianOperator\,\iter{n+1}{d_{\chi}}+H_{\chi}\,\iter{n+1}{d_{\chi}}=
@@ -874,7 +1155,7 @@ solving two standard Partial Differential Equations (PDE), see Equation
 %   thus be solved in most finite element solvers. See \cite{azinpour_simple_2018}
 %   for an alternative implementation of the phase-field model based on this analogy.
 
-Minimization with respect to \(d\) is local and depends on the considered model.
+Minimization with respect to $d$ is local and depends on the considered model.
 % Appendix \ref{sec:micromorphicdamage:damage_evolution} describes
 % the local equations that must be solved in each case.
 
@@ -907,13 +1188,13 @@ one may consider evaluating its value twice, as follows:
 % \right.
 % \]
 
-The damage estimates \(\iter{n+1/2}{d}\) is given by an appropriate
+The damage estimates $\iter{n+1/2}{d}$ is given by an appropriate
 modification of Equation \eqref{eq:micromorphicdamage:damage_estimate}.
 
 \subsubsection{A third alternate minimization scheme}
 
 The third alternate minimization scheme is based on the fact that the
-minimization with respect to \(d\) and \(d_{\chi}\) is convex:
+minimization with respect to $d$ and $d_{\chi}$ is convex:
 \[
 \left\{
 \begin{aligned}
@@ -923,9 +1204,9 @@ minimization with respect to \(d\) and \(d_{\chi}\) is convex:
 \right.
 \]
 
-The evolution of \(d_{\chi}\) is still given by Equation
+The evolution of $d_{\chi}$ is still given by Equation
 \eqref{eq:micromorphicdamage:d_chi} but the determination of the conjugated
-force \(a_{\chi}\) relies locally on the resolution of Equation
+force $a_{\chi}$ relies locally on the resolution of Equation
 \eqref{eq:micromorphicdamage:damage_estimate}.
 As this equation is only linear
 by part, Equation \eqref{eq:micromorphicdamage:d_chi}is indeed non linear and
@@ -933,6 +1214,6 @@ its resolution is performed in this work using a Newton algorithm.
 
 To be more specific, the computation of the stiffness matrix associated
 with Problem \eqref{eq:micromorphicdamage:d_chi}requires the derivative
-\(\deriv{a_{\chi}}{\Delta\,d_{\chi}}\) which is piece-wise constant. In
+$\deriv{a_{\chi}}{\Delta\,d_{\chi}}$ which is piece-wise constant. In
 our numerical experiments, this Newton algorithm usually converges in
 less than 10 iterations.

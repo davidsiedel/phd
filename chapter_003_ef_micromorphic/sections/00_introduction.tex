@@ -1,0 +1,83 @@
+\section{Introduction}
+
+The variational approach to brittle fracture takes its roots in the work of
+Francfort and Marigo \cite{francfort_revisiting_1998,francfort_vers_2002},
+which recasted the Griffith theory into an energy
+minimization problem.
+This revisted approach of the Griffith theory is however not tractable
+with standard numerical methods
+\cite{bourdin_numerical_2000, chambolle_approximation_2018}, in particular
+the commonly used finite element method. For this reason, Bourdin \textit{et
+al.} developed regularized versions \cite{bourdin_numerical_2000} following
+the works of Ambrosio and Tortorelli \cite{ambrosio_approximation_1990}.
+
+\paragraph{Phase field approach to brittle fracture and damage irreversibility consition}
+
+The so-called phase-field approaches to fracture have since become
+widely popular. As pointed by Gerasimov and De Lorenzis in their
+excellent review \cite{gerasimov_numerical_2020}, one of the main
+difficulties in the implementation of those approaches is the treatment
+of the irreversibility constraint (the damage can only increase), a
+question on which a considerable amount of works has been published.
+Most of the proposed solutions are not directly implemented in standard
+FEM or FFT solvers. An noticeable exception to this statement is the
+Miehe' alternative based an the so-called history variable
+\cite{miehe_phase_2010}. However, Miehe' alternative is not variationally
+consistent.
+
+\paragraph{Micromorphic approach to brittle fracture}
+
+A comprehensive framework for 
+micromorphic approaches to various physical problems,
+including brittle fracture, has been developed by Forest in
+\cite{forest_micromorphic_2009, forest_nonlinear_2016}.
+Balance equations arising from
+such micromorphic approaches are
+standard partial differential equations, that can readily be solved by
+most FEM or FFT solvers.
+In particular, these micromorphic behaviours allow to
+deal with the damage irreversibility constraint at integration points,
+instead of having to deal with it in the resolution of balance equations,
+as is the case for the classical Phase field approach \cite{gerasimov_numerical_2020}. These
+advantages have been highlighted by Rezaee-Hajidehi \textit{et al.} in the
+context of phase-field approaches to phase transformation
+\cite{rezaee-hajidehi_micromorphic_2021}.
+%
+%
+%
+Such micromorphic models were recently investigated by Bharali \textit{et al.}
+\cite{bharali_computational_2021} to approximate the AT1 and AT2 models
+using a monolithic resolution strategy.
+
+\paragraph{Outline}
+
+Following Forest' micromorphic framework
+\cite{forest_micromorphic_2009, forest_nonlinear_2016}, a class of micromorphic
+brittle behaviours that can approximate classical models of brittle
+fracture in a variationally consistent way is proposed in
+Section \ref{sec:micromorphicdamage:description}.
+The variational basis of the behaviour is exploited to derive three alternate
+minimization schemes in Section
+\ref{sec:micromorphicdamage:alternate_minimisation}, whose convergence is guaranteed.
+%
+%
+%
+Several test cases comparing the prediction of the classical AT2 model
+and its micromorphic counterpart are presented in Section
+\ref{sec:micromorphicdamage:test_cases}, where
+the choice of the penalization
+parameter which at the foundation of the link between the Phase Field approach and the 
+micromorphic one is discussed in-depth.
+%
+%
+%
+Two numerical experiments are presented in Section
+\ref{sec:micromorphicdamage:numerical_experiments}, which assess:
+%
+%
+%
+\begin{itemize}
+    \item The performance of the micromorphic approach with high order finite
+    elements in the case of shear driven fracture.
+    \item The scalability of the micromorphic approach.
+\end{itemize}

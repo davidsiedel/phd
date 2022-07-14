@@ -1,0 +1,304 @@
+\section{Resolution schemes}
+\label{sec:micromorphicdamage:alternate_minimisation}
+
+\subsection{A first alternate minimization scheme}
+
+\paragraph{Coucou}
+
+Observing that the Lagrangian \eqref{eq:micromorphicdamage:Lagrangian} is not convex \textit{globally}, but convex with respect to
+each variable taken independently, an alternate minimization scheme is the spirit of that proposed by
+Bourdin \textit{et al.} in \cite{bourdin_numerical_2000} is devised.
+It consists in the following iterative scheme
+%
+%
+%
+\begin{equation}
+  \left\{
+    \begin{aligned}
+      \iter{n+1}{\DisplacementField}
+      &
+      =
+      \underset{\VirtualField{\DisplacementField}}{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \VirtualField{\DisplacementField},
+        \iter{n}{\DamageField},
+        \iter{n}{\MicromorphicDamageField}
+      )
+      \\
+      \iter{n+1}{\MicromorphicDamageField}
+      &
+      =
+      \underset{\VirtualField{\MicromorphicDamageField}}{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \iter{n+1}{\DisplacementField},
+        \iter{n}{\DamageField},
+        \VirtualField{\MicromorphicDamageField},
+      )
+      \\
+      \iter{n+1}{\DamageField}
+      &
+      =
+      \underset{\VirtualField{\DamageField}}{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \iter{n+1}{\DisplacementField},
+        \VirtualField{\DamageField},
+        \iter{n+1}{\MicromorphicDamageField},
+      )
+    \end{aligned}
+  \right.
+\end{equation}
+% \[
+% \left\{
+% \begin{aligned}
+% \iter{n+1}{\vec{u}} &= \underset{\vec{u}^{\star}\in C.A.}{\argmin}\, \mathcal{L}\paren{\vec{u}^{\star},\iter{n}{d},\iter{n}{d_{\chi}}}\\
+% \iter{n+1}{d_{\chi}} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},\iter{n}{d},d_{\chi}^{\star}} \\
+% \iter{n+1}{d} &= \argmin \,\mathcal{L}\paren{\iter{n+1}{\vec{u}},d^{\star},\iter{n+1}{d_{\chi}}} \\
+% \end{aligned}
+% \right.
+% \]
+where $\iter{n}{\DisplacementField}$, $\iter{n}{\DamageField}$ and
+$\iter{n}{\MicromorphicDamageField}$ denote respectively the estimates of the
+displacement field, micromorphic damage field and damage field at the
+n\textsuperscript{th} iteration of the algorithm.
+In particular, each step of the algorithm diminishes the value of the Lagrangian,
+ensuring the convergence of the scheme.
+%
+%
+%
+Minimization with respect to $\DisplacementField$ and $\MicromorphicDamageField$ leads to
+solving the two standard Partial Differential Equations (PDE)
+\eqref{eq:ef_micromorphic:formulation:strong_problem_u:eq2}
+and
+\eqref{eq:ef_micromorphic:formulation:strong_problem_d:eq2}.
+%
+%
+%
+% Note that:
+% %
+% %
+% %
+% \begin{itemize}
+%   \item The PDE associated with $\vec{u}$ is a linear elastic problem with
+%   spatially variable mechanical coefficients. This problem becomes non
+%   linear if unilateral effects are taken into account.
+%   \item The PDE associated with $d_{\chi}$ is always linear and
+%   $\iter{n+1}{d_{\chi}}$ is the solution of (see Equation
+%   \eqref{eq:micromorphicdamage:d_chi2}):
+%   \[
+%   -A_{\chi}\,\LaplacianOperator\,\iter{n+1}{d_{\chi}}+H_{\chi}\,\iter{n+1}{d_{\chi}}=
+%   H_{\chi}\,\iter{n}{d}
+%   \]
+%   Note that this PDE is close to the PDE describing heat transfer and can
+%   thus be solved in most finite element solvers. See \cite{azinpour_simple_2018}
+%   for an alternative implementation of the phase-field model based on this analogy.
+% \end{itemize}
+
+\paragraph{Displacement problem}
+
+Considering a linear thermo-elastic material for the definition of the potential
+$\psi_{\tensoriis{F}}$,
+the PDE associated with $\DisplacementField$ is a linear elastic problem with
+spatially variable mechanical coefficients. This problem becomes non
+linear if unilateral effects are taken into account.
+
+\paragraph{Micromorphic damage problem}
+
+The PDE associated with $\MicromorphicDamageField$ is always linear and
+$\iter{n+1}{\MicromorphicDamageField}$ is the solution of (see Equation
+\eqref{eq:micromorphicdamage:d_chi2})
+%
+%
+%
+\begin{equation}
+  -A_{\chi} \, \LaplacianOperator \, \iter{n+1}{\MicromorphicDamageField}
+  +
+  H_{\chi} \, \iter{n+1}{\MicromorphicDamageField}
+  =
+  H_{\chi} \, \iter{n}{\DamageField}
+\end{equation}
+%
+%
+%
+Note that this PDE is close to the PDE describing heat transfer and can
+thus be solved in most finite element solvers. See \cite{azinpour_simple_2018}
+for an alternative implementation of the phase-field model based on this analogy.
+
+% - The PDE associated with $\vec{u}$ is a linear elastic problem with
+%   spatially variable mechanical coefficients. This problem becomes non
+%   linear if unilateral effects are taking into account.
+% - The PDE associated with $d_{\chi}$ is always linear and
+%   $\iter{n+1}{d_{\chi}}$ is the solution of (see Equation
+%   \eqref{eq:micromorphicdamage:d_chi2}):
+%   \[
+%   -A_{\chi}\,\LaplacianOperator\,\iter{n+1}{d_{\chi}}+H_{\chi}\,\iter{n+1}{d_{\chi}}=
+%   H_{\chi}\,\iter{n}{d}
+%   \]
+%   Note that this PDE is close to the PDE describing heat transfer and can
+%   thus be solved in most finite element solvers. See \cite{azinpour_simple_2018}
+%   for an alternative implementation of the phase-field model based on this analogy.
+
+\paragraph{Damage problem}
+
+Minimization with respect to the damage $\DamageField$ is local and depends on the considered model.
+
+% Appendix \ref{sec:micromorphicdamage:damage_evolution} describes
+% the local equations that must be solved in each case.
+
+\subsection{A second alternate minimization scheme}
+
+Since an update of the damage variable is computationally inexpensive,
+compared to the computation of the displacement and micromorphic damage,
+one may consider evaluating its value twice, as follows:
+%
+%
+%
+\begin{equation}
+  \left\{
+    \begin{aligned}
+      \iter{n+1}{\DisplacementField}
+      &
+      =
+      \underset{\VirtualField{\DisplacementField}}{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \VirtualField{\DisplacementField},
+        \iter{n}{\DamageField},
+        \iter{n}{\MicromorphicDamageField}
+      )
+      \\
+      \iter{n+1/2}{\DamageField}
+      &
+      =
+      \underset{\VirtualField{\DamageField}}{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \iter{n+1}{\DisplacementField},
+        \VirtualField{\DamageField},
+        \iter{n}{\MicromorphicDamageField},
+      )
+      \\
+      \iter{n+1}{\MicromorphicDamageField}
+      &
+      =
+      \underset{\VirtualField{\MicromorphicDamageField}}{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \iter{n+1}{\DisplacementField},
+        \iter{n+1/2}{\DamageField},
+        \VirtualField{\MicromorphicDamageField},
+      )
+      \\
+      \iter{n+1}{\DamageField}
+      &
+      =
+      \underset{\VirtualField{\DamageField}}{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \iter{n+1}{\DisplacementField},
+        \VirtualField{\DamageField},
+        \iter{n+1}{\MicromorphicDamageField},
+      )
+    \end{aligned}
+  \right.
+\end{equation}
+%
+%
+%
+where the damage estimate $\iter{n+1/2}{d}$ is given by an appropriate
+modification of Equation \eqref{eq:micromorphicdamage:damage_estimate}.
+
+\subsection{A third alternate minimization scheme}
+\label{sec:micromorphic:third_scheme}
+
+The third alternate minimization scheme is based on the fact that the
+minimization with respect to $\DamageField$ and $\MicromorphicDamageField$ is convex
+
+\paragraph{Dependant variables}
+
+Since the micromorphic damage field $\MicromorphicDamageField$ is an implicit functions of
+the damage field $\DamageField$ (See Equation \eqref{eq:micromorphicdamage:damage_estimate}), the
+total derivative of the micromorphic thermodynamic force $\MicromorphicDamageForceField$
+is given by
+%
+%
+%
+\begin{equation}
+  \label{eq:ef_micromorphic:formulation:implict_damage}
+  \begin{aligned}
+    \derivtot{\MicromorphicDamageForceField}{\MicromorphicDamageField}
+    =
+    \deriv{\MicromorphicDamageForceField}{\MicromorphicDamageField}
+    +
+    \deriv{\MicromorphicDamageForceField}{\DamageField}
+    \deriv{\DamageField}{\MicromorphicDamageField}
+    % 0
+    % \mathfrak{R}_{T}(\mathfrak{U}_{T}(\mathfrak{U}_{\dCell}),
+    % \mathfrak{U}_{\dCell}) = 0
+  \end{aligned}
+\end{equation}
+%
+%
+%
+where the expression of the derivative of the damage field with respect to the micromorphic damage
+field $\partial \DamageField / \partial \MicromorphicDamageField$ is deduced from
+\eqref{eq:micromorphicdamage:damage_estimate}.
+As $\partial \DamageField / \partial \MicromorphicDamageField$ is only linear
+by part, Equation \eqref{eq:ef_micromorphic:formulation:strong_problem_d:eq2} is indeed non-linear.
+% its resolution is performed in this work using a Newton algorithm.
+
+\paragraph{Non-linear micromorphic damage and displacement resolution scheme}
+
+Consequently, the following iterative scheme is considered where the evolution of $\MicromorphicDamageField$ is still given by Equation
+\eqref{eq:ef_micromorphic:formulation:strong_problem_d:eq2} but the where the determination of the conjugated
+force $\MicromorphicDamageForceField$ is given by Equation
+\eqref{eq:ef_micromorphic:formulation:implict_damage}.
+% In practice, non-linear Equation \eqref{eq:ef_micromorphic:formulation:implict_damage} can be
+% solved by an iterative method.
+%
+%
+%
+\begin{equation}
+  \left\{
+    \begin{aligned}
+      \iter{n+1}{\DisplacementField}
+      &
+      =
+      \underset{\VirtualField{\DisplacementField}}{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \VirtualField{\DisplacementField},
+        \iter{n}{\DamageField},
+        \iter{n}{\MicromorphicDamageField}
+      )
+      \\
+      \iter{n+1}{\MicromorphicDamageField},
+      \iter{n+1}{\DamageField}
+      &
+      =
+      \underset{
+        \VirtualField{\MicromorphicDamageField},
+        \VirtualField{\DamageField}
+      }{\argmin} \,
+      \LagrangianOperator{\BodyLagrange}{\text{tot}}(
+        \iter{n+1}{\DisplacementField},
+        \VirtualField{\DamageField},
+        \VirtualField{\MicromorphicDamageField},
+      )
+    \end{aligned}
+  \right.
+\end{equation}
+%
+%
+%
+% where the evolution of $\MicromorphicDamageField$ is still given by Equation
+% \eqref{eq:ef_micromorphic:formulation:strong_problem_d:eq2} but the determination of the conjugated
+% force $\MicromorphicDamageForceField$ relies locally on the resolution of Equation
+% \eqref{eq:micromorphicdamage:damage_estimate}.
+% As this equation is only linear
+% by part, Equation \eqref{eq:ef_micromorphic:formulation:strong_problem_d:eq2}is indeed non linear and
+% its resolution is performed in this work using a Newton algorithm.
+% %
+% %
+% %
+% To be more specific, the computation of the stiffness matrix associated
+% with Problem \eqref{eq:ef_micromorphic:formulation:strong_problem_d:eq2}
+% requires the derivative
+% $\deriv{\MicromorphicDamageForceField}{\DamageField}$ which is piece-wise constant.
+% In
+% our numerical experiments, this Newton algorithm usually converges in
+% less than 10 iterations.
