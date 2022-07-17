@@ -1,0 +1,348 @@
+% Template for Elsevier CRC journal article
+% version 1.2 dated 09 May 2011
+
+% This file (c) 2009-2011 Elsevier Ltd.  Modifications may be freely made,
+% provided the edited file is saved under a different name
+
+% This file contains modifications for Procedia Computer Science
+% but may easily be adapted to other journals
+
+% Changes since version 1.1
+% - added "procedia" option compliant with ecrc.sty version 1.2a
+%   (makes the layout approximately the same as the Word CRC template)
+% - added example for generating copyright line in abstract
+
+%-----------------------------------------------------------------------------------
+
+%% This template uses the elsarticle.cls document class and the extension package ecrc.sty
+%% For full documentation on usage of elsarticle.cls, consult the documentation "elsdoc.pdf"
+%% Further resources available at http://www.elsevier.com/latex
+
+%-----------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                          %%
+%% Important note on usage                                  %%
+%% -----------------------                                  %%
+%% This file should normally be compiled with PDFLaTeX      %%
+%% Using standard LaTeX should work but may produce clashes %%
+%%                                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The '3p' and 'times' class options of elsarticle are used for Elsevier CRC
+%% Add the 'procedia' option to approximate to the Word template
+%\documentclass[3p,times,procedia]{elsarticle}
+\documentclass[3p,times,fleqn]{elsarticle}
+% \documentclass[fleqn]{article}
+
+%% The `ecrc' package must be called to make the CRC functionality available
+\usepackage{ecrc}
+
+%% The ecrc package defines commands needed for running heads and logos.
+%% For running heads, you can set the journal name, the volume, the starting page and the authors
+
+%% set the volume if you know. Otherwise `00'
+\volume{00}
+
+%% set the starting page if not 1
+\firstpage{1}
+
+%% Give the name of the journal
+\journalname{Procedia Computer Science}
+
+%% Give the author list to appear in the running head
+%% Example \runauth{C.V. Radhakrishnan et al.}
+\runauth{}
+
+%% The choice of journal logo is determined by the \jid and \jnltitlelogo commands.
+%% A user-supplied logo with the name <\jid>logo.pdf will be inserted if present.
+%% e.g. if \jid{yspmi} the system will look for a file yspmilogo.pdf
+%% Otherwise the content of \jnltitlelogo will be set between horizontal lines as a default logo
+
+%% Give the abbreviation of the Journal.  Contact the journal editorial office if in any doubt
+\jid{procs}
+
+%% Give a short journal name for the dummy logo (if needed)
+\jnltitlelogo{Procedia Computer Science}
+
+%% Provide the copyright line to appear in the abstract
+%% Usage:
+%   \CopyrightLine[<text-before-year>]{<year>}{<restt-of-the-copyright-text>}
+%   \CopyrightLine[Crown copyright]{2011}{Published by Elsevier Ltd.}
+%   \CopyrightLine{2011}{Elsevier Ltd. All rights reserved}
+\CopyrightLine{2011}{Published by Elsevier Ltd.}
+
+%% Hereafter the template follows `elsarticle'.
+%% For more details see the existing template files elsarticle-template-harv.tex and elsarticle-template-num.tex.
+
+%% Elsevier CRC generally uses a numbered reference style
+%% For this, the conventions of elsarticle-template-num.tex should be followed (included below)
+%% If using BibTeX, use the style file elsarticle-num.bst
+
+%% End of ecrc-specific commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+% if you have landscape tables
+\usepackage[figuresright]{rotating}
+
+% put your own definitions here:
+%   \newcommand{\cZ}{\cal{Z}}
+%   \newtheorem{def}{Definition}[section]
+%   ...
+
+% add words to TeX's hyphenation exception list
+%\hyphenation{author another created financial paper re-commend-ed Post-Script}
+
+% declarations for front matter
+\usepackage{import}
+\usepackage{example}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{../notations}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{import}
+\usepackage{comment}
+% \usepackage{cancel}
+\usepackage{ulem}
+\usepackage{booktabs,xltabular}
+\usepackage{longtable} 
+
+
+\begin{document}
+
+\includecomment{comment_TH}
+% \begin{multicols}{0}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\dochead{}
+%% Use \dochead if there is an article header, e.g. \dochead{Short communication}
+%% \dochead can also be used to include a conference title, if directed by the editors
+%% e.g. \dochead{17th International Conference on Dynamical Processes in Excited States of Solids}
+
+  \title{Implementation of micromorphic approach to brittle fracture}
+
+%% use optional labels to link authors explicitly to addresses:
+
+\author[lsc]{David Siedel}
+\author[psl]{Jacques Besson}
+\author[psl]{Samuel Forest}
+\author[lsc]{Thomas Helfer}
+\author[lm2s,imsia]{Olivier Fandeur}
+
+\address[lsc]{CEA, DES/IRESNE/DEC/SESC/LSC, Département d'Études des Combustibles, Cadarache, France}
+\address[psl]{MINES ParisTech, PSL Research University, MAT - Centre des matériaux, CNRS UMR 7633, Evry BP 87 9103, France}
+\address[lm2s]{CEA, ISAS/DES/DM2S/SEMT/LM2S, Département de Modélisation des Systèmes et des Structures, Saclay, France}
+\address[imsia]{IMSIA, UMR 8193, CNRS-EDF-CEA-ENSTA}
+\address[edf]{EDF R\&D ERMES, 7 Boulevard Gaspard Monge, 91120 Palaiseau, France}
+
+\address{}
+
+  \begin{abstract}
+    This paper describes discusses a class of micromorphic damage behaviours for quasi-brittle
+    materials in the varionnal framework of simple generalized standard materials.
+    Their links with the classical AT1 and AT2 phase-field models is discussed. It is shown that
+    those micromorphic damage behaviours can be seen as approximations of the latter. A numerical
+    parameter allows to control the degree of approximation.
+    Micromorphic damage behaviours exhibits the following advantages:
+    (i) The irreversibility constraint is treated locally, at the integration points.
+    (ii) The balance equations are standard partial derivative equations which can readily be solved
+    by most FEM or FFT solvers.
+    (iii) The variational framework allows the derivation of (at least) three alternate minimisation
+    schemes.
+    % \begin{itemize}
+    %     \item The irreversibility constraint is treated locally, at the integration points.
+    %     \item The balance equations are standard partial derivative equations which can readily be solved
+    %     by most FEM or FFT solvers.
+    %     \item The variational framework allows the derivation of (at least) three alternate minimisation
+    %     schemes.
+    % \end{itemize}
+    Numerical experiments performed using mgis.fenics python module allow to compare numeri-
+    cally the presented micromorphic damage behaviours and the phase field AT1 and AT2 models on a
+    set of tests classically used in the litterature.
+    Finally, those micromorphic damage behaviours have been implemented in the MFEM/MGIS library.
+    This implementation is shown to perform well with higher order finite elements on a test proposed by
+    Alessi et al. A description of the fragmentation of a nuclear fuel pellet demonstrates the applicability
+    of those behavious on large scale industrial problems.
+    % This paper aims at highlighting the link between the
+    % Hu–Washizu variational formulation and the family of Hybrid
+    % Discontinuous Galerkin (HDG) methods, with a focus on one of
+    % their latest refinement, the Hybrid High Order (HHO) method.
+    % % To the best of our knowledge, this link has never been described in the
+    % % litterature.
+    % It is shown that the main ingredients of HDG methods can be derived from the minimization of a Hu–Washizu Lagrangian
+    % where elements are connected by an elastic interface.
+    % % The advanced stabilisation operator introduced by HHO method can't
+    % % however be derived from this approach.
+    % %
+    % %
+    % %
+    % The aim of this perspective is two-fold:
+    % \begin{itemize}
+    %   \item Most introductory materials to HDG/HHO methods
+    %   are focused on mathematical aspects. An approach
+    %   based on physical considerations might help spreading these methods
+    %   to the computational mechanics and engineering communities.
+    %   \item A new resolution algorithm, called cell equilibriume is derived from this approach, and is described
+    %   in depth in this paper as an alternative to the static
+    %   condensation scheme for the elimination of cell unknowns. Advantages
+    %   and disadvantages of both strategies are discussed. Other
+    %   promising lines of research are described, though their detailed
+    %   study is left for future works.
+    % \end{itemize}
+    % %
+    % %
+    % %
+    % Practical implementation of these methods is also discussed
+    % in depth using notations closed to the ones used in standard finite
+    % elements textbooks, highlighting the use of polyhedral cells and the
+    % use of approximation spaces based on polynomials of arbitrary
+    % orders.
+    % %
+    % %
+    % %
+    % The resolution of axi-symmetrical problems, which has seldom,
+    % if ever, been discussed in the literature, is then presented.
+    % %
+    % %
+    % %
+    % Numerical examples prove the robustness of the method
+    % with regards to volumetric locking and the applicability
+    % of the new resolution scheme.
+  \end{abstract}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+Computational mechanics \sep Brittle fracture
+\end{keyword}
+
+\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+% \linenumbers
+
+%% main text
+
+\tableofcontents
+
+\input{../chapter_003_ef_micromorphic/sections/00_introduction.tex}
+\input{../chapter_003_ef_micromorphic/sections/01_formulation.tex}
+\input{../chapter_003_ef_micromorphic/sections/02_links.tex}
+\input{../chapter_003_ef_micromorphic/sections/03_resolution.tex}
+\input{../chapter_003_ef_micromorphic/sections/04_numerical_exemples.tex}
+\input{../chapter_003_ef_micromorphic/sections/05_conclusion.tex}
+
+% \input{parts/introduction.tex}
+% \input{parts/model_problem.tex}
+% \input{parts/composite_demo.tex}
+% \input{parts/discretization.tex}
+% \input{parts/numerical_exemples.tex}
+% \input{parts/conclusion.tex}
+
+\section*{Aknowledgements}
+
+The work presented in this paper was conducted in the framework of
+the PLEIADES project, which was supported financially by the CEA
+(Commissariat à l’Énergie Atomique et aux Énergies Alternatives), EDF
+(Électricité de France) and Framatome.
+
+% \appendix
+% \label{sec_appendix}
+
+% \input{parts/notations.tex}
+% \input{parts/appendix_hu_washizu.tex}
+% \input{parts/appendix_rec_grad.tex}
+% \input{parts/appendix_implementation.tex}
+
+
+\bibliography{../bib_all}
+\bibliographystyle{elsarticle-num}
+
+%% Authors are advised to use a BibTeX database file for their reference list.
+%% The provided style file elsarticle-num.bst formats references in the required Procedia style
+
+%% For references without a BibTeX database:
+
+% \begin{thebibliography}{00}
+
+%% \bibitem must have the following form:
+%%   \bibitem{key}...
+%%
+
+% \bibitem{}
+
+% \end{thebibliography}
+
+% \end{multicols}
+
+\end{document}
+
+%%
+%% End of file `ecrc-template.tex'. 

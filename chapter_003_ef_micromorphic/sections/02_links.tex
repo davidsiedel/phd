@@ -27,7 +27,7 @@ of the total Lagrangian \eqref{eq:ef_micromorphic:formulation:total_lagrangian_1
     +
     \int_{\BodyLagrange} \Frac{H_{\chi}}{2} \, \paren{\DamageField - \MicromorphicDamageField}^{2}
     +
-    \int_{\BodyLagrange} \mathrm{I}_{\mathbb{R}_{+}} (\DamageField - \DamageField \TraceOperator{t + \Delta \, t})
+    \int_{\BodyLagrange} \mathrm{I}_{\mathbb{R}_{+}} (\DamageField - \DamageField \TraceOperator{t})
     \\
     &
     -
@@ -39,7 +39,7 @@ of the total Lagrangian \eqref{eq:ef_micromorphic:formulation:total_lagrangian_1
 %
 %
 %
-where the constant term $Y_{0}\,\ets{d}$, which thus does not have
+where the constant term $Y_{0} \, \DamageField \TraceOperator{t}$, which thus does not have
 any influence of the solution, has been removed from the expression of
 the Lagrangian.
 
@@ -72,7 +72,7 @@ The Lagrangian \eqref{eq:micromorphicdamage:Lagrangian} is thus expected to have
     \\
     &
     +
-    \int_{\BodyLagrange} \mathrm{I}_{\mathbb{R}_{+}} (\DamageField - \DamageField \TraceOperator{t + \Delta \, t})
+    \int_{\BodyLagrange} \mathrm{I}_{\mathbb{R}_{+}} (\DamageField - \DamageField \TraceOperator{t})
     \\
     &
     -
@@ -112,7 +112,7 @@ convergence, to the solution of the initial problem in some specific cases
 
 Two regularization models were introduced in \cite{ambrosio_approximation_1990}.
 The first one, namely the AT1 model, allows to recover the initial problem formulated in \cite{francfort_revisiting_1998}
-for infinitely small values of the characteristic length, and
+for infinitely small values of the characteristic length defining the thckness of the smeared crack, and
 such that initiation of damage occurs on the onset of some yield criterion. Choosing the following potentials and values
 for the definition of the micromorphic model allows to recover the AT1 model
 %
@@ -202,7 +202,7 @@ is thus mesh dependant, since the value of characteristic length must
 be greater than the element size in order to be captured.
 Therefore, Lorentz \textit{et. al.} \cite{lorentz_gradient_2011,lorentz_convergence_2011}
 alleviated this constraint by proposing an extension of the regularization proposed in
-\cite{bourdin_implementation_2000} through the AT1 and AT2 models, that introduces
+\cite{bourdin_implementation_2000}, that introduces
 a state variable $\gamma$ related to the yield strength of the material. The following values for the
 proposed micromorphic approach hence yield Lorentz gradient damage model
 %

@@ -3,7 +3,7 @@
 
 In this section, the proposed micromorphic apporoach to brittle fracture
 is evaluated on numerical applications.
-classical test cases taken from the literature.
+% classical test cases taken from the literature.
 The first three are classical test cases taken from the literature and have been performed using the
 \texttt{mgis.fenics} implementation. Implementations are freely available on the following repository: \url{https://github.com/davidsiedel/h2o_paper}.
 They aim at comparing both the classical phase field approach to the proposed micromorphic one.
@@ -13,11 +13,12 @@ elements in the case of shear driven fracture, and the scalability of the approa
 
 \paragraph{Hypotheses}
 
-For all the applications in this section, a spectral decomposition of the thermo-elastic energy potential
+For the first two and the last applications in this section, a spectral decomposition of the thermo-elastic energy potential
 $\psi_{\tensoriis{\varepsilon}}$ in the framework of
 small deformations is considered, where $\tensorii{\varepsilon}$ denotes the linearized strain tensor.
-Test cases in 2 dimension assume a plane strain hypothesis, and the framework of
-small deformations is adopted.
+Test cases in 2 dimension assume a plane strain hypothesis.
+% , and the framework of
+% small deformations is adopted.
 The penalization parameter $H_{\chi}$ is chosen as
 %
 %
@@ -113,7 +114,7 @@ standard AT2 model based on the resolution of the variational inequality.
 
 \paragraph{Specimen and loading}
 
-The second test case describes a square plate length 1mm,
+The second test case describes a square plate of length 1mm,
 that is clamped at the bottom in the vertical direction (see Figure \ref{fig:micromorphic_formulation:shear_plate}).
 A tangential displacement of amplitude 0.125mm is applied at the top of the specimen, and one of the vertices
 of the plate is fixed to prevent rigid body motions in the tangential direction.
@@ -239,7 +240,7 @@ where $K = 175$ GPa is the bulk modulus, $\mu = 80.77$ Gpa is the shear modulus,
 deviatoric part of the elastic strain, and $\tensorii{\varepsilon}{}^{\text{sph}}$ is the spherical
 part.
 The chosen micromorphic damage is described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
-with a fracture energy release rate $G_c=2.7$ J/m2${}^2$, and a characteristic length $\ell_c = 0.025$ mm.
+with a fracture energy release rate $G_c=2.7$ J/mm${}^2$, and a characteristic length $\ell_c = 0.025$ mm.
 For damage initiation to localize at the center of the specimen, a degraded fracture energy release rate $G_c^{m}=0.99 G_c$
 is imposed in a square of size $0.05$mm at the middle of the rod.
 
@@ -247,7 +248,7 @@ is imposed in a square of size $0.05$mm at the middle of the rod.
 
 As stated by \textit{Alessi et al.}, this model leads to quasi-incompressible
 behaviour in highly damaged zones, and Lagrange elements are not able to
-properly describe the damage localization band as well as the dissipated energy
+properly describe the damage localization band as well as the energy dissipated
 by the crack propagation. They then showed that various
 classical approaches (selective reduced integration and mixed
 displacement/pressure formulation) can overcome this issue.
@@ -365,7 +366,7 @@ Assuming a constant thermal conductivity, a temperature load $T(r, t)$ is impose
 %
 %
 \begin{equation}
-  T(r, t) = (T_{\mathrm{c}} - T_{\mathrm{o}}) (t) \, (1-r^{2}) + T_{\mathrm{o}}
+  T(r, t) = (T_{\mathrm{c}} - T_{\mathrm{o}}) t \, (1-r^{2}) + T_{\mathrm{o}}
 \end{equation}
 %
 %
@@ -432,15 +433,15 @@ thermal expansion coefficient $\alpha  = 1 \, \cdot\,10^{-5}$K${}^{-1}$.
 %
 %
 The chosen micromorphic damage is described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
-with a fracture energy release rate $G_c=2.7$ J/m2${}^2$, and a characteristic length $\ell_c = 0.025$ mm.
+with a fracture energy release rate $G_c=2.7$ J/mm${}^2$, and a characteristic length $\ell_c = 0.025$ mm.
 For damage initiation to localize anywhere in the specimen, a random uniform distribution of the
-fracture energy release rate with a mean value $G_c^{\text{mean}}=G_c$ and a standard deviation $G_c^{\text{std}}=0.2$
+fracture energy release rate with a mean value $G_c^{\text{mean}}=G_c$ and a standard deviation $G_c^{\text{std}}=\textcolor{red}{XXX}$
 is imposed in the pellet.
 
 \paragraph{Large scale computation}
 
 Damage patterns for the cracking of the fuel pellet are given in Figure \ref{fig:micromorphic_damage:pellet_cracked}.
-The mesh is composed of \(33\,230\,848\) triangles, \(132\,923\,392\) nodes, leading to a mechanical problem with
+The mesh is composed of \(33\,230\,848\) triangles and \(132\,923\,392\) nodes, leading to a mechanical problem with
 \(22.10^6\) degrees of freedom. This large scale test case assesses the adaptivity of the micromorphic approach to industrial
 applications. Using the micromorphic approach, the irreversibility condition for the damage field is dealt with at quadrature points,
 and is thus fully parallel, hence avoiding the need to deploy the \(132\,923\,392\) Lagrange multipliers that would have been necessary

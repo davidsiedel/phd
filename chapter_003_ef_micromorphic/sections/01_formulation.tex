@@ -79,7 +79,7 @@ In the spirit of \cite{forest_micromorphic_2009}, the following stresses are int
         && &&
         \MicromorphicDamageForceField = \deriv{\psi_{\BodyLagrange}}{\MicromorphicDamageField}
         && &&
-        \DamageForceField = \deriv{\psi_{\BodyLagrange}}{\DamageField}
+        \DamageForceField = -\deriv{\psi_{\BodyLagrange}}{\DamageField}
     \end{aligned}
 \end{equation}
 %
@@ -433,7 +433,7 @@ it penalizes the localization of the micromorphic damage field $\MicromorphicDam
     \end{alignat}
 \end{subequations}
 
-\paragraph{Micromorphic damage relation}
+\paragraph{Damage and micromorphic damage relation}
 
 Substituting \eqref{eq:micromorphicdamage:achi:eq1} and \eqref{eq:micromorphicdamage:bchi:eq1} in
 the expression of the governing equation \eqref{eq:ef_micromorphic:formulation:strong_problem_d:eq2}
