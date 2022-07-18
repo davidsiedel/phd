@@ -95,7 +95,7 @@ Using vector notations, $\tensori{u}{}_{T}^h$ (respectively $\tensori{u}{}_{F}^h
     &&
     \tensori{u}{}_{F}^h = \mathfrak{U}_F \cdot \mathfrak{B}_F^h
     &&
-    \forall F \in \mathcal{F}(\bodyLag)
+    \forall F \in \mathcal{F}(\bodyLag).
   \end{aligned}
 \end{equation}
 
@@ -122,7 +122,7 @@ the piece-wise continuous displacements such that:
     \tensori{u}{}_{\mathcal{F}}^h \vert_{F}
     % = \tensori{u}{}_{F}^h = \mathfrak{U}_F \cdot \mathfrak{B}_F^h
     &&
-    \forall F \in \mathcal{F}
+    \forall F \in \mathcal{F},
   \end{aligned}
 \end{equation}
 % 
@@ -146,7 +146,7 @@ that
   \begin{aligned}
     \tensori{u}{}_{\dCell}^h \vert_F = \tensori{u}{}_{F}^h
     &&
-    \forall F \in \mathcal{F}(T)
+    \forall F \in \mathcal{F}(T),
   \end{aligned}
 \end{equation}
 % $\tensori{u}{}_{\dCell}^h \vert_F = \tensori{u}{}_{F}^h, \forall F
@@ -187,15 +187,15 @@ Lagrangian~\eqref{eq_total_lagragian_bis}:
     \tensori{\hat{u}}{}_{\cell}^h - \int_{\cell} \tensori{f}{}_V \cdot
     \tensori{\hat{u}}{}_{\cell} - \int_{\dCell{}}
     \tensori{\theta}{}_{\cell}^h \cdot \tensori{\hat{u}}{}_{\cell}^h
-    \vert_{\dCell} && \ \ \ \ \ \ \ \ && \forall
-    \hat{\mathfrak{U}}_{\cell} % \in \virtualDisplacementSpaceCell
+    \vert_{\dCell} && \qquad && \forall
+    \hat{\mathfrak{U}}_{\cell}, % \in \virtualDisplacementSpaceCell
     \label{eq_final_problem_00:eq0} \\
     \mathfrak{R}_{\dCell}(\mathfrak{U}_{\cell},
     \mathfrak{U}_{\dCell}) \cdot \mathfrak{\hat{U}}_{\dCell}
     % \int_{\mathcal{F}} R_{\mathcal{F}}(\tensori{u}{}_{\mathcal{T}}, \tensori{u}{}_{\mathcal{F}}) \cdot \tensori{\hat{u}}{}_{\mathcal{F}}
  = & \int_{\dCell} (\tensori{\theta}{}_{\cell}^h -
     \tensori{t}{}_{\neumannCell}) \cdot \tensori{\hat{u}}{}_{\dCell}^h
-    && \ \ \ \ \ \ \ \ && \forall \hat{\mathfrak{U}}_{\dCell}
+    && \qquad && \forall \hat{\mathfrak{U}}_{\dCell},
     % \in \virtualDisplacementSpaceDCell \label{eq_final_problem_00:eq1}
     \label{eq_final_problem_00:eq1} \\
   \end{alignat}
@@ -216,7 +216,7 @@ equations \eqref{eq_stress} and \eqref{eq_grad} respectively such that:
     \tensorii{\tau}{}_{\cell}^h + \int_{\dCell}
     (\tensori{v}{}_{\dCell}^h - \tensori{v}{}_{\cell}^h \vert_{\dCell})
     \cdot \tensorii{\tau}{}_{\cell}^h \vert_{\dCell} \cdot \tensori{n}{}
-    && \forall \tensorii{\tau}{}_{\cell}^h \in S^h(\cell)
+    && \forall \tensorii{\tau}{}_{\cell}^h \in S^h(\cell),
   \end{aligned}
 \end{equation}
 %
@@ -238,7 +238,7 @@ zero
     \mathfrak{R}_{\cell}(\mathfrak{U}_{\cell}, \mathfrak{U}_{\dCell})
     = 0 && \text{and} &&
     \mathfrak{R}_{\dCell}(\mathfrak{U}_{\cell}, \mathfrak{U}_{\dCell})
-     = 0
+     = 0,
   \end{aligned}
 \end{equation}
 %
@@ -267,7 +267,7 @@ discrete problem satisfies:
     \hat{\mathfrak{U}}_{\mathcal{F}},
     \mathfrak{R}_{\mathcal{F}}(\mathfrak{U}_{\mathcal{T}},
     \mathfrak{U}_{\mathcal{F}}) \cdot \mathfrak{\hat{U}}_{\mathcal{F}} =
-    0
+    0,
   \end{aligned}
 \end{equation}
 where the vector
@@ -285,7 +285,7 @@ $\mathfrak{R}_{\mathcal{F}}(\mathfrak{U}_{\mathcal{T}},
       \mathcal{F}^e_N(\bodyLag{})} \int_{F}
     (\tensori{\theta}{}_{\cell_F}^h - \neumannLag) \cdot
     \tensori{\hat{u}}{}_{F}^h && \forall
-    \hat{\mathfrak{U}}_{\mathcal{F}}
+    \hat{\mathfrak{U}}_{\mathcal{F}},
   \end{aligned}
 \end{equation}
 %
@@ -379,7 +379,7 @@ by:
 \[
 \iter{n}{\delta}\mathfrak{U}_{\mathcal{F}}=
 -\left( \frac{d\mathfrak{R}_{\mathcal{F}}}{d \mathfrak{U}_{\mathcal{F}}}
-\right)^{-1} \,\cdot\,\iter{n}{\mathfrak{R}}_{\mathcal{F}}
+\right)^{-1} \,\cdot\,\iter{n}{\mathfrak{R}}_{\mathcal{F}},
 \]
 with
 \(\iter{n}{\delta}\mathfrak{U}_{\mathcal{F}}=\iter{n+1}{\mathfrak{U}_{\mathcal{F}}}-\iter{n}{\mathfrak{U}_{\mathcal{F}}}\).
@@ -400,7 +400,7 @@ as follows:
       \mathfrak{U}_{\mathcal{F}}} \cdot \delta
     \mathfrak{U}_{\mathcal{F}} + \frac{\partial
       \mathfrak{R}_{\mathcal{F}}}{\partial \mathfrak{U}_{\mathcal{F}}}
-    \cdot \delta \mathfrak{U}_{\mathcal{F}}
+    \cdot \delta \mathfrak{U}_{\mathcal{F}},
   \end{aligned}
 \end{equation}
 Applying the implicit function theorem to
@@ -412,7 +412,7 @@ Applying the implicit function theorem to
       \mathfrak{U}_{\mathcal{T}}}{\partial \mathfrak{U}_{\mathcal{F}}} =
     - \frac{\partial \mathfrak{U}_{\mathcal{T}}}{\partial
       \mathfrak{R}_{\mathcal{T}}} \frac{\partial
-      \mathfrak{R}_{\mathcal{T}}}{\partial \mathfrak{U}_{\mathcal{F}}}
+      \mathfrak{R}_{\mathcal{T}}}{\partial \mathfrak{U}_{\mathcal{F}}}.
   \end{aligned}
 \end{equation}
 Injecting \eqref{eq_cell_equilibrium_2} in
@@ -429,7 +429,7 @@ the face resiudal with respect to the face displacement
     \frac{\partial \mathfrak{U}_{\mathcal{T}}}{\partial
       \mathfrak{R}_{\mathcal{T}}} \frac{\partial
       \mathfrak{R}_{\mathcal{T}}}{\partial \mathfrak{U}_{\mathcal{F}}}
-    \cdot \delta \mathfrak{U}_{\mathcal{F}}
+    \cdot \delta \mathfrak{U}_{\mathcal{F}}.
   \end{aligned}
 \end{equation}
 
@@ -441,13 +441,13 @@ follows:
 \[
 \mathfrak{U}_{\mathcal{F}}=
 \mathfrak{U}_{\mathcal{F}}-\hat{\mathbb{K}}^{-1}\,\cdot\,\mathfrak{R}_{\mathcal{F}}\paren{\mathfrak{U}_{\mathcal{T}}\paren{\mathfrak{U}_{\mathcal{F}}},
- \mathfrak{U}_{\mathcal{F}}}
+ \mathfrak{U}_{\mathcal{F}}},
 \]
 where \(\hat{\mathbb{K}}\) is a preconditionning matrix. This equation leads to the following fixed iteration scheme:
 \[
 \iter{n+1}{\mathfrak{U}_{\mathcal{F}}}=\iter{n}{\mathfrak{U}_{\mathcal{F}}}
 - \hat{\mathbb{K}}^{-1}\,\cdot\,\mathfrak{R}_{\mathcal{F}}\paren{\mathfrak{U}_{\mathcal{T}}\paren{\iter{n}{\mathfrak{U}_{\mathcal{F}}}},
-  \iter{n}{\mathfrak{U}_{\mathcal{F}}}}
+  \iter{n}{\mathfrak{U}_{\mathcal{F}}}}.
 \]
 %
 %
@@ -522,7 +522,7 @@ $\iter{n}{\delta}\mathfrak{U}_{\dCell}$ are given by:
   \mathbb{K}_{\cell\dCell} \\
   \mathbb{K}_{\dCell\cell} &
   \mathbb{K}_{\dCell\dCell} \\
-\end{pmatrix}
+\end{pmatrix},
 \end{equation}
 %
 %
@@ -539,7 +539,7 @@ $\iter{n}{\delta}\mathfrak{U}_{\cell}$ can thus be expressed as:
   \label{eq:cell_unknown_correction}
   \iter{n}{\delta}\mathfrak{U}_{\cell}=
   -\mathbb{K}_{\cell\cell}^{-1}\,\cdot\,\,\iter{n}{\mathfrak{R}}_{\mathcal{\cell}}
-  -\mathbb{K}_{\cell\cell}^{-1}\,\cdot\,\mathbb{K}_{\cell\dCell}\,\cdot\,\iter{n}{\delta}\mathfrak{U}_{\dCell}
+  -\mathbb{K}_{\cell\cell}^{-1}\,\cdot\,\mathbb{K}_{\cell\dCell}\,\cdot\,\iter{n}{\delta}\mathfrak{U}_{\dCell},
 \end{equation}
 %
 %
@@ -551,7 +551,7 @@ $\iter{n}{\delta}\mathfrak{U}_{\dCell}$ satisfies:
   -\mathbb{K}_{\dCell\cell}\,\cdot\,\mathbb{K}_{\cell\cell}^{-1}\,\cdot\,\mathbb{K}_{\cell\dCell}
  }\,\cdot\, \iter{n}{\delta}\mathfrak{U}_{\dCell}=
 -\iter{n}{\mathfrak{R}}_{\mathcal{\dCell}}
-+\mathbb{K}_{\dCell\cell}\,\cdot\,\mathbb{K}_{\cell\cell}^{-1}\,\cdot\,\,\iter{n}{\mathfrak{R}}_{\mathcal{\cell}}
++\mathbb{K}_{\dCell\cell}\,\cdot\,\mathbb{K}_{\cell\cell}^{-1}\,\cdot\,\,\iter{n}{\mathfrak{R}}_{\mathcal{\cell}},
 \]
 %
 %
@@ -564,7 +564,7 @@ or, introducing the condensed quantities
 \(\mathbb{K}_{\dCell\cell}^{c}\):
 \[
 \mathbb{K}_{\dCell\dCell}^{c}\,\cdot\,\iter{n}{\delta}\mathfrak{U}_{\dCell}=
--\iter{n}{\left.\mathfrak{R}^{c}_{\mathcal{\dCell}}\right.}
+-\iter{n}{\left.\mathfrak{R}^{c}_{\mathcal{\dCell}}\right.},
 \]
 %
 %
@@ -586,7 +586,7 @@ where
     \mathfrak{R}^{(n), c}_{\mathcal{\dCell}}
     =
     -\iter{n}{\mathfrak{R}}_{\mathcal{\dCell}}
-    +\mathbb{K}_{\dCell\cell}\,\cdot\,\mathbb{K}_{\cell\cell}^{-1}\,\cdot\,\,\iter{n}{\mathfrak{R}}_{\mathcal{\cell}}
+    +\mathbb{K}_{\dCell\cell}\,\cdot\,\mathbb{K}_{\cell\cell}^{-1}\,\cdot\,\,\iter{n}{\mathfrak{R}}_{\mathcal{\cell}},
   \end{aligned}
   % \iter{n}{\left.\mathfrak{R}^{c}_{\mathcal{\dCell}}\right.}
 \end{equation}
@@ -641,7 +641,7 @@ follows~\cite{lorentz_variational_1999,forest_localization_2004}:
   -
   \int_{\cell} \loadLag{} \cdot \tensori{u}{}_{\cell{}}
   -
-  \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\dCell{}}
+  \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\dCell{}},
 \end{equation}
 %
 %

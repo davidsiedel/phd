@@ -84,7 +84,7 @@ The core of the element $\Bulk{}$ is made out of the same material that composes
 %
 \begin{equation}
     \label{eq_0009}
-        \mecPotential{}_{\Crown} = \frac{1}{2} \beta \frac{\ell}{h_{\cell}} \nabla \tensori{u}{}_{\Crown} : \nabla \tensori{u}{}_{\Crown}
+        \mecPotential{}_{\Crown} = \frac{1}{2} \beta \frac{\ell}{h_{\cell}} \nabla \tensori{u}{}_{\Crown} : \nabla \tensori{u}{}_{\Crown},
 \end{equation}
 %
 %
@@ -113,10 +113,10 @@ By continuity of the displacement field between $\Bulk{}$ and $\dCell$,  the dis
     \label{eq_conformity}
         \begin{alignat}{2}
         \tensori{u}{}_{\Crown} \vert_{\dBulk} & = \tensori{u}{}_{\Bulk} \vert_{\dBulk}
-        \label{eq_conformity:eq1}
+        \label{eq_conformity:eq1},
         \\
         \tensori{u}{}_{\Crown} \vert_{\dCell} & = \tensori{u}{}_{\dCell}
-        \label{eq_conformity:eq2}
+        \label{eq_conformity:eq2}.
     \end{alignat}
 \end{subequations}
 
@@ -142,7 +142,7 @@ By combining both the Lagragian of the core $\Bulk{}$ and that of the interface 
     % -
     % \int_{\Crown} \loadLag \cdot \tensori{u}{}_{\Crown}
     -
-    \int_{\neumannCell} \neumannCellLoad \cdot \tensori{u}{}_{\dCell}
+    \int_{\neumannCell} \neumannCellLoad \cdot \tensori{u}{}_{\dCell},
 \end{equation}
 
 % ---------------------------------------------------------
@@ -170,7 +170,7 @@ its gradient is homogeneous in $\Crown{}$ along $\tensori{n}$
     =
     \frac{\tensori{u}{}_{\dCell}
     -
-    \tensori{u}{}_{\Bulk} \vert_{\dBulk} }{\ell} \otimes \tensori{n}
+    \tensori{u}{}_{\Bulk} \vert_{\dBulk} }{\ell} \otimes \tensori{n}.
 \end{equation}
 % 
 % 
@@ -193,7 +193,7 @@ Likewise, let assume that $\tensorii{P}{}_{\Crown}$ is constant along the direct
         &&
         \text{on}
         &&
-        \dBulk{}
+        \dBulk{}.
         % &&
         % \text{in}
         % &&
@@ -244,7 +244,7 @@ a simplified expression of \eqref{eq_hu_washizu_split} is obtained
         -
         \int_{\cell} \loadLag{} \cdot \tensori{u}{}_{\cell{}}
         -
-        \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\dCell{}}
+        \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\dCell{}},
     \end{aligned}
 \end{equation}
 %
@@ -294,7 +294,7 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             &&
             \ \ \ \ \ \ \ \ 
             &&
-            \forall \delta \tensori{u}{}_{\cell}
+            \forall \delta \tensori{u}{}_{\cell},
             % \in \virtualDisplacementSpaceCell
         \label{eq_0017:eq0}
         \\
@@ -304,7 +304,7 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             &&
             \ \ \ \ \ \ \ \ 
             &&
-            \forall \delta \tensori{u}{}_{\dCell}
+            \forall \delta \tensori{u}{}_{\dCell},
             % \in \virtualDisplacementSpaceDCell
         \label{eq_0017:eq1}
         \\
@@ -315,7 +315,7 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             &&
             \ \ \ \ \ \ \ \ 
             &&
-            \forall \delta \tensorii{P}{}_{\cell}
+            \forall \delta \tensorii{P}{}_{\cell},
             % \in \stressSpaceCell
         \label{eq_0017:eq3}
         \\
@@ -325,7 +325,7 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             &&
             \ \ \ \ \ \ \ \ 
             &&
-            \forall \delta \tensorii{G}{}_{\cell}
+            \forall \delta \tensorii{G}{}_{\cell},
             % \in \gradSpaceCell
         \label{eq_0017:eq2}
     \end{alignat}
@@ -364,7 +364,7 @@ Since minimization of \eqref{eq_0017:eq3} defines a linear problem with any disp
         +
         \int_{\dCell} (\tensori{v}{}_{\dCell} - \tensori{v}{}_{\cell} \vert_{\dCell}) \cdot \tensorii{\tau}{}_{\cell} \vert_{\dCell} \cdot \tensori{n}{}
         &&
-        \forall \tensorii{\tau}{}_{\cell}
+        \forall \tensorii{\tau}{}_{\cell},
         % \in \stressSpaceCell
     \end{aligned}
 \end{equation}
@@ -388,7 +388,7 @@ Likewise, \eqref{eq_0017:eq2} is eliminated from \eqref{eq_0017} since it is lin
 \begin{equation}
     \label{eq_stress}
     \begin{aligned}
-        \tensorii{P}{}_{\cell} = \frac{\partial \mecPotential_{\bodyLag}}{\partial \tensorii{G}{}_{\cell}}
+        \tensorii{P}{}_{\cell} = \frac{\partial \mecPotential_{\bodyLag}}{\partial \tensorii{G}{}_{\cell}}.
     \end{aligned}
 \end{equation}
 
@@ -414,7 +414,7 @@ A new total Lagrangian $L_{\cell}^{HDG}$ arises from the simplified problem such
         -
         \int_{\cell} \loadLag{} \cdot \tensori{u}{}_{\cell{}}
         -
-        \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\dCell{}}
+        \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\dCell{}},
     \end{aligned}
 \end{equation}
 %
@@ -431,9 +431,9 @@ with respective cell and boundary displacement variations:
             -
             \int_{\dCell{}} \tensori{\theta}{}_{\cell} \cdot \delta \tensori{u}{}_{\cell} \vert_{\dCell}
             &&
-            \ \ \ \ \ \ \ \ 
+            \qquad
             &&
-            \forall \delta \tensori{u}{}_{\cell}
+            \forall \delta \tensori{u}{}_{\cell},
             % \in \virtualDisplacementSpaceCell
         \label{eq_final_problem:eq0}
         \\
@@ -441,11 +441,15 @@ with respective cell and boundary displacement variations:
             = &
             \int_{\neumannCell} (\tensori{\theta}{}_{\cell} - \tensori{t}{}_{\neumannCell}) \cdot \delta \tensori{u}{}_{\dCell}
             &&
-            \ \ \ \ \ \ \ \ 
-            % \in \virtualDisplacementSpaceDCell
+            \qquad
+            &&
+            \forall \delta \tensori{u}{}_{\dCell},
         \label{eq_final_problem:eq1}
     \end{alignat}
 \end{subequations}
+%
+%
+%
 where $\tensorii{P}{}_{\cell}$ is defined by \eqref{eq_stress} and
 depends on $\tensorii{G}{}_{\cell}$ which solves \eqref{eq_grad}.
 
@@ -457,7 +461,7 @@ The proposed large deformation formulation also allows for a natural transition 
 %
 %
 \begin{equation}
-    \tensorii{\varepsilon}{}_{\cell} - \nabla^s \tensori{u}{}_{\cell} = 0
+    \tensorii{\varepsilon}{}_{\cell} - \nabla^s \tensori{u}{}_{\cell} = 0,
 \end{equation}
 %
 %
@@ -485,7 +489,7 @@ The stress tensor $\tensorii{P}{}_{\cell}$ is then identified with the Cauchy st
         -
         \int_{\cell} \loadLag{} \cdot \tensori{u}{}_{\cell{}}
         -
-        \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\dCell{}}
+        \int_{\neumannCell{}} \neumannCellLoad{} \cdot \tensori{u}{}_{\dCell{}},
     \end{aligned}
 \end{equation}
 %
@@ -504,7 +508,7 @@ where for any pair $(\tensori{v}{}_{\cell}, \tensori{v}{}_{\dCell})$ the \textit
         +
         \int_{\dCell} (\tensori{v}{}_{\dCell} - \tensori{v}{}_{\cell} \vert_{\dCell}) \cdot \tensorii{\tau}{}_{\cell} \vert_{\dCell} \cdot \tensori{n}{}
         &&
-        \forall \tensorii{\tau}{}_{\cell}
+        \forall \tensorii{\tau}{}_{\cell},
         % \in \stressSpaceCell
     \end{aligned}
 \end{equation}
@@ -518,7 +522,7 @@ and the Cauchy stress is the derivative of the potential $\mecPotential_{\bodyLa
 \begin{equation}
     \label{eq_stress_ss}
     \begin{aligned}
-        \tensorii{\sigma}{}_{\cell} = \frac{\partial \mecPotential_{\bodyLag}}{\partial \tensorii{\varepsilon}{}_{\cell}}
+        \tensorii{\sigma}{}_{\cell} = \frac{\partial \mecPotential_{\bodyLag}}{\partial \tensorii{\varepsilon}{}_{\cell}}.
     \end{aligned}
 \end{equation}
 

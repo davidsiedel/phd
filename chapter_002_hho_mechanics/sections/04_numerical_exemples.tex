@@ -58,7 +58,7 @@ quadrangles. The thermal loading is given by:
 %
 %
 \begin{equation}
-    T(r,z) = 4 (T_{max} - T_{min}) \, r \, (1 - r) + T_{min}
+    T(r,z) = 4 (T_{max} - T_{min}) \, r \, (1 - r) + T_{min},
 \end{equation}
 %
 %
@@ -137,7 +137,7 @@ An isotropic hardening energy potential $\mecPotential{}_{\bodyLag{}}^p$ is chos
 \begin{equation}
     \mecPotential{}_{\bodyLag{}}^p(p)
     =
-    \sigma_0 p + \frac{1}{2} H p^2 + (\sigma_{\infty} - \sigma_0)(p - \frac{1 - e^{-\delta p}}{\delta})
+    \sigma_0 p + \frac{1}{2} H p^2 + (\sigma_{\infty} - \sigma_0)(p - \frac{1 - e^{-\delta p}}{\delta}),
 \end{equation}
 %
 %
@@ -147,7 +147,7 @@ where the parameter $p$ denotes the equivalent plastic strain and a Von Mises yi
 %
 %
 \begin{equation}
-    f = \sqrt{\frac{3}{2}} \rVert \text{dev} (\tensorii{\sigma}) \lVert - p
+    f = \sqrt{\frac{3}{2}} \rVert \text{dev} (\tensorii{\sigma}) \lVert - \frac{\partial \mecPotential{}_{\bodyLag{}}^p(p)}{\partial p}.
 \end{equation}
 %
 %

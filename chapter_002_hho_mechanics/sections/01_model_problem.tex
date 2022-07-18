@@ -53,7 +53,7 @@ configuration $\bodyEul$ such that
 %
 %
 \begin{equation}
-    \tensori{\Phi}\paren{\tensori{X}} = \tensori{x} = \tensori{X}+\tensori{u}\paren{\tensori{X}}
+    \tensori{\Phi}\paren{\tensori{X}} = \tensori{x} = \tensori{X}+\tensori{u}\paren{\tensori{X}},
 \end{equation}
 %
 %
@@ -72,7 +72,7 @@ The transformation gradient $\tensorii{F}$ is defined as
 %
 %
 \begin{equation}
-    \tensorii{F} = \nabla \tensori{\Phi} = \tensorii{I} + \tensorii{G}
+    \tensorii{F} = \nabla \tensori{\Phi} = \tensorii{I} + \tensorii{G},
 \end{equation}
 %
 %
@@ -84,7 +84,7 @@ reference configuration and
 %
 \begin{equation}
     \label{eq_grad_def}
-    \tensorii{G} = \nabla \tensori{u}
+    \tensorii{G} = \nabla \tensori{u},
 \end{equation}
 %
 %
@@ -105,7 +105,7 @@ $\tensorii{F}$ and the first Piola-Kirchhoff stress tensor $\tensorii{P}$ such t
 %
 \begin{equation}
     \label{eq_stress_def}
-  \tensorii{P}=\deriv{\mecPotential_{\bodyLag{}}}{\tensorii{F}}
+  \tensorii{P}=\deriv{\mecPotential_{\bodyLag{}}}{\tensorii{F}}.
 \end{equation}
 
 % ---------------------------------------------------------
@@ -145,7 +145,7 @@ L^{VW}_{\bodyLag{}}
 % \paren{\tensorii{F}\paren{\tensori{u}}}
 - \int_{\bodyLag} \tensori{f}{}_V \cdot \tensori{u}{}
 - \int_{\neumannBoundaryLag} \neumannLag{} \cdot \tensori{u}{}
-\vert_{\neumannBoundaryLag}
+\vert_{\neumannBoundaryLag}.
 \end{equation}
 %
 %
@@ -177,7 +177,7 @@ The first order variation of the Lagrangian is given by
   \int_{\bodyLag} \tensorii{P} : \nabla \delta \tensori{u} -
   \int_{\bodyLag} \tensori{f}_V \cdot \delta \tensori{u} -
   \int_{\neumannBoundaryLag} \neumannLag{} \cdot \delta \tensori{u}
-  \vert_{\neumannBoundaryLag}
+  \vert_{\neumannBoundaryLag},
 \end{equation}
 %
 %
@@ -227,7 +227,7 @@ that:
   \tensori{u}{} - \tensorii{G}{})\,\colon\,\tensorii{P} -
   \int_{\bodyLag{}} \loadLag \cdot \tensori{u}{} -
   \int_{\neumannBoundaryLag{}} \neumannLag{} \cdot \tensori{u}
-  \vert_{\neumannBoundaryLag}
+  \vert_{\neumannBoundaryLag}.
 \end{equation}
 %
 %
@@ -248,24 +248,24 @@ $\tensorii{P}$ yields % % %
     & \int_{\bodyLag} \tensorii{P} : \nabla
     \delta \tensori{u} - \int_{\bodyLag} \tensori{f}_V \cdot \delta
     \tensori{u} - \int_{\neumannBoundaryLag} \neumannLag \cdot \delta
-    \tensori{u} \vert_{\neumannBoundaryLag} && \ \ \ \ \ \ \ \ &&
-    \forall \delta \tensori{u}{} \label{eq_hu_washizu_derivative_0:eq0}
+    \tensori{u} \vert_{\neumannBoundaryLag} && \qquad &&
+    \forall \delta \tensori{u}{} \label{eq_hu_washizu_derivative_0:eq0},
     \\
     \langle \frac{\partial L^{HW}_{\bodyLag{}}}{\partial \tensorii{P}} , \delta \tensorii{P} \rangle
     % \deriv{L^{HW}_{\bodyLag{}}}{\tensorii{P}}
     % : \delta \tensorii{P}
     =
     & \int_{\bodyLag} ( \nabla \tensori{u} -
-    \tensorii{G} ) : \delta \tensorii{P} && \ \ \ \ \ \ \ \ && \forall
-    \delta \tensorii{P}{} \label{eq_hu_washizu_derivative_0:eq2}
+    \tensorii{G} ) : \delta \tensorii{P} && \qquad && \forall
+    \delta \tensorii{P}{} \label{eq_hu_washizu_derivative_0:eq2},
     \\
     \langle \frac{\partial L^{HW}_{\bodyLag{}}}{\partial \tensorii{G}} , \delta \tensorii{G} \rangle
     % \deriv{L^{HW}_{\bodyLag{}}}{\tensorii{G}}
     % : \delta \tensorii{G}
     = & \int_{\bodyLag} (\frac{\partial
       \mecPotential}{\partial \tensorii{G}} - \tensorii{P}) : \delta
-    \tensorii{G} && \ \ \ \ \ \ \ \ && \forall \delta \tensorii{G}{}
-    \label{eq_hu_washizu_derivative_0:eq3}
+    \tensorii{G} && \qquad && \forall \delta \tensorii{G}{}
+    \label{eq_hu_washizu_derivative_0:eq3},
   \end{alignat}
 \end{subequations}
 where Equations~\eqref{eq_hu_washizu_derivative_0:eq2}
@@ -288,7 +288,7 @@ equalities:
 %
 \begin{equation}
   \begin{aligned}
-    \tensorii{G} = \nabla\tensori{u} && \text{and} && \tensorii{P}=\frac{\partial \mecPotential}{\partial \tensorii{G}}
+    \tensorii{G} = \nabla\tensori{u} && \text{and} && \tensorii{P}=\frac{\partial \mecPotential}{\partial \tensorii{G}},
   \end{aligned}
 \end{equation}
 %
