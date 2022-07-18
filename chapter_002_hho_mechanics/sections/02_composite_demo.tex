@@ -24,7 +24,7 @@ method belongs (see Figure \ref{fig_02}(a)).
 % PARAGRAPH
 % ---------------------------------------------------------
 \paragraph{Discontinuous Galerkin methods} On
-the contrary, this condition can be weakened by introducting an elastic
+the contrary, this condition can be weakened by introducing an elastic
 interface of negligible size between \(T\) and \(\Omega\backslash T\).
 This representation is at the basis of Discontinuous Galerkin methods
 (see Figure \ref{fig_02}(b)).
@@ -34,7 +34,7 @@ This representation is at the basis of Discontinuous Galerkin methods
 % ---------------------------------------------------------
 \paragraph{Hybird Discontinuous Galerkin methods} In
 this paper, HDG methods are considered,
-where two elastic interfaces are introducted: one between \(T\) and its
+where two elastic interfaces are introduced: one between \(T\) and its
 boundary \(\partial T\) and a second one between \(\Omega\backslash T\)
 and \(\partial T\) (see Figure \ref{fig_02}(c)).
 Following this idea,
@@ -54,7 +54,7 @@ introduce both the
 
 In the following, the cell $\cell$ is assumed to be convex.
 It is split into a core part $\Bulk \subset \cell$ with boundary $\dBulk$, and into an interface part $\Crown{} \subset \cell$ with boundary $\dCrown = \dBulk \cup \dCell$, as shown in Figure \ref{fig_02}. The interface $\Crown{}$ has some thickness $\ell > 0$ that is supposed to be small compared to $h_{\cell}$ the diameter of $\cell$.
-From a geometrical standpoint, the core part of the element $\Bulk{}$ is an homotethy of $\cell$ by some ratio less than $1$.
+From a geometrical standpoint, the core part of the element $\Bulk{}$ is an homothety of $\cell$ by some ratio less than $1$.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -257,7 +257,7 @@ such that \eqref{eq_0015} fully defines the equilibrium of an element in the con
 % ---------------------------------------------------------
 \paragraph{HDG methods and hybridization of the primal unknown}
 
-Since the interface $\Crown{}$ has vanished, both $\tensori{u}{}_{\cell} \vert_{\dCell{}}$ the trace of the displacement of the core part $\cell$ onto $\dCell{}$ and the displacement of the boundary $\tensori{u}{}_{\dCell{}}$ coexist on $\dCell{}$. The displacement of the element $\cell$ is thus said to be \textit{hybrid}, and is denoted by the pair $(\tensori{u}{}_{\cell}, \tensori{u}{}_{\dCell})$.
+Since the interface $\Crown{}$ has vanished, both $\tensori{u}{}_{\cell} \vert_{\dCell{}}$ the trace of the displacement of the core part $\cell$ onto $\dCell{}$ and $\tensori{u}{}_{\dCell{}}$ the displacement of the boundary coexist on $\dCell{}$. The displacement of the element $\cell$ is thus said to be \textit{hybrid}, and is denoted by the pair $(\tensori{u}{}_{\cell}, \tensori{u}{}_{\dCell})$.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -451,7 +451,7 @@ depends on $\tensorii{G}{}_{\cell}$ which solves \eqref{eq_grad}.
 
 \subsection{Restriction to the Small strain hypothesis}
 
-The proposed large deformation formulation also allows a natural transition to the small deformation framework. In this context, the gradient of the transformation $\tensorii{F}{}_{\cell}$ is assumed to be small compared to the identity $\tensorii{I}$, and the infinitesimal deformation field $\tensorii{\varepsilon}_{\cell}$ is sought in place of $\tensorii{F}{}_{\cell}$ such that
+The proposed large deformation formulation also allows for a natural transition to the small deformation framework. In this context, the gradient of the transformation $\tensorii{F}{}_{\cell}$ is assumed to be small compared to the identity $\tensorii{I}$, and the infinitesimal deformation field $\tensorii{\varepsilon}_{\cell}$ is sought in place of $\tensorii{F}{}_{\cell}$ such that
 % \eqref{eq_grad_def} writes
 %
 %

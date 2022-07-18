@@ -152,7 +152,7 @@ Discrete spaces are chosen such that
 %
 %
 %
-where $P^a(D, \mathbb{R}^{m})$ denotes the space of $m-$ valued polynomials in $D$, spanned by the monomial basis $M^a(D)$. In particular, one notices that the cell displacement polynomial order $l$ might be chosen different from the face displacement order $k$ such that $k - 1 \leq l \leq k + 1$.
+where $P^a(D, \mathbb{R}^{m})$ denotes the space of $m-$ valued polynomials in $D$, spanned by the monomial basis $M^a(D)$. In particular, one notices that the cell displacement polynomial order $l$ might be chosen different from the face displacement order $k$ provided $k - 1 \leq l \leq k + 1$.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -211,7 +211,8 @@ where $\Pi_{\cell}^k$ is the projector onto $P^{k}(\cell, \mathbb{R}^{d})$, $\te
 
 The term $\tensori{w}{}_{\cell}^{k+1}$ in \eqref{eq_hho_stabilization_vector}
 % $ \in \discretePotentialSpaceCell$
-denotes a higher order discrete displacement in $\discretePotentialSpaceCell$ that solves for any displacement pair $(\tensori{v}{}_{\cell}^l, \tensori{v}{}_{\dCell}^k) \in U^h(\cell) \times V^h(\dCell)$
+denotes a higher order discrete displacement in $\discretePotentialSpaceCell$
+that solves for a given displacement pair $(\tensori{v}{}_{\cell}^l, \tensori{v}{}_{\dCell}^k) \in U^h(\cell) \times V^h(\dCell)$
 %
 %
 %

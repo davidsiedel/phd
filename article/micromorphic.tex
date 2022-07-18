@@ -180,7 +180,7 @@
 %% \dochead can also be used to include a conference title, if directed by the editors
 %% e.g. \dochead{17th International Conference on Dynamical Processes in Excited States of Solids}
 
-  \title{Implementation of micromorphic approach to brittle fracture}
+  \title{Implementation of micromorphic approaches to brittle fracture}
 
 %% use optional labels to link authors explicitly to addresses:
 
@@ -200,7 +200,7 @@
 
   \begin{abstract}
     This paper describes discusses a class of micromorphic damage behaviours for quasi-brittle
-    materials in the varionnal framework of simple generalized standard materials.
+    materials in the variational framework of simple generalized standard materials.
     Their links with the classical AT1 and AT2 phase-field models is discussed. It is shown that
     those micromorphic damage behaviours can be seen as approximations of the latter. A numerical
     parameter allows to control the degree of approximation.
@@ -208,7 +208,7 @@
     (i) The irreversibility constraint is treated locally, at the integration points.
     (ii) The balance equations are standard partial derivative equations which can readily be solved
     by most FEM or FFT solvers.
-    (iii) The variational framework allows the derivation of (at least) three alternate minimisation
+    (iii) The variational framework allows the derivation of (at least) three alternate minimization
     schemes.
     % \begin{itemize}
     %     \item The irreversibility constraint is treated locally, at the integration points.
@@ -217,13 +217,13 @@
     %     \item The variational framework allows the derivation of (at least) three alternate minimisation
     %     schemes.
     % \end{itemize}
-    Numerical experiments performed using mgis.fenics python module allow to compare numeri-
-    cally the presented micromorphic damage behaviours and the phase field AT1 and AT2 models on a
-    set of tests classically used in the litterature.
-    Finally, those micromorphic damage behaviours have been implemented in the MFEM/MGIS library.
+    Numerical experiments performed using \texttt{mgis.fenics} python module allow to compare
+    numerically the presented micromorphic damage behaviours and the phase field AT1 and AT2 models on a
+    set of tests classically used in the literature.
+    Finally, those micromorphic damage behaviours have been implemented in the \texttt{mfem.mgis} library.
     This implementation is shown to perform well with higher order finite elements on a test proposed by
-    Alessi et al. A description of the fragmentation of a nuclear fuel pellet demonstrates the applicability
-    of those behavious on large scale industrial problems.
+    \textit{Alessi et al.} A description of the fragmentation of a nuclear fuel pellet demonstrates the applicability
+    of those behaviours on large scale industrial problems.
     % This paper aims at highlighting the link between the
     % Hu–Washizu variational formulation and the family of Hybrid
     % Discontinuous Galerkin (HDG) methods, with a focus on one of
