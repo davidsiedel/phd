@@ -5,7 +5,7 @@ In this section, the proposed micromorphic apporoach to brittle fracture
 is evaluated on numerical applications.
 % classical test cases taken from the literature.
 The first three are classical test cases taken from the literature and have been performed using the
-\texttt{mgis.fenics} implementation. Implementations are freely available on the following repository: \url{https://github.com/davidsiedel/h2o_paper}.
+\texttt{mgis.fenics} implementation. Implementations are freely available on the following repository: \url{https://github.com/davidsiedel/micromorphic-damagc-giens-2022}.
 They aim at comparing both the classical phase field approach to the proposed micromorphic one.
 The last two test cases are performed using the \texttt{mfem.fenics} implementation, and showcase respectively
 the performance of the micromorphic approach with high order finite
@@ -427,8 +427,8 @@ where the thermo-elastic potential $\psi_{\tensoriis{\varepsilon}}^{\text{th}}$ 
 %
 %
 with $\tensoriv{C}$ the Hooke tensor defined by the Young modulus $E = 150$GPa and the Poisson ratio
-$\nu = 0.3$, the thermal expansion reference temperature $T_{\text{ref}} = 273$K and the linear mean
-thermal expansion coefficient $\alpha  = 1 \, \cdot\,10^{-5}$K${}^{-1}$.
+$\nu = 0.3$. The thermal expansion reference temperature is $T_{\text{ref}} = 273$K and the linear mean
+thermal expansion coefficient is $\alpha  = 1 \, \cdot\,10^{-5}$K${}^{-1}$.
 %
 %
 %
@@ -441,11 +441,19 @@ is imposed in the pellet.
 \paragraph{Large scale computation}
 
 Damage patterns for the cracking of the fuel pellet are given in Figure \ref{fig:micromorphic_damage:pellet_cracked}.
-The mesh is composed of \(33\,230\,848\) triangles and \(132\,923\,392\) nodes, leading to a mechanical problem with
-\(22.10^6\) degrees of freedom. This large scale test case assesses the adaptivity of the micromorphic approach to industrial
+The mesh is composed of
+% \(33\,230\,848\)
+more than $33. 10^6$
+linear triangles and more than
+% \(132\,923\,392\)
+$132. 10^6$
+nodes, leading to a mechanical problem with 
+\(264.10^6\)
+degrees of freedom. This large scale test case assesses the adaptivity of the micromorphic approach to industrial
 applications. Using the micromorphic approach, the irreversibility condition for the damage field is dealt with at quadrature points,
-and is thus fully parallel, hence avoiding the need to deploy the \(132\,923\,392\) Lagrange multipliers that would have been necessary
+and is thus fully parallel, hence avoiding the need to deploy \(264.10^6\) Lagrange multipliers that would have been necessary
 for the AT2 model based on the variational treatment of the irreversibility condition.
+The simulation was performed on the \texttt{Topaze} supercomputer of the \texttt{TGCC/CCRT}, using $2500$ cores.
 %
 %
 %

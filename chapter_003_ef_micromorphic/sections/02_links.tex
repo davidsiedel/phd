@@ -33,13 +33,13 @@ of the total Lagrangian \eqref{eq:ef_micromorphic:formulation:total_lagrangian_1
     -
     \int_{\BodyLagrange} \loadLag{} \cdot \DisplacementField
     -
-    \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary}
+    \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary},
   \end{aligned}
 \end{equation}
 %
 %
 %
-where the constant term $Y_{0} \, \DamageField \TraceOperator{t}$, which thus does not have
+where the constant term $Y_{0} \, \DamageField \TraceOperator{t}$, which does not have
 any influence of the solution, has been removed from the expression of
 the Lagrangian.
 
@@ -78,7 +78,7 @@ The Lagrangian \eqref{eq:micromorphicdamage:Lagrangian} is thus expected to have
     -
     \int_{\BodyLagrange} \loadLag{} \cdot \DisplacementField
     -
-    \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary}
+    \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary},
   \end{aligned}
 \end{equation}
 %
@@ -100,21 +100,21 @@ $A_{\chi}$ and $Y_{0}$.
 % on Griffith’ theory and the local approach to fracture, a least for a certain class of non local
 % models.
 
-Ambrosio–Tortorelli \cite{ambrosio_approximation_1990} regularization of the initial
+The Ambrosio–Tortorelli \cite{ambrosio_approximation_1990} regularization of the initial
 variational approach to fracture \cite{francfort_revisiting_1998},
 originally introduced in \cite{bourdin_numerical_2000}, have become
 widely used in the computational mechanics community.
-Several works have shown that the regularized solution converges in the sense of the so-called $\Gamma$-
-convergence, to the solution of the initial problem in some specific cases
-(See \textit{e.g.} \cite{bourdin_numerical_2000}).
+Several works (See \textit{e.g.} \cite{bourdin_numerical_2000}) have shown that the regularized solution converges
+in the sense of the so-called $\Gamma$-
+convergence, to the solution of the initial problem in some specific cases.
 
 \paragraph{Values of the AT1 model}
 
 Two regularization models were introduced in \cite{ambrosio_approximation_1990}.
 The first one, namely the AT1 model, allows to recover the initial problem formulated in \cite{francfort_revisiting_1998}
-for infinitely small values of the characteristic length defining the thckness of the smeared crack, and
+for infinitely small values of some characteristic length $\ell_c$ defining the thickness of the smeared crack, and
 such that initiation of damage occurs on the onset of some yield criterion. Choosing the following potentials and values
-for the definition of the micromorphic model allows to recover the AT1 model
+for the definition of the micromorphic model allows to recover the AT1 regularization model
 %
 %
 %
@@ -124,25 +124,25 @@ for the definition of the micromorphic model allows to recover the AT1 model
     g(\DamageField)
     &
     =
-    (1 - \DamageField)
+    (1 - \DamageField),
     \label{eq:ef_micromorphic:formulation:AT1_link:eq0}
     \\
     \psi_{\DamageField}(\DamageField)
     &
     =
-    \Frac{3 \, G_{c}}{8 \, \ell_{c}} \, \DamageField
+    \Frac{3 \, G_{c}}{8 \, \ell_{c}} \, \DamageField,
     \label{eq:ef_micromorphic:formulation:AT1_link:eq1}
     \\
     A_{\chi}
     &
     =
-    \Frac{3}{4} \, G_{c} \, \ell_{c}
+    \Frac{3}{4} \, G_{c} \, \ell_{c},
     \label{eq:ef_micromorphic:formulation:AT1_link:eq2}
     \\
     Y_{0}
     &
     =
-    0
+    0,
     \label{eq:ef_micromorphic:formulation:AT1_link:eq3}
   \end{alignat}
 \end{subequations}
@@ -155,7 +155,7 @@ where $G_{c}$ is a fracture energy, and $\ell_{c}$ is the characteristic length.
 
 The second regularization model in \cite{ambrosio_approximation_1990} introduces a quadratic fracture energy potential,
 such that damage occurs on the onset of deformation of the medium. Choosing the following potentials and values
-for the definition of the micromorphic model allows to recover the AT2 model
+for the definition of the micromorphic model allows to recover the AT2 regularization model
 %
 %
 %
@@ -165,25 +165,25 @@ for the definition of the micromorphic model allows to recover the AT2 model
     g(\DamageField)
     &
     =
-    (1 - \DamageField)^2
+    (1 - \DamageField)^2,
     \label{eq:ef_micromorphic:formulation:AT2_link:eq0}
     \\
     \psi_{\DamageField}(\DamageField)
     &
     =
-    \Frac{G_{c}}{2 \, \ell_{c}} \, \DamageField
+    \Frac{G_{c}}{2 \, \ell_{c}} \, \DamageField,
     \label{eq:ef_micromorphic:formulation:AT2_link:eq1}
     \\
     A_{\chi}
     &
     =
-    G_{c} \, \ell_{c}
+    G_{c} \, \ell_{c},
     \label{eq:ef_micromorphic:formulation:AT2_link:eq2}
     \\
     Y_{0}
     &
     =
-    0
+    0.
     \label{eq:ef_micromorphic:formulation:AT2_link:eq3}
   \end{alignat}
 \end{subequations}
@@ -194,17 +194,17 @@ for the definition of the micromorphic model allows to recover the AT2 model
 
 \paragraph{Values of Lorentz model}
 
-AT1 and AT2 regularization models proposed by \cite{bourdin_implementation_2000}
+As mentioned above, AT1 and AT2 regularization models proposed by \cite{bourdin_numerical_2000}
 introduce the characteristic length $\ell_c$, that controls the thickness of the smeared crack.
 As stated in \cite{pham_approche_2010-1, pham_construction_2010}, this regularization length
 defines the yield strength of the medium. In numerical applications, the strength of the material
 is thus mesh dependant, since the value of characteristic length must
 be greater than the element size in order to be captured.
 Therefore, Lorentz \textit{et. al.} \cite{lorentz_gradient_2011,lorentz_convergence_2011}
-alleviated this constraint by proposing an extension of the regularization proposed in
-\cite{bourdin_implementation_2000}, that introduces
+alleviated this constraint by proposing an extension of the regularization presented in
+\cite{bourdin_numerical_2000}, that introduces
 a state variable $\gamma$ related to the yield strength of the material. The following values for the
-proposed micromorphic approach hence yield Lorentz gradient damage model
+proposed micromorphic approach allow to recover Lorentz's gradient damage model
 %
 %
 %
@@ -214,25 +214,25 @@ proposed micromorphic approach hence yield Lorentz gradient damage model
     g(\DamageField)
     &
     =
-    \paren{\Frac{1 - \DamageField}{1 + \gamma \, \DamageField}}^{2}
+    \paren{\Frac{1 - \DamageField}{1 + \gamma \, \DamageField}}^{2},
     \label{eq:ef_micromorphic:formulation:Lorentz_link:eq0}
     \\
     \psi_{\DamageField}(\DamageField)
     &
     =
-    \Frac{3 \, G_{c}}{8 \, \ell_{c}} \, \DamageField
+    \Frac{3 \, G_{c}}{8 \, \ell_{c}} \, \DamageField,
     \label{eq:ef_micromorphic:formulation:Lorentz_link:eq1}
     \\
     A_{\chi}
     &
     =
-    \Frac{3}{4} \, G_{c} \, \ell_{c}
+    \Frac{3}{4} \, G_{c} \, \ell_{c},
     \label{eq:ef_micromorphic:formulation:Lorentz_link:eq2}
     \\
     Y_{0}
     &
     =
-    0
+    0,
     \label{eq:ef_micromorphic:formulation:Lorentz_link:eq3}
   \end{alignat}
 \end{subequations}
@@ -253,13 +253,13 @@ Note that an alternative choice can be made for both AT1 and Lorentz' models suc
     &&
     \text{and}
     &&
-    Y_{0} = \Frac{3}{8} \, G_{c} \, \ell_{c}
+    Y_{0} = \Frac{3}{8} \, G_{c} \, \ell_{c},
   \end{aligned}
 \end{equation}
 %
 %
 %
-While leading the same Lagrangian, this alternative choice has a totally
+While leading to the same Lagrangian, this alternative choice has a totally
 different physical meaning, since part of the fracture energy is now
 considered as dissipated rather than stored. Since neither crack healing
 nor coupling with heat transfer are considered, those choices are

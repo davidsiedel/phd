@@ -20,30 +20,30 @@ It consists in the following iterative scheme
       =
       \underset{\VirtualField{\DisplacementField}}{\argmin} \,
       \LagrangianOperator{\BodyLagrange}{\text{tot}}(
-        \VirtualField{\DisplacementField},
-        \iter{n}{\DamageField},
+        \VirtualField{\DisplacementField}, \,
+        \iter{n}{\DamageField}, \,
         \iter{n}{\MicromorphicDamageField}
-      )
+      ),
       \\
       \iter{n+1}{\MicromorphicDamageField}
       &
       =
       \underset{\VirtualField{\MicromorphicDamageField}}{\argmin} \,
       \LagrangianOperator{\BodyLagrange}{\text{tot}}(
-        \iter{n+1}{\DisplacementField},
-        \iter{n}{\DamageField},
-        \VirtualField{\MicromorphicDamageField},
-      )
+        \iter{n+1}{\DisplacementField}, \,
+        \iter{n}{\DamageField}, \,
+        \VirtualField{\MicromorphicDamageField}
+      ),
       \\
       \iter{n+1}{\DamageField}
       &
       =
       \underset{\VirtualField{\DamageField}}{\argmin} \,
       \LagrangianOperator{\BodyLagrange}{\text{tot}}(
-        \iter{n+1}{\DisplacementField},
-        \VirtualField{\DamageField},
-        \iter{n+1}{\MicromorphicDamageField},
-      )
+        \iter{n+1}{\DisplacementField}, \,
+        \VirtualField{\DamageField}, \,
+        \iter{n+1}{\MicromorphicDamageField}
+      ),
     \end{aligned}
   \right.
 \end{equation}
@@ -60,7 +60,8 @@ where $\iter{n}{\DisplacementField}$, $\iter{n}{\DamageField}$ and
 $\iter{n}{\MicromorphicDamageField}$ denote respectively the estimates of the
 displacement field, micromorphic damage field and damage field at the
 n\textsuperscript{th} iteration of the algorithm.
-In particular, each step of the algorithm diminishes the value of the Lagrangian,
+In particular, each step of the algorithm diminishes the value of the
+Lagrangian \cite{bourdin_numerical_2000},
 ensuring the convergence of the scheme.
 %
 %
@@ -114,7 +115,7 @@ $\iter{n+1}{\MicromorphicDamageField}$ is the solution of (see Equation
   +
   H_{\chi} \, \iter{n+1}{\MicromorphicDamageField}
   =
-  H_{\chi} \, \iter{n}{\DamageField}
+  H_{\chi} \, \iter{n}{\DamageField},
 \end{equation}
 %
 %
@@ -160,40 +161,40 @@ one may consider evaluating its value twice, as follows:
       =
       \underset{\VirtualField{\DisplacementField}}{\argmin} \,
       \LagrangianOperator{\BodyLagrange}{\text{tot}}(
-        \VirtualField{\DisplacementField},
-        \iter{n}{\DamageField},
+        \VirtualField{\DisplacementField}, \,
+        \iter{n}{\DamageField}, \,
         \iter{n}{\MicromorphicDamageField}
-      )
+      ),
       \\
       \iter{n+1/2}{\DamageField}
       &
       =
       \underset{\VirtualField{\DamageField}}{\argmin} \,
       \LagrangianOperator{\BodyLagrange}{\text{tot}}(
-        \iter{n+1}{\DisplacementField},
-        \VirtualField{\DamageField},
-        \iter{n}{\MicromorphicDamageField},
-      )
+        \iter{n+1}{\DisplacementField}, \,
+        \VirtualField{\DamageField}, \,
+        \iter{n}{\MicromorphicDamageField}
+      ),
       \\
       \iter{n+1}{\MicromorphicDamageField}
       &
       =
       \underset{\VirtualField{\MicromorphicDamageField}}{\argmin} \,
       \LagrangianOperator{\BodyLagrange}{\text{tot}}(
-        \iter{n+1}{\DisplacementField},
-        \iter{n+1/2}{\DamageField},
-        \VirtualField{\MicromorphicDamageField},
-      )
+        \iter{n+1}{\DisplacementField}, \,
+        \iter{n+1/2}{\DamageField}, \,
+        \VirtualField{\MicromorphicDamageField}
+      ),
       \\
       \iter{n+1}{\DamageField}
       &
       =
       \underset{\VirtualField{\DamageField}}{\argmin} \,
       \LagrangianOperator{\BodyLagrange}{\text{tot}}(
-        \iter{n+1}{\DisplacementField},
-        \VirtualField{\DamageField},
-        \iter{n+1}{\MicromorphicDamageField},
-      )
+        \iter{n+1}{\DisplacementField}, \,
+        \VirtualField{\DamageField}, \,
+        \iter{n+1}{\MicromorphicDamageField}
+      ),
     \end{aligned}
   \right.
 \end{equation}
@@ -226,7 +227,7 @@ is given by
     \deriv{\MicromorphicDamageForceField}{\MicromorphicDamageField}
     +
     \deriv{\MicromorphicDamageForceField}{\DamageField}
-    \deriv{\DamageField}{\MicromorphicDamageField}
+    \deriv{\DamageField}{\MicromorphicDamageField},
     % 0
     % \mathfrak{R}_{T}(\mathfrak{U}_{T}(\mathfrak{U}_{\dCell}),
     % \mathfrak{U}_{\dCell}) = 0

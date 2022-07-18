@@ -4,7 +4,7 @@ The variational approach to brittle fracture takes its roots in the work of
 Francfort and Marigo \cite{francfort_revisiting_1998,francfort_vers_2002},
 which recasted the Griffith theory into an energy
 minimization problem.
-This revisted approach of the Griffith theory is however not tractable
+This revisited approach of the Griffith theory is however not tractable
 with standard numerical methods
 \cite{bourdin_numerical_2000, chambolle_approximation_2018}, in particular
 the commonly used finite element method. For this reason, Bourdin \textit{et
@@ -13,7 +13,7 @@ the works of Ambrosio and Tortorelli \cite{ambrosio_approximation_1990}.
 
 \paragraph{Phase field approach to brittle fracture and damage irreversibility consition}
 
-The so-called phase-field approaches to fracture have since become
+The so-called phase-field approaches to fracture have become
 widely popular. As pointed by Gerasimov and De Lorenzis in their
 excellent review \cite{gerasimov_numerical_2020}, one of the main
 difficulties in the implementation of those approaches is the treatment
@@ -22,9 +22,9 @@ question on which a considerable amount of works has been published
 (See \textit{e.g.}
 \cite{Bourdin2014, Laurenzis2020, DelPietroLancioniMarch2020, Chambolle2018, Gerasimov2019, Bourdin2008}).
 Most of the proposed solutions are not directly implemented in standard
-FEM or FFT solvers. An noticeable exception to this statement is the
+FEM or FFT solvers. A noticeable exception to this statement is the
 Miehe' alternative based an the so-called history variable
-\cite{miehe_phase_2010}. However, Miehe' alternative is not variationally
+\cite{miehe_phase_2010}. However, Miehe's alternative is not variationally
 consistent.
 
 \paragraph{Micromorphic approach to brittle fracture}
@@ -49,11 +49,15 @@ context of phase-field approaches to phase transformation
 %
 Such micromorphic models were recently investigated by Bharali \textit{et al.}
 \cite{bharali_computational_2021} to approximate the AT1 and AT2 models
-using a monolithic resolution strategy.
+introduced in 
+\cite{ambrosio_approximation_1990}
+and that were adapted to the context of brittle fracture problems by Bourdin \textit{et al.} in
+\cite{bourdin_implementation_2000}.
+In their work, Bharali \textit{et al.} used a monolithic resolution strategy.
 
 \paragraph{Outline}
 
-Following Forest' micromorphic framework
+Following Forest's micromorphic framework
 \cite{forest_micromorphic_2009, forest_nonlinear_2016}, a class of micromorphic
 brittle behaviours that can approximate classical models of brittle
 fracture in a variationally consistent way is proposed in
@@ -68,7 +72,7 @@ Several test cases comparing the prediction of the classical AT2 model
 and its micromorphic counterpart are presented in Section
 \ref{sec:micromorphicdamage:test_cases}, where
 the choice of the penalization
-parameter which at the foundation of the link between the Phase Field approach and the 
+parameter which is at the foundation of the link between the Phase Field approach and the 
 micromorphic one is discussed in-depth.
 %
 %

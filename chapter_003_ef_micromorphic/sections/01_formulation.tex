@@ -54,7 +54,7 @@ The free energy potential $\psi_{\BodyLagrange}$ of the body $\BodyLagrange$ rea
     (\MicromorphicDamageField, \DamageField)
     +
     \psi_{\nabla \MicromorphicDamageField}
-    (\nabla \MicromorphicDamageField)
+    (\nabla \MicromorphicDamageField),
 \end{equation}
 %
 %
@@ -79,7 +79,7 @@ In the spirit of \cite{forest_micromorphic_2009}, the following stresses are int
         && &&
         \MicromorphicDamageForceField = \deriv{\psi_{\BodyLagrange}}{\MicromorphicDamageField}
         && &&
-        \DamageForceField = -\deriv{\psi_{\BodyLagrange}}{\DamageField}
+        \DamageForceField = -\deriv{\psi_{\BodyLagrange}}{\DamageField},
     \end{aligned}
 \end{equation}
 %
@@ -102,7 +102,7 @@ such that for any time increment $\Delta \, t > 0$, and any admissible damage fi
   \begin{aligned}
       \Delta \, t \, \phi_{\BodyLagrange}(\frac{\DamageField - \DamageField \TraceOperator{t}} {\Delta \, t})
       =
-      \phi_{\BodyLagrange}(\DamageField - \DamageField \TraceOperator{t})
+      \phi_{\BodyLagrange}(\DamageField - \DamageField \TraceOperator{t}).
   \end{aligned}
 \end{equation}
 %
@@ -139,7 +139,7 @@ such that
     -
     \int_{\BodyLagrange} \loadLag{} \cdot \DisplacementField
     -
-    \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary}
+    \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary},
   \end{aligned}
 \end{equation}
 %
@@ -181,13 +181,13 @@ $\LagrangianOperator{\BodyLagrange}{\text{hel}}$ and $\LagrangianOperator{\BodyL
         -
         \int_{\BodyLagrange} \loadLag{} \cdot \DisplacementField
         -
-        \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary}
+        \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary},
         \label{eq:ef_micromorphic:formulation:total_lagrangian_split:eq0}
         \\
         \LagrangianOperator{\BodyLagrange}{\text{dis}}
         &
         = 
-        \int_{\BodyLagrange} \phi_{\BodyLagrange}(\DamageField - \DamageField \TraceOperator{t})
+        \int_{\BodyLagrange} \phi_{\BodyLagrange}(\DamageField - \DamageField \TraceOperator{t}),
         \label{eq:ef_micromorphic:formulation:total_lagrangian_split:eq1}
   \end{alignat}
 \end{subequations}
@@ -253,11 +253,11 @@ respectively yields the weak equations
       -
       \int_{\BodyLagrange} \tensori{f}_V \cdot \delta \DisplacementField
       -
-      \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \delta \DisplacementField \vert_{\BodyLagrangeNeumannBoundary}
+      \int_{\BodyLagrangeNeumannBoundary} \neumannLag \cdot \delta \DisplacementField \TraceOperator{\BodyLagrangeNeumannBoundary}
       &&
       \qquad
       &&
-      \forall \delta \DisplacementField
+      \forall \delta \DisplacementField,
       \label{eq:ef_micromorphic:formulation:lagragian_variations:eq0}
       \\
       \langle \deriv{\LagrangianOperator{\BodyLagrange}{\text{hel}}}{\MicromorphicDamageField} , \delta \MicromorphicDamageField \rangle
@@ -265,7 +265,7 @@ respectively yields the weak equations
       & \int_{\BodyLagrange} \MicromorphicDamageForceField \, \delta \MicromorphicDamageField + \int_{\BodyLagrange} \MicromorphicDamageStressField \cdot \nabla \MicromorphicDamageField
       &&
       \qquad
-      && \forall \delta d^\chi
+      && \forall \delta \MicromorphicDamageField.
       \label{eq:ef_micromorphic:formulation:lagragian_variations:eq3}
     \end{alignat}
 \end{subequations}
@@ -284,14 +284,14 @@ Applying the divergence theorem, the following strong equations for the sole dis
     &&
     \qquad
     &&
-    \textit{balance of momentum}
+    \textit{balance of momentum},
     \label{eq:ef_micromorphic:formulation:strong_problem_u:eq2}
     \\
     \PKIStressField \cdot \tensori{n}{} - \neumannLag{} & = 0
     &&
     \qquad
     &&
-    \textit{continuity of the normal stress}
+    \textit{continuity of the normal stress}.
     \label{eq:ef_micromorphic:formulation:strong_problem_u:eq3}
     \end{alignat}
 \end{subequations}
@@ -310,14 +310,14 @@ Similarly, the strong equations governing the sole micromorphic damage problem a
         &&
         \qquad
         &&
-        \textit{balance of micromorphic damage momentum}
+        \textit{balance of micromorphic damage momentum},
         \label{eq:ef_micromorphic:formulation:strong_problem_d:eq2}
         \\
         \MicromorphicDamageStressField \cdot \tensori{n}{} & = 0
         &&
         \qquad
         &&
-        \textit{micromorphic damage boundary conditions}
+        \textit{micromorphic damage boundary conditions},
         \label{eq:ef_micromorphic:formulation:strong_problem_d:eq3}
     \end{alignat}
 \end{subequations}
@@ -346,13 +346,13 @@ function $g(\DamageField)$ such that
       (\TransformationGradientField, \DamageField)
       =
       &
-      g(\DamageField) \, \psi_{\tensoriis{F}}(\TransformationGradientField)
+      g(\DamageField) \, \psi_{\tensoriis{F}}(\TransformationGradientField),
       \label{eq:micromorphicdamage:freeenergygel:eq0}
       \\
       \PKIStressField
       =
       &
-      g(\DamageField) \, \deriv{\psi_{\tensoriis{F}}}{\TransformationGradientField}
+      g(\DamageField) \, \deriv{\psi_{\tensoriis{F}}}{\TransformationGradientField}.
       \label{eq:micromorphicdamage:freeenergygel:eq1}
     \end{alignat}
 \end{subequations}
@@ -394,13 +394,13 @@ the damage field $\DamageField$ and the micromorphic damage field $\Micromorphic
       (\MicromorphicDamageField, \DamageField)
       =
       &
-      \Frac{H_{\chi}}{2} \, \paren{\DamageField - \MicromorphicDamageField}^{2}
+      \Frac{H_{\chi}}{2} \, \paren{\DamageField - \MicromorphicDamageField}^{2},
       \label{eq:micromorphicdamage:achi:eq0}
       \\
       \MicromorphicDamageForceField
       =
       &
-      - H_{\chi} \, \paren{\DamageField - \MicromorphicDamageField}
+      - H_{\chi} \, \paren{\DamageField - \MicromorphicDamageField}.
       \label{eq:micromorphicdamage:achi:eq1}
     \end{alignat}
 \end{subequations}
@@ -422,13 +422,13 @@ it penalizes the localization of the micromorphic damage field $\MicromorphicDam
       (\nabla \MicromorphicDamageField)
       =
       &
-      \Frac{A_{\chi}}{2} \, \nabla \MicromorphicDamageField \cdot \nabla \MicromorphicDamageField
+      \Frac{A_{\chi}}{2} \, \nabla \MicromorphicDamageField \cdot \nabla \MicromorphicDamageField,
       \label{eq:micromorphicdamage:bchi:eq0}
       \\
       \MicromorphicDamageStressField
       =
       &
-      A_{\chi} \, \nabla \MicromorphicDamageField
+      A_{\chi} \, \nabla \MicromorphicDamageField.
       \label{eq:micromorphicdamage:bchi:eq1}
     \end{alignat}
 \end{subequations}
@@ -447,7 +447,7 @@ shows that the micromorphic damage $\MicromorphicDamageField$ satisfies the Lapl
   +
   H_{\chi} \, \paren{\DamageField - \MicromorphicDamageField}
   =
-  0
+  0,
 \end{equation}
 %
 %
@@ -476,7 +476,7 @@ force $\DamageForceField$ associated with the damage field is given by:
     -
     \derivtot{\psi_{\DamageField}}{\DamageField}
     -
-    \deriv{\psi_{\MicromorphicDamageField, \DamageField}}{\DamageField}
+    \deriv{\psi_{\MicromorphicDamageField, \DamageField}}{\DamageField},
     \\
     &
     =
@@ -485,7 +485,7 @@ force $\DamageForceField$ associated with the damage field is given by:
     -
     \derivtot{\psi_{\DamageField}}{\DamageField}
     +
-    a_{\chi}
+    a_{\chi},
   \end{aligned}
 \end{equation}
 %
@@ -502,7 +502,7 @@ damage is assumed to be in the subgradient of the dissipation potential:
 %
 \begin{equation}
   \label{eq:ef_micromorphic:formulation:generalized_standard_0}
-  \DamageForceField \in \partial \phi_{\BodyLagrange}
+  \DamageForceField \in \partial \phi_{\BodyLagrange}.
 \end{equation}
 
 \paragraph{Dissipation potential}
@@ -518,7 +518,7 @@ A simple choice for the dissipation potential is
     =
     Y_{0} \, \dot{\DamageField}
     +
-    \mathrm{I}_{\mathbb{R}_{+}} (\dot{\DamageField})
+    \mathrm{I}_{\mathbb{R}_{+}} (\dot{\DamageField}),
   \end{aligned}
 \end{equation}
 %
@@ -549,7 +549,7 @@ the damage surface
 %
 \begin{equation}
   \label{eq:micromorphicdamage:yield}
-  Y = Y_{0}
+  Y = Y_{0},
 \end{equation}
 %
 %
@@ -564,19 +564,19 @@ leading to an evolution of the damage driven by the following Karush–Kuhn–Tu
       \Delta \, \DamageField \, (\DamageForceField - Y_{0})
       &
       =
-      0
+      0,
       \label{eq:micromorphicdamage:KTT:eq0}
       \\
       \Delta \, \DamageField
       &
       \geq
-      0
+      0,
       \label{eq:micromorphicdamage:KTT:eq1}
       \\
       \DamageForceField - Y_{0}
       &
       \leq
-      0
+      0,
       \label{eq:micromorphicdamage:KTT:eq2}
     \end{alignat}
 \end{subequations}
@@ -597,7 +597,7 @@ surface may also be written:
   +
   \derivtot{\psi_{\DamageField}}{\DamageField}
   -
-  H_{\chi}(\DamageField - \MicromorphicDamageField)
+  H_{\chi}(\DamageField - \MicromorphicDamageField),
 \end{equation}
 %
 %
