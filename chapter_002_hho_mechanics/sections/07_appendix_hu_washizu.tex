@@ -17,7 +17,7 @@ It is split into a core part $\Bulk \subset \cell$ with boundary $\dBulk$, and i
 % ---------------------------------------------------------
 % PARAGRAPH
 % ---------------------------------------------------------
-\paragraph{Homotethic transformation}
+\paragraph{Homothetic transformation}
 
 Let $\tensori{\Xi}{}_{\cell}$ the homothety of ratio $(1 - \alpha \ell)$ and center $\tensori{X}{}_{\cell}$ the centroid of $\cell$, with $0 < \alpha < 1 / \ell$ such that $\Bulk$ (respectively $\dBulk$) is the image of $\cell$ (respectively $\dCell$) by $\tensori{\Xi}{}_{\cell}$. Since $\dBulk$ is an homothety of $\dCell$, any point $\tensori{X}{}_{\dCell} \in \dCell$ and $\tensori{X}{}_{\dBulk} = \tensori{\Xi}{}_{\cell}(\tensori{X}{}_{\dCell}) \in \dBulk$ share the same unit outward normal $\tensori{n}{}$.
 
@@ -90,7 +90,8 @@ Since corners of the cell meet the intersection of two faces,
 the displacement is assumed linear in the interface region around an intersection
 such that it linearly bridges the displacement of the cell corner, to that of the two
 faces tips (See Figure \ref{fig_appendix_interface_displacement}).
-In the following, the corner region is supposed to be small compared to $\ell^2$, such that is is not considered in the following development.
+In the following, the corner region is supposed to of the same order of magnitude as $\ell^2$,
+such that is is not considered in the following development.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -283,7 +284,7 @@ where \eqref{eq_continuity_traction_force_2} has been used. And Finally :
 % ---------------------------------------------------------
 % PARAGRAPH
 % ---------------------------------------------------------
-\paragraph{Total Hu-Washizu Lagrangian in the composute element}
+\paragraph{Total Hu-Washizu Lagrangian in the composite element}
 
 Injecting \eqref{eq22} in \eqref{eq_hu_washizu_split} yields
 %
@@ -327,7 +328,7 @@ Injecting \eqref{eq22} in \eqref{eq_hu_washizu_split} yields
 % 
 % 
 Since $\ell$ is arbitrary, let $\ell \rightarrow 0$,
-the interface region vanishes such that $\Crown{} \rightarrow \emptyset, \Bulk{} \rightarrow \cell$ and $\dBulk{} \rightarrow \dCell$, and the expression of the Hu–Washizu functional over the region $\cell$ writes
+the interface region vanishes such that $\Bulk{} \rightarrow \cell$ and $\dBulk{} \rightarrow \dCell$, and the expression of the Hu–Washizu functional over the region $\cell$ writes
 % 
 % 
 %

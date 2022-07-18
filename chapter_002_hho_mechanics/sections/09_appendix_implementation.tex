@@ -245,7 +245,7 @@ that solves for a given displacement pair $(\tensori{v}{}_{\cell}^l, \tensori{v}
 % ---------------------------------------------------------
 \paragraph{Unknown vector}
 
-A cell displacement component unknown is represented by the coefficient vector $\mathfrak{U}_{\cell}^l$ in $M^l(\cell)$, and a face displacement component unknown is represented by the coefficient vector $\mathfrak{U}_{F}^k$ in $M^k(F)$, for any $F \subset \dCell$.
+A cell displacement component unknown vector is represented by the coefficient vector $\mathfrak{U}_{\cell}^l$ in $M^l(\cell)$, and a face displacement component unknown vector is represented by the coefficient vector $\mathfrak{U}_{F}^k$ in $M^k(F)$, for any $F \subset \dCell$.
 The global element displacement unknown vector of size $d M^l_d + d N_{\dCell} M^k_{d - 1}$ is
 denoted $\mathfrak{U}_{\ClosedCell{}}$ and is the collection of all cell and faces displacement component vectors.
 In the following, the cell coefficients in $\mathfrak{U}_{\ClosedCell{}}$ are denoted $\mathfrak{U}_{\cell}$, and the boundary coefficients $\mathfrak{U}_{\dCell}$.
@@ -255,7 +255,7 @@ In the following, the cell coefficients in $\mathfrak{U}_{\ClosedCell{}}$ are de
 % ---------------------------------------------------------
 \paragraph{Quadrature}
 
-Integrals are evaluated numerically by means of a quadrature rule on an element shape. Hence, let ${Q}_D$ a quadrature rule for the domain $D$ of order at least $2k$. A quadrature point is denoted $\tensori{X}{}_q$ and a quadrature weight $w_q$.
+Integrals are evaluated numerically by means of a quadrature rule. Hence, let ${Q}_D$ a quadrature rule for the domain $D$ of order at least $2k$. A quadrature point is denoted $\tensori{X}{}_q$ and a quadrature weight $w_q$.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -563,10 +563,12 @@ In order to circumvent this problem, we consider infinitely thin cylindrical fac
 \section{Numerical examples in plane strain and tridimensional modelling hypotheses}
 \label{sec_implementation_tridimensional_results}
 
-The section showcases numerical examples demonstrating the robustness
-of the cell resolution algorithm. The test cases under study, namely the
-classical Cook membrane, and the indentation test cases, show that no
-volumetric locking is encountered using the cell resolution algorithm.
+The section showcases numerical examples
+using the proposed implementation of the HHO method
+for a cartesian modelling hypothesis.
+The test cases under study, namely the
+classical Cook membrane, and the radially loaded sphere test cases, show that no
+volumetric locking is encountered.
 
 % ---------------------------------------------------------
 % -- SUBSECTION
@@ -579,21 +581,26 @@ volumetric locking is encountered using the cell resolution algorithm.
 \paragraph{Specimen and loading}
 
 Let consider the Cook membrane specimen that is subjected to uniaxial
-traction. The membrane has a width of $48$ mm and a height of $60$ mm,
-and a vertical traction $t_y = 1000$ N/m is imposed at the top. The HHO
-computation is run on a polygonal mesh (see Figure \ref{fig_cook}) and
+traction. The membrane has a width of $48$ mm and a height of $60$ mm.
+A vertical traction $t = 3.125 \, 10^{8}$ N/m is imposed on the right of the specimen.
+The HHO computation is run on a polygonal mesh (see Figure \ref{fig_cook}) and
 is compared with standard QU4 and QU8 formulations (\textit{i.e.} linear
-and quadratic approximations)
+and quadratic approximations) on quadrangular meshes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/drawings/cook_mesh.png}
+    \caption{Geometry and boundary conditions for the Cook membrane test case}
+    \label{fig_cook}
+\end{figure}
 
 % ---------------------------------------------------------
 % PARAGRAPH
 % ---------------------------------------------------------
 \paragraph{Constitutive equation}
 
-The same behavior law as that in \ref{sec_swelling_sphere} is
-considered for the present test case. However, the finite strain
-hypothesis is chosen, based on a logarithmic decomposition of the stress
-\cite{miehe_anisotropic_2002}.
+The same constitutive equation as that in \ref{sec:hho_meca:notched_bar} is
+considered for the present test case.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -605,7 +612,7 @@ $\sigma_0 = 450$ MPa, $\sigma_{\infty} = 715$ MPa with a saturation parameter $\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/figures/cook_comp.png}
+    \includegraphics[width=14.cm]{../chapter_002_hho_mechanics/drawings/cook.png}
     \caption{Hydrostatic pressure map one the reference configuration at the limit load}
     \label{fig_cook}
 \end{figure}
@@ -627,7 +634,9 @@ As expected, the linear and quadratic finite element methods display respectivel
 % ---------------------------------------------------------
 \paragraph{Specimen and loading}
 
-The last test case consists in the indentation of a cube of size $10$ mm. A pressure of $300$ MPa is imposed on the top surface see Figure \ref{fig_cube}).
+The last test case consists in the three dimensional radially loaded sphere test case.
+The sphere has an inner radius of $0.8$ mm, and a thickness of $0.2$mm.
+A displacement of $0.2$mm is imposed on the inner surface (see Figure \ref{fig_cube}).
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -638,7 +647,7 @@ The same perfect plastic material as that in \ref{sec_swelling_sphere} is consid
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/figures/cube.png}
+    \includegraphics[width=14.cm]{../chapter_002_hho_mechanics/drawings/sphere_appendix.png}
     \caption{Hydrostatic pressure map one the reference configuration at the limit load}
     \label{fig_cube}
 \end{figure}
@@ -648,4 +657,4 @@ The same perfect plastic material as that in \ref{sec_swelling_sphere} is consid
 % ---------------------------------------------------------
 \paragraph{Numerical results}
 
-The pressure map at the end of the computation is displayed in Figure \ref{fig_cube}, and no sign of volumetric locking are present on the HHO computation, as opposed to the linear finite element one.
+The pressure map at the end of the computation is displayed in Figure \ref{fig_cube}, and no sign of volumetric locking are present for the HHO computation, as for the axisymmetric case.

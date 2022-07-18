@@ -32,7 +32,7 @@ This representation is at the basis of Discontinuous Galerkin methods
 % ---------------------------------------------------------
 % PARAGRAPH
 % ---------------------------------------------------------
-\paragraph{Hybird Discontinuous Galerkin methods} In
+\paragraph{Hybrid Discontinuous Galerkin methods} In
 this paper, HDG methods are considered,
 where two elastic interfaces are introduced: one between \(T\) and its
 boundary \(\partial T\) and a second one between \(\Omega\backslash T\)
@@ -46,6 +46,7 @@ introduce both the
 % -- SUBSECTION
 % ---------------------------------------------------------
 \subsection{Element description}
+\label{sec_assumtions}
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -119,6 +120,32 @@ By continuity of the displacement field between $\Bulk{}$ and $\dCell$,  the dis
         \label{eq_conformity:eq2}.
     \end{alignat}
 \end{subequations}
+%
+%
+%
+Moreover, since the interface is of negligible volume compared to that of the core,
+let assume that $\Field{\DisplacementField}{\Crown}{}$ linearly bridges
+$\Field{\DisplacementField}{\dCell}{}$ to 
+$\Field{\DisplacementField}{\Bulk}{}$.
+As a result, the gradient of the displacement $\nabla \Field{\DisplacementField}{\Crown}{}$ is homogeneous in $\Crown{}$ along $\tensori{n}$.
+Finally, the normal stress is assumed to be continuous across the inner boundary $\dBulk$, such that
+%
+% 
+% 
+\begin{equation}
+    \label{eq_continuity_traction_force}
+    \begin{aligned}
+        (\tensorii{P}{}_{\Crown} - \tensorii{P}{}_{\Bulk} \vert_{\dBulk{}}) \cdot \tensori{n}{} = 0
+        &&
+        \text{on}
+        &&
+        \dBulk{}.
+        % &&
+        % \text{in}
+        % &&
+        % \Crown{}
+    \end{aligned}
+\end{equation}
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -145,61 +172,87 @@ By combining both the Lagragian of the core $\Bulk{}$ and that of the interface 
     \int_{\neumannCell} \neumannCellLoad \cdot \tensori{u}{}_{\dCell},
 \end{equation}
 
-% ---------------------------------------------------------
-% -- SUBSECTION
-% ---------------------------------------------------------
-\subsection{Hypotheses}
-\label{sec_assumtions}
+% % ---------------------------------------------------------
+% % -- SUBSECTION
+% % ---------------------------------------------------------
+% \subsection{Hypotheses}
+% \label{sec_assumtions}
 
-% Since the interface is of negligible volume compared to that of the core, the following assumptions are made on the displacement and the stress fields in the interface:
+% % Since the interface is of negligible volume compared to that of the core, the following assumptions are made on the displacement and the stress fields in the interface:
 
-% ---------------------------------------------------------
-% PARAGRAPH
-% ---------------------------------------------------------
-\paragraph{Displacement in the interface}
+% % ---------------------------------------------------------
+% % PARAGRAPH
+% % ---------------------------------------------------------
+% \paragraph{Displacement in the interface}
 
-Since the interface is of negligible volume compared to that of the core, the displacement in the interface $\Crown$ is assumed to be linear with respect to $\tensori{n}$, such that
-its gradient is homogeneous in $\Crown{}$ along $\tensori{n}$
-%
-% 
-% 
-\begin{equation}
-    \label{eq_crown_displacement}
-    \nabla
-    \tensori{u}{}_{\Crown}
-    =
-    \frac{\tensori{u}{}_{\dCell}
-    -
-    \tensori{u}{}_{\Bulk} \vert_{\dBulk} }{\ell} \otimes \tensori{n}.
-\end{equation}
-% 
-% 
-%
-That is, the displacement of the interface $\Crown{}$ linearly bridges that of the boundary $\dCell{}$ to that of the bulk $\Bulk{}$.
+% Since the interface is of negligible volume compared to that of the core,
+% let assume that $\Field{\DisplacementField}{\Crown}{}$ the displacement of the interface $\Crown{}$ linearly bridges
+% $\Field{\DisplacementField}{\dCell}{}$ the displacement of the boundary $\dCell{}$ to 
+% $\Field{\DisplacementField}{\Bulk}{}$ that  of the bulk $\Bulk{}$.
+% As a result, the gradient of the displacement $\nabla \Field{\DisplacementField}{\Crown}{}$ is homogeneous in $\Crown{}$ along $\tensori{n}$.
 
-% ---------------------------------------------------------
-% PARAGRAPH
-% ---------------------------------------------------------
-\paragraph{Stress in the interface}
+% % Since the interface is of negligible volume compared to that of the core, the displacement in the interface $\Crown$ is assumed to be linear with respect to $\tensori{n}$, such that
+% % its gradient is homogeneous in $\Crown{}$ along $\tensori{n}$
+% % %
+% % % 
+% % % 
+% % \begin{equation}
+% %     \label{eq_crown_displacement}
+% %     \nabla
+% %     \tensori{u}{}_{\Crown}
+% %     =
+% %     \frac{\tensori{u}{}_{\dCell}
+% %     -
+% %     \tensori{u}{}_{\Bulk} \vert_{\dBulk} }{\ell} \otimes \tensori{n}.
+% % \end{equation}
+% % % 
+% % % 
+% % %
+% % That is, the displacement of the interface $\Crown{}$ linearly bridges that of the boundary $\dCell{}$ to that of the bulk $\Bulk{}$.
 
-Likewise, let assume that $\tensorii{P}{}_{\Crown}$ is constant along the direction $\tensori{n}{}$ in $\Crown{}$. By continuity of the traction force across $\dBulk$, the following equality holds true
-%
-% 
-% 
-\begin{equation}
-    \label{eq_continuity_traction_force}
-    \begin{aligned}
-        (\tensorii{P}{}_{\Crown} - \tensorii{P}{}_{\Bulk} \vert_{\dBulk{}}) \cdot \tensori{n}{} = 0
-        &&
-        \text{on}
-        &&
-        \dBulk{}.
-        % &&
-        % \text{in}
-        % &&
-        % \Crown{}
-    \end{aligned}
-\end{equation}
+% % ---------------------------------------------------------
+% % PARAGRAPH
+% % ---------------------------------------------------------
+% \paragraph{Stress in the interface}
+
+% % Likewise the stress field in the interface $\Field{\PKIStressField}{\Crown}{}$ is assumed to be constant along the direction $\tensori{n}{}$ in $\Crown{}$.
+% The normal stress is assumed to be continuous across the inner boundary $\dBulk$, such that
+% %
+% % 
+% % 
+% \begin{equation}
+%     \label{eq_continuity_traction_force}
+%     \begin{aligned}
+%         (\tensorii{P}{}_{\Crown} - \tensorii{P}{}_{\Bulk} \vert_{\dBulk{}}) \cdot \tensori{n}{} = 0
+%         &&
+%         \text{on}
+%         &&
+%         \dBulk{}.
+%         % &&
+%         % \text{in}
+%         % &&
+%         % \Crown{}
+%     \end{aligned}
+% \end{equation}
+
+% Likewise, let assume that $\tensorii{P}{}_{\Crown}$ is constant along the direction $\tensori{n}{}$ in $\Crown{}$. By continuity of the traction force across $\dBulk$, the following equality holds true
+% %
+% % 
+% % 
+% \begin{equation}
+%     \label{eq_continuity_traction_force}
+%     \begin{aligned}
+%         (\tensorii{P}{}_{\Crown} - \tensorii{P}{}_{\Bulk} \vert_{\dBulk{}}) \cdot \tensori{n}{} = 0
+%         &&
+%         \text{on}
+%         &&
+%         \dBulk{}.
+%         % &&
+%         % \text{in}
+%         % &&
+%         % \Crown{}
+%     \end{aligned}
+% \end{equation}
 
 % ---------------------------------------------------------
 % -- SUBSECTION
@@ -220,10 +273,10 @@ Likewise, let assume that $\tensorii{P}{}_{\Crown}$ is constant along the direct
 % In particular, making the thickness of the interface $\ell \rightarrow 0$, such that $\Crown{}$ vanishes and the core part $\Bulk{}$ identifies to $\cell$,
 % The following simplified Hu–Washizu Lagrangian is obtained (See \ref{sec_appendix_Hu_Washizu})
 % Using hypotheses expressed in Section \ref{sec_assumtions} and making $\ell \rightarrow 0$, the following simplified Hu–Washizu Lagrangian arises from \eqref{eq_hu_washizu_split}
-Using the hypotheses stated in Section \ref{sec_assumtions} on the displacement and the stress field in $\Crown{}$,
+Using the hypotheses stated in Section \ref{sec_assumtions} on the displacement and the stress field in $\Crown{}$, the Lagrangian
 \eqref{eq_hu_washizu_split} can be expressed as a term depending on the thickness of the interface $\ell$ and on the core and boundary unknowns only.
 In particular, making the thickness of the interface $\ell \rightarrow 0$, such that $\Crown{}$ vanishes and the core part $\Bulk{}$ identifies to $\cell$,
-a simplified expression of \eqref{eq_hu_washizu_split} is obtained
+a simplified expression of \eqref{eq_hu_washizu_split} is obtained such that
 % 
 % 
 %
@@ -250,7 +303,7 @@ a simplified expression of \eqref{eq_hu_washizu_split} is obtained
 %
 %
 %
-such that \eqref{eq_0015} fully defines the equilibrium of an element in the context of hybrid discontinuous methods. The reader can refer to \ref{sec_appendix_Hu_Washizu} for more details on technical details.
+where \eqref{eq_0015} fully defines the equilibrium of an element in the context of hybrid discontinuous methods. The reader can refer to \ref{sec_appendix_Hu_Washizu} for technical details.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -292,7 +345,7 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             -
             \int_{\dCell{}} \tensori{\theta}{}_{\cell} \cdot \delta \tensori{u}{}_{\cell} \vert_{\dCell}
             &&
-            \ \ \ \ \ \ \ \ 
+            \qquad
             &&
             \forall \delta \tensori{u}{}_{\cell},
             % \in \virtualDisplacementSpaceCell
@@ -302,7 +355,7 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             = &
             \int_{\neumannCell} (\tensori{\theta}{}_{\cell} - \tensori{t}{}_{\neumannCell}) \cdot \delta \tensori{u}{}_{\dCell}
             &&
-            \ \ \ \ \ \ \ \ 
+            \qquad
             &&
             \forall \delta \tensori{u}{}_{\dCell},
             % \in \virtualDisplacementSpaceDCell
@@ -313,7 +366,7 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             +
             \int_{\dCell} (\tensori{u}{}_{\dCell} - \tensori{u}{}_{\cell} \vert_{\dCell}) \cdot \delta \tensorii{P}{}_{\cell} \vert_{\dCell} \cdot \tensori{n}{}
             &&
-            \ \ \ \ \ \ \ \ 
+            \qquad
             &&
             \forall \delta \tensorii{P}{}_{\cell},
             % \in \stressSpaceCell
@@ -323,7 +376,7 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
             = &
             \int_{\cell} (\frac{\partial \mecPotential_{\bodyLag}}{\partial \tensorii{G}{}_{\cell}} - \tensorii{P}{}_{\cell}) : \delta \tensorii{G}{}_{\cell}
             &&
-            \ \ \ \ \ \ \ \ 
+            \qquad
             &&
             \forall \delta \tensorii{G}{}_{\cell},
             % \in \gradSpaceCell
@@ -333,12 +386,29 @@ By differentiation of the total Lagrangian \eqref{eq_0015} with respect to each 
 % 
 % 
 %
-where the \textit{reconstructed traction force} $\tensori{\theta}{}_{\cell} = \tensorii{P}{}_{\cell} \vert_{\dCell} \cdot \tensori{n}{} + (\beta / h_{\cell}) \tensori{J}(\tensori{u}{}_{\cell}, \tensori{u}{}_{\dCell})$ is introduced, with
+where the \textit{reconstructed traction force}
+$\tensori{\theta}{}_{\cell} = \tensorii{P}{}_{\cell} \vert_{\dCell} \cdot \tensori{n}{} + (\beta / h_{\cell}) \tensori{J}(\tensori{u}{}_{\cell}, \tensori{u}{}_{\dCell})$ is introduced, with
 $\tensori{J}(\tensori{u}{}_{\cell}, \tensori{u}{}_{\dCell}) = \tensori{u}{}_{\dCell} - \tensori{u}{}_{\cell} \vert_{\dCell}$ the jump function on the boundary $\dCell$.
-Following discretization, multiple jump function choices are available. The reader can refer to \ref{sec_stabilization} for more details regarding implementation aspects.
-In particular, \eqref{eq_0017:eq0} is the expression of the Principle of Virtual Work in $\cell$, where the \textit{reconstructed traction force} $\tensori{\theta}{}_{\cell}$ replaces the usual expression $\tensorii{P}{}_{\cell} \cdot \tensori{n}{}$ in the external contribution. \eqref{eq_0017:eq1} denotes a supplementary equation to the usual continuous problem as described in \eqref{eq_hu_washizu_derivative_0}, to account for the continuity of the flux $\tensori{\theta}{}_{\cell}$ across the cell boundary.
-\eqref{eq_0017:eq2} accounts for the constitutive equation in a weak sense, and \eqref{eq_0017:eq3} defines the equation of an enhanced gradient field, that does not reduce to the projection of $\nabla \tensori{u}{}_{\cell}$ as in \eqref{eq_hu_washizu_derivative_0:eq3}, since it is enriched by a boundary component that depends on the displacement jump.
+Following discretization, multiple jump function choices are available.
+The reader can refer to \ref{sec_stabilization} for more details regarding implementation aspects.
+In particular, \eqref{eq_0017:eq0} is the expression of the Principle of Virtual Work in $\cell$,
+where the \textit{reconstructed traction force} $\tensori{\theta}{}_{\cell}$ replaces the usual expression
+$\tensorii{P}{}_{\cell} \cdot \tensori{n}{}$ in the external contribution. \eqref{eq_0017:eq1} denotes a supplementary equation to the usual
+continuous problem as described in \eqref{eq_hu_washizu_derivative_0}, to account for the continuity of the flux $\tensori{\theta}{}_{\cell}$
+across the cell boundary.
+\eqref{eq_0017:eq2} accounts for the constitutive equation in a weak sense, and \eqref{eq_0017:eq3} defines the equation of an enhanced gradient field,
+that does not reduce to the projection of $\nabla \tensori{u}{}_{\cell}$ as in \eqref{eq_hu_washizu_derivative_0:eq3}, since it is enriched by a
+boundary component that depends on the displacement jump.
 This feature is at the origin of the robustness of non-conformal methods to volumetric locking (see \ref{sec_appendix_gradient} for more details on this note).
+
+\paragraph{Links with previous works}
+
+The weak equations \eqref{eq_0017} are those defining the HDG problem introduced as in \cite{kabaria_hybridizable_2015}.
+Though the equations are the same, they have been obtained here by the minimization of a total Lagrangian that also introduces
+the definition of the so-called \textit{DG-derivative}
+(which identifies with Equation \eqref{eq_0017:eq3}, and which is denoted here as the \textit{reconstructed gradient} in the following).
+Moreover, in this paper, the discontinuity of the displacement is obtained by considering the limit case of a vanishing volumetric interface,
+whereas if it postulated \textit{a priori} in \cite{kabaria_hybridizable_2015}.
 
 % ---------------------------------------------------------
 % -- SUBSECTION
@@ -372,6 +442,8 @@ Since minimization of \eqref{eq_0017:eq3} defines a linear problem with any disp
 %
 %
 where $\tensorii{\tau}{}_{\cell}$ denotes an arbitrary kinematically admissible stress field.
+In particular, the \textit{reconstructed gradient} defined by Equation \eqref{eq_grad} identifies to that introduced in
+\cite{di_pietro_hybrid_2015,abbas_hybrid_2018, abbas_hybrid_2019}.
 
 % -> expliquer que quand saut tend vers 0, on retrouve le projection normale
 %  ordre du gradient -> dire que même ordre que approximation primale, renvoie aux annexes

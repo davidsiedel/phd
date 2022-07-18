@@ -67,7 +67,7 @@ with temperature values $T_{max} = 2000$ K and $T_{min} = 293.15$ K.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=10.cm]{../chapter_002_hho_mechanics/figures/satoh_setting.png}
+    \includegraphics[width=10.cm]{../chapter_002_hho_mechanics/drawings/satoh_mesh.png}
     \caption{Geometry, displacement boundary conditions and temperature loading for the free dilatation test case}
     \label{fig_satoh_setting}
 \end{figure}
@@ -75,7 +75,7 @@ with temperature values $T_{max} = 2000$ K and $T_{min} = 293.15$ K.
 % ---------------------------------------------------------
 % PARAGRAPH
 % ---------------------------------------------------------
-\paragraph{Material behaviour}
+\paragraph{Material behavior}
 
 A linear thermo-elastic energy potential is considered with a Young's
 modulus $E$ equal to $150$ GPa. The material is quasi-incompressible
@@ -93,11 +93,11 @@ strain approximation is of order $0, 1$, whereas the thermal
 strain adopted in this example is of order $2$, which results in strong signs of volumetric locking. For Lagrange
 elements to accurately model the hydrostatic pressure, one needs to choose a polynomial approximation of the temperature field that is one order lower than that of the
 displacement field. This feature is of major importance for mixed
-elements, where quadratic displacement elements needs be employed together with linear ones for the pressure/swelling field.
+elements, where quadratic displacement elements needs be employed together with linear ones for the pressure/volume variation field.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=10.cm]{../chapter_002_hho_mechanics/figures/satoh_calc.png}
+    \includegraphics[width=10.cm]{../chapter_002_hho_mechanics/drawings/satoh_res.png}
     \caption{Map fo the Trace of the Cauchy stress at quadrature points for the Free dilatation test case at the last time step}
     \label{fig_satoh_calc}
 \end{figure}
@@ -113,7 +113,7 @@ approximation, and strong oscillations are noted for the linear finite element s
 % ---------------------------------------------------------
 % -- SUBSECTION
 % ---------------------------------------------------------
-\subsection{Perfect plastic swelling sphere}
+\subsection{Perfect plastic radially loaded sphere}
 \label{sec_swelling_sphere}
 
 % ---------------------------------------------------------
@@ -121,16 +121,23 @@ approximation, and strong oscillations are noted for the linear finite element s
 % ---------------------------------------------------------
 \paragraph{Specimen and loading}
 
-This benchmark consists in a quasi-incompressible sphere under uniform internal loading (see Figure \ref{fig_sphereall}).
+This benchmark consists in a quasi-incompressible sphere under uniform internal loading (see Figure \ref{fig_sphere_mesh}).
 This test case has an analytical solution and the state of the specimen is known when the plastic region has reached the external border of the sphere.
 The sphere has an inner radius $r_{int} = 0.8$ mm and an outer
 radius $r_{ext} = 1$ mm. An internal radial displacement $u$ is imposed.
 The simulation is performed until the limit load corresponding to an internal displacement of $0.2$ mm is reached.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/drawings/sphere_mesh.png}
+    \caption{Geometry and loadings for the radially loaded sphere test case}
+    \label{fig_sphere_mesh}
+\end{figure}
+
 % ---------------------------------------------------------
 % PARAGRAPH
 % ---------------------------------------------------------
-\paragraph{Material behaviour}
+\paragraph{Material behavior}
 
 An isotropic hardening energy potential $\mecPotential{}_{\bodyLag{}}^p$ is chosen for the description of the plastic evolution of the material such that
 
@@ -157,9 +164,10 @@ perfect plasticity is considered for this test case. The saturation parameter $\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/figures/sphere_mesh.png}
-    \caption{the swelling sphere test case. Geometry, loadings, final displacement along the radius of the sphere, and final equivalent plastic strain map at quadrature points}
-    \label{fig_sphereall}
+    % \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/figures/sphere_mesh.png}
+    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/drawings/sphere_res.png}
+    \caption{Final displacement along the radius of the sphere, and final equivalent plastic strain map at quadrature points for the radially loaded sphere test case}
+    \label{fig_sphere_res}
 \end{figure}
 
 % ---------------------------------------------------------
@@ -168,8 +176,8 @@ perfect plasticity is considered for this test case. The saturation parameter $\
 \paragraph{Displacement along the radius}
 
 Since an analytical solution is known for this test case, it is compared to the proposed HHO method numerical results. The displacement of the section of the sphere at cell nodes
-is plotted in Figure \ref{fig_sphereall}, along with the analytical one, and it is noticed that the obtained results are in agreement with the analytical ones.
-Figure \ref{fig_sphereall} mentions the label HHO without specifying approximation orders for all computations deliver the same result.
+is plotted in Figure \ref{fig_sphere_res}, along with the analytical one, and it is noticed that the obtained results are in agreement with the analytical ones.
+Figure \ref{fig_sphere_res} mentions the label HHO without specifying approximation orders for all computations deliver the same result.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -182,7 +190,7 @@ at the borders of the specimen for higher orders, a phenomenon that was pointed 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15.cm]{../chapter_002_hho_mechanics/figures/sphere_pressures.png}
+    \includegraphics[width=15.cm]{../chapter_002_hho_mechanics/drawings/sphere_pressures.png}
     \caption{trace of the Cauchy stress tensor along the radius of the sphere at quadrature points}
     \label{fig_sphere_pressure}
 \end{figure}
@@ -191,6 +199,7 @@ at the borders of the specimen for higher orders, a phenomenon that was pointed 
 % -- SUBSECTION
 % ---------------------------------------------------------
 \subsection{Necking of a notched bar}
+\label{sec:hho_meca:notched_bar}
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -201,16 +210,26 @@ The last application consists of a notched bar that is subjected to uniaxial
 extension.
 The bar has a length of $30$ mm, a top section of radius $5$ mm and a bottom section of radius $3$ mm.
 A vertical
-displacement $u_z = 0.8$ mm is imposed at the top, as shown in Figure \ref{fig_ssnaallmesh}.
+displacement $u_z = 0.8$ mm is imposed at the top, as shown in Figure \ref{fig_ssna_mesh}.
 For symmetry reasons, only one-quarter of the
 bar is discretized.
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/figures/ssna_mesh.png}
+    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/drawings/ssna_mesh.png}
+    \caption{
+        Geometry, loadings and load deflection curve for the notched specimen test case
+    }
+    \label{fig_ssna_mesh}
+\end{figure}
 
 % ---------------------------------------------------------
 % PARAGRAPH
 % ---------------------------------------------------------
-\paragraph{Behaviour law}
+\paragraph{Material behavior}
 
-The same behavior law as that in \ref{sec_swelling_sphere} is considered for the present test case. 
+The same constitutive equation as that in \ref{sec_swelling_sphere} is considered for the present test case. 
 However, the finite strain hypothesis is chosen, based on a logarithmic decomposition of the stress \cite{miehe_anisotropic_2002}.
 
 % ---------------------------------------------------------
@@ -227,7 +246,7 @@ $\sigma_0 = 450$ MPa, $\sigma_{\infty} = 715$ MPa with a saturation parameter $\
 \paragraph{Load deflection curve}
 
 The load-displacement curve is plotted
-in Figure \ref{fig_ssnaallmesh}, and gives similar results to that obtained with quadratic reduced integration elements.
+in Figure \ref{fig_ssna_mesh}, and gives similar results to that obtained with quadratic reduced integration elements.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -235,17 +254,18 @@ in Figure \ref{fig_ssnaallmesh}, and gives similar results to that obtained with
 \paragraph{Equivalent plastic strain}
 
 Moreover, the equivalent
-plastic strain $p$ at quadrature points and at the final load is plotted Figure \ref{fig_ssnaallplastic}.
-It has been observed that the equivalent plastic strain might suffer some oscillations at a certain limit load with UPG methods.
-One notices through the present example, that the proposed HHO method displays no oscillations of the equivalent plastic strain.
+plastic strain $p$ at quadrature points and at the final load is plotted Figure \ref{fig_ssna_res}.
+% It has been observed that the equivalent plastic strain might suffer some oscillations at a certain limit load with UPG methods.
+One notices through the present example, that the proposed HHO method displays no oscillations of the equivalent plastic strain as well.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/figures/ssna_plastic.png}
+    % \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/figures/ssna_plastic.png}
+    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/drawings/ssna_res.png}
     \caption{
-        final equivalent plastic strain map at quadrature points in the notch region
+        final hydrostatic pressure map and equivalent plastic strain map at quadrature points in the notch region
     }
-    \label{fig_ssnaallplastic}
+    \label{fig_ssna_res}
 \end{figure}
 
 % ---------------------------------------------------------
@@ -253,18 +273,9 @@ One notices through the present example, that the proposed HHO method displays n
 % ---------------------------------------------------------
 \paragraph{Hydrostatic pressure}
 
-The hyrostatic pressure map at quadrature points and at the final load is shown Figure \ref{fig_ssnaallmesh} for three HHO element orders (respectively $1, 2$ and $3$).
-As for the swelling sphere test case, one notices that the hydrostatic pressure map is
+The hydrostatic pressure map at quadrature points and at the final load is shown Figure \ref{fig_ssna_res} for three HHO element orders (respectively $1, 2$ and $3$).
+As for the radially loaded sphere test case, one notices that the hydrostatic pressure map is
 fairly smooth over the whole structure at all approximation orders, even at the bottom left corner where plasticity is confined.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=12.cm]{../chapter_002_hho_mechanics/figures/ssna_mesh.png}
-    \caption{
-        the notched specimen test case. Geometry, loadings, load deflection curve, and final hydrostatic pressure map at quadrature points in the notch region
-    }
-    \label{fig_ssnaallmesh}
-\end{figure}
 
 % ---------------------------------------------------------
 % ---- SUBSECTION
@@ -273,7 +284,7 @@ fairly smooth over the whole structure at all approximation orders, even at the 
 \label{sec_num_example_part_2}
 
 In this section, both elimination strategies
-introduced in Section \ref{sec_cell_unknowns_elimination} are evaluated. In particular, four different variants of the usual
+introduced in Section \ref{sec_cell_unknowns_elimination} are evaluated. In particular, six different variants of the usual
 Newton algorithm
 are studied, namely :
 % \begin{itemize}
@@ -291,14 +302,14 @@ are studied, namely :
 (Sa) a Static condensation scheme using an elastic Jacobian operator and coupled with an Anderson acceleration algorithm, that acts on both cell and faces unknowns at the global level,
 (Ca) a Cell equilibrium scheme using an elastic Jacobian operator coupled with an Anderson acceleration algorithm on faces unknowns only.
 
-The last two test cases that showcase non-linear behaviours are considered for the evaluation of all these variants. The static condensation resolution scheme that uses a consistent stiffness matrix is taken for reference, since it is the
+The last two test cases that showcase non-linear behaviors are considered for the evaluation of all these variants. The static condensation resolution scheme that uses a consistent stiffness matrix is taken for reference, since it is the
 one used in the literature \cite{abbas_hybrid_2019,abbas_hybrid_2018}.
 The estimation of the Anderson acceleration is performed every iteration and is based on the last three residual and unknown vectors.
 
 \paragraph{Number of iterations per time step}
 
 The number of iterations per time step for each variant
-is displayed in Figure \ref{fig_acceleration_res_0} for both the swelling sphere test case
+is displayed in Figure \ref{fig_acceleration_res_0} for both the radially loaded sphere test case
 and the notched rod one.
 At each time steps, the number of iteration is normalized by the number of iterations obtained with the
 Static condensation variant (Sc).
@@ -363,10 +374,10 @@ is given in Figure \ref{fig_acceleration_res_memory} for different acceleration 
 
 The price for alleviating the memory footprint of the Static condensation scheme
 is paid by systematic calls to the local Newton algorithm.
-As a consequence, one also notices an increasing number of calls to the behaviour law.
-The mean number of local cell iterations per time time step is given in Figure \ref{fig_acceleration_res_1} for both test cases. The high number of cell iterations for the swelling sphere test case is
+As a consequence, one also notices an increasing number of calls to the constitutive equation.
+The mean number of local cell iterations per time time step is given in Figure \ref{fig_acceleration_res_1} for both test cases. The high number of cell iterations for the radially loaded sphere test case is
 due to the fact that the plastic front involves a linearly increasing number of cells submitted to a perfect plastic beahviour.
-Considering \textit{e.g.} a linear hardening behaviour law leads to a stabilized number of cell iterations once the whole domain is plastic.
+Considering \textit{e.g.} a linear hardening constitutive equation leads to a stabilized number of cell iterations once the whole domain is plastic.
 
 \begin{figure}[H]
     \centering
@@ -391,7 +402,7 @@ parallelizable.
 % \paragraph{Resolution schemes using a consitent stiffness matrix}
 
 % The number of iterations per time step for the Cell equilibrium algorithm using a consistent tangent operator
-% is showcased by the dashed blue line in Figure \ref{fig_acceleration_res_0} for the swelling sphere test case,
+% is showcased by the dashed blue line in Figure \ref{fig_acceleration_res_0} for the radially loaded sphere test case,
 % and in Figure \ref{fig_acceleration_res_1} for the notched rod one.
 % Results are normalized by those obtained with the Static condensation algorithm.
 % As expected, the number of iteration per time is roughly the same between the Cell resolution scheme

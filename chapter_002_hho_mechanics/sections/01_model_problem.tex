@@ -140,7 +140,7 @@ the stored energy minus the work of external loadings, as follows:
 L^{VW}_{\bodyLag{}}
 % \paren{\tensori{u}}
 = \int_{\Omega}\mecPotential_{\bodyLag{}}
-(\tensorii{F}(\tensori{u}))
+(\tensorii{I} + \nabla \DisplacementField)
 % (\tensorii{I} + \nabla \tensori{u})
 % \paren{\tensorii{F}\paren{\tensori{u}}}
 - \int_{\bodyLag} \tensori{f}{}_V \cdot \tensori{u}{}
@@ -222,7 +222,8 @@ that:
   = \int_{\bodyLag{}}
   \mecPotential_{\bodyLag{}}
   % (\tensorii{I}+\tensorii{G})
-  (\tensorii{F}(\tensorii{G}))
+  (\tensorii{I} + \DisplacementGradientField)
+  % (\tensorii{F}(\tensorii{G}))
   + \int_{\bodyLag{}}  (\nabla
   \tensori{u}{} - \tensorii{G}{})\,\colon\,\tensorii{P} -
   \int_{\bodyLag{}} \loadLag \cdot \tensori{u}{} -
@@ -306,16 +307,16 @@ for the specification of the Lagrangian \eqref{eq_HW_0}.
 % ---------------------------------------------------------
 % PARAGRAPH
 % ---------------------------------------------------------
-\paragraph{Pressure swelling formulations}
+\paragraph{Pressure and volume variation formulations}
 \label{sec_pressure_swelling}
 
 Since volumetric locking is a pressure dependent phenomenon,
 considering for instance a decomposition of the stress and strain fields
 into \textit{e.g.} devatoric and spherical components, one can express a
-mixed problem in terms of pressure and swelling, which is at the origin
+mixed problem in terms of pressure and volume variation, which is at the origin
 of so-called UPG methods \cite{al_akhrass_integrating_2014,
   simo_quasi-incompressible_1991, simo_variational_1985}. The scalar
-pressure and swelling unknowns replace respectively the stress and
+pressure and volume variation unknowns replace respectively the stress and
 strain tensorial unknowns in \eqref{eq_HW_0} and a modified deformation
 gradient is introduced in the constitutive equation.
 

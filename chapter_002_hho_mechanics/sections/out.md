@@ -1366,7 +1366,7 @@ elements, where quadratic displacement elements needs be employed together with 
 In Figure \ref{fig_satoh_calc}, one can observe that the pressure map is completely smooth for HHO computations, even for a quadratic temperature field acting on a linear gradient using HHO(1,1). As expected, the results display mild signs of volumetric locking for the quadratic finite element
 approximation, and strong oscillations are noted for the linear finite element solution.
 
-### Perfect plastic swelling sphere
+### Perfect plastic radially loaded sphere
 \label{sec_swelling_sphere}
 
 ##### Specimen and loading
@@ -1396,7 +1396,7 @@ perfect plasticity is considered for this test case. The saturation parameter $\
 \begin{figure}[H]
     \centering
     \includegraphics[width=12.cm]{image_calcs/sphere_mesh.png}
-    \caption{the swelling sphere test case. Geometry, loadings, final displacement along the radius of the sphere, and final equivalent plastic strain map at quadrature points}
+    \caption{the radially loaded sphere test case. Geometry, loadings, final displacement along the radius of the sphere, and final equivalent plastic strain map at quadrature points}
     \label{fig_sphereall}
 \end{figure}
 
@@ -1465,7 +1465,7 @@ One notices through the present example, that the proposed HHO method displays n
 ##### Hydrostatic pressure
 
 The hyrostatic pressure map at quadrature points and at the final load is shown Figure \ref{fig_ssnaallmesh} for three HHO element orders (respectively $1, 2$ and $3$).
-As for the swelling sphere test case, one notices that the hydrostatic pressure map is
+As for the radially loaded sphere test case, one notices that the hydrostatic pressure map is
 fairly smooth over the whole structure at all approximation orders, even at the bottom left corner where plasticity is confined.
 
 \begin{figure}[H]
@@ -1498,7 +1498,7 @@ The estimation of the Anderson acceleration is performed every iteration and is 
 ##### Number of iterations per time step
 
 The number of iterations per time step for each variant
-is displayed in Figure \ref{fig_acceleration_res_0} for both the swelling sphere test case
+is displayed in Figure \ref{fig_acceleration_res_0} for both the radially loaded sphere test case
 and the notched rod one.
 At each time steps, the number of iteration is normalized by the number of iterations obtained with the
 Static condensation variant (Sc).
@@ -1564,7 +1564,7 @@ is given in Figure \ref{fig_acceleration_res_memory} for different acceleration 
 The price for alleviating the memory footprint of the Static condensation scheme
 is paid by systematic calls to the local Newton algorithm.
 As a consequence, one also notices an increasing number of calls to the behaviour law.
-The mean number of local cell iterations per time time step is given in Figure \ref{fig_acceleration_res_1} for both test cases. The high number of cell iterations for the swelling sphere test case is
+The mean number of local cell iterations per time time step is given in Figure \ref{fig_acceleration_res_1} for both test cases. The high number of cell iterations for the radially loaded sphere test case is
 due to the fact that the plastic front involves a linearly increasing number of cells submitted to a perfect plastic beahviour.
 Considering \textit{e.g.} a linear hardening behaviour law leads to a stabilized number of cell iterations once the whole domain is plastic.
 
