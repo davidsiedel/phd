@@ -82,7 +82,7 @@ A linear thermo-elastic energy potential $\psi_{\tensoriis{\varepsilon}}$ is con
 with a Young's modulus $E$ equal to $200$ MPa. The material displays a compressible
 behaviour with a Poisson's ratio $\nu$ equal to $0.2$.
 The chosen micromorphic model is that corresponding to a AT2 model, and is described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
-where the fracture energy release rate $G_c$ is equal to $1$ J/mm${}^2$, and the characteristic length is $\ell_c = 0.02$ mm.
+where the fracture energy release rate $G_c$ is equal to $1$ N/mm, and the characteristic length is $\ell_c = 0.02$ mm.
 Moreover, the degradation function acts on the spherical part of free energy potential (See Section \ref{sec:micromorphic:deviatori_split})
 % The penalization factor $\beta$ has been tests with several values.
 
@@ -131,7 +131,7 @@ of the plate is fixed to prevent rigid body motions in the tangential direction.
 As for the precedent test case, a linear elastic energy potential $\psi_{\tensoriis{\varepsilon}}$ is considered,
 with a Young's modulus $E=200$ MPa and a Poisson's ratio $\nu=0.2$.
 The chosen micromorphic damage is also described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
-with a fracture energy release rate $G_c=1$ J/mm${}^2$, and a characteristic length $\ell_c = 0.02$ mm.
+with a fracture energy release rate $G_c=1$ N/mm, and a characteristic length $\ell_c = 0.02$ mm.
 The degradation function acts on the spherical part of free energy potential (See Section \ref{sec:micromorphic:deviatori_split})
 
 \paragraph{Force delfection curve}
@@ -204,7 +204,7 @@ A value of $\beta = 300$ is needed here to recover the energy dissipated by frac
 
 The considered test case taken from \cite{alessi_phase-field_2020} describes a simple rectangular rod
 of length $2$mm and width $1$mm.
-A vertical displacement of amplitude $0.125$mm is applied at the top of the specimen, and the
+A vertical displacement of amplitude $0.01$mm is applied at the top of the specimen, and the
 bottom is clamped in the vertical direction.
 One of the vertices
 of the plate is fixed in the tangential direction to prevent rigid body motions.
@@ -240,8 +240,8 @@ where $K = 175$ GPa is the bulk modulus, $\mu = 80.77$ Gpa is the shear modulus,
 deviatoric part of the elastic strain, and $\tensorii{\varepsilon}{}^{\text{sph}}$ is the spherical
 part.
 The chosen micromorphic damage is described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
-with a fracture energy release rate $G_c=2.7$ J/mm${}^2$, and a characteristic length $\ell_c = 0.025$ mm.
-For damage initiation to localize at the center of the specimen, a degraded fracture energy release rate $G_c^{m}=0.99 G_c$
+with a fracture energy release rate $G_c=2.7$ N/mm, and a characteristic length $\ell_c = 0.025$ mm.
+For damage initiation to localize at the center of the specimen, a degraded fracture energy release rate $G_c^{m}=0.99 \, G_c$
 is imposed in a square of size $0.05$mm at the middle of the rod.
 
 \paragraph{Quasi-incompressible behaviour}
@@ -433,9 +433,10 @@ thermal expansion coefficient is $\alpha  = 1 \, \cdot\,10^{-5}$K${}^{-1}$.
 %
 %
 The chosen micromorphic damage is described by Equations \eqref{eq:ef_micromorphic:formulation:AT2_link},
-with a fracture energy release rate $G_c=2.7$ J/mm${}^2$, and a characteristic length $\ell_c = 0.025$ mm.
-For damage initiation to localize anywhere in the specimen, a random uniform distribution of the
-fracture energy release rate with a mean value $G_c^{\text{mean}}=G_c$ and a standard deviation $G_c^{\text{std}}=\textcolor{red}{XXX}$
+with a fracture energy release rate $G_c=5$ N/mm, and a characteristic length $\ell_c = 0.025$ mm.
+For damage initiation to localize anywhere in the specimen, a bounded uniform distribution of the
+fracture energy release rate with a mean value $G_c^{\text{mean}}=G_c$, a standard deviation $G_c^{\text{std}}=0.5$ N/mm
+and an upper bound $G_c^{\text{max}} = G_c - 3 \, G_c^{\text{std}}$ N/mm
 is imposed in the pellet.
 
 \paragraph{Large scale computation}
