@@ -70,27 +70,6 @@ From a geometrical standpoint, the core part of the element $\Bulk{}$ is an homo
     \caption{schematic representation of a cell and its surrounding depending on the continuity requirement of the displacement field}
     \label{fig_02}
 \end{figure}
-%
-%
-%
-
-% ---------------------------------------------------------
-% PARAGRAPH
-% ---------------------------------------------------------
-\paragraph{Element behaviour}
-
-The core of the element $\Bulk{}$ is made out of the same material that composes $\bodyLag$ and behaves according to the free energy potential $\mecPotential{}_{\bodyLag{}}$. The interface $\Crown{}$ is made out of a pseudo linear elastic material of Young modulus $\beta (\ell / h_{\cell})$ with a zero Poisson ratio and its behavior is defined by the free energy potential $\mecPotential{}_{\Crown{}}$ such that
-%
-%
-%
-\begin{equation}
-    \label{eq_0009}
-        \mecPotential{}_{\Crown} = \frac{1}{2} \beta \frac{\ell}{h_{\cell}} \nabla \tensori{u}{}_{\Crown} : \nabla \tensori{u}{}_{\Crown},
-\end{equation}
-%
-%
-%
-where the dimensionless ratio $\ell / h_{\cell}$ balances the accumulated energy with the size of the domain $\cell$.
 
 % ---------------------------------------------------------
 % PARAGRAPH
@@ -146,6 +125,28 @@ Finally, the normal stress is assumed to be continuous across the inner boundary
         % \Crown{}
     \end{aligned}
 \end{equation}
+
+% ---------------------------------------------------------
+% PARAGRAPH
+% ---------------------------------------------------------
+\paragraph{Element behaviour}
+
+The core of the element $\Bulk{}$ is made out of the same material that composes $\bodyLag$ and behaves
+according to the free energy potential $\mecPotential{}_{\bodyLag{}}$.
+The interface $\Crown{}$ is made out of a pseudo linear elastic material of
+Young modulus $\beta (\ell / h_{\cell})$ with a zero Poisson ratio and its behavior is defined
+by the free energy potential $\mecPotential{}_{\Crown{}}$ such that
+%
+%
+%
+\begin{equation}
+    \label{eq_0009}
+        \mecPotential{}_{\Crown} = \frac{1}{2} \beta \frac{\ell}{h_{\cell}} \nabla \tensori{u}{}_{\Crown} : \nabla \tensori{u}{}_{\Crown},
+\end{equation}
+%
+%
+%
+where the dimensionless ratio $\ell / h_{\cell}$ balances the internal energy in the pseudo-elastic interface with that in the core part.
 
 % ---------------------------------------------------------
 % PARAGRAPH
