@@ -165,7 +165,8 @@ continuity of the flux across interfaces.
 In 2002, Hansbo and Larson \cite{hansbo_discontinuous_2002-1} considered this
 Nitsche's formulation based DG
 method for the nearly incompressible linear
-elasticity problem, and demonstrated the robustness of the method to volumetric locking 
+elasticity problem, and demonstrated the robustness of the method to volumetric locking.
+A comprehensive analysis of DG methods, with all its variants, can be found in \cite{arnold_unified_2002}.
 % were the first to
 % consider the Nitsche's classical DG method for nearly incompressible
 % elasticity. They showed, theoretically and numerically, that this
@@ -263,12 +264,16 @@ Extension of HDG methods to non-linear elasticity were first undertaken in \cite
 % ---------------------------------------------------------
 \paragraph{HHO methods}
 
-In \cite{di_pietro_hybrid_2015, di_pietro_arbitrary-order_2014}, the authors introduced a higher order potential reconstruction operator in the classical HDG formulation for elliptic problems, providing a $h^{k+1} H^1$-norm convergence rate as compared to the usual $h^k$-rate. This higher order term coined the name for HHO methods.
+In \cite{di_pietro_hybrid_2015, di_pietro_arbitrary-order_2014}, the authors introduced a higher order potential reconstruction operator
+in the classical HDG formulation for elliptic problems,
+providing a $h^{k+1} H^1$-norm convergence rate as compared to the usual $h^k$-rate. This higher order term coined the name for HHO methods, and the link
+with HDG methods has been studied in \cite{cockburn_bridging_2016}.
 Recent developments of HHO methods in
 computational mechanics include the incompressible Stokes
 equations (with possibly large irrotational forces) \cite{di_pietro_discontinuous_2016}, the
-incompressible Navier–Stokes equations \cite{di_pietro_hybrid_2018}, Biot’s consolidation problem \cite{boffi_nonconforming_2016}, and nonlinear elasticity with small
-deformations \cite{botti_hybrid_2017}
+incompressible Navier–Stokes equations \cite{di_pietro_hybrid_2018}, Biot’s consolidation problem \cite{boffi_nonconforming_2016},
+and nonlinear elasticity with small
+deformations \cite{botti_hybrid_2017}.
 
 \subsection{Outline}
 
